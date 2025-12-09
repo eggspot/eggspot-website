@@ -1,0 +1,1 @@
+import{g as t}from"./index.DP5dVRrk.js";import{S as i}from"./ScrollTrigger.BWsqEc1I.js";t.registerPlugin(i);const e=document.getElementById("service-lamp"),r=document.getElementById("service-curve");e&&r&&t.timeline({scrollTrigger:{trigger:".lamp",scrub:1,start:"-=100"}}).to(e,{x:-80,ease:"linear",duration:2}).to(r,{x:80,ease:"linear",duration:2},0);

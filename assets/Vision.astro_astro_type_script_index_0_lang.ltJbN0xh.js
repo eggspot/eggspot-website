@@ -1,0 +1,1 @@
+import{g as e}from"./index.DP5dVRrk.js";import{S as i}from"./ScrollTrigger.BWsqEc1I.js";e.registerPlugin(i);const r=document.getElementById("vision-combile-circle");r&&(e.set(r,{scale:1,transformOrigin:"0 100%"}),e.timeline({scrollTrigger:{trigger:".who-are-you",scrub:1,start:"-=100"}}).to(r,{rotation:"+=30",ease:"linear",duration:3}));
