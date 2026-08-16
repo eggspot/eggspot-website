@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
+  <title>Contact — Talon &amp; Whisker Workshop, Austin TX</title>
+  <meta name="description" content="Questions about engraving, sizing or an order? Email hello@talonandwhisker.com, call +1 (512) 555-0162, or visit the workshop at 310 E 2nd St, Austin, TX.">
+  <link rel="canonical" href="https://talonandwhisker.com/pages/contact">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Talon &amp; Whisker</a>
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="collections.html">Shop</a>
+        <a href="about.html">Our Story</a>
+        <a href="blog.html">Journal</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><span aria-hidden="true">🔍</span></button>
+        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><span aria-hidden="true">👤</span></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart"><span aria-hidden="true">🛒</span><span class="cart-badge" data-cart-count hidden>0</span></a>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="search-panel" id="searchPanel">
+      <div class="container">
+        <form class="search-form" role="search">
+          <label class="visually-hidden" for="searchInput">Search products</label>
+          <input type="search" id="searchInput" placeholder="Search dog tags, cat tags, collars…">
+          <button type="submit" class="btn btn-dark">Search</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span aria-hidden="true">/</span>Contact
+        </nav>
+        <h1>Talk to the engravers</h1>
+        <p class="section-desc">Spelling questions, rush orders, rescue partnerships — the same two people who cut the tags answer the email.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-layout">
+        <div class="reveal" data-reveal="left">
+          <p class="eyebrow">The workshop</p>
+          <h2>310 E 2nd St, Austin</h2>
+          <ul class="info-list">
+            <li>
+              <span class="info-icon" aria-hidden="true">📍</span>
+              <div>
+                <h3>Studio</h3>
+                <p>310 E 2nd St, Austin, TX 78701<br>Walk-ins welcome — most tags are cut while you wait.</p>
+              </div>
+            </li>
+            <li>
+              <span class="info-icon" aria-hidden="true">📞</span>
+              <div>
+                <h3>Phone</h3>
+                <p><a href="tel:+15125550162">+1 (512) 555-0162</a></p>
+              </div>
+            </li>
+            <li>
+              <span class="info-icon" aria-hidden="true">✉️</span>
+              <div>
+                <h3>Email</h3>
+                <p><a href="mailto:hello@talonandwhisker.com">hello@talonandwhisker.com</a></p>
+              </div>
+            </li>
+            <li>
+              <span class="info-icon" aria-hidden="true">🕘</span>
+              <div>
+                <h3>Hours</h3>
+                <p>Mon–Fri 9am–6pm CT<br>Saturday by appointment</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card reveal" data-reveal="right">
+          <h2>Send a message</h2>
+          <form id="contactForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="contactName">Name</label>
+                <input type="text" id="contactName" name="name" placeholder="Jordan Reyes" required>
+              </div>
+              <div class="field">
+                <label for="contactEmail">Email</label>
+                <input type="email" id="contactEmail" name="email" placeholder="you@example.com" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="contactSubject">Subject</label>
+              <select id="contactSubject" name="subject" required>
+                <option value="engraving">Engraving question</option>
+                <option value="order">An existing order</option>
+                <option value="sizing">Sizing help</option>
+                <option value="rescue">Rescue partnership</option>
+                <option value="wholesale">Wholesale</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" name="message" placeholder="Tell us about your pet, the tag you want, and any deadline…" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-accent btn-block">Send message</button>
+            <p class="form-note" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container article-wrap">
+        <div class="section-head center reveal" data-reveal="up">
+          <p class="eyebrow">Quick answers</p>
+          <h2>Frequently asked</h2>
+        </div>
+        <div class="accordion">
+          <div class="acc-item">
+            <h3>
+              <button type="button" class="acc-trigger" aria-expanded="true" aria-controls="faqTurnaround">How long does engraving take?</button>
+            </h3>
+            <div class="acc-panel" id="faqTurnaround">
+              <p>Orders placed before 1pm CT are engraved the same business day and ship the next. Most U.S. addresses receive their tag within two to four days of ordering. Need it faster? Call the workshop — we can usually cut in the queue.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <h3>
+              <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="faqSizing">Which size should I pick?</button>
+            </h3>
+            <div class="acc-panel" id="faqSizing" hidden>
+              <p>Small (1.0in) suits cats and dogs under 15 lbs and holds about eight comfortable characters per line. Large (1.3in) suits anything over 15 lbs and stays readable with a full twelve. If your pet is on the line, size up — the text engraves bigger.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <h3>
+              <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="faqReturns">Can I return an engraved tag?</button>
+            </h3>
+            <div class="acc-panel" id="faqReturns" hidden>
+              <p>Personalized items are final sale — we cannot resell a tag with your dog's name on it. Non-personalized items (collars, gift boxes, blank tags) come with 30-day returns. If we engraved something differently from what you typed, we recut and reship it free, no return needed.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <strong>310 E 2nd St, Austin, TX 78701</strong>
+          <p>Interactive map placeholder — two blocks east of Congress Ave.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="logo" href="index.html">Talon &amp; Whisker</a>
+          <p>Every name, engraved. Custom pet ID tags cut and engraved in Austin, Texas since 2021 — and shipped anywhere in the United States.</p>
+          <div class="social-row">
+            <a href="https://instagram.com" rel="noopener">Instagram</a>
+            <a href="https://pinterest.com" rel="noopener">Pinterest</a>
+            <a href="https://tiktok.com" rel="noopener">TikTok</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="collection.html">Dog Tags</a></li>
+            <li><a href="collection.html">Cat Tags</a></li>
+            <li><a href="collection.html">Engraved Collars</a></li>
+            <li><a href="collection.html">Gift Sets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">Our story</a></li>
+            <li><a href="blog.html">Journal</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="collections.html">Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="product.html">Engraving guide</a></li>
+            <li><a href="contact.html">Shipping &amp; returns</a></li>
+            <li><a href="cart.html">Your cart</a></li>
+            <li><a href="contact.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Talon &amp; Whisker. All rights reserved.</p>
+        <p>310 E 2nd St, Austin, TX 78701 · <a href="tel:+15125550162">+1 (512) 555-0162</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="to-top" aria-label="Back to top"><span aria-hidden="true">↑</span></button>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

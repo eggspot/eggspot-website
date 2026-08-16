@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+  <title>Contact Us — North &amp; Noble</title>
+  <meta name="description" content="Questions about sizing, shipping or a return? Reach the North &amp; Noble team in Portland, Oregon — Mon–Fri 9am–6pm PT, or send us a message.">
+  <link rel="canonical" href="https://northandnoble.com/pages/contact">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">North &amp; Noble</a>
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="collections.html">Collections</a>
+        <a href="collection.html">Shop All</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Journal</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><span aria-hidden="true">🔍</span></button>
+        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><span aria-hidden="true">👤</span></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart"><span aria-hidden="true">🛒</span><span class="cart-badge" data-cart-count hidden>0</span></a>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="search-panel" id="searchPanel">
+      <div class="container">
+        <form class="search-form" role="search">
+          <label class="visually-hidden" for="searchInput">Search products</label>
+          <input type="search" id="searchInput" placeholder="Search shirts, denim, outerwear…">
+          <button type="submit" class="btn btn-dark">Search</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span aria-hidden="true">/</span>Contact
+        </nav>
+        <p class="eyebrow">We reply within one business day</p>
+        <h1>Get in touch</h1>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-layout">
+        <div class="reveal" data-reveal="left">
+          <h2>Portland studio &amp; shop</h2>
+          <p class="section-desc">Walk-ins welcome. The full line is on the rail, and we do free hem adjustments on anything bought in store.</p>
+          <ul class="info-list">
+            <li>
+              <span class="info-icon" aria-hidden="true">📍</span>
+              <div>
+                <h3>Address</h3>
+                <p>1825 NW Glisan St, Portland, OR 97209</p>
+              </div>
+            </li>
+            <li>
+              <span class="info-icon" aria-hidden="true">📞</span>
+              <div>
+                <h3>Phone</h3>
+                <p><a href="tel:+15035550148">+1 (503) 555-0148</a></p>
+              </div>
+            </li>
+            <li>
+              <span class="info-icon" aria-hidden="true">✉️</span>
+              <div>
+                <h3>Email</h3>
+                <p><a href="mailto:hello@northandnoble.com">hello@northandnoble.com</a></p>
+              </div>
+            </li>
+            <li>
+              <span class="info-icon" aria-hidden="true">🕘</span>
+              <div>
+                <h3>Hours</h3>
+                <p>Monday–Friday, 9am–6pm PT</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card reveal" data-reveal="right">
+          <h2>Send a message</h2>
+          <form id="contactForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="contactName">Name *</label>
+                <input type="text" id="contactName" name="name" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="contactEmail">Email *</label>
+                <input type="email" id="contactEmail" name="email" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="contactSubject">Subject *</label>
+              <select id="contactSubject" name="subject" required>
+                <option value="">Choose a topic…</option>
+                <option value="order">Order status</option>
+                <option value="returns">Returns &amp; exchanges</option>
+                <option value="sizing">Sizing advice</option>
+                <option value="wholesale">Wholesale</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="contactMessage">Message *</label>
+              <textarea id="contactMessage" name="message" placeholder="How can we help?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark btn-block">Send message</button>
+            <p class="form-note" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container article-wrap">
+        <div class="section-head center reveal" data-reveal="up">
+          <p class="eyebrow">Quick answers</p>
+          <h2>Frequently asked</h2>
+        </div>
+        <div class="accordion">
+          <div class="acc-item">
+            <h3>
+              <button type="button" class="acc-trigger" aria-expanded="true" aria-controls="faq1">How long does shipping take?</button>
+            </h3>
+            <div class="acc-panel" id="faq1">
+              <p>Standard U.S. shipping is 2–4 business days and free on orders over $75. Express is $12 and ships the same day when ordered before 1pm PT.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <h3>
+              <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="faq2">What is your return policy?</button>
+            </h3>
+            <div class="acc-panel" id="faq2" hidden>
+              <p>Thirty days, unworn or worn — we accept both. Returns are free with a prepaid label, and refunds land on the original payment method within five business days.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <h3>
+              <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="faq3">Do you repair worn garments?</button>
+            </h3>
+            <div class="acc-panel" id="faq3" hidden>
+              <p>Yes. Send us anything with our label in it and we will repair seams, buttons and small tears for free during the first three years. After that it is a flat $15.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <strong>1825 NW Glisan St</strong>
+          <p>Portland, Oregon 97209 — map embed goes here</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="logo" href="index.html">North &amp; Noble</a>
+          <p>Modern essentials, made to last. Designed in Portland, Oregon since 2016 and shipped carbon-neutral across the United States.</p>
+          <div class="social-row">
+            <a href="https://instagram.com" rel="noopener">Instagram</a>
+            <a href="https://pinterest.com" rel="noopener">Pinterest</a>
+            <a href="https://youtube.com" rel="noopener">YouTube</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="collection.html">Men's Essentials</a></li>
+            <li><a href="collection.html">Women's Essentials</a></li>
+            <li><a href="collection.html">Outerwear</a></li>
+            <li><a href="collection.html">Accessories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">Our story</a></li>
+            <li><a href="blog.html">Journal</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="collections.html">Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="contact.html">Shipping &amp; returns</a></li>
+            <li><a href="contact.html">Size guide</a></li>
+            <li><a href="cart.html">Your cart</a></li>
+            <li><a href="contact.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 North &amp; Noble. All rights reserved.</p>
+        <p>1825 NW Glisan St, Portland, OR 97209 · +1 (503) 555-0148</p>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="to-top" aria-label="Back to top"><span aria-hidden="true">↑</span></button>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

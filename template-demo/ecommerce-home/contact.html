@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛋️</text></svg>">
+  <title>Contact Us — Oak &amp; Ember</title>
+  <meta name="description" content="Questions about lead times, delivery or a custom size? Reach the Oak &amp; Ember team in Asheville, North Carolina — Mon–Sat 10am–6pm ET.">
+  <link rel="canonical" href="https://oakandember.com/pages/contact">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Oak &amp; Ember</a>
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="collections.html">Shop</a>
+        <a href="about.html">Our Story</a>
+        <a href="blog.html">Journal</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-btn" href="cart.html" aria-label="Cart"><span aria-hidden="true">🛒</span><span class="cart-badge" data-cart-count hidden>0</span></a>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span aria-hidden="true">/</span>Contact
+        </nav>
+        <p class="eyebrow">We reply within one business day</p>
+        <h1>Get in touch</h1>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-layout">
+        <div class="reveal" data-reveal="left">
+          <h2>Asheville showroom</h2>
+          <p class="section-desc">Come sit on everything. The showroom is attached to the workshop, so you can usually watch something being built while you decide.</p>
+          <ul class="info-list">
+            <li>
+              <span class="info-icon" aria-hidden="true">📍</span>
+              <div>
+                <h3>Address</h3>
+                <p>55 Biltmore Ave, Asheville, NC 28801</p>
+              </div>
+            </li>
+            <li>
+              <span class="info-icon" aria-hidden="true">📞</span>
+              <div>
+                <h3>Phone</h3>
+                <p><a href="tel:+18285550176">+1 (828) 555-0176</a></p>
+              </div>
+            </li>
+            <li>
+              <span class="info-icon" aria-hidden="true">✉️</span>
+              <div>
+                <h3>Email</h3>
+                <p><a href="mailto:hello@oakandember.com">hello@oakandember.com</a></p>
+              </div>
+            </li>
+            <li>
+              <span class="info-icon" aria-hidden="true">🕙</span>
+              <div>
+                <h3>Hours</h3>
+                <p>Monday–Saturday, 10am–6pm ET</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card reveal" data-reveal="right">
+          <h2>Send a message</h2>
+          <form id="contactForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="contactName">Name *</label>
+                <input type="text" id="contactName" name="name" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="contactEmail">Email *</label>
+                <input type="email" id="contactEmail" name="email" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="contactSubject">Subject *</label>
+              <select id="contactSubject" name="subject" required>
+                <option value="">Choose a topic…</option>
+                <option value="order">Order status</option>
+                <option value="delivery">Delivery &amp; lead times</option>
+                <option value="custom">Custom sizing</option>
+                <option value="trade">Trade &amp; wholesale</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="contactMessage">Message *</label>
+              <textarea id="contactMessage" name="message" placeholder="How can we help?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark btn-block">Send message</button>
+            <p class="form-note" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container article-wrap">
+        <div class="section-head center reveal" data-reveal="up">
+          <p class="eyebrow">Quick answers</p>
+          <h2>Frequently asked</h2>
+        </div>
+        <div class="accordion">
+          <div class="acc-item">
+            <h3>
+              <button type="button" class="acc-trigger" aria-expanded="true" aria-controls="faq1">How long does furniture take to arrive?</button>
+            </h3>
+            <div class="acc-panel" id="faq1">
+              <p>Furniture is made to order and ships in 2–3 weeks. Decor, bedding and lighting ship within two business days. Free shipping applies to orders over $75; white-glove furniture delivery is a flat $89.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <h3>
+              <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="faq2">Can I order a custom size?</button>
+            </h3>
+            <div class="acc-panel" id="faq2" hidden>
+              <p>Usually yes. Tables and beds can be resized in one-inch increments for about 15% over list, and we will send a full-scale drawing to approve before anything is cut. Email us with your dimensions.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <h3>
+              <button type="button" class="acc-trigger" aria-expanded="false" aria-controls="faq3">What if a joint fails?</button>
+            </h3>
+            <div class="acc-panel" id="faq3" hidden>
+              <p>We repair any joint we cut, free, for the first three years — including collection and redelivery. After that it is a flat $95 plus shipping. We have never refused a repair on age alone.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <strong>55 Biltmore Ave</strong>
+          <p>Asheville, North Carolina 28801 — map embed goes here</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="logo" href="index.html">Oak &amp; Ember</a>
+          <p>Warmth, crafted. Solid wood furniture and home goods made in Asheville, North Carolina since 2018.</p>
+          <div class="social-row">
+            <a href="https://instagram.com" rel="noopener">Instagram</a>
+            <a href="https://pinterest.com" rel="noopener">Pinterest</a>
+            <a href="https://youtube.com" rel="noopener">YouTube</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="collections.html">All collections</a></li>
+            <li><a href="collection.html">Living Room</a></li>
+            <li><a href="collection.html">Bedroom</a></li>
+            <li><a href="collection.html">Dining</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">Our story</a></li>
+            <li><a href="blog.html">Journal</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html">Showroom</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="contact.html">Shipping &amp; returns</a></li>
+            <li><a href="contact.html">Care guide</a></li>
+            <li><a href="cart.html">Your cart</a></li>
+            <li><a href="contact.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Oak &amp; Ember. All rights reserved.</p>
+        <p>55 Biltmore Ave, Asheville, NC 28801 · +1 (828) 555-0176</p>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="to-top" aria-label="Back to top"><span aria-hidden="true">↑</span></button>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

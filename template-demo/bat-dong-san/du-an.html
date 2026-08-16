@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏙️</text></svg>">
+<title>Dự án — PHÚC LAND</title>
+<meta name="description" content="Danh sách dự án PHÚC LAND: căn hộ, nhà phố, biệt thự và đất nền tại Hà Nội, TP.HCM, Đà Nẵng, Bình Dương, Hưng Yên. Lọc theo loại hình và sắp xếp theo giá.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header header-light">
+  <div class="container header-inner">
+    <a class="logo" href="index.html">PHÚC <span class="logo-mark">LAND</span></a>
+
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="index.html">Trang chủ</a>
+      <a href="du-an.html" class="active" aria-current="page">Dự án</a>
+      <a href="ve-chung-toi.html">Về chúng tôi</a>
+      <a href="tin-tuc.html">Tin tức</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-cta" href="lien-he.html">Tư vấn miễn phí</a>
+      <a class="icon-btn" href="tel:0936888666" aria-label="Gọi hotline 0936 888 666">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"></path></svg>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Menu mobile ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Trang chủ</a>
+  <a href="du-an.html" class="active" aria-current="page">Dự án</a>
+  <a href="ve-chung-toi.html">Về chúng tôi</a>
+  <a href="tin-tuc.html">Tin tức</a>
+  <a href="lien-he.html">Liên hệ</a>
+  <div class="mobile-menu-meta">024 3568 7777 · Golden Tower, 275 Nguyễn Trãi</div>
+</div>
+
+<main>
+
+  <!-- ===== Page hero ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="index.html">Trang chủ</a><span class="sep">/</span><span>Dự án</span>
+      </nav>
+      <h1 class="reveal" data-reveal="up">Dự án của chúng tôi</h1>
+      <p class="reveal" data-reveal="up" data-delay="100">
+        Tám sản phẩm tiêu biểu đang mở bán và cho thuê. Mọi hồ sơ đều đã qua thẩm định
+        pháp lý trước khi lên sàn.
+      </p>
+
+      <div class="page-hero-strip reveal" data-reveal="zoom" data-delay="200">
+        <img src="https://picsum.photos/seed/pl-strip-1/600/400" alt="Toà căn hộ cao tầng nhìn từ dưới lên" loading="lazy">
+        <img src="https://picsum.photos/seed/pl-strip-2/600/400" alt="Dãy biệt thự liền kề trong khu đô thị" loading="lazy">
+        <img src="https://picsum.photos/seed/pl-strip-3/600/400" alt="Khu đất nền đã phân lô có đường nhựa" loading="lazy">
+        <img src="https://picsum.photos/seed/pl-strip-4/600/400" alt="Chuyên viên bàn giao hồ sơ nhà cho khách hàng" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Lưới dự án + bộ lọc ===== -->
+  <section class="section">
+    <div class="container">
+
+      <div class="filter-bar">
+        <div class="filter-group" role="group" aria-label="Lọc theo loại hình">
+          <button class="pill-btn active" type="button" data-filter="all" aria-pressed="true">Tất cả</button>
+          <button class="pill-btn" type="button" data-filter="can-ho" aria-pressed="false">Căn hộ</button>
+          <button class="pill-btn" type="button" data-filter="nha-biet-thu" aria-pressed="false">Nhà &amp; biệt thự</button>
+          <button class="pill-btn" type="button" data-filter="dat-nen" aria-pressed="false">Đất nền</button>
+        </div>
+
+        <div class="filter-meta">
+          <span id="projectCount" role="status">8 dự án</span>
+          <select class="sort-select" id="sortSelect" aria-label="Sắp xếp dự án">
+            <option value="newest">Mới nhất</option>
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="project-grid" id="projectGrid">
+
+        <article class="project-card reveal" data-reveal="up" data-category="can-ho" data-price="3600000000" data-price-type="sale">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p1-smart-city/800/550" alt="Căn hộ 2 phòng ngủ tại Vinhomes Smart City nhìn từ ban công" loading="lazy">
+            <span class="project-badge">Bán</span>
+          </div>
+          <div class="project-info">
+            <h3>Căn hộ 2PN Vinhomes Smart City</h3>
+            <p class="project-loc">📍 Tây Mỗ, Nam Từ Liêm, Hà Nội</p>
+            <div class="project-meta">
+              <span class="chip">72m²</span>
+              <span class="chip">2PN · 2WC</span>
+              <span class="chip">Tầng cao</span>
+            </div>
+            <div class="project-price">3,6 tỷ <span class="price-unit">50 tr/m²</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Căn hộ 2PN Vinhomes Smart City"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+        <article class="project-card reveal" data-reveal="up" data-delay="60" data-category="nha-biet-thu" data-price="45000000" data-price-type="rent">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p2-duong-noi/800/550" alt="Biệt thự song lập ba tầng nhìn ra hồ tại Dương Nội" loading="lazy">
+            <span class="project-badge rent">Cho thuê</span>
+          </div>
+          <div class="project-info">
+            <h3>Biệt thự song lập 3 tầng view hồ</h3>
+            <p class="project-loc">📍 Dương Nội, Hà Đông, Hà Nội</p>
+            <div class="project-meta">
+              <span class="chip">200m²</span>
+              <span class="chip">4PN</span>
+              <span class="chip">Full nội thất</span>
+            </div>
+            <div class="project-price">45 triệu <span class="price-unit">/tháng</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Biệt thự song lập 3 tầng view hồ"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+        <article class="project-card reveal" data-reveal="up" data-delay="120" data-category="dat-nen" data-price="2100000000" data-price-type="sale">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p3-binh-an/800/550" alt="Khu dân cư Bình An với đường nội bộ rộng và cây xanh" loading="lazy">
+            <span class="project-badge">Bán</span>
+          </div>
+          <div class="project-info">
+            <h3>Đất nền KDC Bình An</h3>
+            <p class="project-loc">📍 Dĩ An, Bình Dương</p>
+            <div class="project-meta">
+              <span class="chip">100m²</span>
+              <span class="chip">Đường 12m</span>
+              <span class="chip">Sổ hồng riêng</span>
+            </div>
+            <div class="project-price">2,1 tỷ <span class="price-unit">21 tr/m²</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Đất nền KDC Bình An"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+        <article class="project-card reveal" data-reveal="up" data-delay="180" data-category="can-ho" data-price="5200000000" data-price-type="sale">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p4-grand-park/800/550" alt="Căn hộ 3 phòng ngủ tại Vinhomes Grand Park với phòng khách rộng" loading="lazy">
+            <span class="project-badge new">Mới</span>
+          </div>
+          <div class="project-info">
+            <h3>Căn hộ 3PN Vinhomes Grand Park</h3>
+            <p class="project-loc">📍 Quận 9, TP. Hồ Chí Minh</p>
+            <div class="project-meta">
+              <span class="chip">110m²</span>
+              <span class="chip">3PN · 2WC</span>
+              <span class="chip">Bàn giao 2026</span>
+            </div>
+            <div class="project-price">5,2 tỷ <span class="price-unit">47 tr/m²</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Căn hộ 3PN Vinhomes Grand Park"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+        <article class="project-card reveal" data-reveal="up" data-category="nha-biet-thu" data-price="15800000000" data-price-type="sale">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p5-ecopark/800/550" alt="Biệt thự ven sông tại Ecopark với sân vườn rộng" loading="lazy">
+            <span class="project-badge">Bán</span>
+          </div>
+          <div class="project-info">
+            <h3>Biệt thự ven sông Ecopark</h3>
+            <p class="project-loc">📍 Văn Giang, Hưng Yên</p>
+            <div class="project-meta">
+              <span class="chip">250m²</span>
+              <span class="chip">5PN</span>
+              <span class="chip">Ven sông</span>
+            </div>
+            <div class="project-price">15,8 tỷ <span class="price-unit">63 tr/m²</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Biệt thự ven sông Ecopark"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+        <article class="project-card reveal" data-reveal="up" data-delay="60" data-category="dat-nen" data-price="6500000000" data-price-type="sale">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p6-da-nang/800/550" alt="Khu đất nền biệt thự nghỉ dưỡng gần biển Đà Nẵng" loading="lazy">
+            <span class="project-badge new">Mới</span>
+          </div>
+          <div class="project-info">
+            <h3>Đất nền biệt thự nghỉ dưỡng Đà Nẵng</h3>
+            <p class="project-loc">📍 Ngũ Hành Sơn, Đà Nẵng</p>
+            <div class="project-meta">
+              <span class="chip">150m²</span>
+              <span class="chip">Gần biển</span>
+              <span class="chip">Sổ hồng riêng</span>
+            </div>
+            <div class="project-price">6,5 tỷ <span class="price-unit">43 tr/m²</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Đất nền biệt thự nghỉ dưỡng Đà Nẵng"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+        <article class="project-card reveal" data-reveal="up" data-delay="120" data-category="can-ho" data-price="2400000000" data-price-type="sale">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p7-sunrise/800/550" alt="Officetel một phòng ngủ tại Sunrise City Quận 7" loading="lazy">
+            <span class="project-badge">Bán</span>
+          </div>
+          <div class="project-info">
+            <h3>Officetel 1PN Sunrise City</h3>
+            <p class="project-loc">📍 Quận 7, TP. Hồ Chí Minh</p>
+            <div class="project-meta">
+              <span class="chip">45m²</span>
+              <span class="chip">1PN</span>
+              <span class="chip">Vừa ở vừa làm việc</span>
+            </div>
+            <div class="project-price">2,4 tỷ <span class="price-unit">53 tr/m²</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Officetel 1PN Sunrise City"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+        <article class="project-card reveal" data-reveal="up" data-delay="180" data-category="nha-biet-thu" data-price="8900000000" data-price-type="sale">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p8-ocean-park/800/550" alt="Dãy nhà phố liền kề tại Vinhomes Ocean Park, Gia Lâm" loading="lazy">
+            <span class="project-badge">Bán</span>
+          </div>
+          <div class="project-info">
+            <h3>Nhà phố liền kề Vinhomes Ocean Park</h3>
+            <p class="project-loc">📍 Gia Lâm, Hà Nội</p>
+            <div class="project-meta">
+              <span class="chip">90m²</span>
+              <span class="chip">4PN</span>
+              <span class="chip">Kinh doanh được</span>
+            </div>
+            <div class="project-price">8,9 tỷ <span class="price-unit">99 tr/m²</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Nhà phố liền kề Vinhomes Ocean Park"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+      </div>
+
+      <p class="empty-note" id="emptyNote" hidden>Chưa có dự án nào trong loại hình này.</p>
+
+      <div class="text-center section-cta reveal" data-reveal="up">
+        <a class="btn btn-gold" href="lien-he.html">Đăng ký tư vấn miễn phí <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Newsletter ===== -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-inner reveal" data-reveal="up">
+        <span class="eyebrow">Bản tin</span>
+        <h2>Nhận báo cáo thị trường mỗi tuần</h2>
+        <p>Giá giao dịch thực tế theo khu vực, dự án mở bán mới và cảnh báo pháp lý.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" required>
+          <button class="btn btn-gold" type="submit">Đăng ký <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="form-note" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">PHÚC <span class="logo-mark">LAND</span></a>
+        <p>Đồng hành trọn vẹn cùng khách hàng. Sàn giao dịch bất động sản uy tín từ 2014 với ba chi nhánh toàn quốc.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Dịch vụ</h4>
+        <ul>
+          <li><a href="du-an.html">Mua bán</a></li>
+          <li><a href="du-an.html">Cho thuê</a></li>
+          <li><a href="du-an.html">Đầu tư</a></li>
+          <li><a href="lien-he.html">Tư vấn pháp lý</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Công ty</h4>
+        <ul>
+          <li><a href="ve-chung-toi.html">Về chúng tôi</a></li>
+          <li><a href="du-an.html">Dự án</a></li>
+          <li><a href="tin-tuc.html">Tin tức</a></li>
+          <li><a href="lien-he.html">Liên hệ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li>Tầng 8, Golden Tower, 275 Nguyễn Trãi, Hà Nội</li>
+          <li><a href="tel:02435687777">024 3568 7777</a> · <a href="tel:0936888666">0936 888 666</a></li>
+          <li><a href="mailto:info@phucland.vn">info@phucland.vn</a></li>
+          <li>Mở cửa T2–CN: 8:00–20:00</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> PHÚC LAND. Bảo lưu mọi quyền.</span>
+      <span>Chi nhánh: Hà Nội · TP. Hồ Chí Minh · Đà Nẵng</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="Lên đầu trang">↑</button>
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

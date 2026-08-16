@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍜</text></svg>">
+<title>Thực đơn — HƯƠNG QUÊ</title>
+<meta name="description" content="Thực đơn HƯƠNG QUÊ với hơn 150 món đặc sản ba miền: phở bò Hà Nội, bún chả, bánh xèo miền Tây, cá kho tộ, chả cá Lã Vọng, gỏi cuốn, chè trôi nước.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header header-light">
+  <div class="container header-inner">
+    <a class="logo" href="index.html">HƯƠNG QUÊ<span class="logo-dot">●</span></a>
+
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="index.html">Trang chủ</a>
+      <a href="thuc-don.html" class="active" aria-current="page">Thực đơn</a>
+      <a href="ve-chung-toi.html">Câu chuyện</a>
+      <a href="tin-tuc.html">Tin tức</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-cta" href="lien-he.html">Đặt bàn ngay</a>
+      <button class="icon-btn" id="cartBtn" type="button" aria-label="Giỏ món đã chọn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 8h16l-1.2 12H5.2L4 8Z"></path><path d="M8.5 8a3.5 3.5 0 0 1 7 0"></path></svg>
+        <span class="cart-badge">0</span>
+      </button>
+      <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Menu mobile ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Trang chủ</a>
+  <a href="thuc-don.html" class="active" aria-current="page">Thực đơn</a>
+  <a href="ve-chung-toi.html">Câu chuyện</a>
+  <a href="tin-tuc.html">Tin tức</a>
+  <a href="lien-he.html">Liên hệ</a>
+  <div class="mobile-menu-meta">028 3820 6688 · 88 Nguyễn Huệ, Q.1</div>
+</div>
+
+<main>
+
+  <!-- ===== Page hero ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="index.html">Trang chủ</a><span class="sep">/</span><span>Thực đơn</span>
+      </nav>
+      <h1 class="reveal" data-reveal="up">Thực đơn hương vị ba miền</h1>
+      <p class="reveal" data-reveal="up" data-delay="100">
+        Hơn 150 món được nấu theo công thức gốc từng vùng miền. Dưới đây là những món
+        được gọi nhiều nhất trong tháng.
+      </p>
+
+      <div class="page-hero-strip reveal" data-reveal="zoom" data-delay="200">
+        <img src="https://picsum.photos/seed/hq-strip-1/600/400" alt="Nồi nước dùng phở đang sôi trong bếp" loading="lazy">
+        <img src="https://picsum.photos/seed/hq-strip-2/600/400" alt="Rau thơm và gia vị tươi được sơ chế buổi sáng" loading="lazy">
+        <img src="https://picsum.photos/seed/hq-strip-3/600/400" alt="Đầu bếp nướng chả trên than hoa" loading="lazy">
+        <img src="https://picsum.photos/seed/hq-strip-4/600/400" alt="Mâm cơm gia đình dọn sẵn trên bàn gỗ" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Lưới món + bộ lọc ===== -->
+  <section class="section">
+    <div class="container">
+
+      <div class="filter-bar">
+        <div class="filter-group" role="group" aria-label="Lọc theo loại món">
+          <button class="pill-btn active" type="button" data-filter="all" aria-pressed="true">Tất cả</button>
+          <button class="pill-btn" type="button" data-filter="mon-chinh" aria-pressed="false">Món chính</button>
+          <button class="pill-btn" type="button" data-filter="khai-vi" aria-pressed="false">Khai vị</button>
+          <button class="pill-btn" type="button" data-filter="trang-mieng" aria-pressed="false">Tráng miệng</button>
+          <button class="pill-btn" type="button" data-filter="do-uong" aria-pressed="false">Đồ uống</button>
+        </div>
+
+        <div class="filter-meta">
+          <span id="dishCount" role="status">8 món</span>
+          <select class="sort-select" id="sortSelect" aria-label="Sắp xếp món ăn">
+            <option value="suggest">Gợi ý của bếp</option>
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="dish-grid" id="dishGrid">
+
+        <article class="dish-card reveal" data-reveal="up" data-category="mon-chinh" data-price="79000">
+          <div class="dish-media">
+            <img src="https://picsum.photos/seed/hq-pho-bo/800/600" alt="Tô phở bò Hà Nội với bánh phở tươi và hành lá" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Món chính</span>
+            <h3>Phở bò Hà Nội</h3>
+            <p class="dish-desc">Nước dùng ninh 12 tiếng từ xương bò, bánh phở tươi Bắc.</p>
+            <div class="dish-price">79.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Phở bò Hà Nội"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+        <article class="dish-card reveal" data-reveal="up" data-delay="60" data-category="mon-chinh" data-price="89000">
+          <div class="dish-media">
+            <img src="https://picsum.photos/seed/hq-bun-cha/800/600" alt="Suất bún chả Hà Nội với chả nướng than hoa và rau sống" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Món chính</span>
+            <h3>Bún chả Hà Nội</h3>
+            <p class="dish-desc">Chả nướng than hoa, nước chấm chua ngọt đúng vị Hà Thành.</p>
+            <div class="dish-price">89.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Bún chả Hà Nội"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+        <article class="dish-card reveal" data-reveal="up" data-delay="120" data-category="mon-chinh" data-price="95000">
+          <div class="dish-media">
+            <img src="https://picsum.photos/seed/hq-banh-xeo/800/600" alt="Bánh xèo miền Tây vàng giòn ăn kèm rau sống" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Món chính</span>
+            <h3>Bánh xèo miền Tây</h3>
+            <p class="dish-desc">Bánh giòn rụm, tôm sông, giá sống, cuốn rau sống chấm nước mắm.</p>
+            <div class="dish-price">95.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Bánh xèo miền Tây"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+        <article class="dish-card reveal" data-reveal="up" data-delay="180" data-category="mon-chinh" data-price="135000">
+          <div class="dish-media">
+            <img src="https://picsum.photos/seed/hq-ca-kho-to/800/600" alt="Cá kho tộ miền Tây trong nồi đất còn nóng" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Món chính</span>
+            <h3>Cá kho tộ miền Tây</h3>
+            <p class="dish-desc">Cá lóc đồng kho riềng sả, ăn kèm cơm nóng.</p>
+            <div class="dish-price">135.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Cá kho tộ miền Tây"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+        <article class="dish-card reveal" data-reveal="up" data-category="mon-chinh" data-price="169000">
+          <div class="dish-media">
+            <span class="dish-badge">Đặc sản</span>
+            <img src="https://picsum.photos/seed/hq-cha-ca/800/600" alt="Chả cá Lã Vọng nướng nghệ ăn kèm thì là trên chảo nóng" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Món chính</span>
+            <h3>Chả cá Lã Vọng</h3>
+            <p class="dish-desc">Chả cá lăng nướng nghệ, thì là, mắm tôm — di sản Hà Nội.</p>
+            <div class="dish-price">169.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Chả cá Lã Vọng"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+        <article class="dish-card reveal" data-reveal="up" data-delay="60" data-category="khai-vi" data-price="55000">
+          <div class="dish-media">
+            <span class="dish-badge new">Mới</span>
+            <img src="https://picsum.photos/seed/hq-goi-cuon/800/600" alt="Đĩa gỏi cuốn tôm thịt cuốn tươi chấm tương đậu phộng" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Khai vị</span>
+            <h3>Gỏi cuốn tôm thịt</h3>
+            <p class="dish-desc">Cuốn tươi, chấm tương đậu phộng bùi béo.</p>
+            <div class="dish-price">55.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Gỏi cuốn tôm thịt"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+        <article class="dish-card reveal" data-reveal="up" data-delay="120" data-category="trang-mieng" data-price="35000">
+          <div class="dish-media">
+            <img src="https://picsum.photos/seed/hq-che-troi-nuoc/800/600" alt="Chén chè trôi nước gừng ấm rắc vừng" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Tráng miệng</span>
+            <h3>Chè trôi nước</h3>
+            <p class="dish-desc">Bánh trôi nước gừng ấm, món tráng miệng truyền thống.</p>
+            <div class="dish-price">35.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Chè trôi nước"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+        <article class="dish-card reveal" data-reveal="up" data-delay="180" data-category="do-uong" data-price="28000">
+          <div class="dish-media">
+            <span class="dish-badge new">Mới</span>
+            <img src="https://picsum.photos/seed/hq-nuoc-mo/800/600" alt="Ly nước mơ muối Hà Nội với đá viên và lát mơ" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Đồ uống</span>
+            <h3>Nước mơ muối Hà Nội</h3>
+            <p class="dish-desc">Mơ ngâm muối chua ngọt, giải nhiệt ngày hè.</p>
+            <div class="dish-price">28.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Nước mơ muối Hà Nội"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+      </div>
+
+      <p class="empty-note" id="emptyNote" hidden>Chưa có món nào trong nhóm này.</p>
+
+      <div class="text-center section-cta reveal" data-reveal="up">
+        <a class="btn btn-lg btn-primary" href="lien-he.html">Đặt bàn để thưởng thức <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Newsletter ===== -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-inner reveal" data-reveal="up">
+        <span class="eyebrow">Bản tin</span>
+        <h2>Nhận ưu đãi &amp; món mới mỗi tháng</h2>
+        <p>Một email mỗi tháng: món theo mùa, ưu đãi sinh nhật và lịch đờn ca tài tử.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" required>
+          <button class="btn btn-light" type="submit">Đăng ký <span class="arrow">→</span></button>
+          <p class="form-note" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">HƯƠNG QUÊ<span class="logo-dot">●</span></a>
+        <p>Hương vị quê nhà giữa lòng phố thị. Nhà hàng ẩm thực Việt phục vụ đặc sản ba miền từ năm 2004.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Khám phá</h4>
+        <ul>
+          <li><a href="thuc-don.html">Thực đơn</a></li>
+          <li><a href="ve-chung-toi.html">Câu chuyện</a></li>
+          <li><a href="tin-tuc.html">Tin tức</a></li>
+          <li><a href="lien-he.html">Đặt bàn</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Thực đơn</h4>
+        <ul>
+          <li><a href="thuc-don.html">Món chính</a></li>
+          <li><a href="thuc-don.html">Khai vị</a></li>
+          <li><a href="thuc-don.html">Tráng miệng</a></li>
+          <li><a href="thuc-don.html">Đồ uống</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li>88 Nguyễn Huệ, Quận 1, TP.HCM</li>
+          <li><a href="tel:02838206688">028 3820 6688</a> · <a href="tel:0908889990">0908 889 990</a></li>
+          <li><a href="mailto:lienhe@huongque.vn">lienhe@huongque.vn</a></li>
+          <li>Mở cửa 10:00–22:00 cả tuần</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> HƯƠNG QUÊ. Bảo lưu mọi quyền.</span>
+      <span>Nấu bằng nguyên liệu Việt, phục vụ bằng tấm lòng Việt</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="Lên đầu trang">↑</button>
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

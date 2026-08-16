@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+  <title>All Products — North &amp; Noble</title>
+  <meta name="description" content="Shop all North &amp; Noble products: oxford shirts, selvedge denim, merino knitwear, wool outerwear and leather accessories. Filter by category and sort by price.">
+  <link rel="canonical" href="https://northandnoble.com/collections/all">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">North &amp; Noble</a>
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="collections.html">Collections</a>
+        <a href="collection.html" aria-current="page">Shop All</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Journal</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><span aria-hidden="true">🔍</span></button>
+        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><span aria-hidden="true">👤</span></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart"><span aria-hidden="true">🛒</span><span class="cart-badge" data-cart-count hidden>0</span></a>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="search-panel" id="searchPanel">
+      <div class="container">
+        <form class="search-form" role="search">
+          <label class="visually-hidden" for="searchInput">Search products</label>
+          <input type="search" id="searchInput" placeholder="Search shirts, denim, outerwear…">
+          <button type="submit" class="btn btn-dark">Search</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span aria-hidden="true">/</span><a href="collections.html">Collections</a><span aria-hidden="true">/</span>All products
+        </nav>
+        <h1>All products</h1>
+        <p class="section-desc">The full line — eight core pieces we make in small, repeated runs.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="shop-toolbar">
+          <div class="filter-group" id="filterBar" role="group" aria-label="Filter products by category">
+            <button type="button" class="chip" data-value="all" aria-pressed="true">All</button>
+            <button type="button" class="chip" data-value="mens" aria-pressed="false">Men</button>
+            <button type="button" class="chip" data-value="womens" aria-pressed="false">Women</button>
+            <button type="button" class="chip" data-value="outerwear" aria-pressed="false">Outerwear</button>
+            <button type="button" class="chip" data-value="accessories" aria-pressed="false">Accessories</button>
+          </div>
+          <div class="toolbar-right">
+            <p class="result-count" id="resultCount" role="status">8 products</p>
+            <label class="visually-hidden" for="sortSelect">Sort products</label>
+            <select class="sort-select" id="sortSelect">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="newest">Newest</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+          <article class="product-card reveal" data-reveal="up" data-handle="oxford-shirt-white" data-category="mens" data-price="8800" data-added="3" data-color="White" data-size="M">
+            <div class="product-media">
+              <img src="https://picsum.photos/seed/nnp1/600/800" alt="White oxford shirt on a wooden hanger" loading="lazy">
+              <button type="button" class="quick-view" data-variant-id="4000000000001">Quick Add +</button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Men's Essentials</p>
+              <h3 class="product-name">Oxford Shirt — White</h3>
+              <p class="product-price"><span class="price" data-price="8800">$88.00</span></p>
+            </div>
+            <a class="product-card-link" href="product.html" aria-label="View Oxford Shirt in White"></a>
+          </article>
+
+          <article class="product-card reveal" data-reveal="up" data-delay="60" data-handle="selvedge-denim-jeans-indigo" data-category="mens" data-price="12800" data-added="2" data-color="Indigo" data-size="M">
+            <div class="product-media">
+              <img src="https://picsum.photos/seed/nnp2/600/800" alt="Indigo selvedge denim jeans folded on a bench" loading="lazy">
+              <span class="product-badge badge-best">Bestseller</span>
+              <button type="button" class="quick-view" data-variant-id="4000000000002">Quick Add +</button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Men's Essentials</p>
+              <h3 class="product-name">Selvedge Denim Jeans — Indigo</h3>
+              <p class="product-price"><span class="price" data-price="12800">$128.00</span></p>
+            </div>
+            <a class="product-card-link" href="product.html" aria-label="View Selvedge Denim Jeans in Indigo"></a>
+          </article>
+
+          <article class="product-card reveal" data-reveal="up" data-delay="120" data-handle="merino-crewneck-sweater-oat" data-category="womens" data-price="9800" data-added="4" data-color="Oat" data-size="M">
+            <div class="product-media">
+              <img src="https://picsum.photos/seed/nnp3/600/800" alt="Oat colored merino crewneck sweater folded on linen" loading="lazy">
+              <button type="button" class="quick-view" data-variant-id="4000000000003">Quick Add +</button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Women's Essentials</p>
+              <h3 class="product-name">Merino Crewneck Sweater — Oat</h3>
+              <p class="product-price"><span class="price" data-price="9800">$98.00</span></p>
+            </div>
+            <a class="product-card-link" href="product.html" aria-label="View Merino Crewneck Sweater in Oat"></a>
+          </article>
+
+          <article class="product-card reveal" data-reveal="up" data-delay="180" data-handle="linen-midi-dress-sand" data-category="womens" data-price="11840" data-added="5" data-color="Sand" data-size="M">
+            <div class="product-media">
+              <img src="https://picsum.photos/seed/nnp4/600/800" alt="Sand linen midi dress photographed against a stucco wall" loading="lazy">
+              <span class="product-badge badge-sale">Sale −20%</span>
+              <button type="button" class="quick-view" data-variant-id="4000000000004">Quick Add +</button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Women's Essentials</p>
+              <h3 class="product-name">Linen Midi Dress — Sand</h3>
+              <p class="product-price"><span class="price on-sale" data-price="11840">$118.40</span><span class="compare-at">$148.00</span></p>
+            </div>
+            <a class="product-card-link" href="product.html" aria-label="View Linen Midi Dress in Sand"></a>
+          </article>
+
+          <article class="product-card reveal" data-reveal="up" data-handle="wool-peacoat-charcoal" data-category="outerwear" data-price="29800" data-added="6" data-color="Charcoal" data-size="M">
+            <div class="product-media">
+              <img src="https://picsum.photos/seed/nnp5/600/800" alt="Charcoal double-faced wool peacoat on a tailor's dummy" loading="lazy">
+              <span class="product-badge badge-low">Low stock</span>
+              <button type="button" class="quick-view" data-variant-id="4000000000005">Quick Add +</button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Outerwear</p>
+              <h3 class="product-name">Wool Peacoat — Charcoal</h3>
+              <p class="product-price"><span class="price" data-price="29800">$298.00</span></p>
+            </div>
+            <a class="product-card-link" href="product.html" aria-label="View Wool Peacoat in Charcoal"></a>
+          </article>
+
+          <article class="product-card reveal" data-reveal="up" data-delay="60" data-handle="waxed-canvas-field-jacket-olive" data-category="outerwear" data-price="24800" data-added="7" data-color="Olive" data-size="M">
+            <div class="product-media">
+              <img src="https://picsum.photos/seed/nnp6/600/800" alt="Olive waxed canvas field jacket hanging by a doorway" loading="lazy">
+              <button type="button" class="quick-view" data-variant-id="4000000000006">Quick Add +</button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Outerwear</p>
+              <h3 class="product-name">Waxed Canvas Field Jacket — Olive</h3>
+              <p class="product-price"><span class="price" data-price="24800">$248.00</span></p>
+            </div>
+            <a class="product-card-link" href="product.html" aria-label="View Waxed Canvas Field Jacket in Olive"></a>
+          </article>
+
+          <article class="product-card reveal" data-reveal="up" data-delay="120" data-handle="leather-belt-cognac" data-category="accessories" data-price="6800" data-added="1" data-color="Cognac" data-size="One Size">
+            <div class="product-media">
+              <img src="https://picsum.photos/seed/nnp7/600/800" alt="Cognac full-grain leather belt coiled with a brass buckle" loading="lazy">
+              <button type="button" class="quick-view" data-variant-id="4000000000007">Quick Add +</button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Accessories</p>
+              <h3 class="product-name">Leather Belt — Cognac</h3>
+              <p class="product-price"><span class="price" data-price="6800">$68.00</span></p>
+            </div>
+            <a class="product-card-link" href="product.html" aria-label="View Leather Belt in Cognac"></a>
+          </article>
+
+          <article class="product-card reveal" data-reveal="up" data-delay="180" data-handle="wool-beanie-heather" data-category="accessories" data-price="3800" data-added="8" data-color="Heather" data-size="One Size">
+            <div class="product-media">
+              <img src="https://picsum.photos/seed/nnp8/600/800" alt="Heather gray ribbed merino wool beanie on a stone surface" loading="lazy">
+              <span class="product-badge badge-new">New</span>
+              <button type="button" class="quick-view" data-variant-id="4000000000008">Quick Add +</button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Accessories</p>
+              <h3 class="product-name">Wool Beanie — Heather</h3>
+              <p class="product-price"><span class="price" data-price="3800">$38.00</span></p>
+            </div>
+            <a class="product-card-link" href="product.html" aria-label="View Wool Beanie in Heather"></a>
+          </article>
+        </div>
+
+        <p class="empty-results" id="emptyResults" hidden>No products match this filter yet — try another category.</p>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="container">
+        <p class="eyebrow">Stay in the loop</p>
+        <h2>10% off your first order</h2>
+        <p>Restock alerts, new arrivals and the occasional field note. No daily email, ever.</p>
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <label class="visually-hidden" for="newsletterEmail">Email address</label>
+          <input type="email" id="newsletterEmail" name="email" placeholder="you@example.com" required>
+          <button type="submit" class="btn btn-light">Subscribe</button>
+        </form>
+        <p class="form-note" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="logo" href="index.html">North &amp; Noble</a>
+          <p>Modern essentials, made to last. Designed in Portland, Oregon since 2016 and shipped carbon-neutral across the United States.</p>
+          <div class="social-row">
+            <a href="https://instagram.com" rel="noopener">Instagram</a>
+            <a href="https://pinterest.com" rel="noopener">Pinterest</a>
+            <a href="https://youtube.com" rel="noopener">YouTube</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="collection.html">Men's Essentials</a></li>
+            <li><a href="collection.html">Women's Essentials</a></li>
+            <li><a href="collection.html">Outerwear</a></li>
+            <li><a href="collection.html">Accessories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">Our story</a></li>
+            <li><a href="blog.html">Journal</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="collections.html">Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="contact.html">Shipping &amp; returns</a></li>
+            <li><a href="contact.html">Size guide</a></li>
+            <li><a href="cart.html">Your cart</a></li>
+            <li><a href="contact.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 North &amp; Noble. All rights reserved.</p>
+        <p>1825 NW Glisan St, Portland, OR 97209 · +1 (503) 555-0148</p>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="to-top" aria-label="Back to top"><span aria-hidden="true">↑</span></button>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍜</text></svg>">
+<title>Chả cá Lã Vọng — Đặc sản Hà Nội | HƯƠNG QUÊ</title>
+<meta name="description" content="Chả cá Lã Vọng tại HƯƠNG QUÊ: chả cá lăng ướp nghệ riềng, nướng than hoa rồi đảo chảo cùng thì là, hành lá, chấm mắm tôm. Giá 169.000đ mỗi phần.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header header-light">
+  <div class="container header-inner">
+    <a class="logo" href="index.html">HƯƠNG QUÊ<span class="logo-dot">●</span></a>
+
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="index.html">Trang chủ</a>
+      <a href="thuc-don.html" class="active" aria-current="page">Thực đơn</a>
+      <a href="ve-chung-toi.html">Câu chuyện</a>
+      <a href="tin-tuc.html">Tin tức</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-cta" href="lien-he.html">Đặt bàn ngay</a>
+      <button class="icon-btn" id="cartBtn" type="button" aria-label="Giỏ món đã chọn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 8h16l-1.2 12H5.2L4 8Z"></path><path d="M8.5 8a3.5 3.5 0 0 1 7 0"></path></svg>
+        <span class="cart-badge">0</span>
+      </button>
+      <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Menu mobile ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Trang chủ</a>
+  <a href="thuc-don.html" class="active" aria-current="page">Thực đơn</a>
+  <a href="ve-chung-toi.html">Câu chuyện</a>
+  <a href="tin-tuc.html">Tin tức</a>
+  <a href="lien-he.html">Liên hệ</a>
+  <div class="mobile-menu-meta">028 3820 6688 · 88 Nguyễn Huệ, Q.1</div>
+</div>
+
+<main>
+
+  <!-- ===== Page hero (breadcrumb) ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="index.html">Trang chủ</a><span class="sep">/</span>
+        <a href="thuc-don.html">Thực đơn</a><span class="sep">/</span>
+        <span>Chả cá Lã Vọng</span>
+      </nav>
+      <span class="eyebrow">Món chính · Đặc sản</span>
+      <p>Món ăn gắn với phố cổ Hà Nội, được bếp trưởng Minh giữ nguyên công thức nướng than hoa truyền thống.</p>
+    </div>
+  </section>
+
+  <!-- ===== Chi tiết món ===== -->
+  <section>
+    <div class="container dish-detail">
+
+      <!-- Gallery -->
+      <div class="reveal" data-reveal="zoom">
+        <div class="gallery-main">
+          <img id="galleryMain" src="https://picsum.photos/seed/hq-cha-ca-1/1000/750" alt="Chảo chả cá Lã Vọng nóng hổi với thì là và hành lá">
+          <button class="gallery-nav prev" type="button" aria-label="Ảnh trước">←</button>
+          <button class="gallery-nav next" type="button" aria-label="Ảnh kế tiếp">→</button>
+        </div>
+
+        <div class="gallery-thumbs" role="group" aria-label="Ảnh món Chả cá Lã Vọng">
+          <button class="thumb active" type="button" aria-label="Xem ảnh 1" aria-current="true"
+                  data-full="https://picsum.photos/seed/hq-cha-ca-1/1000/750"
+                  data-alt="Chảo chả cá Lã Vọng nóng hổi với thì là và hành lá">
+            <img src="https://picsum.photos/seed/hq-cha-ca-1/400/300" alt="Ảnh nhỏ: chảo chả cá nóng hổi" loading="lazy">
+          </button>
+          <button class="thumb" type="button" aria-label="Xem ảnh 2"
+                  data-full="https://picsum.photos/seed/hq-cha-ca-2/1000/750"
+                  data-alt="Miếng chả cá lăng ướp nghệ đang nướng trên than hoa">
+            <img src="https://picsum.photos/seed/hq-cha-ca-2/400/300" alt="Ảnh nhỏ: chả cá nướng trên than hoa" loading="lazy">
+          </button>
+          <button class="thumb" type="button" aria-label="Xem ảnh 3"
+                  data-full="https://picsum.photos/seed/hq-cha-ca-3/1000/750"
+                  data-alt="Mâm chả cá dọn kèm bún, lạc rang, mắm tôm và rau thơm">
+            <img src="https://picsum.photos/seed/hq-cha-ca-3/400/300" alt="Ảnh nhỏ: mâm chả cá dọn đầy đủ" loading="lazy">
+          </button>
+        </div>
+      </div>
+
+      <!-- Thông tin -->
+      <div class="detail-info reveal" data-reveal="right" data-delay="120">
+        <span class="eyebrow">Đặc sản Hà Nội</span>
+        <h1>Chả cá Lã Vọng</h1>
+        <div class="detail-price">169.000đ</div>
+
+        <p>
+          Cá lăng tươi lọc thịt, ướp riềng, mẻ và nghệ tươi trong 4 tiếng rồi nướng trên than hoa
+          cho se mặt. Khi phục vụ, chả cá được đảo nóng cùng thì là và hành lá ngay tại bàn,
+          ăn kèm bún rối, lạc rang và mắm tôm vắt quất.
+        </p>
+        <p>
+          Một phần dành cho 1–2 người ăn, có thể gọi thêm bún và rau. Bếp phục vụ từ 10:00 đến 21:30.
+        </p>
+
+        <div class="option-group">
+          <span class="option-label">Khẩu phần: <b id="portionLabel">2 người</b></span>
+          <div class="portions" role="group" aria-label="Chọn khẩu phần">
+            <button class="pill-btn" type="button" aria-pressed="false">1 người</button>
+            <button class="pill-btn active" type="button" aria-pressed="true">2 người</button>
+            <button class="pill-btn" type="button" aria-pressed="false">Gia đình</button>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <span class="option-label">Số lượng</span>
+          <div class="qty">
+            <button id="qtyMinus" type="button" aria-label="Giảm số lượng">−</button>
+            <input id="qtyInput" type="number" value="1" min="1" max="20" aria-label="Số lượng">
+            <button id="qtyPlus" type="button" aria-label="Tăng số lượng">+</button>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <button class="btn btn-primary" id="addToCart" type="button">Thêm vào giỏ <span class="arrow">→</span></button>
+          <a class="btn btn-light" href="lien-he.html">Đặt bàn thưởng thức <span class="arrow">→</span></a>
+        </div>
+
+        <ul class="detail-note">
+          <li><span aria-hidden="true">🔥</span> Phục vụ nóng tại bàn trên bếp cồn</li>
+          <li><span aria-hidden="true">🌿</span> Cá lăng tươi nhập mỗi sáng, không dùng cá đông lạnh</li>
+          <li><span aria-hidden="true">🥜</span> Món có lạc và mắm tôm — báo nhân viên nếu bạn dị ứng</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Tabs ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="tabs" role="tablist" aria-label="Thông tin chi tiết món ăn">
+        <button class="tab-btn active" type="button" role="tab" aria-selected="true" id="tab-cauchuyen-tab" aria-controls="tab-cauchuyen" data-tab="tab-cauchuyen">Câu chuyện món</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" tabindex="-1" id="tab-nguyenlieu-tab" aria-controls="tab-nguyenlieu" data-tab="tab-nguyenlieu">Nguyên liệu</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" tabindex="-1" id="tab-thuongthuc-tab" aria-controls="tab-thuongthuc" data-tab="tab-thuongthuc">Cách thưởng thức</button>
+      </div>
+
+      <div class="tab-panel" id="tab-cauchuyen" role="tabpanel" aria-labelledby="tab-cauchuyen-tab">
+        <p>
+          Chả cá Lã Vọng ra đời ở phố Chả Cá (Hà Nội) từ cuối thế kỷ 19, gắn với gia đình họ Đoàn.
+          Món ăn nổi tiếng đến mức con phố được đặt tên theo chính nó — điều hiếm có trong ẩm thực Việt.
+        </p>
+        <p>
+          Bếp trưởng Nguyễn Văn Minh học món này trong ba năm học nghề tại Hà Nội và giữ nguyên
+          cách nướng than hoa thay vì nướng lò, vì theo thầy, chính mùi khói mới làm nên linh hồn của món.
+        </p>
+      </div>
+
+      <div class="tab-panel" id="tab-nguyenlieu" role="tabpanel" hidden aria-labelledby="tab-nguyenlieu-tab">
+        <ul>
+          <li><span aria-hidden="true">▸</span> Cá lăng tươi phi lê, nhập từ sông Đà mỗi sáng.</li>
+          <li><span aria-hidden="true">▸</span> Riềng, nghệ tươi và mẻ tự ủ tại bếp để ướp cá.</li>
+          <li><span aria-hidden="true">▸</span> Thì là, hành lá cắt khúc — cho vào chảo ngay khi phục vụ.</li>
+          <li><span aria-hidden="true">▸</span> Bún rối, lạc rang giã dập, mắm tôm Thanh Hoá vắt quất.</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" id="tab-thuongthuc" role="tabpanel" hidden aria-labelledby="tab-thuongthuc-tab">
+        <ul>
+          <li><span aria-hidden="true">▸</span> Đợi chảo nóng, đảo chả cá cùng thì là khoảng 30 giây cho dậy mùi.</li>
+          <li><span aria-hidden="true">▸</span> Gắp bún vào bát, thêm chả cá, rau thơm rồi rưới chút mỡ hành.</li>
+          <li><span aria-hidden="true">▸</span> Pha mắm tôm với quất và chút đường, đánh bông trước khi chấm.</li>
+          <li><span aria-hidden="true">▸</span> Ăn nóng ngay tại bàn, dùng kèm nước mơ muối để cân vị.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Món cùng loại ===== -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head reveal" data-reveal="up">
+        <span class="eyebrow">Gợi ý của bếp</span>
+        <h2>Món cùng loại</h2>
+      </div>
+
+      <div class="dish-grid">
+        <article class="dish-card reveal" data-reveal="up">
+          <div class="dish-media">
+            <img src="https://picsum.photos/seed/hq-pho-bo/800/600" alt="Tô phở bò Hà Nội với bánh phở tươi và hành lá" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Món chính</span>
+            <h3>Phở bò Hà Nội</h3>
+            <p class="dish-desc">Nước dùng ninh 12 tiếng từ xương bò, bánh phở tươi Bắc.</p>
+            <div class="dish-price">79.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Phở bò Hà Nội"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+        <article class="dish-card reveal" data-reveal="up" data-delay="100">
+          <div class="dish-media">
+            <img src="https://picsum.photos/seed/hq-bun-cha/800/600" alt="Suất bún chả Hà Nội với chả nướng than hoa và rau sống" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Món chính</span>
+            <h3>Bún chả Hà Nội</h3>
+            <p class="dish-desc">Chả nướng than hoa, nước chấm chua ngọt đúng vị Hà Thành.</p>
+            <div class="dish-price">89.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Bún chả Hà Nội"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+
+        <article class="dish-card reveal" data-reveal="up" data-delay="200">
+          <div class="dish-media">
+            <img src="https://picsum.photos/seed/hq-ca-kho-to/800/600" alt="Cá kho tộ miền Tây trong nồi đất còn nóng" loading="lazy">
+          </div>
+          <div class="dish-info">
+            <span class="dish-cat">Món chính</span>
+            <h3>Cá kho tộ miền Tây</h3>
+            <p class="dish-desc">Cá lóc đồng kho riềng sả, ăn kèm cơm nóng.</p>
+            <div class="dish-price">135.000đ</div>
+          </div>
+          <a class="dish-card-link" href="chi-tiet-mon-an.html" aria-label="Xem chi tiết món Cá kho tộ miền Tây"></a>
+          <button type="button" class="quick-view">Thêm món</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Newsletter ===== -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-inner reveal" data-reveal="up">
+        <span class="eyebrow">Bản tin</span>
+        <h2>Nhận ưu đãi &amp; món mới mỗi tháng</h2>
+        <p>Một email mỗi tháng: món theo mùa, ưu đãi sinh nhật và lịch đờn ca tài tử.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" required>
+          <button class="btn btn-light" type="submit">Đăng ký <span class="arrow">→</span></button>
+          <p class="form-note" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">HƯƠNG QUÊ<span class="logo-dot">●</span></a>
+        <p>Hương vị quê nhà giữa lòng phố thị. Nhà hàng ẩm thực Việt phục vụ đặc sản ba miền từ năm 2004.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Khám phá</h4>
+        <ul>
+          <li><a href="thuc-don.html">Thực đơn</a></li>
+          <li><a href="ve-chung-toi.html">Câu chuyện</a></li>
+          <li><a href="tin-tuc.html">Tin tức</a></li>
+          <li><a href="lien-he.html">Đặt bàn</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Thực đơn</h4>
+        <ul>
+          <li><a href="thuc-don.html">Món chính</a></li>
+          <li><a href="thuc-don.html">Khai vị</a></li>
+          <li><a href="thuc-don.html">Tráng miệng</a></li>
+          <li><a href="thuc-don.html">Đồ uống</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li>88 Nguyễn Huệ, Quận 1, TP.HCM</li>
+          <li><a href="tel:02838206688">028 3820 6688</a> · <a href="tel:0908889990">0908 889 990</a></li>
+          <li><a href="mailto:lienhe@huongque.vn">lienhe@huongque.vn</a></li>
+          <li>Mở cửa 10:00–22:00 cả tuần</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> HƯƠNG QUÊ. Bảo lưu mọi quyền.</span>
+      <span>Nấu bằng nguyên liệu Việt, phục vụ bằng tấm lòng Việt</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="Lên đầu trang">↑</button>
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

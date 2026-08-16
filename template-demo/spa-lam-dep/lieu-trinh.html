@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+<title>Liệu trình chăm sóc — SEN SPA</title>
+<meta name="description" content="Bảng liệu trình SEN SPA: chăm sóc da mặt cao cấp, massage trị liệu Thái, massage đá nóng, xông hơi thảo dược, chăm sóc body và các gói trọn ngày.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header header-light">
+  <div class="container header-inner">
+    <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">❀</span> SEN SPA</a>
+
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="index.html">Trang chủ</a>
+      <a href="lieu-trinh.html" class="active" aria-current="page">Liệu trình</a>
+      <a href="ve-sen.html">Về SEN</a>
+      <a href="tin-tuc.html">Tin tức</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-cta" href="lien-he.html">Đặt lịch ngay</a>
+      <button class="icon-btn" id="bookingBtn" type="button" aria-label="Lịch hẹn đã chọn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 9.5h17M8 3.5v3M16 3.5v3"></path></svg>
+        <span class="book-badge">0</span>
+      </button>
+      <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Menu mobile ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Trang chủ</a>
+  <a href="lieu-trinh.html" class="active" aria-current="page">Liệu trình</a>
+  <a href="ve-sen.html">Về SEN</a>
+  <a href="tin-tuc.html">Tin tức</a>
+  <a href="lien-he.html">Liên hệ</a>
+  <div class="mobile-menu-meta">024 3933 8899 · 24 Bà Triệu, Hoàn Kiếm</div>
+</div>
+
+<main>
+
+  <!-- ===== Page hero ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="index.html">Trang chủ</a><span class="sep">/</span><span>Liệu trình</span>
+      </nav>
+      <h1 class="reveal" data-reveal="up">Liệu trình chăm sóc</h1>
+      <p class="reveal" data-reveal="up" data-delay="100">
+        Tám liệu trình chủ đạo của SEN, từ chăm sóc da chuyên sâu tới massage trị liệu
+        và các gói trọn ngày. Mọi liệu trình đều được điều chỉnh theo cơ địa từng khách.
+      </p>
+
+      <div class="page-hero-strip reveal" data-reveal="zoom" data-delay="200">
+        <img src="https://picsum.photos/seed/sen-strip-1/600/400" alt="Bàn trị liệu với khăn trắng và hoa sen" loading="lazy">
+        <img src="https://picsum.photos/seed/sen-strip-2/600/400" alt="Các lọ tinh dầu thảo dược xếp trên khay gỗ" loading="lazy">
+        <img src="https://picsum.photos/seed/sen-strip-3/600/400" alt="Phòng xông hơi thảo dược đang toả hơi ấm" loading="lazy">
+        <img src="https://picsum.photos/seed/sen-strip-4/600/400" alt="Chuyên viên chuẩn bị đá nóng cho liệu trình" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Lưới liệu trình + bộ lọc ===== -->
+  <section class="section">
+    <div class="container">
+
+      <div class="filter-bar">
+        <div class="filter-group" role="group" aria-label="Lọc theo nhóm liệu trình">
+          <button class="pill-btn active" type="button" data-filter="all" aria-pressed="true">Tất cả</button>
+          <button class="pill-btn" type="button" data-filter="cham-soc-da" aria-pressed="false">Chăm sóc da</button>
+          <button class="pill-btn" type="button" data-filter="massage" aria-pressed="false">Massage</button>
+          <button class="pill-btn" type="button" data-filter="xong-hoi" aria-pressed="false">Xông hơi</button>
+          <button class="pill-btn" type="button" data-filter="body" aria-pressed="false">Body</button>
+        </div>
+
+        <div class="filter-meta">
+          <span id="serviceCount" role="status">8 liệu trình</span>
+          <select class="sort-select" id="sortSelect" aria-label="Sắp xếp liệu trình">
+            <option value="suggest">Gợi ý của SEN</option>
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="service-grid" id="serviceGrid">
+
+        <article class="service-card reveal" data-reveal="up" data-category="cham-soc-da" data-price="990000">
+          <div class="service-media">
+            <img src="https://picsum.photos/seed/sen-s1-da-mat/800/560" alt="Chuyên viên đang chăm sóc da mặt cho khách hàng" loading="lazy">
+            <span class="service-badge">Bán chạy</span>
+          </div>
+          <div class="service-info">
+            <h3>Chăm sóc da mặt cao cấp</h3>
+            <span class="service-dur">60–90 phút</span>
+            <p>Làm sạch sâu, cấp ẩm, phục hồi da với công nghệ Hifu &amp; tinh chất sen.</p>
+            <div class="service-price">990.000đ</div>
+          </div>
+          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Chăm sóc da mặt cao cấp"></a>
+          <button type="button" class="quick-view">Đặt nhanh</button>
+        </article>
+
+        <article class="service-card reveal" data-reveal="up" data-delay="60" data-category="massage" data-price="1290000">
+          <div class="service-media">
+            <img src="https://picsum.photos/seed/sen-s2-massage-thai/800/560" alt="Phòng massage trị liệu Thái với ánh sáng ấm dịu" loading="lazy">
+            <span class="service-badge">Bán chạy</span>
+          </div>
+          <div class="service-info">
+            <h3>Massage trị liệu Thái</h3>
+            <span class="service-dur">60–120 phút</span>
+            <p>Giải phóng căng thẳng, phục hồi năng lượng với kỹ thuật massage Thái cổ truyền.</p>
+            <div class="service-price">1.290.000đ</div>
+          </div>
+          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Massage trị liệu Thái"></a>
+          <button type="button" class="quick-view">Đặt nhanh</button>
+        </article>
+
+        <article class="service-card reveal" data-reveal="up" data-delay="120" data-category="xong-hoi" data-price="450000">
+          <div class="service-media">
+            <img src="https://picsum.photos/seed/sen-s3-xong-hoi/800/560" alt="Nồi lá thảo dược dùng cho liệu trình xông hơi" loading="lazy">
+          </div>
+          <div class="service-info">
+            <h3>Xông hơi thảo dược</h3>
+            <span class="service-dur">45–60 phút</span>
+            <p>Xông hơi 12 loại lá, hỗ trợ giảm đau nhức và thải độc toàn thân.</p>
+            <div class="service-price">450.000đ</div>
+          </div>
+          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Xông hơi thảo dược"></a>
+          <button type="button" class="quick-view">Đặt nhanh</button>
+        </article>
+
+        <article class="service-card reveal" data-reveal="up" data-delay="180" data-category="massage" data-price="1590000">
+          <div class="service-media">
+            <img src="https://picsum.photos/seed/sen-s4-da-nong/800/560" alt="Bộ đá bazan nóng chuẩn bị cho liệu trình massage" loading="lazy">
+            <span class="service-badge new">Mới</span>
+          </div>
+          <div class="service-info">
+            <h3>Massage đá nóng</h3>
+            <span class="service-dur">90 phút</span>
+            <p>Đá bazan nóng kết hợp tinh dầu, làm ấm cơ thể và lưu thông khí huyết.</p>
+            <div class="service-price">1.590.000đ</div>
+          </div>
+          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Massage đá nóng"></a>
+          <button type="button" class="quick-view">Đặt nhanh</button>
+        </article>
+
+        <article class="service-card reveal" data-reveal="up" data-category="body" data-price="1190000">
+          <div class="service-media">
+            <img src="https://picsum.photos/seed/sen-s5-body/800/560" alt="Hỗn hợp muối và thảo dược dùng để tẩy tế bào chết" loading="lazy">
+          </div>
+          <div class="service-info">
+            <h3>Chăm sóc body thảo dược</h3>
+            <span class="service-dur">90 phút</span>
+            <p>Tẩy tế bào chết, ủ ấm thảo dược, nuôi dưỡng da mềm mịn.</p>
+            <div class="service-price">1.190.000đ</div>
+          </div>
+          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Chăm sóc body thảo dược"></a>
+          <button type="button" class="quick-view">Đặt nhanh</button>
+        </article>
+
+        <article class="service-card reveal" data-reveal="up" data-delay="60" data-category="cham-soc-da" data-price="1390000">
+          <div class="service-media">
+            <img src="https://picsum.photos/seed/sen-s6-guong-mat-sen/800/560" alt="Tinh chất hoa sen dùng trong liệu trình gương mặt của SEN SPA" loading="lazy">
+            <span class="service-badge new">Mới</span>
+          </div>
+          <div class="service-info">
+            <h3>Trị liệu gương mặt sen</h3>
+            <span class="service-dur">75 phút</span>
+            <p>Liệu trình độc quyền SEN với tinh chất hoa sen, săn chắc và trẻ hoá da.</p>
+            <div class="service-price">1.390.000đ</div>
+          </div>
+          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Trị liệu gương mặt sen"></a>
+          <button type="button" class="quick-view">Đặt nhanh</button>
+        </article>
+
+        <article class="service-card reveal" data-reveal="up" data-delay="120" data-category="body" data-price="1690000">
+          <div class="service-media">
+            <img src="https://picsum.photos/seed/sen-s7-phuc-hoi/800/560" alt="Giường trị liệu chuẩn bị cho gói Phục Hồi kéo dài 150 phút" loading="lazy">
+          </div>
+          <div class="service-info">
+            <h3>Gói Phục Hồi</h3>
+            <span class="service-dur">150 phút</span>
+            <p>Combo phổ biến nhất: massage 90 phút thư giãn toàn thân + chăm sóc da mặt 60 phút chuyên sâu.</p>
+            <div class="service-price">1.690.000đ</div>
+          </div>
+          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết Gói Phục Hồi"></a>
+          <button type="button" class="quick-view">Đặt nhanh</button>
+        </article>
+
+        <article class="service-card reveal" data-reveal="up" data-delay="180" data-category="body" data-price="2990000">
+          <div class="service-media">
+            <img src="https://picsum.photos/seed/sen-s8-hoang-gia/800/560" alt="Phòng tĩnh toạ riêng dành cho gói Hoàng Gia trọn ngày" loading="lazy">
+          </div>
+          <div class="service-info">
+            <h3>Gói Hoàng Gia trọn ngày</h3>
+            <span class="service-dur">4 giờ</span>
+            <p>Full liệu trình 4 giờ + bữa ăn healthy + phòng tĩnh toạ riêng.</p>
+            <div class="service-price">2.990.000đ</div>
+          </div>
+          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết Gói Hoàng Gia trọn ngày"></a>
+          <button type="button" class="quick-view">Đặt nhanh</button>
+        </article>
+
+      </div>
+
+      <p class="empty-note" id="emptyNote" hidden>Chưa có liệu trình nào trong nhóm này.</p>
+
+      <div class="text-center section-cta reveal" data-reveal="up">
+        <a class="btn btn-lg btn-primary" href="lien-he.html">Đặt lịch trải nghiệm <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Newsletter ===== -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-inner reveal" data-reveal="up">
+        <span class="eyebrow">Bản tin</span>
+        <h2>Nhận ưu đãi &amp; bí quyết chăm sóc</h2>
+        <p>Mỗi tháng một email: liệu trình theo mùa, ưu đãi sinh nhật và mẹo chăm da tại nhà.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" required>
+          <button class="btn btn-light" type="submit">Đăng ký <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="form-note" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">❀</span> SEN SPA</a>
+        <p>Vẻ đẹp đến từ sự tĩnh lặng. Spa &amp; wellness cao cấp với thảo dược thiên nhiên, phục vụ từ năm 2015.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liệu trình</h4>
+        <ul>
+          <li><a href="lieu-trinh.html">Chăm sóc da</a></li>
+          <li><a href="lieu-trinh.html">Massage trị liệu</a></li>
+          <li><a href="lieu-trinh.html">Xông hơi thảo dược</a></li>
+          <li><a href="lieu-trinh.html">Chăm sóc body</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>SEN SPA</h4>
+        <ul>
+          <li><a href="ve-sen.html">Về chúng tôi</a></li>
+          <li><a href="lieu-trinh.html">Bảng giá</a></li>
+          <li><a href="tin-tuc.html">Góc thư giãn</a></li>
+          <li><a href="lien-he.html">Đặt lịch</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li>24 Bà Triệu, Hoàn Kiếm, Hà Nội</li>
+          <li><a href="tel:02439338899">024 3933 8899</a> · <a href="tel:0912345678">0912 345 678</a></li>
+          <li><a href="mailto:hello@senspa.vn">hello@senspa.vn</a></li>
+          <li>Mở cửa 9:00–21:00 cả tuần</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> SEN SPA. Bảo lưu mọi quyền.</span>
+      <span>Chi nhánh: Hà Nội · TP. Hồ Chí Minh · Đà Nẵng</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="Lên đầu trang">↑</button>
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

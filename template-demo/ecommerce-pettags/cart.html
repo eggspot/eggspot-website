@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
+  <title>Your Cart — Talon &amp; Whisker</title>
+  <meta name="description" content="Review your custom engraved pet tags before checkout. Check the engraving on every line — personalized items are final sale.">
+  <link rel="canonical" href="https://talonandwhisker.com/cart">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Talon &amp; Whisker</a>
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="collections.html">Shop</a>
+        <a href="about.html">Our Story</a>
+        <a href="blog.html">Journal</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><span aria-hidden="true">🔍</span></button>
+        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><span aria-hidden="true">👤</span></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart" aria-current="page"><span aria-hidden="true">🛒</span><span class="cart-badge" data-cart-count hidden>0</span></a>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="search-panel" id="searchPanel">
+      <div class="container">
+        <form class="search-form" role="search">
+          <label class="visually-hidden" for="searchInput">Search products</label>
+          <input type="search" id="searchInput" placeholder="Search dog tags, cat tags, collars…">
+          <button type="submit" class="btn btn-dark">Search</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span aria-hidden="true">/</span>Cart
+        </nav>
+        <h1>Your cart</h1>
+      </div>
+    </section>
+
+    <section class="section" id="cartRoot">
+      <div class="container">
+
+        <!-- Empty state -->
+        <div class="empty-state" id="cartEmpty" hidden>
+          <p class="empty-icon" aria-hidden="true">🐾</p>
+          <h2>Your cart is empty</h2>
+          <p>No tags yet. Start with the Classic Round — it takes about a minute to customize.</p>
+          <a class="btn btn-accent" href="collection.html">Shop tags</a>
+        </div>
+
+        <!-- Cart content -->
+        <div id="cartContent" hidden>
+          <div class="cart-layout">
+            <form class="cart-form" novalidate>
+              <div class="cart-head">
+                <span>Tag &amp; engraving</span>
+                <span>Quantity &amp; total</span>
+              </div>
+              <div id="cartLines"></div>
+
+              <div class="ship-progress" id="shipProgress">
+                <p class="ship-note" id="shipText" role="status">Free shipping on U.S. orders over $35.</p>
+                <div class="ship-bar"><span id="shipBar"></span></div>
+              </div>
+            </form>
+
+            <aside class="order-summary">
+              <h2>Order summary</h2>
+              <div class="summary-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+              <div class="summary-row"><span>Engraving</span><span>Included</span></div>
+              <div class="summary-row"><span>Estimated tax</span><span>Calculated at checkout</span></div>
+              <div class="summary-row total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+              <p class="summary-note">Personalized items are final sale and cannot be returned. Please re-read every engraving above before checking out.</p>
+              <div class="summary-actions">
+                <a class="btn btn-accent btn-block" id="checkoutBtn" href="#">Checkout</a>
+                <a class="btn btn-outline btn-block" href="collection.html">Continue shopping</a>
+              </div>
+              <p class="summary-note">Engraved and shipped from Austin in 2 business days.</p>
+            </aside>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="logo" href="index.html">Talon &amp; Whisker</a>
+          <p>Every name, engraved. Custom pet ID tags cut and engraved in Austin, Texas since 2021 — and shipped anywhere in the United States.</p>
+          <div class="social-row">
+            <a href="https://instagram.com" rel="noopener">Instagram</a>
+            <a href="https://pinterest.com" rel="noopener">Pinterest</a>
+            <a href="https://tiktok.com" rel="noopener">TikTok</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="collection.html">Dog Tags</a></li>
+            <li><a href="collection.html">Cat Tags</a></li>
+            <li><a href="collection.html">Engraved Collars</a></li>
+            <li><a href="collection.html">Gift Sets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">Our story</a></li>
+            <li><a href="blog.html">Journal</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="collections.html">Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="product.html">Engraving guide</a></li>
+            <li><a href="contact.html">Shipping &amp; returns</a></li>
+            <li><a href="cart.html">Your cart</a></li>
+            <li><a href="contact.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Talon &amp; Whisker. All rights reserved.</p>
+        <p>310 E 2nd St, Austin, TX 78701 · <a href="tel:+15125550162">+1 (512) 555-0162</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="to-top" aria-label="Back to top"><span aria-hidden="true">↑</span></button>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

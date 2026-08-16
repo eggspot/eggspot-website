@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏙️</text></svg>">
+<title>PHÚC LAND — Sàn giao dịch bất động sản uy tín</title>
+<meta name="description" content="PHÚC LAND — sàn giao dịch bất động sản với 5.000+ sản phẩm niêm yết, 12 năm kinh nghiệm, 99% hồ sơ pháp lý minh bạch. Mua bán, cho thuê, đầu tư và tư vấn pháp lý.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== Preloader ===== -->
+<div class="preloader">
+  <div class="preloader-logo">PHÚC <span>LAND</span></div>
+  <div class="preloader-line"></div>
+</div>
+
+<!-- ===== Header ===== -->
+<header class="site-header header-light">
+  <div class="container header-inner">
+    <a class="logo" href="index.html">PHÚC <span class="logo-mark">LAND</span></a>
+
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="index.html" class="active" aria-current="page">Trang chủ</a>
+      <a href="du-an.html">Dự án</a>
+      <a href="ve-chung-toi.html">Về chúng tôi</a>
+      <a href="tin-tuc.html">Tin tức</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-cta" href="lien-he.html">Tư vấn miễn phí</a>
+      <a class="icon-btn" href="tel:0936888666" aria-label="Gọi hotline 0936 888 666">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"></path></svg>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Menu mobile ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="active" aria-current="page">Trang chủ</a>
+  <a href="du-an.html">Dự án</a>
+  <a href="ve-chung-toi.html">Về chúng tôi</a>
+  <a href="tin-tuc.html">Tin tức</a>
+  <a href="lien-he.html">Liên hệ</a>
+  <div class="mobile-menu-meta">024 3568 7777 · Golden Tower, 275 Nguyễn Trãi</div>
+</div>
+
+<main>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://picsum.photos/seed/pl-hero-2026/1600/1000" alt="Khu đô thị hiện đại nhìn từ trên cao lúc hoàng hôn" fetchpriority="high">
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-inner">
+      <span class="eyebrow reveal" data-reveal="up">Sàn giao dịch bất động sản hàng đầu</span>
+      <h1 class="reveal" data-reveal="up" data-delay="100">
+        Tìm kiếm tổ ấm<br><em>lý tưởng của bạn</em>
+      </h1>
+      <p class="hero-sub reveal" data-reveal="up" data-delay="200">
+        Hơn 5.000 sản phẩm căn hộ, nhà phố, biệt thự và đất nền được thẩm định pháp lý.
+        PHÚC LAND đồng hành trọn vẹn cùng khách hàng từ lúc xem nhà tới khi cầm sổ.
+      </p>
+
+      <form class="search-box reveal" id="heroSearch" data-reveal="up" data-delay="300">
+        <div class="search-field">
+          <label for="search-type">Loại hình</label>
+          <select id="search-type" name="type">
+            <option>Tất cả loại hình</option>
+            <option>Căn hộ</option>
+            <option>Nhà &amp; biệt thự</option>
+            <option>Đất nền</option>
+          </select>
+        </div>
+
+        <div class="search-field">
+          <label for="search-city">Tỉnh thành</label>
+          <select id="search-city" name="city">
+            <option>Toàn quốc</option>
+            <option>Hà Nội</option>
+            <option>TP. Hồ Chí Minh</option>
+            <option>Đà Nẵng</option>
+            <option>Bình Dương</option>
+            <option>Hưng Yên</option>
+          </select>
+        </div>
+
+        <div class="search-field">
+          <label for="search-price">Khoảng giá</label>
+          <select id="search-price" name="price">
+            <option>Mọi mức giá</option>
+            <option>Dưới 3 tỷ</option>
+            <option>3 – 6 tỷ</option>
+            <option>6 – 10 tỷ</option>
+            <option>Trên 10 tỷ</option>
+          </select>
+        </div>
+
+        <button class="btn btn-gold" type="submit"><span aria-hidden="true">🔍</span> Tìm kiếm</button>
+      </form>
+
+      <div class="hero-actions reveal" data-reveal="up" data-delay="400">
+        <a class="btn btn-outline" href="du-an.html">Hoặc xem toàn bộ dự án <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Dải số liệu ===== -->
+  <section class="stats-band">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal" data-reveal="up">
+          <div class="stat-num" data-count="5000" data-suffix="+">0</div>
+          <div class="stat-label">Sản phẩm niêm yết</div>
+        </div>
+        <div class="stat-item reveal" data-reveal="up" data-delay="100">
+          <div class="stat-num" data-count="12" data-suffix="">0</div>
+          <div class="stat-label">Năm kinh nghiệm</div>
+        </div>
+        <div class="stat-item reveal" data-reveal="up" data-delay="200">
+          <div class="stat-num" data-count="8500" data-suffix="+">0</div>
+          <div class="stat-label">Khách hàng đã giao dịch</div>
+        </div>
+        <div class="stat-item reveal" data-reveal="up" data-delay="300">
+          <div class="stat-num" data-count="99" data-suffix="%">0</div>
+          <div class="stat-label">Hồ sơ pháp lý minh bạch</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Marquee ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>DỰ ÁN CHÍNH CHỦ <i>✦</i></span>
+      <span>PHÁP LÝ MINH BẠCH <i>✦</i></span>
+      <span>HỖ TRỢ VAY 70% <i>✦</i></span>
+      <span>CHIẾT KHẤU TỚI 2% <i>✦</i></span>
+      <span>DỰ ÁN CHÍNH CHỦ <i>✦</i></span>
+      <span>PHÁP LÝ MINH BẠCH <i>✦</i></span>
+      <span>HỖ TRỢ VAY 70% <i>✦</i></span>
+      <span>CHIẾT KHẤU TỚI 2% <i>✦</i></span>
+    </div>
+  </div>
+
+  <!-- ===== Dịch vụ ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal" data-reveal="up">
+        <span class="eyebrow">Dịch vụ</span>
+        <h2>Trọn gói từ tìm nhà tới sang tên</h2>
+        <p class="section-desc">Một chuyên viên phụ trách xuyên suốt, không đẩy khách qua nhiều đầu mối.</p>
+      </div>
+
+      <div class="service-grid">
+        <div class="service-card reveal" data-reveal="up">
+          <span class="service-ico" aria-hidden="true">🏠</span>
+          <h3>Mua bán</h3>
+          <p>Căn hộ, nhà phố, biệt thự, đất nền đã thẩm định pháp lý trước khi lên sàn.</p>
+        </div>
+
+        <div class="service-card reveal" data-reveal="up" data-delay="100">
+          <span class="service-ico" aria-hidden="true">🔑</span>
+          <h3>Cho thuê</h3>
+          <p>Kết nối chủ nhà và khách thuê, soạn hợp đồng và bàn giao có biên bản rõ ràng.</p>
+        </div>
+
+        <div class="service-card reveal" data-reveal="up" data-delay="200">
+          <span class="service-ico" aria-hidden="true">📈</span>
+          <h3>Đầu tư</h3>
+          <p>Phân tích dòng tiền, tiềm năng tăng giá và rủi ro từng khu vực trước khi xuống tiền.</p>
+        </div>
+
+        <div class="service-card reveal" data-reveal="up" data-delay="300">
+          <span class="service-ico" aria-hidden="true">⚖️</span>
+          <h3>Pháp lý</h3>
+          <p>Kiểm tra quy hoạch, tranh chấp, thế chấp và hỗ trợ thủ tục sang tên trọn gói.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Dự án nổi bật ===== -->
+  <section class="section section-alt" id="du-an-noi-bat">
+    <div class="container">
+      <div class="section-head reveal" data-reveal="up">
+        <span class="eyebrow">Dự án nổi bật</span>
+        <h2>Sản phẩm đang được quan tâm</h2>
+        <p class="section-desc">Cập nhật mỗi ngày, giá niêm yết đúng với chủ sở hữu.</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card reveal" data-reveal="up">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p1-smart-city/800/550" alt="Căn hộ 2 phòng ngủ tại Vinhomes Smart City nhìn từ ban công" loading="lazy">
+            <span class="project-badge">Bán</span>
+          </div>
+          <div class="project-info">
+            <h3>Căn hộ 2PN Vinhomes Smart City</h3>
+            <p class="project-loc">📍 Tây Mỗ, Nam Từ Liêm, Hà Nội</p>
+            <div class="project-meta">
+              <span class="chip">72m²</span>
+              <span class="chip">2PN · 2WC</span>
+              <span class="chip">Tầng cao</span>
+            </div>
+            <div class="project-price">3,6 tỷ <span class="price-unit">50 tr/m²</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Căn hộ 2PN Vinhomes Smart City"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+        <article class="project-card reveal" data-reveal="up" data-delay="100">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p2-duong-noi/800/550" alt="Biệt thự song lập ba tầng nhìn ra hồ tại Dương Nội" loading="lazy">
+            <span class="project-badge rent">Cho thuê</span>
+          </div>
+          <div class="project-info">
+            <h3>Biệt thự song lập 3 tầng view hồ</h3>
+            <p class="project-loc">📍 Dương Nội, Hà Đông, Hà Nội</p>
+            <div class="project-meta">
+              <span class="chip">200m²</span>
+              <span class="chip">4PN</span>
+              <span class="chip">Full nội thất</span>
+            </div>
+            <div class="project-price">45 triệu <span class="price-unit">/tháng</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Biệt thự song lập 3 tầng view hồ"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+
+        <article class="project-card reveal" data-reveal="up" data-delay="200">
+          <div class="project-media">
+            <img src="https://picsum.photos/seed/pl-p3-binh-an/800/550" alt="Khu dân cư Bình An với đường nội bộ rộng và cây xanh" loading="lazy">
+            <span class="project-badge">Bán</span>
+          </div>
+          <div class="project-info">
+            <h3>Đất nền KDC Bình An</h3>
+            <p class="project-loc">📍 Dĩ An, Bình Dương</p>
+            <div class="project-meta">
+              <span class="chip">100m²</span>
+              <span class="chip">Đường 12m</span>
+              <span class="chip">Sổ hồng riêng</span>
+            </div>
+            <div class="project-price">2,1 tỷ <span class="price-unit">21 tr/m²</span></div>
+          </div>
+          <a class="project-card-link" href="chi-tiet-du-an.html" aria-label="Xem chi tiết Đất nền KDC Bình An"></a>
+          <button type="button" class="quick-view">Xem nhanh</button>
+        </article>
+      </div>
+
+      <div class="text-center section-cta reveal" data-reveal="up">
+        <a class="btn btn-light" href="du-an.html">Xem tất cả dự án <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Vì sao chọn PHÚC LAND ===== -->
+  <section class="section">
+    <div class="container split">
+      <div class="split-body reveal" data-reveal="left">
+        <span class="eyebrow">Vì sao chọn chúng tôi</span>
+        <h2>Mua bất động sản không phải là canh bạc</h2>
+        <p>
+          Mỗi sản phẩm lên sàn PHÚC LAND đều đi qua vòng thẩm định pháp lý: kiểm tra quy hoạch,
+          tình trạng thế chấp và tranh chấp. Khách hàng biết rõ mình đang mua gì trước khi đặt cọc.
+        </p>
+
+        <ul class="check-list">
+          <li><span class="ico" aria-hidden="true">✔</span> Pháp lý minh bạch 100% — công khai hồ sơ trước khi ký</li>
+          <li><span class="ico" aria-hidden="true">✔</span> Đội ngũ 120+ chuyên viên am hiểu từng khu vực</li>
+          <li><span class="ico" aria-hidden="true">✔</span> Hỗ trợ trọn đời: sang tên, vay vốn, cho thuê lại</li>
+          <li><span class="ico" aria-hidden="true">✔</span> Chiết khấu 0,5–2% tuỳ dự án, không phí ẩn</li>
+        </ul>
+
+        <a class="btn btn-light" href="ve-chung-toi.html">Tìm hiểu về PHÚC LAND <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="split-media reveal" data-reveal="zoom" data-delay="150">
+        <img src="https://picsum.photos/seed/pl-consult/1000/800" alt="Chuyên viên PHÚC LAND tư vấn hồ sơ pháp lý cho khách hàng" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Quote ===== -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="quote-block reveal" data-reveal="up">
+        <span class="eyebrow">Cam kết</span>
+        <blockquote>
+          “Chúng tôi không bán cho khách căn nhà đắt nhất, mà bán căn nhà khách còn hài lòng
+          sau năm năm ở.”
+        </blockquote>
+        <div class="quote-sign">— Ban giám đốc PHÚC LAND</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Tin tức ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal" data-reveal="up">
+        <span class="eyebrow">Tin tức thị trường</span>
+        <h2>Phân tích &amp; kinh nghiệm</h2>
+        <p class="section-desc">Góc nhìn từ đội ngũ chuyên viên đang trực tiếp giao dịch mỗi ngày.</p>
+      </div>
+
+      <div class="journal-grid">
+        <a class="journal-card reveal" data-reveal="up" href="tin-tuc.html">
+          <div class="journal-media">
+            <img src="https://picsum.photos/seed/pl-news-1/800/550" alt="Biểu đồ phân tích thị trường bất động sản trên màn hình" loading="lazy">
+          </div>
+          <div class="journal-body">
+            <div class="journal-meta"><span class="cat">Thị trường</span><span>·</span><span>12.03.2026</span></div>
+            <h3>Xu hướng thị trường BĐS 2026</h3>
+            <p>Dòng tiền quay lại phân khúc căn hộ ở thực, đất nền vùng ven hạ nhiệt sau ba quý.</p>
+            <span class="link-more">Đọc tiếp <span class="arrow" aria-hidden="true">→</span></span>
+          </div>
+        </a>
+
+        <a class="journal-card reveal" data-reveal="up" data-delay="100" href="tin-tuc.html">
+          <div class="journal-media">
+            <img src="https://picsum.photos/seed/pl-news-2/800/550" alt="Cặp vợ chồng trẻ xem bản vẽ căn hộ cùng chuyên viên" loading="lazy">
+          </div>
+          <div class="journal-body">
+            <div class="journal-meta"><span class="cat">Kinh nghiệm</span><span>·</span><span>28.02.2026</span></div>
+            <h3>Kinh nghiệm mua căn hộ lần đầu</h3>
+            <p>Bảy khoản chi phí người mua lần đầu hay bỏ sót khi tính ngân sách.</p>
+            <span class="link-more">Đọc tiếp <span class="arrow" aria-hidden="true">→</span></span>
+          </div>
+        </a>
+
+        <a class="journal-card reveal" data-reveal="up" data-delay="200" href="tin-tuc.html">
+          <div class="journal-media">
+            <img src="https://picsum.photos/seed/pl-news-3/800/550" alt="Khu đất nền phân lô nhìn từ trên cao" loading="lazy">
+          </div>
+          <div class="journal-body">
+            <div class="journal-meta"><span class="cat">Đầu tư</span><span>·</span><span>15.02.2026</span></div>
+            <h3>Đất nền hay chung cư — nên đầu tư gì?</h3>
+            <p>So sánh dòng tiền, thanh khoản và rủi ro pháp lý của hai kênh phổ biến nhất.</p>
+            <span class="link-more">Đọc tiếp <span class="arrow" aria-hidden="true">→</span></span>
+          </div>
+        </a>
+      </div>
+
+      <div class="text-center section-cta reveal" data-reveal="up">
+        <a class="btn btn-light" href="tin-tuc.html">Tất cả bài viết <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Newsletter ===== -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-inner reveal" data-reveal="up">
+        <span class="eyebrow">Bản tin</span>
+        <h2>Nhận báo cáo thị trường mỗi tuần</h2>
+        <p>Giá giao dịch thực tế theo khu vực, dự án mở bán mới và cảnh báo pháp lý.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" required>
+          <button class="btn btn-gold" type="submit">Đăng ký <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="form-note" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">PHÚC <span class="logo-mark">LAND</span></a>
+        <p>Đồng hành trọn vẹn cùng khách hàng. Sàn giao dịch bất động sản uy tín từ 2014 với ba chi nhánh toàn quốc.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Dịch vụ</h4>
+        <ul>
+          <li><a href="du-an.html">Mua bán</a></li>
+          <li><a href="du-an.html">Cho thuê</a></li>
+          <li><a href="du-an.html">Đầu tư</a></li>
+          <li><a href="lien-he.html">Tư vấn pháp lý</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Công ty</h4>
+        <ul>
+          <li><a href="ve-chung-toi.html">Về chúng tôi</a></li>
+          <li><a href="du-an.html">Dự án</a></li>
+          <li><a href="tin-tuc.html">Tin tức</a></li>
+          <li><a href="lien-he.html">Liên hệ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li>Tầng 8, Golden Tower, 275 Nguyễn Trãi, Hà Nội</li>
+          <li><a href="tel:02435687777">024 3568 7777</a> · <a href="tel:0936888666">0936 888 666</a></li>
+          <li><a href="mailto:info@phucland.vn">info@phucland.vn</a></li>
+          <li>Mở cửa T2–CN: 8:00–20:00</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> PHÚC LAND. Bảo lưu mọi quyền.</span>
+      <span>Chi nhánh: Hà Nội · TP. Hồ Chí Minh · Đà Nẵng</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="Lên đầu trang">↑</button>
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
