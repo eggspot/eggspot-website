@@ -63,6 +63,32 @@
     toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2600);
   }
 
+  /* Collapses a burst of calls (a keystroke run) into one paint-aligned update. */
+  function rafDebounce(fn) {
+    var frame = null;
+    return function () {
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(function () {
+        frame = null;
+        fn();
+      });
+    };
+  }
+
+  /* Plays a one-shot CSS animation and takes the class back off, so the same
+     class can fire again on the next swap. */
+  function playOnce(el, className) {
+    if (!el || reducedMotion) return;
+    el.classList.remove(className);
+    void el.getBoundingClientRect(); // reflow: restart the animation on repeat swaps
+    el.classList.add(className);
+    var clear = function () {
+      el.classList.remove(className);
+      el.removeEventListener('animationend', clear);
+    };
+    el.addEventListener('animationend', clear);
+  }
+
   /* Reveal observer --------------------------- */
   function observeOnce(elements) {
     if (!elements.length) return;
@@ -223,6 +249,14 @@
     });
   }
 
+  /* The badge growing by one IS the confirmation that the tag was added — it
+     replaces the success toast, so nothing has to be read or dismissed. */
+  function bumpBadge() {
+    $$('[data-cart-count]').forEach(function (badge) {
+      if (!badge.hidden) playOnce(badge, 'bump');
+    });
+  }
+
   function addToCart(data) {
     var item = makeLine(data);
     if (!isValidLine(item)) {
@@ -241,30 +275,8 @@
       cart.push(item);
     }
     writeCart(cart);
-    showToast('Added to cart ✓');
+    bumpBadge();
     return true;
-  }
-
-  /* ---------------------------------------------
-     Preloader
-  --------------------------------------------- */
-  function initPreloader() {
-    var preloader = $('.preloader');
-    if (!preloader) return;
-    var removed = false;
-    function dismiss() {
-      if (removed) return;
-      removed = true;
-      preloader.classList.add('done');
-      setTimeout(function () {
-        if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
-      }, 700);
-    }
-    /* Dismiss on the next frame after DOM ready instead of waiting for
-       window.load: the hero image is the LCP element and every extra moment
-       behind the cream overlay is a moment it cannot be painted. */
-    requestAnimationFrame(function () { requestAnimationFrame(dismiss); });
-    setTimeout(dismiss, 3500); // failsafe if a frame never lands (hidden tab)
   }
 
   /* ---------------------------------------------
@@ -348,37 +360,6 @@
         showToast(el.getAttribute('data-demo-toast'));
       });
     });
-  }
-
-  /* ---------------------------------------------
-     Hero parallax (clamped, never detaches)
-  --------------------------------------------- */
-  function initParallax() {
-    var hero = $('.hero');
-    var bg = $('.hero-bg');
-    if (!hero || !bg || reducedMotion) return;
-    // 0.096 = 80% of the 0.12 slack the -12% inset gives us, so the image never
-    // exposes an edge. Measured once per layout, not per scroll event.
-    var overhang = hero.offsetHeight * 0.096;
-
-    function applyParallax() {
-      var offset = Math.min(window.pageYOffset * 0.3, overhang);
-      bg.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0)';
-    }
-
-    window.addEventListener('scroll', applyParallax, { passive: true });
-
-    // a shorter viewport means a shorter hero: re-measure or the clamp goes stale
-    var resizeTimer = null;
-    window.addEventListener('resize', function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        overhang = hero.offsetHeight * 0.096;
-        // re-clamp against the new overhang now — waiting for the next scroll
-        // would leave the image detached from its edge until the user moves
-        applyParallax();
-      }, 200);
-    }, { passive: true });
   }
 
   /* ---------------------------------------------
@@ -621,14 +602,110 @@
     return Math.max(minSize, Math.min(maxSize, maxWidth / (widthFactor * length)));
   }
 
+  /* Both surfaces that draw a tag — the product studio and the hero workbench —
+     share one renderer. `refs` names the four SVG nodes each surface owns. */
+  function drawTagShape(refs, state) {
+    var shape = SHAPES[state.shape] || SHAPES.circle;
+    var stage = refs.stage;
+    while (stage.firstChild) stage.removeChild(stage.firstChild);
+    shape.parts.forEach(function (part) {
+      var node = document.createElementNS(SVG_NS, part.tag);
+      Object.keys(part.attrs).forEach(function (key) {
+        node.setAttribute(key, String(part.attrs[key]));
+      });
+      stage.appendChild(node);
+    });
+    stage.setAttribute('fill', 'url(#metal-' + state.metal + ')');
+    if (refs.hole) {
+      refs.hole.setAttribute('cx', String(shape.hole.cx));
+      refs.hole.setAttribute('cy', String(shape.hole.cy));
+      refs.hole.setAttribute('r', String(shape.hole.r));
+    }
+  }
+
+  /* value1 / value2 arrive already cleaned. Empty fields still show something:
+     a ghosted sample of what will be engraved. */
+  function drawTagText(refs, state, value1, value2) {
+    var shape = SHAPES[state.shape] || SHAPES.circle;
+    var metal = METALS[state.metal] || METALS.brass;
+    var font = FONTS[state.font] || FONTS.classic;
+
+    /* The floor is set by the narrowest silhouette and the widest face: the
+       heart gives the name line only 106px, which a full 12-character name in
+       Modern fills at 15px. A higher floor pushes the engraving off the metal. */
+    [[refs.line1, value1 || 'Buddy', !value1, shape.line1Y, 40, 15],
+     [refs.line2, value2 || '+1 555-0148', !value2, shape.line2Y, 22, 11]].forEach(function (row) {
+      var el = row[0];
+      if (!el) return;
+      el.setAttribute('x', String(shape.textX));
+      el.setAttribute('y', String(row[3]));
+      el.setAttribute('fill', metal.engrave);
+      el.setAttribute('font-size', fitFontSize(row[1], shape.maxWidth, font.widthFactor, row[4], row[5]).toFixed(1));
+      el.textContent = row[1];
+      el.classList.toggle('is-placeholder', row[2]);
+      el.classList.remove('font-classic', 'font-modern', 'font-script');
+      el.classList.add(font.className);
+    });
+  }
+
+  /* Swapping shape or metal re-draws the tag in place, which is easy to miss.
+     One swing on its split ring says "this is the thing that changed". */
+  function nudgeTag(refs) {
+    playOnce(refs.stage ? refs.stage.ownerSVGElement : null, 'nudge');
+  }
+
+  /* Hero workbench (home page): name + shape + metal, no cart. Same renderer as
+     the product studio, so the tag drawn here is the tag that gets engraved. */
+  function initHeroWorkbench() {
+    var refs = {
+      stage: $('#heroTagShape'),
+      hole: $('#heroTagHole'),
+      line1: $('#heroTagLine1'),
+      line2: $('#heroTagLine2')
+    };
+    if (!refs.stage) return;
+    var input = $('#heroName');
+    var state = { shape: 'circle', metal: 'brass', font: 'classic' };
+
+    function paintText() {
+      drawTagText(refs, state, input ? cleanEngraving(input.value, MAX_LINE1) : '', '');
+    }
+
+    function swap(key, value, dictionary) {
+      if (!dictionary[value]) return;
+      state[key] = value;
+      drawTagShape(refs, state);
+      paintText();
+      nudgeTag(refs);
+    }
+
+    initRadioGroup($('#heroShapeGroup'), function (value) { swap('shape', value, SHAPES); });
+    initRadioGroup($('#heroMetalGroup'), function (value) { swap('metal', value, METALS); });
+
+    if (input) {
+      var scheduleText = rafDebounce(paintText);
+      input.addEventListener('input', function () {
+        var typed = stripUnengravable(input.value, MAX_LINE1);
+        if (typed !== input.value) input.value = typed; // strip characters we cannot engrave
+        scheduleText();
+      });
+    }
+
+    drawTagShape(refs, state);
+    paintText();
+  }
+
   function initEngraver() {
     var form = $('#productForm');
     var stage = $('#tagShape');
     if (!form || !stage) return;
 
-    var hole = $('#tagHole');
-    var line1El = $('#tagLine1');
-    var line2El = $('#tagLine2');
+    var refs = {
+      stage: stage,
+      hole: $('#tagHole'),
+      line1: $('#tagLine1'),
+      line2: $('#tagLine2')
+    };
     var input1 = $('#engraveLine1');
     var input2 = $('#engraveLine2');
     var count1 = $('#count1');
@@ -643,62 +720,16 @@
       size: form.getAttribute('data-default-size') || 'Small'
     };
 
-    function drawShape() {
-      var shape = SHAPES[state.shape] || SHAPES.circle;
-      while (stage.firstChild) stage.removeChild(stage.firstChild);
-      shape.parts.forEach(function (part) {
-        var node = document.createElementNS(SVG_NS, part.tag);
-        Object.keys(part.attrs).forEach(function (key) {
-          node.setAttribute(key, String(part.attrs[key]));
-        });
-        stage.appendChild(node);
-      });
-      stage.setAttribute('fill', 'url(#metal-' + state.metal + ')');
-      if (hole) {
-        hole.setAttribute('cx', String(shape.hole.cx));
-        hole.setAttribute('cy', String(shape.hole.cy));
-        hole.setAttribute('r', String(shape.hole.r));
-      }
-    }
-
     function drawText() {
-      var shape = SHAPES[state.shape] || SHAPES.circle;
-      var metal = METALS[state.metal] || METALS.brass;
-      var font = FONTS[state.font] || FONTS.classic;
-      var value1 = input1 ? cleanEngraving(input1.value, MAX_LINE1) : '';
-      var value2 = input2 ? cleanEngraving(input2.value, MAX_LINE2) : '';
-      // empty fields still show something: a ghosted sample of what will be engraved
-      var text1 = value1 || 'Buddy';
-      var text2 = value2 || '+1 555-0148';
-
-      /* The floor is set by the narrowest silhouette and the widest face: the
-         heart gives the name line only 106px, which a full 12-character name in
-         Modern fills at 15px. A higher floor pushes the engraving off the metal. */
-      [[line1El, text1, !value1, shape.line1Y, 40, 15],
-       [line2El, text2, !value2, shape.line2Y, 22, 11]].forEach(function (row) {
-        var el = row[0];
-        if (!el) return;
-        el.setAttribute('x', String(shape.textX));
-        el.setAttribute('y', String(row[3]));
-        el.setAttribute('fill', metal.engrave);
-        el.setAttribute('font-size', fitFontSize(row[1], shape.maxWidth, font.widthFactor, row[4], row[5]).toFixed(1));
-        el.textContent = row[1];
-        el.classList.toggle('is-placeholder', row[2]);
-        el.classList.remove('font-classic', 'font-modern', 'font-script');
-        el.classList.add(font.className);
-      });
+      drawTagText(
+        refs,
+        state,
+        input1 ? cleanEngraving(input1.value, MAX_LINE1) : '',
+        input2 ? cleanEngraving(input2.value, MAX_LINE2) : ''
+      );
     }
 
-    /* Typing fires one input event per keystroke and drawText touches ~18 SVG
-       attributes. Collapse bursts into a single paint-aligned update. */
-    var textFrame = null;
-    function scheduleText() {
-      if (textFrame !== null) cancelAnimationFrame(textFrame);
-      textFrame = requestAnimationFrame(function () {
-        textFrame = null;
-        drawText();
-      });
-    }
+    var scheduleText = rafDebounce(drawText);
 
     function drawCaption() {
       if (!caption) return;
@@ -708,24 +739,27 @@
     }
 
     function render() {
-      drawShape();
+      drawTagShape(refs, state);
       drawText();
       drawCaption();
     }
 
-    function bindOption(groupId, key, labelId, dictionary) {
+    /* Only shape and metal re-cut the tag itself, so only they earn the swing.
+       Font and size change the engraving in place — that reads on its own. */
+    function bindOption(groupId, key, labelId, dictionary, nudge) {
       initRadioGroup($('#' + groupId), function (value) {
         state[key] = value;
         var label = labelId ? $('#' + labelId) : null;
         if (label) label.textContent = dictionary ? (dictionary[value] || {}).label || value : value;
         render();
+        if (nudge) nudgeTag(refs);
       });
     }
 
-    bindOption('shapeGroup', 'shape', 'selectedShape', SHAPES);
-    bindOption('metalGroup', 'metal', 'selectedMetal', METALS);
-    bindOption('fontGroup', 'font', 'selectedFont', FONTS);
-    bindOption('sizeGroup', 'size', 'selectedSize', SIZES);
+    bindOption('shapeGroup', 'shape', 'selectedShape', SHAPES, true);
+    bindOption('metalGroup', 'metal', 'selectedMetal', METALS, true);
+    bindOption('fontGroup', 'font', 'selectedFont', FONTS, false);
+    bindOption('sizeGroup', 'size', 'selectedSize', SIZES, false);
 
     function bindInput(input, counter, maxLength) {
       if (!input) return;
@@ -989,15 +1023,14 @@
      Boot
   --------------------------------------------- */
   function init() {
-    initPreloader();
     initHeader();
     initDemoToasts();
-    initParallax();
     initToTop();
     initAccordions();
     initCounters();
     initCollection();
     initProductGallery();
+    initHeroWorkbench();
     initEngraver();
     initCartPage();
     observeOnce($$('.reveal'));

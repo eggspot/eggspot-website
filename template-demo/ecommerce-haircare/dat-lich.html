@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đặt lịch tại salon — AURELLE</title>
+<meta name="description" content="Đặt lịch AURELLE trong bốn bước: chọn dịch vụ, chọn stylist, chọn ngày giờ, xác nhận. Cọc 20% trừ vào hoá đơn, hủy miễn phí trước 24 giờ.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Đặt lịch tại salon — AURELLE">
+<meta property="og:description" content="Đặt lịch AURELLE trong bốn bước: chọn dịch vụ, chọn stylist, chọn ngày giờ, xác nhận. Cọc 20% trừ vào hoá đơn, hủy miễn phí trước 24 giờ.">
+<meta property="og:image" content="https://picsum.photos/seed/s87/1200/630">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231c1a17'/><path d='M16 6.4 23.6 25.6h-3.7l-1.4-3.9h-5l-1.4 3.9H8.4Zm0 6.3-1.7 6.2h3.4Z' fill='%239aa383'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js-on')</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Bỏ qua đến nội dung chính</a>
+
+<header class="site-header">
+  <div class="hd-inner">
+    <a class="logo" href="index.html">AURELLE<em>.</em><small>Salon &amp; Apothecary</small></a>
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="dich-vu.html">Dịch vụ</a>
+      <a href="stylists.html">Stylist</a>
+      <a href="ritual.html">Ritual</a>
+      <a href="cua-hang.html">Cửa hàng</a>
+      <a href="cau-chuyen.html">Câu chuyện</a>
+      <a href="tap-chi.html">Tạp chí</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+    <div class="hd-actions">
+      <button class="icon-btn" type="button" data-cart-open aria-label="Mở giỏ hàng">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8h13l-1.1 12.5H6.6L5.5 8Z"/><path d="M9 8V6.4a3 3 0 0 1 6 0V8"/></svg>
+        <span class="cart-badge" data-cart-count data-empty="true">0</span>
+      </button>
+      <a class="btn btn-primary hd-book" href="dat-lich.html" aria-current="page">Đặt lịch</a>
+      <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="mobileNav" aria-label="Mở menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mobileNav" data-mobile-panel>
+  <a class="m-link" href="index.html">Trang chủ</a>
+  <a class="m-link" href="dich-vu.html">Dịch vụ</a>
+  <a class="m-link" href="dat-lich.html" aria-current="page">Đặt lịch</a>
+  <a class="m-link" href="stylists.html">Stylist</a>
+  <a class="m-link" href="ritual.html">Ritual</a>
+  <a class="m-link" href="cua-hang.html">Cửa hàng</a>
+  <a class="m-link" href="cau-chuyen.html">Câu chuyện</a>
+  <a class="m-link" href="tap-chi.html">Tạp chí</a>
+  <a class="m-link" href="lien-he.html">Liên hệ</a>
+  <div class="m-foot">
+    <a class="tel" href="tel:0901234567">0901 234 567</a>
+    <span class="hrs">T2–T6 09:00–20:00 · T7–CN 08:30–19:00</span>
+    <span class="hrs">24 Nguyễn Đình Chiểu, P. Đa Kao, Q.1, TP.HCM</span>
+  </div>
+</div>
+
+<main id="main">
+  <section class="page-head s-dark">
+    <div class="page-head-media">
+      <img src="https://picsum.photos/seed/s87/1800/900" srcset="https://picsum.photos/seed/s87/480/240 480w, https://picsum.photos/seed/s87/960/480 960w, https://picsum.photos/seed/s87/1800/900 1800w" sizes="100vw" alt="Quầy lễ tân và sổ đặt lịch của salon" width="1800" height="900">
+    </div>
+    <div class="wrap">
+      <span class="eyebrow">Đặt lịch</span>
+      <h1 class="d1">Bốn bước. Xong trong hai phút.</h1>
+      <p class="lead">Chọn người trước, chọn giờ sau. Mọi buổi hẹn đều bắt đầu bằng 15 phút chẩn đoán da đầu — miễn phí và không tính vào thời lượng dịch vụ.</p>
+    </div>
+  </section>
+
+  <section class="sec s-light">
+    <div class="wrap booking-grid">
+      <div>
+        <form data-booking novalidate>
+          <ol class="stepper">
+            <li class="step-item" data-step="1" data-state="active"><span class="step-n">Bước 1</span><b>Dịch vụ</b></li>
+            <li class="step-item" data-step="2" data-state="todo"><span class="step-n">Bước 2</span><b>Stylist</b></li>
+            <li class="step-item" data-step="3" data-state="todo"><span class="step-n">Bước 3</span><b>Ngày &amp; giờ</b></li>
+            <li class="step-item" data-step="4" data-state="todo"><span class="step-n">Bước 4</span><b>Xác nhận</b></li>
+          </ol>
+
+          <!-- Bước 1 -->
+          <section class="step-panel is-active" data-step="1" aria-label="Bước 1: chọn dịch vụ">
+            <h2>Bạn cần dịch vụ nào?</h2>
+            <p class="step-hint">Chưa chắc chắn? Chọn “Chẩn đoán da đầu” — miễn phí, và bạn có thể quyết định sau khi nghe stylist.</p>
+            <fieldset>
+              <legend class="sr-only">Danh sách dịch vụ</legend>
+              <div class="opt-list">
+          <p class="eyebrow mb-0">Cắt</p>
+          <label class="opt">
+            <input type="radio" name="service" value="cat-nu" data-name="Cắt & tạo kiểu nữ" data-price="450000" data-dur="45 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Cắt &amp; tạo kiểu nữ</span><span class="o-desc">45 phút</span></span>
+            <span class="o-price">từ 450.000₫</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="cat-nam" data-name="Cắt nam" data-price="280000" data-dur="30 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Cắt nam</span><span class="o-desc">30 phút</span></span>
+            <span class="o-price">từ 280.000₫</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="cat-phom" data-name="Cắt tạo phom cao cấp" data-price="750000" data-dur="60 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Cắt tạo phom cao cấp</span><span class="o-desc">60 phút</span></span>
+            <span class="o-price">từ 750.000₫</span>
+          </label>
+          <p class="eyebrow mb-0">Chăm sóc da đầu</p>
+          <label class="opt">
+            <input type="radio" name="service" value="chan-doan" data-name="Chẩn đoán da đầu" data-price="0" data-dur="15 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Chẩn đoán da đầu</span><span class="o-desc">15 phút</span></span>
+            <span class="o-price">Miễn phí</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="detox-da-dau" data-name="Detox da đầu chuyên sâu" data-price="850000" data-dur="60 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Detox da đầu chuyên sâu</span><span class="o-desc">60 phút</span></span>
+            <span class="o-price">từ 850.000₫</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="dieu-tri-rung-toc" data-name="Điều trị rụng tóc" data-price="1250000" data-dur="75 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Điều trị rụng tóc</span><span class="o-desc">75 phút</span></span>
+            <span class="o-price">từ 1.250.000₫</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="u-duong-sau" data-name="Ủ dưỡng sâu Atlas" data-price="690000" data-dur="45 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Ủ dưỡng sâu Atlas</span><span class="o-desc">45 phút</span></span>
+            <span class="o-price">từ 690.000₫</span>
+          </label>
+          <p class="eyebrow mb-0">Nhuộm màu</p>
+          <label class="opt">
+            <input type="radio" name="service" value="nhuom-chan-toc" data-name="Nhuộm phủ chân tóc" data-price="950000" data-dur="90 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Nhuộm phủ chân tóc</span><span class="o-desc">90 phút</span></span>
+            <span class="o-price">từ 950.000₫</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="nhuom-thoi-trang" data-name="Nhuộm thời trang toàn đầu" data-price="1850000" data-dur="150 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Nhuộm thời trang toàn đầu</span><span class="o-desc">150 phút</span></span>
+            <span class="o-price">từ 1.850.000₫</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="balayage" data-name="Balayage & highlight" data-price="2400000" data-dur="180 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Balayage &amp; highlight</span><span class="o-desc">180 phút</span></span>
+            <span class="o-price">từ 2.400.000₫</span>
+          </label>
+          <p class="eyebrow mb-0">Uốn, duỗi &amp; phục hồi</p>
+          <label class="opt">
+            <input type="radio" name="service" value="uon-cold" data-name="Uốn lạnh cold perm" data-price="1650000" data-dur="150 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Uốn lạnh cold perm</span><span class="o-desc">150 phút</span></span>
+            <span class="o-price">từ 1.650.000₫</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="duoi-phuc-hoi" data-name="Duỗi phục hồi" data-price="1950000" data-dur="180 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Duỗi phục hồi</span><span class="o-desc">180 phút</span></span>
+            <span class="o-price">từ 1.950.000₫</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="keratin" data-name="Liệu trình phục hồi keratin" data-price="2100000" data-dur="120 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Liệu trình phục hồi keratin</span><span class="o-desc">120 phút</span></span>
+            <span class="o-price">từ 2.100.000₫</span>
+          </label>
+          <p class="eyebrow mb-0">Tạo kiểu</p>
+          <label class="opt">
+            <input type="radio" name="service" value="goi-say-tao-kieu" data-name="Gội & sấy tạo kiểu" data-price="320000" data-dur="40 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Gội &amp; sấy tạo kiểu</span><span class="o-desc">40 phút</span></span>
+            <span class="o-price">từ 320.000₫</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="service" value="tao-kieu-su-kien" data-name="Tạo kiểu sự kiện" data-price="650000" data-dur="60 phút">
+            <span class="dot" aria-hidden="true"></span>
+            <span><span class="o-name">Tạo kiểu sự kiện</span><span class="o-desc">60 phút</span></span>
+            <span class="o-price">từ 650.000₫</span>
+          </label>
+              </div>
+            </fieldset>
+            <p class="field-error" data-error="1" hidden></p>
+            <div class="booking-nav">
+              <button class="btn btn-primary" type="button" data-next>Tiếp tục chọn stylist</button>
+            </div>
+          </section>
+
+          <!-- Bước 2 -->
+          <section class="step-panel" data-step="2" aria-label="Bước 2: chọn stylist">
+            <h2>Ai sẽ làm cho bạn?</h2>
+            <p class="step-hint">Mỗi stylist có thế mạnh riêng. Nếu bạn không có ưu tiên, chọn “Để salon sắp xếp”.</p>
+            <fieldset>
+              <legend class="sr-only">Danh sách stylist</legend>
+              <div class="opt-stylists">
+          <label class="opt-card">
+            <input type="radio" name="stylist" value="bat-ky" data-name="Để salon sắp xếp">
+            <img src="https://picsum.photos/seed/s40/200/200" alt="" loading="lazy" width="200" height="200">
+            <b>Để salon sắp xếp</b>
+            <span>Ghép theo nhu cầu</span>
+          </label>
+          <label class="opt-card">
+            <input type="radio" name="stylist" value="le-minh-anh" data-name="Lê Minh Anh">
+            <img src="https://picsum.photos/seed/au50/200/200" alt="" loading="lazy" width="200" height="200">
+            <b>Lê Minh Anh</b>
+            <span>Cắt · Phom</span>
+          </label>
+          <label class="opt-card">
+            <input type="radio" name="stylist" value="tran-hai-yen" data-name="Trần Hải Yến">
+            <img src="https://picsum.photos/seed/s36/200/200" alt="" loading="lazy" width="200" height="200">
+            <b>Trần Hải Yến</b>
+            <span>Màu · Highlight</span>
+          </label>
+          <label class="opt-card">
+            <input type="radio" name="stylist" value="nguyen-quoc-bao" data-name="Nguyễn Quốc Bảo">
+            <img src="https://picsum.photos/seed/au31/200/200" alt="" loading="lazy" width="200" height="200">
+            <b>Nguyễn Quốc Bảo</b>
+            <span>Da đầu · Phục hồi</span>
+          </label>
+          <label class="opt-card">
+            <input type="radio" name="stylist" value="pham-thu-trang" data-name="Phạm Thu Trang">
+            <img src="https://picsum.photos/seed/s15/200/200" alt="" loading="lazy" width="200" height="200">
+            <b>Phạm Thu Trang</b>
+            <span>Uốn · Tạo kiểu</span>
+          </label>
+          <label class="opt-card">
+            <input type="radio" name="stylist" value="do-gia-huy" data-name="Đỗ Gia Huy">
+            <img src="https://picsum.photos/seed/s48/200/200" alt="" loading="lazy" width="200" height="200">
+            <b>Đỗ Gia Huy</b>
+            <span>Cắt nam · Fade</span>
+          </label>
+          <label class="opt-card">
+            <input type="radio" name="stylist" value="vu-lan-anh" data-name="Vũ Lan Anh">
+            <img src="https://picsum.photos/seed/s90/200/200" alt="" loading="lazy" width="200" height="200">
+            <b>Vũ Lan Anh</b>
+            <span>Keratin · Hoá chất</span>
+          </label>
+              </div>
+            </fieldset>
+            <p class="field-error" data-error="2" hidden></p>
+            <div class="booking-nav">
+              <button class="btn btn-outline" type="button" data-prev>Quay lại</button>
+              <button class="btn btn-primary" type="button" data-next>Tiếp tục chọn giờ</button>
+            </div>
+          </section>
+
+          <!-- Bước 3 -->
+          <section class="step-panel" data-step="3" aria-label="Bước 3: chọn ngày và giờ">
+            <h2>Ngày nào hợp với bạn?</h2>
+            <p class="step-hint">Lịch mở trước 12 ngày. Khung giờ gạch ngang là đã kín chỗ.</p>
+            <div class="date-row" data-date-row role="group" aria-label="Chọn ngày"></div>
+            <div class="slot-grid" data-slot-grid role="group" aria-label="Chọn khung giờ"></div>
+            <p class="field-error" data-error="3" hidden></p>
+            <div class="booking-nav">
+              <button class="btn btn-outline" type="button" data-prev>Quay lại</button>
+              <button class="btn btn-primary" type="button" data-next>Tiếp tục xác nhận</button>
+            </div>
+          </section>
+
+          <!-- Bước 4 -->
+          <section class="step-panel" data-step="4" aria-label="Bước 4: xác nhận">
+            <h2>Xác nhận buổi hẹn</h2>
+            <p class="step-hint">Kiểm tra lại thông tin, đọc chính sách cọc, rồi xác nhận.</p>
+
+            <dl class="summary-list">
+              <div><dt>Dịch vụ</dt><dd data-sum-service>—</dd></div>
+              <div><dt>Thời lượng</dt><dd data-sum-dur>—</dd></div>
+              <div><dt>Stylist</dt><dd data-sum-stylist>—</dd></div>
+              <div><dt>Ngày</dt><dd data-sum-date>—</dd></div>
+              <div><dt>Giờ</dt><dd data-sum-time>—</dd></div>
+              <div><dt>Giá dịch vụ</dt><dd data-sum-price>—</dd></div>
+            </dl>
+
+            <div class="policy">
+              <h3>Chính sách cọc &amp; hủy lịch</h3>
+              <ul>
+                <li>Cọc giữ chỗ <b>20% giá dịch vụ</b> — hiện tại là <b data-sum-deposit>—</b>. Tiền cọc được trừ thẳng vào hoá đơn cuối buổi.</li>
+                <li>Hủy hoặc đổi lịch <b>trước 24 giờ</b>: hoàn cọc 100%.</li>
+                <li>Hủy trong vòng 24 giờ hoặc không đến: cọc được giữ lại để bù khung giờ trống.</li>
+                <li>Đến muộn quá 15 phút, buổi hẹn có thể phải rút ngắn hoặc dời sang khung khác.</li>
+              </ul>
+            </div>
+
+            <div class="field">
+              <label class="label" for="bk-name">Họ và tên <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="bk-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label class="label" for="bk-phone">Số điện thoại <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="bk-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0901 234 567" required>
+              <span class="help">Lễ tân gọi xác nhận trong giờ làm việc. Không dùng cho mục đích khác.</span>
+            </div>
+            <div class="field">
+              <label class="label" for="bk-note">Ghi chú cho stylist</label>
+              <textarea class="textarea" id="bk-note" name="note" placeholder="Ví dụ: tóc đã tẩy hai lần trong 6 tháng, muốn giữ độ dài."></textarea>
+            </div>
+
+            <label class="check-row">
+              <input type="checkbox" id="bk-agree" name="agree">
+              <span>Tôi đã đọc và đồng ý với chính sách cọc 20% và quy định hủy lịch trước 24 giờ.</span>
+            </label>
+
+            <p class="field-error" data-error="4" hidden></p>
+            <div class="booking-nav">
+              <button class="btn btn-outline" type="button" data-prev>Quay lại</button>
+              <button class="btn btn-primary" type="submit">Xác nhận đặt lịch</button>
+            </div>
+          </section>
+        </form>
+
+        <div class="booking-done" data-booking-done>
+          <div class="seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+          </div>
+          <h2 class="d2">Đã giữ chỗ cho bạn.</h2>
+          <p class="lead mt-4">Mã buổi hẹn: <b data-done-code>—</b>. Lễ tân sẽ gọi xác nhận và gửi link thanh toán cọc trong giờ làm việc.</p>
+          <div class="done-card">
+            <dl class="summary-list">
+              <div><dt>Dịch vụ</dt><dd data-sum-service>—</dd></div>
+              <div><dt>Stylist</dt><dd data-sum-stylist>—</dd></div>
+              <div><dt>Ngày</dt><dd data-sum-date>—</dd></div>
+              <div><dt>Giờ</dt><dd data-sum-time>—</dd></div>
+              <div><dt>Cọc giữ chỗ</dt><dd data-sum-deposit>—</dd></div>
+            </dl>
+            <p class="small muted">Đây là bản demo: dữ liệu chỉ lưu trên trình duyệt của bạn, không gửi đi đâu cả.</p>
+          </div>
+          <div class="flex-btns mt-6 flex-center">
+            <a class="btn btn-primary" href="cua-hang.html">Xem sản phẩm cho ritual</a>
+            <a class="btn btn-outline" href="tel:0901234567">Gọi salon 0901 234 567</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="aside-summary">
+        <h2>Lựa chọn của bạn</h2>
+        <dl class="summary-list">
+          <div><dt>Dịch vụ</dt><dd data-sum-service>—</dd></div>
+          <div><dt>Stylist</dt><dd data-sum-stylist>—</dd></div>
+          <div><dt>Ngày</dt><dd data-sum-date>—</dd></div>
+          <div><dt>Giờ</dt><dd data-sum-time>—</dd></div>
+          <div><dt>Cọc 20%</dt><dd data-sum-deposit>—</dd></div>
+        </dl>
+        <p class="small muted">Cần đổi lịch gấp hoặc đặt cho nhóm từ 3 người? Gọi lễ tân.</p>
+        <a class="tel" href="tel:02839101234">028 3910 1234</a>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <span class="logo">AURELLE<em>.</em><small>Salon &amp; Apothecary</small></span>
+        <p>Salon chăm sóc tóc và apothecary tại Quận 1. Chẩn đoán trước, sản phẩm sau.</p>
+        <div class="ft-social">
+          <a href="https://www.facebook.com" aria-label="Facebook của AURELLE"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6c-.3 0-1.3-.1-2.45-.1-2.4 0-4.05 1.5-4.05 4.2v2.2H7.5V13h2.7v8Z"/></svg></a>
+          <a href="https://www.instagram.com" aria-label="Instagram của AURELLE"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8Zm0 7.25a2.85 2.85 0 1 1 0-5.7 2.85 2.85 0 0 1 0 5.7Zm5.6-7.43a1.03 1.03 0 1 1-2.05 0 1.03 1.03 0 0 1 2.05 0ZM20.5 8.9c-.06-1.36-.37-2.57-1.37-3.56-1-1-2.2-1.3-3.56-1.38-1.4-.08-5.74-.08-7.14 0-1.36.07-2.56.38-3.56 1.37s-1.3 2.2-1.38 3.56c-.08 1.4-.08 5.74 0 7.14.07 1.36.38 2.56 1.38 3.56s2.2 1.3 3.56 1.38c1.4.08 5.74.08 7.14 0 1.36-.07 2.56-.38 3.56-1.38 1-1 1.3-2.2 1.37-3.56.08-1.4.08-5.73 0-7.13Zm-1.84 8.63a2.88 2.88 0 0 1-1.62 1.62c-1.13.45-3.8.35-5.04.35s-3.92.1-5.04-.35a2.88 2.88 0 0 1-1.63-1.62c-.45-1.13-.34-3.8-.34-5.04s-.1-3.92.34-5.04A2.88 2.88 0 0 1 6.96 5.8c1.12-.44 3.8-.34 5.04-.34s3.91-.1 5.04.34a2.88 2.88 0 0 1 1.62 1.63c.45 1.12.35 3.8.35 5.04s.1 3.91-.35 5.04Z"/></svg></a>
+          <a href="https://www.youtube.com" aria-label="YouTube của AURELLE"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.2 8.1a2.4 2.4 0 0 0-1.7-1.7C18 6 12 6 12 6s-6 0-7.5.4A2.4 2.4 0 0 0 2.8 8.1 25 25 0 0 0 2.4 12c0 1.3.1 2.6.4 3.9a2.4 2.4 0 0 0 1.7 1.7C6 18 12 18 12 18s6 0 7.5-.4a2.4 2.4 0 0 0 1.7-1.7c.3-1.3.4-2.6.4-3.9 0-1.3-.1-2.6-.4-3.9ZM10.2 14.6V9.4l5 2.6Z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h3>Salon</h3>
+        <ul>
+          <li><a href="dich-vu.html">Dịch vụ &amp; bảng giá</a></li>
+          <li><a href="dat-lich.html">Đặt lịch</a></li>
+          <li><a href="stylists.html">Đội ngũ stylist</a></li>
+          <li><a href="ritual.html">Chẩn đoán ritual</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h3>Cửa hàng</h3>
+        <ul>
+          <li><a href="cua-hang.html">Tất cả sản phẩm</a></li>
+          <li><a href="cua-hang.html?buoc=lam-sach">Theo bước ritual</a></li>
+          <li><a href="cau-chuyen.html">Câu chuyện &amp; nguyên liệu</a></li>
+          <li><a href="tap-chi.html">Tạp chí</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h3>Ghé salon</h3>
+        <address>24 Nguyễn Đình Chiểu, P. Đa Kao,<br>Quận 1, TP.HCM</address>
+        <a class="tel" href="tel:0901234567">0901 234 567</a><br>
+        <a class="tel" href="tel:02839101234">028 3910 1234</a>
+        <p class="ft-hours"><span>T2–T6: 09:00–20:00</span><span>T7–CN: 08:30–19:00</span></p>
+      </div>
+    </div>
+
+    <div class="ft-bottom">
+      <p>© <span data-year>2026</span> AURELLE Salon &amp; Apothecary. Mẫu website demo.</p>
+      <nav aria-label="Liên kết phụ">
+        <a href="lien-he.html">Chính sách cọc &amp; hủy lịch</a>
+        <a href="lien-he.html">Câu hỏi thường gặp</a>
+        <a href="lien-he.html">Liên hệ</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- Lớp phủ dùng chung: giỏ hàng + xem nhanh -->
+<div class="scrim" data-scrim></div>
+
+<aside class="drawer" data-drawer role="dialog" aria-modal="true" aria-label="Giỏ hàng">
+  <div class="drawer-head">
+    <h2>Giỏ hàng</h2>
+    <button class="drawer-close" type="button" data-cart-close aria-label="Đóng giỏ hàng">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" data-cart-body></div>
+  <div class="drawer-foot" data-cart-foot hidden>
+    <dl class="cart-total">
+      <dt>Tạm tính</dt>
+      <dd class="money" data-cart-total>0₫</dd>
+    </dl>
+    <p class="ship-note">Miễn phí giao hàng nội thành cho đơn từ 1.000.000₫. Nhận tại salon: miễn phí.</p>
+    <a class="btn btn-primary btn-block" href="lien-he.html">Tiến hành đặt hàng</a>
+  </div>
+</aside>
+
+<div class="qv" data-qv role="dialog" aria-modal="true" aria-labelledby="qvName">
+  <div class="qv-panel">
+    <img data-qv-img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 750'%3E%3C/svg%3E" alt="" width="600" height="750">
+    <div class="qv-info">
+      <button class="qv-close" type="button" data-qv-close aria-label="Đóng xem nhanh">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <p class="qv-vol" data-qv-vol></p>
+      <h2 class="qv-name" id="qvName" data-qv-name></h2>
+      <p class="qv-price money" data-qv-price></p>
+      <p class="qv-desc" data-qv-desc></p>
+      <button class="btn btn-primary btn-block" type="button" data-qv-add data-add>Thêm vào giỏ</button>
+      <a class="link-under qv-more" data-qv-link href="san-pham.html">Xem đầy đủ thông tin</a>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-bar">
+  <a class="btn btn-outline" href="tel:0901234567" aria-label="Gọi salon: 0901 234 567">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 3.5h3l1.5 3.7-2 1.4a12 12 0 0 0 5.7 5.7l1.4-2 3.7 1.5v3a1.7 1.7 0 0 1-1.9 1.7A16.5 16.5 0 0 1 4.5 5.4 1.7 1.7 0 0 1 6.2 3.5Z"/></svg>
+  </a>
+  <a class="btn btn-primary" href="dat-lich.html">Đặt lịch tại salon</a>
+</div>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

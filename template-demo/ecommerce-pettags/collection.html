@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <!-- reveal animations are driven by JS; without it the content must simply be visible -->
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -25,9 +27,9 @@
         <a href="contact.html">Contact</a>
       </nav>
       <div class="header-actions">
-        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><span aria-hidden="true">🔍</span></button>
-        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><span aria-hidden="true">👤</span></button>
-        <a class="icon-btn" href="cart.html" aria-label="Cart"><span aria-hidden="true">🛒</span><span class="cart-badge" data-cart-count hidden>0</span></a>
+        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.4"/><path d="M15.8 15.8 20.5 20.5"/></svg></button>
+        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.4" r="3.9"/><path d="M4.8 20c.6-3.6 3.6-6 7.2-6s6.6 2.4 7.2 6"/></svg></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.4 8.4h9.2a1.5 1.5 0 0 1 1.5 1.7l-.8 6.3a2 2 0 0 1-2 1.7H8.7a2 2 0 0 1-2-1.7l-.8-6.3a1.5 1.5 0 0 1 1.5-1.7z"/><path d="M9.4 8.4V7a2.6 2.6 0 0 1 5.2 0v1.4"/></svg><span class="cart-badge" data-cart-count hidden>0</span></a>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -64,7 +66,8 @@
             <button type="button" class="chip" data-value="gift" aria-pressed="false">Gift</button>
           </div>
           <div class="toolbar-right">
-            <p class="result-count" id="resultCount" role="status">8 products</p>
+            <!-- filled by initCollection() on first pass so the count can never drift from the grid -->
+            <p class="result-count" id="resultCount" role="status"></p>
             <label class="visually-hidden" for="sortSelect">Sort products</label>
             <select class="sort-select" id="sortSelect">
               <option value="featured">Featured</option>
@@ -76,7 +79,7 @@
         </div>
 
         <div class="product-grid" id="productGrid">
-          <article class="product-card reveal" data-reveal="up" data-handle="classic-round-tag" data-category="dog" data-price="1495" data-added="3" data-shape="round">
+          <article class="product-card" data-handle="classic-round-tag" data-category="dog" data-price="1495" data-added="3">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp1/600/800" alt="Polished brass round pet ID tag engraved with a name" loading="lazy">
               <span class="product-badge badge-best">Bestseller</span>
@@ -86,12 +89,12 @@
               <p class="product-cat">Dog Tags</p>
               <h2 class="product-name">Classic Round Tag</h2>
               <p class="product-blurb">Polished brass, double-sided engraving.</p>
-              <p class="product-price"><span class="price" data-price="1495">$14.95</span></p>
+              <p class="product-price"><span class="price">$14.95</span></p>
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Classic Round Tag"></a>
           </article>
 
-          <article class="product-card reveal" data-reveal="up" data-delay="80" data-handle="bone-shaped-tag" data-category="dog" data-price="1695" data-added="4" data-shape="bone">
+          <article class="product-card" data-handle="bone-shaped-tag" data-category="dog" data-price="1695" data-added="4">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp2/600/800" alt="Brushed silver bone shaped dog tag on a linen surface" loading="lazy">
               <a class="quick-view" href="product.html" aria-label="Customize the Bone Shaped Tag">Customize <span aria-hidden="true">→</span></a>
@@ -100,12 +103,12 @@
               <p class="product-cat">Dog Tags</p>
               <h2 class="product-name">Bone Shaped Tag</h2>
               <p class="product-blurb">Brushed silver, playful silhouette.</p>
-              <p class="product-price"><span class="price" data-price="1695">$16.95</span></p>
+              <p class="product-price"><span class="price">$16.95</span></p>
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Bone Shaped Tag"></a>
           </article>
 
-          <article class="product-card reveal" data-reveal="up" data-delay="160" data-handle="heart-tag-for-cats" data-category="cat" data-price="1695" data-added="5" data-shape="heart">
+          <article class="product-card" data-handle="heart-tag-for-cats" data-category="cat" data-price="1695" data-added="5">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp3/600/800" alt="Petite rose gold heart tag sized for a cat collar" loading="lazy">
               <span class="product-badge badge-best">Bestseller</span>
@@ -115,12 +118,12 @@
               <p class="product-cat">Cat Tags</p>
               <h2 class="product-name">Heart Tag for Cats</h2>
               <p class="product-blurb">Rose gold, petite 0.8in size.</p>
-              <p class="product-price"><span class="price" data-price="1695">$16.95</span></p>
+              <p class="product-price"><span class="price">$16.95</span></p>
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Heart Tag for Cats"></a>
           </article>
 
-          <article class="product-card reveal" data-reveal="up" data-delay="240" data-handle="mini-circle-tag" data-category="cat" data-price="1295" data-added="2" data-shape="circle">
+          <article class="product-card" data-handle="mini-circle-tag" data-category="cat" data-price="1295" data-added="2">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp4/600/800" alt="Ultra light black steel mini circle tag for small cats" loading="lazy">
               <a class="quick-view" href="product.html" aria-label="Customize the Mini Circle Tag">Customize <span aria-hidden="true">→</span></a>
@@ -129,12 +132,12 @@
               <p class="product-cat">Cat Tags</p>
               <h2 class="product-name">Mini Circle Tag</h2>
               <p class="product-blurb">Ultra-light for small cats, black steel.</p>
-              <p class="product-price"><span class="price" data-price="1295">$12.95</span></p>
+              <p class="product-price"><span class="price">$12.95</span></p>
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Mini Circle Tag"></a>
           </article>
 
-          <article class="product-card reveal" data-reveal="up" data-handle="engraved-leather-collar" data-category="collar" data-price="3495" data-added="8" data-shape="round">
+          <article class="product-card" data-handle="engraved-leather-collar" data-category="collar" data-price="3495" data-added="8">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp5/600/800" alt="Full-grain leather collar with a matching engraved plate" loading="lazy">
               <span class="product-badge badge-new">New</span>
@@ -144,12 +147,12 @@
               <p class="product-cat">Engraved Collars</p>
               <h2 class="product-name">Engraved Leather Collar</h2>
               <p class="product-blurb">Full-grain leather + matching tag.</p>
-              <p class="product-price"><span class="price" data-price="3495">$34.95</span></p>
+              <p class="product-price"><span class="price">$34.95</span></p>
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Engraved Leather Collar"></a>
           </article>
 
-          <article class="product-card reveal" data-reveal="up" data-delay="80" data-handle="duo-tag-set" data-category="gift" data-price="2376" data-added="6" data-shape="round">
+          <article class="product-card" data-handle="duo-tag-set" data-category="gift" data-price="2376" data-added="6">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp6/600/800" alt="Two engraved tags packaged together as a duo gift set" loading="lazy">
               <span class="product-badge badge-sale">Sale −15%</span>
@@ -164,7 +167,7 @@
             <a class="product-card-link" href="product.html" aria-label="View the Duo Tag Set"></a>
           </article>
 
-          <article class="product-card reveal" data-reveal="up" data-delay="160" data-handle="star-charm-tag" data-category="cat" data-price="1795" data-added="7" data-shape="heart">
+          <article class="product-card" data-handle="star-charm-tag" data-category="cat" data-price="1795" data-added="7">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp7/600/800" alt="Hand-stamped star charm tag in brushed gold" loading="lazy">
               <span class="product-badge badge-new">New</span>
@@ -174,12 +177,12 @@
               <p class="product-cat">Cat Tags</p>
               <h2 class="product-name">Star Charm Tag</h2>
               <p class="product-blurb">Hand-stamped star, brushed gold.</p>
-              <p class="product-price"><span class="price" data-price="1795">$17.95</span></p>
+              <p class="product-price"><span class="price">$17.95</span></p>
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Star Charm Tag"></a>
           </article>
 
-          <article class="product-card reveal" data-reveal="up" data-delay="240" data-handle="premium-gift-box" data-category="gift" data-price="1995" data-added="1" data-shape="round">
+          <article class="product-card" data-handle="premium-gift-box" data-category="gift" data-price="1995" data-added="1">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp8/600/800" alt="Premium gift box containing a tag, silk pouch and wrapping" loading="lazy">
               <span class="product-badge badge-low">Low stock</span>
@@ -189,7 +192,7 @@
               <p class="product-cat">Gift Sets</p>
               <h2 class="product-name">Premium Gift Box</h2>
               <p class="product-blurb">Tag + silk pouch + gift wrap.</p>
-              <p class="product-price"><span class="price" data-price="1995">$19.95</span></p>
+              <p class="product-price"><span class="price">$19.95</span></p>
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Premium Gift Box"></a>
           </article>

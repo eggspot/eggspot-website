@@ -1,621 +1,409 @@
-/* =====================================================
-   SEN SPA — Spa & Wellness
-   JS chung cho toàn bộ site (6 trang)
-   ===================================================== */
+/* =========================================================================
+   SEN SPA — WATER MEMORY / KÝ ỨC NƯỚC
+   01 Tiện ích · 02 Chuyển động · 03 Điều hướng · 04 Ripple Index
+   05 Timeline một ngày · 06 Nhịp thở 4·7·8 · 07 Form giữ chỗ
+   08 View Transitions · 99 Motion (reveal)
+   ========================================================================= */
 (function () {
-  "use strict";
+  'use strict';
 
-  /* ===== Tiện ích chung ===== */
-  var $ = function (sel, ctx) {
-    return (ctx || document).querySelector(sel);
-  };
-  var $$ = function (sel, ctx) {
-    return Array.prototype.slice.call((ctx || document).querySelectorAll(sel));
+  /* ---- 01 Tiện ích ----------------------------------------------------- */
+  var $ = function (sel, root) { return (root || document).querySelector(sel); };
+  var $$ = function (sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   };
 
-  // Người dùng bật "giảm chuyển động" → tắt hiệu ứng nặng
-  var reducedMotion =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* ---- 02 Chuyển động -------------------------------------------------- */
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduced = function () { return motionQuery.matches; };
 
-  // Ngăn cách hàng nghìn kiểu Việt Nam: 10000 → 10.000
-  function formatNumber(value) {
-    return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  }
+  var finePointer = window.matchMedia('(min-width: 900px)');
 
-  // Nhóm nút kiểu "radio": click nút nào thì nút đó active, các nút còn lại tắt.
-  // clearAttr = true → nút không active bị gỡ hẳn thuộc tính (dùng cho aria-current).
-  // Trả về hàm activate() để gọi lại từ nơi khác (vd nút prev/next của gallery).
-  function initRadioGroup(items, stateAttr, onPick, clearAttr) {
-    var activate = function (item) {
-      items.forEach(function (other) {
-        other.classList.remove("active");
-        if (clearAttr) other.removeAttribute(stateAttr);
-        else other.setAttribute(stateAttr, "false");
-      });
-      item.classList.add("active");
-      item.setAttribute(stateAttr, "true");
-      onPick(item);
-    };
-
-    items.forEach(function (item) {
-      item.addEventListener("click", function () {
-        activate(item);
-      });
-    });
-
-    return activate;
-  }
-
-  // Quan sát phần tử vào viewport đúng 1 lần rồi ngừng theo dõi.
-  // Trình duyệt không hỗ trợ IntersectionObserver → chạy fn ngay cho tất cả.
-  function observeOnce(elements, fn, options) {
-    if (!("IntersectionObserver" in window)) {
-      elements.forEach(fn);
-      return;
-    }
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        observer.unobserve(entry.target);
-        fn(entry.target);
-      });
-    }, options);
-
-    elements.forEach(function (el) {
-      observer.observe(el);
-    });
-  }
-
-  /* ===== Toast thông báo ===== */
-  var toastTimer = null;
-  function showToast(message) {
-    var toast = $(".toast");
-    if (!toast) return;
-    toast.textContent = message;
-    toast.classList.add("show");
-    window.clearTimeout(toastTimer);
-    toastTimer = window.setTimeout(function () {
-      toast.classList.remove("show");
-    }, 2800);
-  }
-
-  // Form demo: chặn gửi thật, kiểm tra trường bắt buộc rồi báo kết quả trong .form-note
-  function bindDemoForm(form, successMsg, toastMsg) {
-    var note = $(".form-note", form);
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      var empty = $$("[required]", form).filter(function (field) {
-        return !String(field.value).trim();
-      })[0];
-
-      if (empty) {
-        if (note) {
-          note.textContent = "⚠ Vui lòng điền đầy đủ thông tin bắt buộc.";
-          note.classList.add("error", "show");
-        }
-        empty.focus();
-        return;
-      }
-
-      if (note) {
-        note.textContent = successMsg;
-        note.classList.remove("error");
-        note.classList.add("show");
-      }
-      if (toastMsg) showToast(toastMsg);
-      form.reset();
-    });
-  }
-
-  /* ===== Lịch hẹn đã chọn: badge đếm (localStorage, an toàn khi bị chặn) ===== */
-  var store = {
-    read: function () {
-      try {
-        return parseInt(window.localStorage.getItem("sen_booking") || "0", 10) || 0;
-      } catch (err) {
-        return 0;
-      }
-    },
-    write: function (value) {
-      try {
-        window.localStorage.setItem("sen_booking", String(value));
-      } catch (err) {
-        /* localStorage bị chặn — badge vẫn chạy trong phiên hiện tại */
-      }
-    }
-  };
-
-  var bookingCount = store.read();
-
-  function renderBadge() {
-    $$(".book-badge").forEach(function (badge) {
-      badge.textContent = String(bookingCount);
-    });
-  }
-
-  function addBooking(qty) {
-    bookingCount += qty;
-    store.write(bookingCount);
-    renderBadge();
-  }
-
-  renderBadge();
-
-  /* ===== Preloader: ẩn khi trang load xong ===== */
-  (function initPreloader() {
-    var preloader = $(".preloader");
-    if (!preloader) return;
-
-    var hide = function () {
-      preloader.classList.add("loaded");
-      window.setTimeout(function () {
-        if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
-      }, 700);
-    };
-
-    if (document.readyState === "complete") {
-      window.setTimeout(hide, 300);
-    } else {
-      window.addEventListener("load", function () {
-        window.setTimeout(hide, 400);
-      });
-    }
-    // Chốt chặn: luôn ẩn sau 3.5s kể cả khi ảnh lỗi
-    window.setTimeout(hide, 3500);
-  })();
-
-  /* ===== Header đổi nền khi scroll + nút lên đầu trang ===== */
-  (function initScrollUI() {
-    var header = $(".site-header");
-    var toTop = $(".to-top");
-
-    var onScroll = function () {
-      var y = window.pageYOffset;
-      if (header) header.classList.toggle("scrolled", y > 40);
-      if (toTop) toTop.classList.toggle("show", y > 500);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    if (toTop) {
-      toTop.addEventListener("click", function () {
-        window.scrollTo({
-          top: 0,
-          behavior: reducedMotion ? "auto" : "smooth"
-        });
-      });
-    }
-  })();
-
-  /* ===== Menu mobile: hamburger ↔ overlay ===== */
-  (function initMobileMenu() {
-    var toggle = $(".nav-toggle");
-    var menu = $(".mobile-menu");
-    if (!toggle || !menu) return;
+  /* ---- 03 Điều hướng --------------------------------------------------- */
+  function initNav() {
+    var toggle = $('.nav-toggle');
+    var nav = $('#site-nav');
+    if (!toggle || !nav) return;
 
     var setOpen = function (open) {
-      toggle.classList.toggle("open", open);
-      menu.classList.toggle("open", open);
-      document.body.classList.toggle("no-scroll", open);
-      // menu-open: header trong suốt + logo/icon/hamburger đổi sang tông sáng
-      document.body.classList.toggle("menu-open", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? "Đóng menu" : "Mở menu");
+      nav.setAttribute('data-open', open ? 'true' : 'false');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
     };
 
-    toggle.addEventListener("click", function () {
-      setOpen(!menu.classList.contains("open"));
+    toggle.addEventListener('click', function () {
+      setOpen(nav.getAttribute('data-open') !== 'true');
     });
 
-    $$("a", menu).forEach(function (link) {
-      link.addEventListener("click", function () {
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.getAttribute('data-open') === 'true') {
         setOpen(false);
-      });
+        toggle.focus();
+      }
     });
 
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && menu.classList.contains("open")) setOpen(false);
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 900) setOpen(false);
     });
-  })();
+  }
 
-  /* ===== Scroll reveal: IntersectionObserver + stagger delay ===== */
-  (function initReveal() {
-    var items = $$(".reveal");
-    if (!items.length) return;
+  /* ---- 04 Ripple Index ------------------------------------------------- */
+  /* Desktop: hover/focus dòng liệu trình đổi ảnh preview cột phải.
+     Touch/mobile: mỗi dòng là accordion mở panel chứa ảnh. */
+  function initRipple() {
+    $$('.ripple').forEach(function (root) {
+      var rows = $$('.ripple-row', root);
+      var img = $('.ripple-preview img', root);
+      var cap = $('.ripple-preview figcaption', root);
+      var link = $('.ripple-preview [data-preview-link]', root);
+      if (!rows.length) return;
 
-    if (reducedMotion) {
-      items.forEach(function (el) {
-        el.classList.add("visible");
+      var show = function (row) {
+        if (!img || !finePointer.matches) return;
+        rows.forEach(function (r) { r.setAttribute('data-active', r === row ? 'true' : 'false'); });
+
+        var href = row.getAttribute('data-href');
+        if (link && href) link.setAttribute('href', href);
+
+        var src = row.getAttribute('data-img');
+        if (!src) return;
+
+        // Đặt trước khi so src: dòng đầu dùng đúng ảnh đã có trong HTML,
+        // nếu chờ đổi src thì ảnh không bao giờ hiện.
+        img.setAttribute('data-shown', 'true');
+        img.setAttribute('alt', row.getAttribute('data-alt') || '');
+        if (cap) cap.textContent = row.getAttribute('data-caption') || '';
+        if (img.getAttribute('src') === src) return;
+
+        img.setAttribute('src', src);
+      };
+
+      rows.forEach(function (row) {
+        var trigger = $('a, .ripple-btn', row);
+        if (!trigger) return;
+
+        row.addEventListener('mouseenter', function () { show(row); });
+        trigger.addEventListener('focus', function () { show(row); });
+
+        if (trigger.classList.contains('ripple-btn')) {
+          trigger.addEventListener('click', function () {
+            // Desktop: click = đi tới trang chi tiết liệu trình
+            if (finePointer.matches) {
+              var href = row.getAttribute('data-href');
+              if (href) { window.location.href = href; return; }
+              show(row);
+              return;
+            }
+            var open = row.getAttribute('data-open') === 'true';
+            rows.forEach(function (r) {
+              r.setAttribute('data-open', 'false');
+              var t = $('.ripple-btn', r);
+              if (t) t.setAttribute('aria-expanded', 'false');
+            });
+            if (!open) {
+              row.setAttribute('data-open', 'true');
+              trigger.setAttribute('aria-expanded', 'true');
+            }
+            show(row);
+          });
+        }
       });
-      return;
-    }
 
-    observeOnce(
-      items,
-      function (el) {
-        var delay = parseInt(el.getAttribute("data-delay") || "0", 10);
-        window.setTimeout(function () {
-          el.classList.add("visible");
-        }, delay);
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
-    );
-  })();
+      // trạng thái ban đầu: dòng đầu tiên
+      show(rows[0]);
+    });
+  }
 
-  /* ===== Hero parallax: ảnh nền dịch chậm hơn scroll ===== */
-  (function initParallax() {
-    var bg = $(".hero-bg");
-    if (!bg || reducedMotion) return;
+  /* ---- 05 Timeline một ngày -------------------------------------------- */
+  /* Hairline celadon dâng theo scroll — IntersectionObserver bật/tắt,
+     rAF tính tiến độ. Reduced motion: CSS giữ vạch đầy, JS không chạy. */
+  function initDayTrack() {
+    var day = $('.day');
+    var track = $('.day-track');
+    var bar = $('.day-track i');
+    if (!day || !bar || reduced()) return;
 
-    // CSS để .hero-bg inset -12% → phần ảnh dự trữ thực tế là 0.12 chiều cao hero.
-    // Chỉ dùng 0.096 (80% mức dự trữ) để chừa biên an toàn, ảnh không bao giờ
-    // dịch tới sát mép và hở nền ở đỉnh hero.
-    var OVERHANG_RATIO = 0.096;
-    var FACTOR = 0.3;
-    // Đo 1 lần lúc khởi tạo, tránh đọc layout mỗi lần scroll
-    var heroH = bg.parentElement.offsetHeight;
-    var overhang = heroH * OVERHANG_RATIO;
+    /* Rail chỉ chạy từ tâm chấm đầu tới tâm chấm cuối (không thò ra ngoài).
+       Chấm ::before cao 15px, margin-top 7px, item padding-top 24px → tâm = offsetTop + 38.5px */
+    var fitTrack = function () {
+      if (!track) return;
+      var items = $$('.day-item', day);
+      if (!items.length) return;
+      var t = items[0].offsetTop + 38.5;
+      var b = items[items.length - 1].offsetTop + 38.5;
+      track.style.top = t + 'px';
+      track.style.bottom = 'auto';
+      track.style.height = Math.max(0, b - t) + 'px';
+    };
+
     var ticking = false;
-    var inHero = true;
-
-    bg.style.willChange = "transform";
+    var active = false;
 
     var update = function () {
       ticking = false;
-      var offset = Math.min(window.pageYOffset * FACTOR, overhang);
-      bg.style.transform = "translate3d(0," + offset + "px,0)";
+      var rect = day.getBoundingClientRect();
+      var anchor = window.innerHeight * 0.62;
+      var progress = (anchor - rect.top) / rect.height;
+      progress = Math.max(0, Math.min(1, progress));
+      bar.style.setProperty('--progress', progress.toFixed(3));
     };
 
     var onScroll = function () {
-      // Ra khỏi vùng hero: ngừng ghi transform và nhả GPU layer.
-      // KHÔNG gỡ listener — nếu gỡ, transform bị đóng băng và khi cuộn ngược
-      // lên đầu trang ảnh vẫn nằm lệch xuống, để hở khoảng trống ở đỉnh hero.
-      if (window.pageYOffset > heroH) {
-        if (inHero) {
-          inHero = false;
-          bg.style.willChange = "auto";
+      if (ticking || !active) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
+    fitTrack();
+    window.addEventListener('resize', fitTrack);
+    /* Font swap có thể đổi chiều cao item sau DOMContentLoaded → đo lại khi fonts sẵn sàng */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTrack);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        active = entries[0].isIntersecting;
+        if (active) onScroll();
+      }, { rootMargin: '120px 0px' }).observe(day);
+    } else {
+      active = true;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  }
+
+  /* ---- 06 Nhịp thở 4·7·8 ----------------------------------------------- */
+  /* Opt-in: chỉ chạy khi bấm. 3 chu kỳ rồi tự dừng. */
+  function initBreath() {
+    var root = $('.breath');
+    if (!root) return;
+
+    var orb = $('.breath-orb', root);
+    var text = $('.breath-orb span', root);
+    var count = $('.breath-count', root);
+    var startBtn = $('.breath-start', root);
+    var stopBtn = $('.breath-stop', root);
+    if (!orb || !text || !startBtn) return;
+
+    var PHASES = [
+      { key: 'in', label: 'Hít vào', sec: 4 },
+      { key: 'hold', label: 'Giữ', sec: 7 },
+      { key: 'out', label: 'Thở ra', sec: 8 }
+    ];
+    var TOTAL = 3;
+
+    var timer = null;
+    var cycle = 0;
+    var step = 0;
+
+    var reset = function (message) {
+      if (timer) { clearTimeout(timer); timer = null; }
+      cycle = 0;
+      step = 0;
+      orb.setAttribute('data-phase', 'idle');
+      orb.style.removeProperty('--breath-dur');
+      text.textContent = '4 · 7 · 8';
+      if (count) count.textContent = message || '';
+      startBtn.hidden = false;
+      if (stopBtn) stopBtn.hidden = true;
+    };
+
+    var run = function () {
+      var phase = PHASES[step];
+      orb.style.setProperty('--breath-dur', phase.sec + 's');
+      orb.setAttribute('data-phase', phase.key);
+      text.textContent = phase.label;
+      if (count) count.textContent = 'Chu kỳ ' + (cycle + 1) + ' trên ' + TOTAL;
+
+      timer = window.setTimeout(function () {
+        step += 1;
+        if (step >= PHASES.length) {
+          step = 0;
+          cycle += 1;
+        }
+        if (cycle >= TOTAL) {
+          reset('Xong ba chu kỳ.');
+          return;
+        }
+        run();
+      }, phase.sec * 1000);
+    };
+
+    startBtn.addEventListener('click', function () {
+      if (reduced()) {
+        if (count) {
+          count.textContent = 'Hít vào 4 giây, giữ 7 giây, thở ra 8 giây. Lặp lại ba lần.';
         }
         return;
       }
+      cycle = 0;
+      step = 0;
+      startBtn.hidden = true;
+      if (stopBtn) stopBtn.hidden = false;
+      run();
+    });
 
-      if (!inHero) {
-        inHero = true;
-        bg.style.willChange = "transform";
+    /* Click vòng tròn cũng bắt đầu (giống nút Bắt đầu) */
+    orb.addEventListener('click', function () {
+      if (startBtn.hidden) return;
+      startBtn.click();
+    });
+
+    if (stopBtn) {
+      stopBtn.addEventListener('click', function () {
+        reset('');
+        startBtn.focus();
+      });
+    }
+
+    reset('');
+  }
+
+  /* ---- 07 Form giữ chỗ ------------------------------------------------- */
+  function initForm() {
+    $$('form[data-booking]').forEach(function (form) {
+      var status = $('.form-status', form);
+      var fields = $$('input, select, textarea', form);
+
+      fields.forEach(function (field) {
+        field.addEventListener('input', function () {
+          if (field.checkValidity()) field.removeAttribute('aria-invalid');
+        });
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var firstInvalid = null;
+
+        fields.forEach(function (field) {
+          if (field.checkValidity()) {
+            field.removeAttribute('aria-invalid');
+          } else {
+            field.setAttribute('aria-invalid', 'true');
+            if (!firstInvalid) firstInvalid = field;
+          }
+        });
+
+        if (firstInvalid) {
+          if (status) status.textContent = 'Còn thiếu thông tin ở bên trên. Bạn kiểm tra lại giúp chúng tôi.';
+          firstInvalid.focus();
+          return;
+        }
+
+        if (status) status.textContent = 'Chúng tôi gọi lại trong 30 phút, trong giờ mở cửa.';
+        form.reset();
+      });
+    });
+  }
+
+  /* ---- 08 View Transitions --------------------------------------------- */
+  /* Chuyển trang do @view-transition trong CSS lo. JS chỉ gắn cờ để
+     có thể tắt hoàn toàn khi người dùng chọn giảm chuyển động. */
+  function initViewTransition() {
+    if (!('startViewTransition' in document)) return;
+    document.documentElement.classList.add('vt-on');
+    var sync = function () {
+      document.documentElement.classList.toggle('vt-on', !reduced());
+    };
+    if (motionQuery.addEventListener) motionQuery.addEventListener('change', sync);
+    sync();
+  }
+
+  /* ---- 99 Motion (reveal) ---------------------------------------------- */
+  /* Chỉ áp cho section head — không reveal đại trà. */
+  /* Quét theo vị trí thay vì IntersectionObserver: khi mở trang bằng neo
+     hoặc cuộn thật nhanh, phần tử nhảy thẳng lên trên viewport mà không
+     cắt qua nó — observer sẽ không báo và nội dung kẹt ở trạng thái ẩn. */
+  function initReveal() {
+    var pending = $$('.reveal');
+    if (!pending.length) return;
+
+    if (reduced()) {
+      pending.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+
+    var ticking = false;
+
+    var show = function (head) {
+      $$(':scope > *', head).forEach(function (child, i) {
+        child.style.setProperty('--reveal-delay', (i * 70) + 'ms');
+      });
+      head.classList.add('is-in');
+    };
+
+    var sweep = function () {
+      ticking = false;
+      var line = window.innerHeight * 0.88;
+      pending = pending.filter(function (el) {
+        if (el.getBoundingClientRect().top > line) return true;
+        show(el);
+        return false;
+      });
+      if (!pending.length) {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onScroll);
       }
+    };
+
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(sweep);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    sweep();
+  }
+
+  /* Parallax hero — ảnh đã scale(1.15), dịch nhẹ theo scroll, rAF-throttle.
+     Reduced motion: không chạy (ảnh giữ scale tĩnh). */
+  function initHeroParallax() {
+    var img = $('.hero-media img');
+    if (!img || reduced()) return;
+
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      var rect = img.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = (rect.top + rect.height / 2 - vh / 2) / (vh / 2);
+      var ty = Math.min(Math.max(progress * -14, -70), 70);
+      img.style.transform = 'scale(1.15) translateY(' + ty.toFixed(1) + 'px)';
+    };
+
+    var onScroll = function () {
       if (ticking) return;
       ticking = true;
       window.requestAnimationFrame(update);
     };
 
-    // Xoay màn hình / đổi kích thước → đo lại, tránh dùng số cũ khi hero co lại
-    var remeasure = function () {
-      heroH = bg.parentElement.offsetHeight;
-      overhang = heroH * OVERHANG_RATIO;
-      update();
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", remeasure, { passive: true });
     update();
-  })();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+  }
 
-  /* ===== Counter: đếm số liệu khi vào viewport ===== */
-  (function initCounters() {
-    var counters = $$("[data-count]");
-    if (!counters.length) return;
+  /* ---- Khởi động ------------------------------------------------------- */
+  function boot() {
+    initNav();
+    initRipple();
+    initDayTrack();
+    initBreath();
+    initForm();
+    initViewTransition();
+    initReveal();
+    initHeroParallax();
+  }
 
-    var run = function (el) {
-      var target = parseFloat(el.getAttribute("data-count")) || 0;
-      var suffix = el.getAttribute("data-suffix") || "";
-      var duration = 1500;
-      var start = null;
-
-      if (reducedMotion) {
-        el.textContent = formatNumber(target) + suffix;
-        return;
-      }
-
-      var step = function (timestamp) {
-        if (start === null) start = timestamp;
-        var progress = Math.min((timestamp - start) / duration, 1);
-        // easeOutCubic cho cảm giác chậm dần
-        var eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = formatNumber(Math.round(target * eased)) + suffix;
-        if (progress < 1) window.requestAnimationFrame(step);
-      };
-
-      window.requestAnimationFrame(step);
-    };
-
-    observeOnce(counters, run, { threshold: 0.4 });
-  })();
-
-  /* ===== Bộ lọc + sắp xếp liệu trình (lieu-trinh.html) ===== */
-  (function initFilter() {
-    var grid = $("#serviceGrid");
-    if (!grid) return;
-
-    // .pill-btn dùng chung nhiều nhóm nút → luôn giới hạn trong nhóm của mình
-    var filterGroup = $(".filter-group");
-    var buttons = filterGroup ? $$(".pill-btn", filterGroup) : [];
-    var countEl = $("#serviceCount");
-    var sortSelect = $("#sortSelect");
-    var emptyNote = $("#emptyNote");
-    var cards = $$(".service-card", grid);
-    var activeFilter = "all";
-    var hideTimer = null;
-
-    // Ghi nhớ thứ tự gốc để phục vụ sắp xếp "Gợi ý của SEN"
-    cards.forEach(function (card, index) {
-      card.dataset.index = String(index);
-      // gỡ class animation khi chạy xong để lần lọc sau kích hoạt lại được
-      card.addEventListener("animationend", function (e) {
-        if (e.animationName === "filterPop") card.classList.remove("filter-pop");
-      });
-    });
-
-    var updateCount = function (visible) {
-      if (countEl) countEl.textContent = visible + " liệu trình";
-      if (emptyNote) emptyNote.hidden = visible !== 0;
-    };
-
-    var applyFilter = function () {
-      var visible = 0;
-
-      cards.forEach(function (card) {
-        var match =
-          activeFilter === "all" ||
-          card.getAttribute("data-category") === activeFilter;
-
-        if (match) {
-          visible += 1;
-          card.classList.remove("hide", "filter-out");
-          // Animation riêng của bộ lọc, không đụng trạng thái của scroll reveal.
-          // Chỉ chạy cho card đã reveal — card dưới fold chưa .visible mà chạy
-          // filter-pop sẽ chớp hiện rồi tụt ẩn trở lại.
-          if (card.classList.contains("visible")) {
-            card.classList.remove("filter-pop");
-            window.requestAnimationFrame(function () {
-              card.classList.add("filter-pop");
-            });
-          }
-        } else {
-          card.classList.add("filter-out");
-        }
-      });
-
-      // một timer chung cho cả lưới: chờ animation mờ dần xong mới gỡ khỏi layout
-      window.clearTimeout(hideTimer);
-      hideTimer = window.setTimeout(
-        function () {
-          cards.forEach(function (card) {
-            if (card.classList.contains("filter-out")) card.classList.add("hide");
-          });
-        },
-        reducedMotion ? 0 : 300
-      );
-
-      updateCount(visible);
-    };
-
-    var applySort = function (mode) {
-      var sorted = cards.slice();
-      sorted.sort(function (a, b) {
-        var pa = parseInt(a.getAttribute("data-price") || "0", 10);
-        var pb = parseInt(b.getAttribute("data-price") || "0", 10);
-        if (mode === "price-asc") return pa - pb;
-        if (mode === "price-desc") return pb - pa;
-        return parseInt(a.dataset.index, 10) - parseInt(b.dataset.index, 10);
-      });
-      sorted.forEach(function (card) {
-        grid.appendChild(card);
-      });
-    };
-
-    initRadioGroup(buttons, "aria-pressed", function (btn) {
-      activeFilter = btn.getAttribute("data-filter") || "all";
-      applyFilter();
-    });
-
-    if (sortSelect) {
-      sortSelect.addEventListener("change", function () {
-        applySort(sortSelect.value);
-      });
-    }
-
-    updateCount(cards.length);
-  })();
-
-  /* ===== Nút "Đặt nhanh" trên service card ===== */
-  (function initQuickView() {
-    // Là <button> thật, nằm trên link phủ card (z-index) nên không kích hoạt link
-    $$(".quick-view").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var card = btn.closest(".service-card");
-        var name = card ? $("h3", card) : null;
-        addBooking(1);
-        showToast(
-          "Đã thêm " +
-            (name ? name.textContent.trim() : "liệu trình") +
-            " vào lịch hẹn ✓"
-        );
-      });
-    });
-  })();
-
-  /* ===== Gallery chi tiết liệu trình: thumbnail + prev/next ===== */
-  (function initGallery() {
-    var mainImg = $("#galleryMain");
-    if (!mainImg) return;
-
-    var thumbs = $$(".thumb");
-    if (!thumbs.length) return;
-
-    var current = 0;
-
-    // dùng chung cơ chế "radio" — thumb không active bị gỡ hẳn aria-current
-    var activateThumb = initRadioGroup(
-      thumbs,
-      "aria-current",
-      function (thumb) {
-        current = thumbs.indexOf(thumb);
-        var src = thumb.getAttribute("data-full");
-        var alt = thumb.getAttribute("data-alt") || mainImg.alt;
-
-        // đổi ảnh với hiệu ứng mờ dần
-        mainImg.classList.add("fading");
-        window.setTimeout(
-          function () {
-            mainImg.src = src;
-            mainImg.alt = alt;
-            mainImg.classList.remove("fading");
-          },
-          reducedMotion ? 0 : 200
-        );
-      },
-      true
-    );
-
-    var show = function (index) {
-      activateThumb(thumbs[(index + thumbs.length) % thumbs.length]);
-    };
-
-    var prev = $(".gallery-nav.prev");
-    var next = $(".gallery-nav.next");
-    if (prev) {
-      prev.addEventListener("click", function () {
-        show(current - 1);
-      });
-    }
-    if (next) {
-      next.addEventListener("click", function () {
-        show(current + 1);
-      });
-    }
-  })();
-
-  /* ===== Tabs thông tin liệu trình ===== */
-  (function initTabs() {
-    var tabs = $$(".tab-btn");
-    if (!tabs.length) return;
-
-    var panels = $$(".tab-panel");
-
-    initRadioGroup(tabs, "aria-selected", function (tab) {
-      var targetId = tab.getAttribute("data-tab");
-      panels.forEach(function (panel) {
-        panel.hidden = panel.id !== targetId;
-      });
-      // chỉ tab đang chọn nằm trong luồng Tab, đúng chuẩn tablist
-      tabs.forEach(function (t) {
-        t.tabIndex = t === tab ? 0 : -1;
-      });
-    });
-
-    // Điều hướng tab bằng phím mũi tên trái/phải
-    tabs.forEach(function (tab, index) {
-      tab.tabIndex = tab.classList.contains("active") ? 0 : -1;
-      tab.addEventListener("keydown", function (e) {
-        var step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-        if (!step) return;
-        e.preventDefault();
-        var next = tabs[(index + step + tabs.length) % tabs.length];
-        next.focus();
-        next.click();
-      });
-    });
-  })();
-
-  /* ===== Chọn chuyên viên / số lượng / đặt lịch (chi-tiet-lieu-trinh.html) ===== */
-  (function initDetailOptions() {
-    var therapistLabel = $("#therapistLabel");
-    var therapistGroup = $(".therapists");
-    if (therapistGroup) {
-      // .pill-btn dùng chung nhiều nhóm nút → luôn giới hạn trong nhóm của mình
-      initRadioGroup($$(".pill-btn", therapistGroup), "aria-pressed", function (btn) {
-        if (therapistLabel) therapistLabel.textContent = btn.textContent.trim();
-      });
-    }
-
-    var qtyInput = $("#qtyInput");
-    if (!qtyInput) return;
-
-    var readQty = function () {
-      var value = parseInt(qtyInput.value, 10);
-      return isNaN(value) || value < 1 ? 1 : Math.min(value, 10);
-    };
-
-    qtyInput.addEventListener("change", function () {
-      qtyInput.value = String(readQty());
-    });
-
-    var minus = $("#qtyMinus");
-    var plus = $("#qtyPlus");
-    if (minus) {
-      minus.addEventListener("click", function () {
-        qtyInput.value = String(Math.max(1, readQty() - 1));
-      });
-    }
-    if (plus) {
-      plus.addEventListener("click", function () {
-        qtyInput.value = String(Math.min(10, readQty() + 1));
-      });
-    }
-
-    var bookBtn = $("#bookBtn");
-    if (bookBtn) {
-      bookBtn.addEventListener("click", function () {
-        addBooking(readQty());
-        showToast("✔ Đã thêm vào lịch hẹn! SEN sẽ gọi xác nhận trong 15 phút.");
-      });
-    }
-
-    var giftBtn = $("#giftBtn");
-    if (giftBtn) {
-      giftBtn.addEventListener("click", function () {
-        showToast("Voucher tặng người thân sẽ gửi qua email sau khi thanh toán.");
-      });
-    }
-  })();
-
-  /* ===== Nút lịch hẹn trên header ===== */
-  (function initBookingButton() {
-    var btn = $("#bookingBtn");
-    if (!btn) return;
-
-    btn.addEventListener("click", function () {
-      showToast(
-        bookingCount > 0
-          ? "Lịch hẹn đang có " + bookingCount + " liệu trình"
-          : "Chưa có liệu trình nào trong lịch hẹn"
-      );
-    });
-  })();
-
-  /* ===== Các form demo: đặt lịch + nhận bản tin ===== */
-  (function initForms() {
-    $$(".newsletter-form").forEach(function (form) {
-      bindDemoForm(form, "✔ Cảm ơn bạn! Ưu đãi sẽ được gửi tới hộp thư.");
-    });
-
-    $$(".booking-form").forEach(function (form) {
-      bindDemoForm(
-        form,
-        "✔ Đã nhận yêu cầu! SEN sẽ gọi xác nhận lịch trong 15 phút.",
-        "✔ Đã gửi yêu cầu đặt lịch!"
-      );
-    });
-  })();
-
-  /* ===== Cập nhật năm ở footer ===== */
-  (function initYear() {
-    $$(".year").forEach(function (el) {
-      el.textContent = String(new Date().getFullYear());
-    });
-  })();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
 })();

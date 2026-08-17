@@ -16,6 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <!-- reveal animations are driven by JS; without it the content must simply be visible -->
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -30,9 +32,9 @@
         <a href="contact.html">Contact</a>
       </nav>
       <div class="header-actions">
-        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><span aria-hidden="true">🔍</span></button>
-        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><span aria-hidden="true">👤</span></button>
-        <a class="icon-btn" href="cart.html" aria-label="Cart"><span aria-hidden="true">🛒</span><span class="cart-badge" data-cart-count hidden>0</span></a>
+        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.4"/><path d="M15.8 15.8 20.5 20.5"/></svg></button>
+        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.4" r="3.9"/><path d="M4.8 20c.6-3.6 3.6-6 7.2-6s6.6 2.4 7.2 6"/></svg></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.4 8.4h9.2a1.5 1.5 0 0 1 1.5 1.7l-.8 6.3a2 2 0 0 1-2 1.7H8.7a2 2 0 0 1-2-1.7l-.8-6.3a1.5 1.5 0 0 1 1.5-1.7z"/><path d="M9.4 8.4V7a2.6 2.6 0 0 1 5.2 0v1.4"/></svg><span class="cart-badge" data-cart-count hidden>0</span></a>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -59,7 +61,7 @@
     <section class="section">
       <div class="container product-detail">
         <!-- Gallery -->
-        <div class="reveal" data-reveal="up">
+        <div>
           <div class="gallery-main">
             <img class="active" src="https://picsum.photos/seed/twp1/900/1125" alt="Polished brass round pet tag engraved with a pet name, front view" fetchpriority="high">
             <img src="https://picsum.photos/seed/twp1b/900/1125" alt="Back of the round tag engraved with a phone number">
@@ -85,7 +87,7 @@
         </div>
 
         <!-- Panel -->
-        <div class="product-panel reveal" data-reveal="up" data-delay="100">
+        <div class="product-panel">
           <p class="eyebrow">Dog Tags</p>
           <h1>Classic Round Tag</h1>
           <p class="rating-row">
@@ -285,7 +287,7 @@
           <p class="eyebrow">Reviews</p>
           <h2>What owners say</h2>
         </div>
-        <div class="rating-summary reveal" data-reveal="up">
+        <div class="rating-summary">
           <p class="rating-score">4.9</p>
           <div>
             <p class="stars" aria-hidden="true">★★★★★</p>
@@ -293,7 +295,7 @@
           </div>
         </div>
         <div class="review-grid">
-          <article class="review-card reveal" data-reveal="up">
+          <article class="review-card">
             <div class="review-head">
               <p class="stars" aria-hidden="true">★★★★★</p>
               <p class="review-meta">Verified buyer</p>
@@ -302,7 +304,7 @@
             <p>"I ordered the brass round in Classic. Two years of creek swims, one very muddy winter, and you can still read Scout's name from arm's length. The preview matched the tag exactly."</p>
             <p class="review-meta">Erin M. — Denver, CO · Small · Brass</p>
           </article>
-          <article class="review-card reveal" data-reveal="up" data-delay="90">
+          <article class="review-card">
             <div class="review-head">
               <p class="stars" aria-hidden="true">★★★★☆</p>
               <p class="review-meta">Verified buyer</p>
@@ -318,12 +320,12 @@
     <!-- Related -->
     <section class="section">
       <div class="container">
-        <div class="section-head center reveal" data-reveal="up">
+        <div class="section-head center">
           <p class="eyebrow">Complete the set</p>
           <h2>Pairs well with</h2>
         </div>
         <div class="product-grid">
-          <article class="product-card reveal" data-reveal="up" data-handle="bone-shaped-tag" data-category="dog" data-price="1695" data-shape="bone">
+          <article class="product-card" data-handle="bone-shaped-tag" data-category="dog" data-price="1695" data-shape="bone">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp2/600/800" alt="Brushed silver bone shaped dog tag on a linen surface" loading="lazy">
               <a class="quick-view" href="product.html" aria-label="Customize the Bone Shaped Tag">Customize <span aria-hidden="true">→</span></a>
@@ -335,7 +337,7 @@
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Bone Shaped Tag"></a>
           </article>
-          <article class="product-card reveal" data-reveal="up" data-delay="80" data-handle="engraved-leather-collar" data-category="collar" data-price="3495" data-shape="round">
+          <article class="product-card" data-handle="engraved-leather-collar" data-category="collar" data-price="3495" data-shape="round">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp5/600/800" alt="Full-grain leather collar with a matching engraved plate" loading="lazy">
               <span class="product-badge badge-new">New</span>
@@ -348,7 +350,7 @@
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Engraved Leather Collar"></a>
           </article>
-          <article class="product-card reveal" data-reveal="up" data-delay="160" data-handle="premium-gift-box" data-category="gift" data-price="1995" data-shape="round">
+          <article class="product-card" data-handle="premium-gift-box" data-category="gift" data-price="1995" data-shape="round">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp8/600/800" alt="Premium gift box containing a tag, silk pouch and wrapping" loading="lazy">
               <span class="product-badge badge-low">Low stock</span>
@@ -361,7 +363,7 @@
             </div>
             <a class="product-card-link" href="product.html" aria-label="View the Premium Gift Box"></a>
           </article>
-          <article class="product-card reveal" data-reveal="up" data-delay="240" data-handle="duo-tag-set" data-category="gift" data-price="2376" data-shape="round">
+          <article class="product-card" data-handle="duo-tag-set" data-category="gift" data-price="2376" data-shape="round">
             <div class="product-media">
               <img src="https://picsum.photos/seed/twp6/600/800" alt="Two engraved tags packaged together as a duo gift set" loading="lazy">
               <span class="product-badge badge-sale">Sale −15%</span>

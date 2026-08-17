@@ -2,417 +2,597 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
-<title>SEN SPA — Spa &amp; Wellness cao cấp tại Hà Nội</title>
-<meta name="description" content="SEN SPA — vẻ đẹp đến từ sự tĩnh lặng. 15 năm chăm sóc da, massage trị liệu, xông hơi thảo dược với chuyên viên chứng nhận quốc tế. Đặt lịch 024 3933 8899.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEN SPA — Chậm lại một buổi chiều</title>
+<meta name="description" content="SEN SPA, 12 Hàng Bông, Hoàn Kiếm, Hà Nội. Xoa bóp, ngâm chân thảo mộc, ủ ấm trong phòng riêng. Mở cửa từ 2011. Gọi 024 3933 8899 để giữ chỗ.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='19' fill='none' stroke='%237E9C95' stroke-width='1.5' opacity='.4'/%3E%3Ccircle cx='24' cy='24' r='14.5' fill='none' stroke='%237E9C95' stroke-width='1.5' opacity='.7'/%3E%3Cpath d='M24 9.8c3.3 4.4 5.7 7.7 5.7 10.6a5.7 5.7 0 0 1-11.4 0c0-2.9 2.4-6.2 5.7-10.6z' fill='none' stroke='%237E9C95' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Epilogue:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js-on');</script>
 </head>
 <body>
+<a class="skip-link" href="#main">Tới nội dung chính</a>
 
-<!-- ===== Preloader ===== -->
-<div class="preloader">
-  <div class="preloader-logo"><span aria-hidden="true">❀</span> SEN SPA</div>
-  <div class="preloader-line"></div>
-</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".35"/><circle cx="24" cy="24" r="14.5" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".6"/><path d="M24 9.8c3.3 4.4 5.7 7.7 5.7 10.6a5.7 5.7 0 0 1-11.4 0c0-2.9 2.4-6.2 5.7-10.6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <b>SEN</b><small>SPA</small>
+    </a>
 
-<!-- ===== Header ===== -->
-<header class="site-header header-light">
-  <div class="container header-inner">
-    <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">❀</span> SEN SPA</a>
-
-    <nav class="nav" aria-label="Điều hướng chính">
-      <a href="index.html" class="active" aria-current="page">Trang chủ</a>
-      <a href="lieu-trinh.html">Liệu trình</a>
-      <a href="ve-sen.html">Về SEN</a>
-      <a href="tin-tuc.html">Tin tức</a>
-      <a href="lien-he.html">Liên hệ</a>
+    <nav class="nav" id="site-nav" aria-label="Điều hướng chính">
+      <ul>
+        <li><a href="index.html" aria-current="page">Trang chủ</a></li>
+        <li><a href="lieu-trinh.html">Liệu trình</a></li>
+        <li><a href="ve-sen.html">Về SEN</a></li>
+        <li><a href="khong-gian.html">Không gian</a></li>
+        <li><a href="tin-tuc.html">Tin tức</a></li>
+        <li><a href="lien-he.html">Liên hệ</a></li>
+      </ul>
     </nav>
 
     <div class="header-actions">
-      <a class="header-cta" href="lien-he.html">Đặt lịch ngay</a>
-      <button class="icon-btn" id="bookingBtn" type="button" aria-label="Lịch hẹn đã chọn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 9.5h17M8 3.5v3M16 3.5v3"></path></svg>
-        <span class="book-badge">0</span>
-      </button>
-      <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileMenu">
-        <span></span><span></span><span></span>
+      <a class="btn btn--solid btn--sm header-cta" href="#dat-lich">Giữ chỗ</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <i aria-hidden="true"></i><span>Menu</span>
       </button>
     </div>
   </div>
 </header>
 
-<!-- ===== Menu mobile ===== -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" class="active" aria-current="page">Trang chủ</a>
-  <a href="lieu-trinh.html">Liệu trình</a>
-  <a href="ve-sen.html">Về SEN</a>
-  <a href="tin-tuc.html">Tin tức</a>
-  <a href="lien-he.html">Liên hệ</a>
-  <div class="mobile-menu-meta">024 3933 8899 · 24 Bà Triệu, Hoàn Kiếm</div>
-</div>
+<main id="main">
 
-<main>
-
-  <!-- ===== Hero ===== -->
+  <!-- 01 Hero -->
   <section class="hero">
-    <div class="hero-bg">
-      <img src="https://picsum.photos/seed/sen-hero-2026/1600/1000" alt="Không gian trị liệu yên tĩnh với nến thơm và hoa sen tại SEN SPA" fetchpriority="high">
-    </div>
-    <div class="hero-overlay"></div>
-
-    <div class="container hero-inner">
-      <span class="eyebrow reveal" data-reveal="up"><span aria-hidden="true">✦</span> Spa &amp; Wellness cao cấp</span>
-      <h1 class="reveal" data-reveal="up" data-delay="100">
-        Thư giãn cơ thể<br><em>nuôi dưỡng tâm hồn</em>
-      </h1>
-      <p class="hero-sub reveal" data-reveal="up" data-delay="200">
-        15 năm đồng hành cùng phụ nữ Việt. Mỗi liệu trình tại SEN được thiết kế riêng theo cơ địa,
-        dùng thảo dược thiên nhiên trong không gian tĩnh tại giữa lòng Hà Nội.
-      </p>
-      <div class="hero-actions reveal" data-reveal="up" data-delay="300">
-        <a class="btn btn-lg btn-primary" href="lien-he.html">Đặt lịch ngay <span class="arrow" aria-hidden="true">→</span></a>
-        <a class="btn btn-lg btn-outline" href="lieu-trinh.html">Xem liệu trình <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-      <div class="hero-badges reveal" data-reveal="up" data-delay="400">
-        <span class="hero-badge"><span aria-hidden="true">⭐</span> 4.9/5 · 2.100+ đánh giá</span>
-        <span class="hero-badge"><span aria-hidden="true">🏆</span> Top spa Hà Nội 2025</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Marquee ===== -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>THƯ GIÃN CƠ THỂ <i>✦</i></span>
-      <span>NUÔI DƯỠNG TÂM HỒN <i>✦</i></span>
-      <span>THẢO DƯỢC THIÊN NHIÊN <i>✦</i></span>
-      <span>CHUYÊN VIÊN CIDESCO <i>✦</i></span>
-      <span>THƯ GIÃN CƠ THỂ <i>✦</i></span>
-      <span>NUÔI DƯỠNG TÂM HỒN <i>✦</i></span>
-      <span>THẢO DƯỢC THIÊN NHIÊN <i>✦</i></span>
-      <span>CHUYÊN VIÊN CIDESCO <i>✦</i></span>
-    </div>
-  </div>
-
-  <!-- ===== Liệu trình nổi bật ===== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal" data-reveal="up">
-        <span class="eyebrow">Liệu trình nổi bật</span>
-        <h2>Được khách hàng yêu thích nhất</h2>
-        <p class="section-desc">Bốn liệu trình được đặt nhiều nhất trong tháng tại cả ba chi nhánh.</p>
-      </div>
-
-      <div class="service-grid">
-        <article class="service-card reveal" data-reveal="up">
-          <div class="service-media">
-            <img src="https://picsum.photos/seed/sen-s1-da-mat/800/560" alt="Chuyên viên đang chăm sóc da mặt cho khách hàng" loading="lazy">
-            <span class="service-badge">Bán chạy</span>
-          </div>
-          <div class="service-info">
-            <h3>Chăm sóc da mặt cao cấp</h3>
-            <span class="service-dur">60–90 phút</span>
-            <p>Làm sạch sâu, cấp ẩm, phục hồi da với công nghệ Hifu &amp; tinh chất sen.</p>
-            <div class="service-price">990.000đ</div>
-          </div>
-          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Chăm sóc da mặt cao cấp"></a>
-          <button type="button" class="quick-view">Đặt nhanh</button>
-        </article>
-
-        <article class="service-card reveal" data-reveal="up" data-delay="100">
-          <div class="service-media">
-            <img src="https://picsum.photos/seed/sen-s2-massage-thai/800/560" alt="Phòng massage trị liệu Thái với ánh sáng ấm dịu" loading="lazy">
-            <span class="service-badge">Bán chạy</span>
-          </div>
-          <div class="service-info">
-            <h3>Massage trị liệu Thái</h3>
-            <span class="service-dur">60–120 phút</span>
-            <p>Giải phóng căng thẳng, phục hồi năng lượng với kỹ thuật massage Thái cổ truyền.</p>
-            <div class="service-price">1.290.000đ</div>
-          </div>
-          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Massage trị liệu Thái"></a>
-          <button type="button" class="quick-view">Đặt nhanh</button>
-        </article>
-
-        <article class="service-card reveal" data-reveal="up" data-delay="200">
-          <div class="service-media">
-            <img src="https://picsum.photos/seed/sen-s4-da-nong/800/560" alt="Bộ đá bazan nóng chuẩn bị cho liệu trình massage" loading="lazy">
-            <span class="service-badge new">Mới</span>
-          </div>
-          <div class="service-info">
-            <h3>Massage đá nóng</h3>
-            <span class="service-dur">90 phút</span>
-            <p>Đá bazan nóng kết hợp tinh dầu, làm ấm cơ thể và lưu thông khí huyết.</p>
-            <div class="service-price">1.590.000đ</div>
-          </div>
-          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Massage đá nóng"></a>
-          <button type="button" class="quick-view">Đặt nhanh</button>
-        </article>
-
-        <article class="service-card reveal" data-reveal="up" data-delay="300">
-          <div class="service-media">
-            <img src="https://picsum.photos/seed/sen-s6-guong-mat-sen/800/560" alt="Tinh chất hoa sen dùng trong liệu trình gương mặt của SEN SPA" loading="lazy">
-            <span class="service-badge new">Mới</span>
-          </div>
-          <div class="service-info">
-            <h3>Trị liệu gương mặt sen</h3>
-            <span class="service-dur">75 phút</span>
-            <p>Liệu trình độc quyền SEN với tinh chất hoa sen, săn chắc và trẻ hoá da.</p>
-            <div class="service-price">1.390.000đ</div>
-          </div>
-          <a class="service-card-link" href="chi-tiet-lieu-trinh.html" aria-label="Xem chi tiết liệu trình Trị liệu gương mặt sen"></a>
-          <button type="button" class="quick-view">Đặt nhanh</button>
-        </article>
-      </div>
-
-      <div class="text-center section-cta reveal" data-reveal="up">
-        <a class="btn btn-lg btn-primary" href="lieu-trinh.html">Xem tất cả liệu trình <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Về SEN ===== -->
-  <section class="section section-alt">
-    <div class="container split">
-      <div class="split-media petal reveal" data-reveal="zoom">
-        <img src="https://picsum.photos/seed/sen-about-space/1000/800" alt="Góc tiếp đón của SEN SPA với bình hoa sen và trà thảo mộc" loading="lazy">
-      </div>
-
-      <div class="split-body reveal" data-reveal="right" data-delay="150">
-        <span class="eyebrow">Về SEN SPA</span>
-        <h2>Vẻ đẹp đến từ sự tĩnh lặng</h2>
-        <p>
-          SEN SPA ra đời năm 2015 với mong muốn tạo một khoảng lặng giữa phố thị — nơi phụ nữ
-          được chăm sóc bằng thảo dược Việt và đôi tay của những chuyên viên thật sự có nghề.
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="label">SEN SPA · Hà Nội · từ 2011</p>
+        <h1>Chậm lại một <em>buổi chiều.</em></h1>
+        <p class="lead">Mười lăm năm, chúng tôi chỉ làm một việc: tìm đúng chỗ đang căng, và gỡ nó ra theo nhịp thở của bạn.</p>
+        <div class="hero-actions">
+          <a class="btn btn--solid" href="#dat-lich">Giữ chỗ</a>
+          <a class="btn btn--line" href="lieu-trinh.html">Xem liệu trình</a>
+        </div>
+        <p class="hero-ledger ledger-line">
+          <span>90 phút</span><span>phòng riêng</span><span>từ 2011</span>
         </p>
+      </div>
 
-        <ul class="check-list">
-          <li><span class="ico" aria-hidden="true">✔</span> 100% nguyên liệu thiên nhiên, không hương liệu tổng hợp</li>
-          <li><span class="ico" aria-hidden="true">✔</span> Chuyên viên đạt chứng nhận CIDESCO &amp; ITEC quốc tế</li>
-          <li><span class="ico" aria-hidden="true">✔</span> Phòng trị liệu riêng tư, cách âm, mỗi khách một bộ khăn riêng</li>
-          <li><span class="ico" aria-hidden="true">✔</span> Tư vấn liệu trình theo cơ địa, không bán gói ép buộc</li>
+      <figure class="hero-media">
+        <img src="https://images.unsplash.com/photo-1651065213855-e6094f99ee65?w=1280&amp;h=1600&amp;q=80&amp;auto=format&amp;fit=crop"
+             srcset="https://images.unsplash.com/photo-1651065213855-e6094f99ee65?w=640&amp;h=800&amp;q=80&amp;auto=format&amp;fit=crop 640w,
+                     https://images.unsplash.com/photo-1651065213855-e6094f99ee65?w=1280&amp;h=1600&amp;q=80&amp;auto=format&amp;fit=crop 1280w,
+                     https://images.unsplash.com/photo-1651065213855-e6094f99ee65?w=1920&amp;h=2400&amp;q=80&amp;auto=format&amp;fit=crop 1920w"
+             sizes="(min-width: 900px) 44vw, 100vw"
+             alt="Phòng trị liệu trống người, giường phủ khăn trắng bên vách tre có ánh sáng hắt"
+             width="1280" height="1600" fetchpriority="high" decoding="async">
+        <figcaption>Phòng số 3, trước giờ mở cửa</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 02 Nghi thức -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="label">Nghi thức</p>
+        <h2>Bốn bước, theo thứ tự đó</h2>
+        <p class="muted">Chúng tôi không đảo thứ tự. Cơ thể cần ấm trước khi chịu được lực, và cần nước sau khi được xoa.</p>
+      </div>
+
+      <!-- Ritual Path: đường nghi thức — 4 bước so le quanh đường dọc, mỗi bước một ảnh thật -->
+      <ol class="ritual-path">
+        <li class="rp-item" id="buoc-ngam">
+          <figure class="rp-media">
+            <img src="https://images.unsplash.com/photo-1577117633143-a2437fb9bdda?w=800&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+                 alt="Bồn gỗ ngâm chân bên khăn xám cuộn và chén thảo mộc"
+                 width="800" height="600" loading="lazy" decoding="async">
+          </figure>
+          <div class="rp-body">
+            <p class="rp-meta"><span class="num">01</span><span>15 phút</span></p>
+            <h3>Ngâm</h3>
+            <p>Nước đun từ ngải cứu, sả và gừng, để nguội xuống khoảng bốn mươi độ. Bạn ngâm chân và trả lời vài câu hỏi — đây là lúc chúng tôi quyết định lực tay cho cả buổi.</p>
+          </div>
+        </li>
+
+        <li class="rp-item" id="buoc-u-am">
+          <figure class="rp-media">
+            <img src="https://images.unsplash.com/photo-1578413142862-c10be6467b8b?w=800&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+                 alt="Sáu viên đá bazalt đen xếp thưa trên nền tối"
+                 width="800" height="600" loading="lazy" decoding="async">
+          </figure>
+          <div class="rp-body">
+            <p class="rp-meta"><span class="num">02</span><span>10 phút</span></p>
+            <h3>Ủ ấm</h3>
+            <p>Khăn hấp nóng đặt lên lưng và bụng dưới. Nhiệt làm mô mềm ra trước khi tay chạm vào; với ca lưng dưới, chúng tôi thay khăn bằng đá bazalt.</p>
+          </div>
+        </li>
+
+        <li class="rp-item" id="buoc-xoa">
+          <figure class="rp-media">
+            <img src="https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5?w=800&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+                 alt="Bàn tay kỹ thuật viên miết dọc sống lưng"
+                 width="800" height="600" loading="lazy" decoding="async">
+          </figure>
+          <div class="rp-body">
+            <p class="rp-meta"><span class="num">03</span><span>50 phút</span></p>
+            <h3>Xoa</h3>
+            <p>Phần dài nhất của buổi. Đi từ vùng xa chỗ đau rồi thu dần vào, lực tăng theo hơi thở của bạn chứ không theo đồng hồ. Đau quá thì nói, chúng tôi giảm ngay.</p>
+          </div>
+        </li>
+
+        <li class="rp-item" id="buoc-tra">
+          <figure class="rp-media">
+            <img src="https://images.unsplash.com/photo-1606377695906-236fdfcef767?w=800&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+                 alt="Chén trà gốm và ấm men nhạt trên mặt gỗ"
+                 width="800" height="600" loading="lazy" decoding="async">
+          </figure>
+          <div class="rp-body">
+            <p class="rp-meta"><span class="num">04</span><span>15 phút</span></p>
+            <h3>Trà</h3>
+            <p>Một chén trà ấm, nhạt, không đường. Bạn ngồi thêm mười phút cho nhịp tim về bình thường trước khi ra đường.</p>
+          </div>
+        </li>
+      </ol>
+
+      <p class="rites-total ledger-line">
+        <span>Bốn bước liền mạch</span><span>không rút gọn</span><span>tổng 90 phút</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 03 Liệu trình (Ripple Index) -->
+  <section class="section section--linen">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="label">Liệu trình</p>
+        <h2>Năm buổi thường được chọn</h2>
+        <p class="muted">Bảng giá đầy đủ nằm ở trang liệu trình. Thời lượng đã tính cả mười phút hỏi chuyện.</p>
+      </div>
+
+      <div class="ripple">
+        <ul class="ripple-list">
+
+          <li class="ripple-row"
+              data-img="https://images.unsplash.com/photo-1577117633143-a2437fb9bdda?w=640&amp;h=854&amp;q=80&amp;auto=format&amp;fit=crop"
+              data-alt="Bồn gỗ ngâm chân bên khăn xám cuộn"
+              data-caption="Nước thảo mộc đun mỗi sáng trong bếp."
+              data-href="chi-tiet-lieu-trinh.html">
+            <button class="ripple-btn" type="button" aria-expanded="false" aria-controls="lt-1">
+              <span class="ripple-name">
+                <strong>Ngâm chân thảo mộc</strong>
+                <span>Ngải cứu, sả, gừng — cho người hay lạnh chân</span>
+              </span>
+              <span class="ripple-meta"><b>60 phút</b>Báo giá khi giữ chỗ</span>
+            </button>
+            <div class="ripple-panel" id="lt-1"><div>
+              <img src="https://images.unsplash.com/photo-1577117633143-a2437fb9bdda?w=640&amp;q=80&amp;auto=format&amp;fit=crop"
+                   alt="Bồn gỗ ngâm chân bên khăn xám cuộn" width="640" height="427" loading="lazy" decoding="async">
+              <p><a class="link-quiet" href="chi-tiet-lieu-trinh.html">Xem chi tiết liệu trình</a></p>
+            </div></div>
+          </li>
+
+          <li class="ripple-row"
+              data-img="https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5?w=640&amp;h=854&amp;q=80&amp;auto=format&amp;fit=crop"
+              data-alt="Bàn tay kỹ thuật viên miết dọc sống lưng"
+              data-caption="Mở lồng ngực trước, gáy sau."
+              data-href="chi-tiet-lieu-trinh.html">
+            <button class="ripple-btn" type="button" aria-expanded="false" aria-controls="lt-2">
+              <span class="ripple-name">
+                <strong>Xoa bóp vai gáy</strong>
+                <span>Cho người ngồi bàn giấy, đau cứng buổi chiều</span>
+              </span>
+              <span class="ripple-meta"><b>60 phút</b>Báo giá khi giữ chỗ</span>
+            </button>
+            <div class="ripple-panel" id="lt-2"><div>
+              <img src="https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5?w=640&amp;q=80&amp;auto=format&amp;fit=crop"
+                   alt="Bàn tay kỹ thuật viên miết dọc sống lưng" width="640" height="427" loading="lazy" decoding="async">
+              <p><a class="link-quiet" href="chi-tiet-lieu-trinh.html">Xem chi tiết liệu trình</a></p>
+            </div></div>
+          </li>
+
+          <li class="ripple-row"
+              data-img="https://images.unsplash.com/photo-1578413142862-c10be6467b8b?w=640&amp;h=854&amp;q=80&amp;auto=format&amp;fit=crop"
+              data-alt="Bảy viên đá bazalt đen trên nền đá phiến"
+              data-caption="Đá hâm trong nước, không hâm bằng lò."
+              data-href="chi-tiet-lieu-trinh.html">
+            <button class="ripple-btn" type="button" aria-expanded="false" aria-controls="lt-3">
+              <span class="ripple-name">
+                <strong>Đá nóng lưng dưới</strong>
+                <span>Nhiệt giữ lâu, hợp với lưng cứng lâu ngày</span>
+              </span>
+              <span class="ripple-meta"><b>75 phút</b>Báo giá khi giữ chỗ</span>
+            </button>
+            <div class="ripple-panel" id="lt-3"><div>
+              <img src="https://images.unsplash.com/photo-1578413142862-c10be6467b8b?w=640&amp;q=80&amp;auto=format&amp;fit=crop"
+                   alt="Bảy viên đá bazalt đen trên nền đá phiến" width="640" height="427" loading="lazy" decoding="async">
+              <p><a class="link-quiet" href="chi-tiet-lieu-trinh.html">Xem chi tiết liệu trình</a></p>
+            </div></div>
+          </li>
+
+          <li class="ripple-row"
+              data-img="https://images.unsplash.com/photo-1527986654082-0b5b3fef2632?w=640&amp;h=854&amp;q=80&amp;auto=format&amp;fit=crop"
+              data-alt="Chồng khăn gấp trên ghế đẩu gỗ"
+              data-caption="Khăn giặt bằng nước không mùi."
+              data-href="chi-tiet-lieu-trinh.html">
+            <button class="ripple-btn" type="button" aria-expanded="false" aria-controls="lt-4">
+              <span class="ripple-name">
+                <strong>Ủ ấm bụng và thắt lưng</strong>
+                <span>Khăn hấp thay ba lượt, không dùng lực mạnh</span>
+              </span>
+              <span class="ripple-meta"><b>60 phút</b>Báo giá khi giữ chỗ</span>
+            </button>
+            <div class="ripple-panel" id="lt-4"><div>
+              <img src="https://images.unsplash.com/photo-1527986654082-0b5b3fef2632?w=640&amp;q=80&amp;auto=format&amp;fit=crop"
+                   alt="Chồng khăn gấp trên ghế đẩu gỗ" width="640" height="427" loading="lazy" decoding="async">
+              <p><a class="link-quiet" href="chi-tiet-lieu-trinh.html">Xem chi tiết liệu trình</a></p>
+            </div></div>
+          </li>
+
+          <li class="ripple-row"
+              data-img="https://images.unsplash.com/photo-1731597076108-f3bbe268162f?w=640&amp;h=854&amp;q=80&amp;auto=format&amp;fit=crop"
+              data-alt="Bàn trị liệu phủ vải lanh bên kệ gỗ đựng dầu"
+              data-caption="Buổi trọn đi hết bốn bước nghi thức."
+              data-href="chi-tiet-lieu-trinh.html">
+            <button class="ripple-btn" type="button" aria-expanded="false" aria-controls="lt-5">
+              <span class="ripple-name">
+                <strong>Buổi trọn</strong>
+                <span>Ngâm, ủ ấm, xoa toàn thân, trà — không rút gọn</span>
+              </span>
+              <span class="ripple-meta"><b>120 phút</b>Báo giá khi giữ chỗ</span>
+            </button>
+            <div class="ripple-panel" id="lt-5"><div>
+              <img src="https://images.unsplash.com/photo-1731597076108-f3bbe268162f?w=640&amp;q=80&amp;auto=format&amp;fit=crop"
+                   alt="Bàn trị liệu phủ vải lanh bên kệ gỗ đựng dầu" width="640" height="427" loading="lazy" decoding="async">
+              <p><a class="link-quiet" href="chi-tiet-lieu-trinh.html">Xem chi tiết liệu trình</a></p>
+            </div></div>
+          </li>
+
         </ul>
 
-        <blockquote class="pull-quote">
-          “Chúng tôi không bán liệu trình đắt nhất, chúng tôi chọn liệu trình đúng nhất cho làn da của bạn.”
-        </blockquote>
-
-        <a class="link-more" href="ve-sen.html">Tìm hiểu câu chuyện SEN <span class="arrow" aria-hidden="true">→</span></a>
+        <figure class="ripple-preview">
+          <img src="https://images.unsplash.com/photo-1577117633143-a2437fb9bdda?w=640&amp;h=854&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="" width="640" height="854" loading="lazy" decoding="async">
+          <figcaption></figcaption>
+          <p><a class="link-quiet" data-preview-link href="chi-tiet-lieu-trinh.html">Xem chi tiết liệu trình</a></p>
+        </figure>
       </div>
+
+      <p style="margin-top:var(--s6)"><a class="link-quiet" href="lieu-trinh.html">Xem toàn bộ liệu trình</a></p>
     </div>
   </section>
 
-  <!-- ===== Bảng giá ===== -->
+  <!-- 04 Một ngày ở SEN -->
   <section class="section">
-    <div class="container">
-      <div class="section-head reveal" data-reveal="up">
-        <span class="eyebrow">Gói liệu trình</span>
-        <h2>Chọn gói phù hợp với bạn</h2>
-        <p class="section-desc">Giá đã bao gồm trà thảo mộc, khăn ấm và tư vấn chăm sóc tại nhà.</p>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="label">Một ngày ở SEN</p>
+        <h2>Từ 09:00 đến 20:00</h2>
+        <p class="muted">Chúng tôi mở cửa lúc chín giờ, nhưng bếp đỏ lửa từ tám giờ.</p>
       </div>
 
-      <div class="price-grid">
-        <div class="price-card reveal" data-reveal="up">
-          <h3>Thư Giãn</h3>
-          <div class="price-amount">890.000đ <span class="price-unit">/lượt</span></div>
-          <ul class="price-list">
-            <li><span aria-hidden="true">✔</span> Massage thư giãn 60 phút</li>
-            <li><span aria-hidden="true">✔</span> Xông hơi thảo dược 20 phút</li>
-            <li><span aria-hidden="true">✔</span> Trà sen &amp; bánh thảo mộc</li>
-          </ul>
-          <a class="btn btn-light btn-block" href="lien-he.html">Đặt gói Thư Giãn</a>
+      <div class="day">
+        <div class="day-track" aria-hidden="true"><i></i></div>
+
+        <div class="day-item">
+          <p class="day-time">09:00</p>
+          <div class="day-body">
+            <h3>Nồi thảo mộc bắc lên</h3>
+            <p>Ngải cứu và sả cho vào trước, gừng cho sau. Nước sôi rồi hạ nhỏ lửa, giữ đến hết ngày.</p>
+          </div>
         </div>
 
-        <div class="price-card featured reveal" data-reveal="up" data-delay="100">
-          <span class="price-tag"><span aria-hidden="true">★</span> Phổ biến nhất</span>
-          <h3>Phục Hồi</h3>
-          <div class="price-amount">1.690.000đ <span class="price-unit">/lượt</span></div>
-          <ul class="price-list">
-            <li><span aria-hidden="true">✔</span> Massage trị liệu 90 phút</li>
-            <li><span aria-hidden="true">✔</span> Chăm sóc da mặt 60 phút</li>
-            <li><span aria-hidden="true">✔</span> Ủ ấm thảo dược toàn thân</li>
-            <li><span aria-hidden="true">✔</span> Tư vấn chăm sóc da 1-1</li>
-          </ul>
-          <a class="btn btn-primary btn-block" href="lien-he.html">Đặt gói Phục Hồi</a>
+        <div class="day-item">
+          <p class="day-time">10:30</p>
+          <div class="day-body">
+            <h3>Khách đầu tiên</h3>
+            <p>Buổi sáng thường là người lớn tuổi và người làm ca đêm. Chúng tôi làm nhẹ tay hơn buổi chiều.</p>
+          </div>
         </div>
 
-        <div class="price-card reveal" data-reveal="up" data-delay="200">
-          <h3>Hoàng Gia</h3>
-          <div class="price-amount">2.990.000đ <span class="price-unit">/ngày</span></div>
-          <ul class="price-list">
-            <li><span aria-hidden="true">✔</span> Trọn ngày trị liệu 4 giờ</li>
-            <li><span aria-hidden="true">✔</span> Phòng tĩnh toạ riêng</li>
-            <li><span aria-hidden="true">✔</span> Bữa ăn healthy theo thực đơn</li>
-            <li><span aria-hidden="true">✔</span> Quà tặng bộ chăm sóc tại nhà</li>
-          </ul>
-          <a class="btn btn-light btn-block" href="lien-he.html">Đặt gói Hoàng Gia</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Đánh giá khách ===== -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-head reveal" data-reveal="up">
-        <span class="eyebrow">Khách nói gì</span>
-        <h2>2.100+ đánh giá, 4.9/5 sao</h2>
-      </div>
-
-      <div class="review-grid">
-        <div class="review-card reveal" data-reveal="up">
-          <span class="review-stars" aria-hidden="true">★★★★★</span>
-          <blockquote>“Mình làm văn phòng nên vai gáy đau kinh niên. Sau 5 buổi massage trị liệu ở SEN, mình ngủ ngon hẳn.”</blockquote>
-          <p class="review-name">— Thanh Trúc, nhân viên văn phòng</p>
+        <div class="day-item">
+          <p class="day-time">13:00</p>
+          <div class="day-body">
+            <h3>Giờ yên</h3>
+            <p>Hai tiếng giữa trưa ít khách nhất. Đây là khung dễ giữ chỗ nhất nếu bạn linh động giờ.</p>
+          </div>
         </div>
 
-        <div class="review-card reveal" data-reveal="up" data-delay="100">
-          <span class="review-stars" aria-hidden="true">★★★★★</span>
-          <blockquote>“Không gian rất tĩnh, mùi tinh dầu dễ chịu. Chuyên viên tư vấn thật lòng, không ép mua gói.”</blockquote>
-          <p class="review-name">— Mỹ Linh, giáo viên yoga</p>
+        <div class="day-item">
+          <p class="day-time">15:30</p>
+          <div class="day-body">
+            <h3>Thay khăn, hâm lại đá</h3>
+            <p>Toàn bộ khăn của ca sáng được đưa đi giặt. Đá bazalt hâm lại trong nồi nước riêng.</p>
+          </div>
         </div>
 
-        <div class="review-card reveal" data-reveal="up" data-delay="200">
-          <span class="review-stars" aria-hidden="true">★★★★★</span>
-          <blockquote>“Đàn ông đi spa hơi ngại, nhưng phòng riêng kín đáo và kỹ thuật viên chuyên nghiệp nên rất thoải mái.”</blockquote>
-          <p class="review-name">— Anh Tuấn, giám đốc kinh doanh</p>
+        <div class="day-item">
+          <p class="day-time">18:00</p>
+          <div class="day-body">
+            <h3>Giờ đông nhất</h3>
+            <p>Người tan làm, vai gáy cứng, đầu còn đầy việc. Mười phút hỏi chuyện lúc này thường dài hơn quy định.</p>
+          </div>
         </div>
+
+        <div class="day-item">
+          <p class="day-time">20:00</p>
+          <div class="day-body">
+            <h3>Buổi cuối</h3>
+            <p>Chúng tôi nhận khách cuối trước giờ đóng cửa chín mươi phút, để không ai phải kết thúc vội.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ===== Đặt lịch nhanh ===== -->
+  <!-- 05 Không gian -->
+  <section class="section section--mist">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="label">Không gian</p>
+        <h2>Nhà cũ, giữ nguyên tường</h2>
+        <p class="muted">Ba phòng riêng có cửa, một góc tắm, một hành lang nhận nắng buổi chiều.</p>
+      </div>
+
+      <div class="bento">
+        <figure class="tall">
+          <img src="https://images.unsplash.com/photo-1776993800059-3c9adeb67c19?w=800&amp;h=1120&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="Hành lang tông kem với vệt nắng đổ chéo trên sàn" width="800" height="1120" loading="lazy" decoding="async">
+          <figcaption>Hành lang tầng một, khoảng ba giờ chiều.</figcaption>
+        </figure>
+
+        <figure class="wide">
+          <img src="https://images.unsplash.com/photo-1731597076108-f3bbe268162f?w=800&amp;h=500&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="Bàn trị liệu phủ vải lanh bên kệ gỗ đựng dầu và chum đồng" width="800" height="500" loading="lazy" decoding="async">
+          <figcaption>Phòng số 1, cửa sổ hướng sân sau.</figcaption>
+        </figure>
+
+        <figure class="wide">
+          <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=800&amp;h=500&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="Góc tắm với bồn men trắng đặt cạnh tường vữa thô" width="800" height="500" loading="lazy" decoding="async">
+          <figcaption>Góc tắm, tường vữa giữ từ nhà cũ.</figcaption>
+        </figure>
+      </div>
+
+      <p style="margin-top:var(--s6)"><a class="link-quiet" href="khong-gian.html">Xem toàn bộ không gian</a></p>
+    </div>
+  </section>
+
+  <!-- 06 Nước & thảo mộc -->
   <section class="section">
-    <div class="container split">
-      <div class="split-body reveal" data-reveal="left">
-        <span class="eyebrow">Đặt lịch</span>
-        <h2>Giữ chỗ trước, không phải chờ đợi</h2>
-        <p>
-          Cuối tuần các khung 10:00 và 15:00 thường kín trước 2–3 ngày. Để lại thông tin,
-          chuyên viên SEN sẽ gọi xác nhận trong 15 phút.
-        </p>
-        <p>
-          Cần tư vấn liệu trình phù hợp cơ địa, gọi trực tiếp
-          <a class="link-more" href="tel:02439338899">024 3933 8899</a>
-        </p>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="label">Nước &amp; thảo mộc</p>
+        <h2>Bốn thứ trong nồi</h2>
+        <p class="muted">Đun trong bếp mỗi sáng, không pha sẵn, không tinh dầu tổng hợp.</p>
       </div>
 
-      <form class="booking-form reveal" data-reveal="right" data-delay="150" novalidate>
-        <h2>Đặt lịch nhanh</h2>
+      <div class="herbs">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1627323678334-3a5d164b0e24?w=600&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="Những bó thảo mộc khô treo ngược dưới xà gỗ" width="600" height="600" loading="lazy" decoding="async">
+          <h3>Ngải cứu</h3>
+          <p>Cho hơi ấm giữ lâu. Phơi khô treo bếp, dùng dần trong mùa lạnh.</p>
+        </figure>
 
-        <div class="field-row">
-          <div class="field">
-            <label for="qb-name">Họ và tên</label>
-            <input id="qb-name" name="name" type="text" placeholder="Nguyễn Thanh Trúc" required>
-          </div>
-          <div class="field">
-            <label for="qb-phone">Số điện thoại</label>
-            <input id="qb-phone" name="phone" type="tel" placeholder="0912 345 678" required>
-          </div>
-        </div>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1662545112071-8bb57931c20a?w=600&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="Lá sả tươi mọc dày" width="600" height="600" loading="lazy" decoding="async">
+          <h3>Sả</h3>
+          <p>Làm hơi nước dễ chịu và bớt nồng. Lấy từ vườn nhà một hộ ở Đông Anh.</p>
+        </figure>
 
-        <div class="field">
-          <label for="qb-service">Liệu trình</label>
-          <select id="qb-service" name="service">
-            <option>Chăm sóc da mặt cao cấp</option>
-            <option>Massage trị liệu Thái</option>
-            <option>Xông hơi thảo dược</option>
-            <option>Massage đá nóng</option>
-            <option>Trị liệu gương mặt sen</option>
-            <option>Gói Phục Hồi</option>
-            <option>Gói Hoàng Gia</option>
-          </select>
-        </div>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1635843104103-ddd88e1c5141?w=600&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="Củ gừng tươi chất đống, cận cảnh" width="600" height="600" loading="lazy" decoding="async">
+          <h3>Gừng</h3>
+          <p>Dành cho người tay chân lạnh. Đập dập, cho vào sau cùng.</p>
+        </figure>
 
-        <div class="field-row">
-          <div class="field">
-            <label for="qb-date">Ngày</label>
-            <input id="qb-date" name="date" type="date" required>
-          </div>
-          <div class="field">
-            <label for="qb-time">Giờ</label>
-            <input id="qb-time" name="time" type="time" required>
-          </div>
-        </div>
-
-        <button class="btn btn-primary btn-block" type="submit">Đặt lịch ngay <span class="arrow" aria-hidden="true">→</span></button>
-        <p class="form-note" role="status"></p>
-      </form>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1604697976327-4f28ff459803?w=600&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="Vảy muối biển trắng trên đĩa gốm nâu" width="600" height="600" loading="lazy" decoding="async">
+          <h3>Muối biển</h3>
+          <p>Một nắm cho mỗi chậu ngâm chân. Muối hạt to, không tẩy trắng.</p>
+        </figure>
+      </div>
     </div>
   </section>
 
-  <!-- ===== Newsletter ===== -->
-  <section class="newsletter">
-    <div class="container">
-      <div class="newsletter-inner reveal" data-reveal="up">
-        <span class="eyebrow">Bản tin</span>
-        <h2>Nhận ưu đãi &amp; bí quyết chăm sóc</h2>
-        <p>Mỗi tháng một email: liệu trình theo mùa, ưu đãi sinh nhật và mẹo chăm da tại nhà.</p>
-        <form class="newsletter-form" novalidate>
-          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" required>
-          <button class="btn btn-light" type="submit">Đăng ký <span class="arrow" aria-hidden="true">→</span></button>
-          <p class="form-note" role="status"></p>
+  <!-- 07 Kỹ thuật viên -->
+  <section class="section section--linen">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="label">Kỹ thuật viên</p>
+        <h2>Người sẽ làm cho bạn</h2>
+        <p class="muted">Bạn nói tình trạng khi giữ chỗ, chúng tôi xếp người có tay phù hợp.</p>
+      </div>
+
+      <div class="staff">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1584948500423-4a9c7b63c7ee?w=800&amp;h=1066&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="Chân dung chị Hà, kỹ thuật viên trưởng" width="800" height="1066" loading="lazy" decoding="async">
+          <blockquote>Người ngồi bàn giấy hay đau vai, nhưng chỗ cứng thật nằm ở cạnh sườn. Tôi làm ở đó trước, vai tự mềm ra.</blockquote>
+          <figcaption><b>Chị Hà — kỹ thuật viên trưởng</b>Làm việc tại SEN từ 2013. Nhận các ca vai gáy và lưng dưới.</figcaption>
+        </figure>
+
+        <figure>
+          <img src="https://images.unsplash.com/photo-1590702841774-45166f031529?w=800&amp;h=1066&amp;q=80&amp;auto=format&amp;fit=crop"
+               alt="Chân dung chị Linh, kỹ thuật viên" width="800" height="1066" loading="lazy" decoding="async">
+          <blockquote>Có hôm khách chỉ cần ngâm chân rồi ngủ hai mươi phút. Tôi để yên như thế, không xoa gì thêm.</blockquote>
+          <figcaption><b>Chị Linh — kỹ thuật viên</b>Tại SEN từ 2018. Nhận ca ngâm chân, ủ ấm và chăm sóc da mặt.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 Đặt lịch -->
+  <section class="section" id="dat-lich">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="label">Giữ chỗ</p>
+        <h2>Ba bước, không cần tài khoản</h2>
+        <p class="muted">Chúng tôi gọi lại trong 30 phút, trong giờ mở cửa.</p>
+      </div>
+
+      <div class="booking">
+
+        <form class="form" data-booking novalidate>
+          <fieldset class="fieldset">
+            <legend><span class="num">01</span> Dịch vụ</legend>
+            <div class="field">
+              <label for="h-service">Liệu trình bạn quan tâm</label>
+              <select class="select" id="h-service" name="service" required>
+                <option value="">Chọn liệu trình</option>
+                <option>Ngâm chân thảo mộc — 60 phút</option>
+                <option>Xoa bóp vai gáy — 60 phút</option>
+                <option>Đá nóng lưng dưới — 75 phút</option>
+                <option>Ủ ấm bụng và thắt lưng — 60 phút</option>
+                <option>Buổi trọn — 120 phút</option>
+                <option>Chưa rõ, nhờ tư vấn</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="h-people">Số người</label>
+              <select class="select" id="h-people" name="people" required>
+                <option value="">Chọn số người</option>
+                <option>1 người</option>
+                <option>2 người</option>
+                <option>3 người trở lên</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend><span class="num">02</span> Thời gian</legend>
+            <div class="field-row">
+              <div class="field">
+                <label for="h-date">Ngày</label>
+                <input class="input" id="h-date" name="date" type="date" required>
+              </div>
+              <div class="field">
+                <label for="h-time">Khung giờ</label>
+                <select class="select" id="h-time" name="time" required>
+                  <option value="">Chọn khung giờ</option>
+                  <option>09:00 – 11:00</option>
+                  <option>11:00 – 14:00</option>
+                  <option>14:00 – 17:00</option>
+                  <option>17:00 – 19:00</option>
+                  <option>19:00 – 21:00</option>
+                </select>
+              </div>
+            </div>
+            <p class="field-note">Khung 11:00 – 14:00 thường còn nhiều chỗ nhất.</p>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend><span class="num">03</span> Thông tin</legend>
+            <div class="field-row">
+              <div class="field">
+                <label for="h-name">Tên bạn</label>
+                <input class="input" id="h-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="h-phone">Số điện thoại</label>
+                <input class="input" id="h-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" pattern="[\d \+\-\.\(\)]{8,}" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="h-note">Điều chúng tôi nên biết trước</label>
+              <textarea class="textarea" id="h-note" name="note" rows="4" placeholder="Vùng đang căng, chấn thương cũ, đang mang thai, dị ứng tinh dầu…"></textarea>
+            </div>
+          </fieldset>
+
+          <div class="form-foot">
+            <button class="btn btn--solid" type="submit">Gửi yêu cầu giữ chỗ</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </div>
         </form>
+
+        <aside class="booking-aside">
+          <div class="breath">
+            <div class="breath-copy">
+              <p class="label">Chuẩn bị trước buổi trị liệu</p>
+              <h3>Nhịp thở 4 · 7 · 8</h3>
+              <p class="muted" style="font-size:15px">Hít vào bốn giây, giữ bảy giây, thở ra tám giây. Ba chu kỳ rồi tự dừng. Bạn bấm mới chạy.</p>
+              <div class="hero-actions">
+                <button class="btn btn--line btn--sm breath-start" type="button">Bắt đầu</button>
+                <button class="btn btn--line btn--sm breath-stop" type="button" hidden>Dừng</button>
+              </div>
+            </div>
+            <div class="breath-stage">
+              <div class="breath-orb" data-phase="idle" aria-hidden="true"><span>4 · 7 · 8</span></div>
+              <p class="breath-count" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="aside-card">
+            <p class="label">Hoặc gọi</p>
+            <a class="footer-tel" style="color:var(--ink);border-color:var(--line)" href="tel:02439338899">024 3933 8899</a>
+            <dl>
+              <div><dt>Địa chỉ</dt><dd>12 Hàng Bông, Hoàn Kiếm</dd></div>
+              <div><dt>Thứ Hai – Thứ Sáu</dt><dd>09:00 – 21:00</dd></div>
+              <div><dt>Thứ Bảy</dt><dd>09:00 – 22:00</dd></div>
+              <div><dt>Chủ Nhật</dt><dd>10:00 – 20:00</dd></div>
+            </dl>
+          </div>
+        </aside>
+
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- ===== Footer ===== -->
+<!-- 09 Footer ledger -->
 <footer class="site-footer">
-  <div class="container">
+  <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">❀</span> SEN SPA</a>
-        <p>Vẻ đẹp đến từ sự tĩnh lặng. Spa &amp; wellness cao cấp với thảo dược thiên nhiên, phục vụ từ năm 2015.</p>
+
+      <div class="footer-col">
+        <p class="label">SEN SPA · Hà Nội</p>
+        <h2>Gọi cho chúng tôi</h2>
+        <a class="footer-tel" href="tel:02439338899">024 3933 8899</a>
+        <p style="font-size:14px">12 Hàng Bông, Hoàn Kiếm, Hà Nội</p>
       </div>
 
       <div class="footer-col">
-        <h4>Liệu trình</h4>
-        <ul>
-          <li><a href="lieu-trinh.html">Chăm sóc da</a></li>
-          <li><a href="lieu-trinh.html">Massage trị liệu</a></li>
-          <li><a href="lieu-trinh.html">Xông hơi thảo dược</a></li>
-          <li><a href="lieu-trinh.html">Chăm sóc body</a></li>
-        </ul>
+        <p class="label">Giờ mở cửa</p>
+        <dl class="footer-hours">
+          <div><dt>Thứ Hai</dt><dd>09:00 – 21:00</dd></div>
+          <div><dt>Thứ Ba</dt><dd>09:00 – 21:00</dd></div>
+          <div><dt>Thứ Tư</dt><dd>09:00 – 21:00</dd></div>
+          <div><dt>Thứ Năm</dt><dd>09:00 – 21:00</dd></div>
+          <div><dt>Thứ Sáu</dt><dd>09:00 – 21:00</dd></div>
+          <div><dt>Thứ Bảy</dt><dd>09:00 – 22:00</dd></div>
+          <div><dt>Chủ Nhật</dt><dd>10:00 – 20:00</dd></div>
+        </dl>
       </div>
 
       <div class="footer-col">
-        <h4>SEN SPA</h4>
-        <ul>
-          <li><a href="ve-sen.html">Về chúng tôi</a></li>
-          <li><a href="lieu-trinh.html">Bảng giá</a></li>
-          <li><a href="tin-tuc.html">Góc thư giãn</a></li>
-          <li><a href="lien-he.html">Đặt lịch</a></li>
+        <p class="label">Trang</p>
+        <ul class="footer-nav">
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="lieu-trinh.html">Liệu trình</a></li>
+          <li><a href="ve-sen.html">Về SEN</a></li>
+          <li><a href="khong-gian.html">Không gian</a></li>
+          <li><a href="tin-tuc.html">Tin tức</a></li>
+          <li><a href="lien-he.html">Liên hệ</a></li>
         </ul>
       </div>
 
-      <div class="footer-col">
-        <h4>Liên hệ</h4>
-        <ul>
-          <li>24 Bà Triệu, Hoàn Kiếm, Hà Nội</li>
-          <li><a href="tel:02439338899">024 3933 8899</a> · <a href="tel:0912345678">0912 345 678</a></li>
-          <li><a href="mailto:hello@senspa.vn">hello@senspa.vn</a></li>
-          <li>Mở cửa 9:00–21:00 cả tuần</li>
-        </ul>
-      </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© <span class="year">2026</span> SEN SPA. Bảo lưu mọi quyền.</span>
-      <span>Chi nhánh: Hà Nội · TP. Hồ Chí Minh · Đà Nẵng</span>
+      <span>© 2026 SEN SPA</span>
+      <span>Ảnh minh hoạ: Unsplash</span>
     </div>
   </div>
 </footer>
 
-<button class="to-top" type="button" aria-label="Lên đầu trang">↑</button>
-<div class="toast" role="status" aria-live="polite"></div>
-
-<script src="js/main.js"></script>
+<script src="js/main.js?v=2"></script>
 </body>
 </html>

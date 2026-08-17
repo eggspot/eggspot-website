@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <!-- reveal animations are driven by JS; without it the content must simply be visible -->
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -25,9 +27,9 @@
         <a href="contact.html">Contact</a>
       </nav>
       <div class="header-actions">
-        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><span aria-hidden="true">🔍</span></button>
-        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><span aria-hidden="true">👤</span></button>
-        <a class="icon-btn" href="cart.html" aria-label="Cart"><span aria-hidden="true">🛒</span><span class="cart-badge" data-cart-count hidden>0</span></a>
+        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.4"/><path d="M15.8 15.8 20.5 20.5"/></svg></button>
+        <button type="button" class="icon-btn account-btn" data-demo-toast="Account area is a demo" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.4" r="3.9"/><path d="M4.8 20c.6-3.6 3.6-6 7.2-6s6.6 2.4 7.2 6"/></svg></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.4 8.4h9.2a1.5 1.5 0 0 1 1.5 1.7l-.8 6.3a2 2 0 0 1-2 1.7H8.7a2 2 0 0 1-2-1.7l-.8-6.3a1.5 1.5 0 0 1 1.5-1.7z"/><path d="M9.4 8.4V7a2.6 2.6 0 0 1 5.2 0v1.4"/></svg><span class="cart-badge" data-cart-count hidden>0</span></a>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
       </div>
     </div>
