@@ -1,0 +1,10 @@
+{
+  "resources": ["sfx.m4a", "sfx.ogg"],
+  "spritemap": {
+    "crack": { "start": 0.0, "end": 0.5, "loop": false },
+    "thud": { "start": 0.6, "end": 0.887, "loop": false },
+    "splat": { "start": 0.987, "end": 1.587, "loop": false },
+    "bloop": { "start": 1.687, "end": 2.047, "loop": false },
+    "unlock": { "start": 2.147, "end": 2.431, "loop": false }
+  }
+}

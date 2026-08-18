@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liên hệ — NHỤY</title>
+<meta name="description" content="NHỤY tại 34 Nguyễn Khuyến, Đống Đa, Hà Nội. Điện thoại 024 3956 8822. Mở cửa T2–T6 09:00–19:00, T7 09:00–17:00.">
+<meta property="og:title" content="Liên hệ — NHỤY">
+<meta property="og:description" content="NHỤY tại 34 Nguyễn Khuyến, Đống Đa, Hà Nội. Điện thoại 024 3956 8822. Mở cửa T2–T6 09:00–19:00, T7 09:00–17:00.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%23C4626E' stroke-width='1.6'%3E%3Ccircle cx='16' cy='16' r='4.2'/%3E%3Ccircle cx='16' cy='5' r='2.1'/%3E%3Ccircle cx='26.5' cy='12.6' r='2.1'/%3E%3Ccircle cx='22.5' cy='24.9' r='2.1'/%3E%3Ccircle cx='9.5' cy='24.9' r='2.1'/%3E%3Ccircle cx='5.5' cy='12.6' r='2.1'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+/* Cờ js-on bật các hiệu ứng chỉ an toàn khi có JS. Cờ loading dựng cổng mở
+   trang — đặt ngay tại đây (đồng bộ, trước khi vẽ) để nội dung không nháy một
+   nhịp rồi mới bị che. Hẹn giờ cuối là chốt chặn: nếu main.js không chạy được
+   thì trang vẫn tự mở ra thay vì kẹt sau tấm che. */
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js-on');
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /* Cổng mở trang chỉ chạy ở lần vào site đầu tiên. Cắm cờ NGAY tại đây, không
+     đợi đếm xong: khách bấm sang trang khác giữa chừng cũng không phải xem lại.
+     Chế độ riêng tư chặn sessionStorage thì cứ dựng cổng, thà thừa còn hơn kẹt. */
+  try {
+    if (window.sessionStorage.getItem('nhuy-intro')) return;
+    window.sessionStorage.setItem('nhuy-intro', '1');
+  } catch (e) { /* chế độ riêng tư */ }
+
+  d.classList.add('loading');
+  setTimeout(function () {
+    d.classList.remove('loading');
+    if (document.body) document.body.classList.add('ready');
+  }, 4000);
+})();
+</script>
+</head>
+<body>
+<div class="loader" aria-hidden="true">
+  <svg class="loader-mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="4.2"/><circle cx="16" cy="5" r="2.1"/><circle cx="26.5" cy="12.6" r="2.1"/><circle cx="22.5" cy="24.9" r="2.1"/><circle cx="9.5" cy="24.9" r="2.1"/><circle cx="5.5" cy="12.6" r="2.1"/></g></svg>
+  <p class="loader-count" data-loader-count>000</p>
+  <div class="loader-track"><i data-loader-fill></i></div>
+</div>
+<a class="skip-link" href="#main">Tới nội dung chính</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="4.2"/><circle cx="16" cy="5" r="2.1"/><circle cx="26.5" cy="12.6" r="2.1"/><circle cx="22.5" cy="24.9" r="2.1"/><circle cx="9.5" cy="24.9" r="2.1"/><circle cx="5.5" cy="12.6" r="2.1"/></g></svg>
+      <b>NHỤY</b><small>Mỹ phẩm</small>
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Điều hướng chính">
+      <ul>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="san-pham.html">Sản phẩm</a></li>
+        <li><a href="thanh-phan.html">Thành phần</a></li>
+        <li><a href="routine.html">Routine</a></li>
+        <li><a href="ve-chung-toi.html">Về NHỤY</a></li>
+        <li><a href="lien-he.html" aria-current="page">Liên hệ</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <p class="open-chip"><i aria-hidden="true"></i><span data-open-hours>Hôm nay 09:00–19:00</span></p>
+      <a class="btn btn--solid btn--sm header-cta" href="san-pham.html">Mua ngay</a>
+      <a class="cart-btn" href="san-pham.html"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 5h10l-.9 8.5H3.9L3 5Z"/><path d="M6 5V3.6a2 2 0 0 1 4 0V5"/></svg><span>Giỏ</span><b data-cart-count>0</b><span class="sr-only">sản phẩm trong giỏ</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <i aria-hidden="true"></i><span>Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="page-num" aria-hidden="true"><b>06</b><span>/ 06</span></div>
+    <div class="wrap inner">
+      <p class="crumb"><a href="index.html">NHỤY</a> <span aria-hidden="true">/</span> <span>Liên hệ</span></p>
+      <h1>Cửa hàng ở Đống Đa, mở sáu ngày một tuần</h1>
+      <p class="lead">Ghé thử sản phẩm trên tay, hoặc gọi trước để chúng tôi giữ phần tư vấn cho bạn.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap contact">
+      <div>
+        <div class="section-head reveal">
+          <p class="tag">Thông tin</p>
+          <h2>Gọi, hoặc ghé.</h2>
+          <p class="muted">Trong giờ mở cửa, máy bàn luôn có người nghe. Ngoài giờ, bạn để lại số ở biểu mẫu bên cạnh.</p>
+        </div>
+      <dl class="info-list">
+        <div><dt>Địa chỉ</dt><dd>34 Nguyễn Khuyến, Đống Đa, Hà Nội</dd></div>
+        <div><dt>Điện thoại</dt><dd><a href="tel:02439568822">024 3956 8822</a></dd></div>
+        <div><dt>Giờ mở cửa</dt><dd>T2–T6 09:00–19:00 · T7 09:00–17:00 · CN nghỉ</dd></div>
+      </dl>
+        <a class="tel-big" href="tel:02439568822">024 3956 8822</a>
+
+        <div class="info-block">
+          <p class="tag">Giờ mở cửa</p>
+          <dl class="hours">
+            <div><dt>Thứ 2 – Thứ 6</dt><dd>09:00 – 19:00</dd></div>
+            <div><dt>Thứ 7</dt><dd>09:00 – 17:00</dd></div>
+            <div><dt>Chủ nhật</dt><dd>Nghỉ</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <form class="form" data-contact novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="lh-ten">Họ và tên</label>
+            <input id="lh-ten" name="ten" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="lh-sdt">Số điện thoại</label>
+            <input id="lh-sdt" name="sdt" type="tel" inputmode="tel" autocomplete="tel" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="lh-nhu-cau">Bạn cần gì</label>
+          <select id="lh-nhu-cau" name="nhu-cau" required>
+            <option value="">— Chọn một mục —</option>
+            <option>Tư vấn chọn sản phẩm</option>
+            <option>Đặt hàng</option>
+            <option>Mua sỉ / hợp tác</option>
+            <option>Khác</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="lh-ghi-chu">Ghi chú</label>
+          <textarea id="lh-ghi-chu" name="ghi-chu" rows="4" placeholder="Da bạn đang gặp chuyện gì?"></textarea>
+        </div>
+        <div class="form-foot">
+          <button class="btn btn--solid" type="submit">Gửi</button>
+          <p class="form-status" role="status"></p>
+        </div>
+        <p class="field-note">Biểu mẫu minh hoạ — chưa nối hệ thống gửi thật.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="wrap">
+      <div class="section-head section-head--split reveal">
+        <span class="sh-num" aria-hidden="true">02</span>
+        <p class="tag">Đường đi</p>
+        <h2>34 Nguyễn Khuyến, Đống Đa</h2>
+        <p class="muted">Cửa hàng nằm ở tầng một, biển nhỏ màu hồng đất. Gửi xe trong ngõ bên cạnh, miễn phí cho khách.</p>
+      </div>
+
+      <div class="map-embed">
+        <iframe title="Bản đồ vị trí NHỤY tại 34 Nguyễn Khuyến, Đống Đa, Hà Nội"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=105.8300%2C21.0240%2C105.8410%2C21.0315&amp;layer=mapnik&amp;marker=21.0278%2C105.8352"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <p class="map-note">
+        <span>34 Nguyễn Khuyến, phường Văn Miếu, Đống Đa, Hà Nội</span>
+        <a class="link-quiet" href="https://www.openstreetmap.org/?mlat=21.0278&amp;mlon=105.8352#map=17/21.0278/105.8352" target="_blank" rel="noopener">Mở bản đồ lớn <span aria-hidden="true">&rarr;</span></a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="tag">NHỤY <i aria-hidden="true"></i> Mỹ phẩm thực vật</p>
+        <h2>Làm đẹp bắt đầu từ nhụy hoa.</h2>
+        <p>Tinh chất từ thực vật, cho làn da biết thở.</p>
+        <a class="footer-tel" href="tel:02439568822">024 3956 8822</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="tag">Giờ mở cửa</p>
+        <dl class="footer-hours">
+          <div><dt>Thứ 2 – Thứ 6</dt><dd>09:00 – 19:00</dd></div>
+          <div><dt>Thứ 7</dt><dd>09:00 – 17:00</dd></div>
+          <div><dt>Chủ nhật</dt><dd>Nghỉ</dd></div>
+        </dl>
+        <p>34 Nguyễn Khuyến, Đống Đa, Hà Nội</p>
+      </div>
+
+      <div class="footer-col">
+        <p class="tag">Liên kết</p>
+        <ul class="footer-nav">
+          <li><a href="san-pham.html">Sản phẩm</a></li>
+          <li><a href="thanh-phan.html">Thành phần</a></li>
+          <li><a href="routine.html">Routine</a></li>
+          <li><a href="ve-chung-toi.html">Về NHỤY</a></li>
+          <li><a href="lien-he.html">Liên hệ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <dl class="footer-plate">
+      <div><dt>Xuất xứ</dt><dd>Hà Nội, Việt Nam</dd></div>
+      <div><dt>Dòng sản phẩm</dt><dd>06 mã</dd></div>
+      <div><dt>Chiết xuất</dt><dd>12 thực vật</dd></div>
+      <div><dt>Paraben</dt><dd>0%</dd></div>
+    </dl>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 NHỤY</span>
+      <span>Ảnh minh hoạ: Unsplash</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

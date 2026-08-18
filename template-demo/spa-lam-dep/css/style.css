@@ -212,7 +212,19 @@ p:last-child { margin-bottom: 0; }
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* Eyebrow dot — chấm celadon mở đầu label (pattern getlayers #11) */
+.label::before {
+  content: "";
+  width: .375rem;
+  height: .375rem;
+  border-radius: 50%;
+  background: var(--celadon);
+  flex: none;
 }
 
 @media (min-width: 768px) {
@@ -541,6 +553,34 @@ p:last-child { margin-bottom: 0; }
   min-height: 100vh;
   min-height: calc(100svh - var(--header-h));
   overflow: hidden;
+  /* Rounded section shell: tấm/lớp thay vì khối liền (pattern getlayers #7) */
+  border-radius: 0 0 2rem 2rem;
+}
+
+/* Watermark chữ khổng lồ sau hero — 'SEN' mở trang, footer 'SEN' đóng trang.
+   Căn theo cột text (mép trái wrap) để đọc trọn, không bị ảnh cắt giữa chữ */
+.hero-watermark {
+  position: absolute;
+  left: max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter)));
+  right: auto;
+  bottom: clamp(-2rem, -4vw, -1rem);
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(9rem, 22vw, 18rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: color-mix(in srgb, var(--deep) 7%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-watermark[aria-hidden="true"] { display: block; }
+
+@media (max-width: 899px) {
+  /* Mobile: watermark nằm sau ảnh, bị che — ẩn (hero đã có texture + đủ chi tiết) */
+  .hero-watermark { display: none; }
 }
 
 .hero-grid {
@@ -585,6 +625,34 @@ p:last-child { margin-bottom: 0; }
 .hero-copy > *:nth-child(4) { animation-delay: .34s; }
 .hero-copy > *:nth-child(5) { animation-delay: .42s; }
 
+/* H1 dùng word reveal riêng (pattern getlayers #3) — bỏ fade-up */
+.hero-copy h1 {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* Word reveal: mỗi từ nằm trong span.w (overflow hidden), nội dung trượt lên */
+.reveal-words .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.reveal-words .w > span {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform .8s cubic-bezier(.16, 1, .3, 1);
+}
+.reveal-words.is-in .w > span {
+  transform: translateY(0);
+}
+.reveal-words .w:nth-child(2) > span { transition-delay: .05s; }
+.reveal-words .w:nth-child(3) > span { transition-delay: .1s; }
+.reveal-words .w:nth-child(4) > span { transition-delay: .15s; }
+.reveal-words .w:nth-child(5) > span { transition-delay: .2s; }
+.reveal-words .w:nth-child(6) > span { transition-delay: .25s; }
+.reveal-words .w:nth-child(7) > span { transition-delay: .3s; }
+
 @keyframes heroUp {
   to { opacity: 1; transform: translateY(0); }
 }
@@ -608,6 +676,10 @@ p:last-child { margin-bottom: 0; }
   .hero-media {
     opacity: 1;
     animation: none;
+  }
+  .reveal-words .w > span {
+    transform: none;
+    transition: none;
   }
 }
 
@@ -837,6 +909,43 @@ p:last-child { margin-bottom: 0; }
   }
 }
 
+/* ---- Stats panel (count-up, pattern getlayers #13) ---------------------- */
+.stats-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 48px);
+  background: var(--deep);
+  color: var(--paper);
+  border-radius: 2rem;
+  padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
+}
+
+.stat {
+  display: grid;
+  gap: 4px;
+}
+
+.stat b {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat span {
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 72%, transparent);
+}
+
+@media (min-width: 768px) {
+  .stats-panel { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
 /* ---- 09 Ripple Index (bảng liệu trình) --------------------------------- */
 .ripple {
   display: grid;
@@ -873,7 +982,8 @@ p:last-child { margin-bottom: 0; }
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  transition: transform var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease),
+              background-color var(--dur) var(--ease);
 }
 
 .ripple-row > a::after,
@@ -897,6 +1007,9 @@ p:last-child { margin-bottom: 0; }
 .ripple-row > a:focus-visible,
 .ripple-row > .ripple-btn:focus-visible {
   transform: translateX(8px);
+  background: color-mix(in srgb, var(--linen) 55%, transparent);
+  padding-inline: var(--s3);
+  margin-inline: calc(var(--s3) * -1);
 }
 
 .ripple-row[data-active="true"] > a::after,
@@ -1484,11 +1597,37 @@ p:last-child { margin-bottom: 0; }
   background: var(--deep);
   color: color-mix(in srgb, var(--paper) 88%, transparent);
   padding-block: clamp(48px, 7vw, 80px) var(--s6);
+  /* Rounded section shell: đóng trang bằng tấm bo góc (pattern getlayers #7) */
+  border-radius: 2rem 2rem 0 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .site-footer a { color: var(--paper); }
 
+/* Watermark 'SEN' cắt cụt đáy footer — cùng chữ với hero, hai độ mờ (pattern #6) */
+.footer-watermark {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.55em;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(9rem, 22vw, 18rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: color-mix(in srgb, var(--paper) 6%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+.footer-watermark[aria-hidden="true"] { display: block; }
+
 .footer-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--s7);
@@ -1556,6 +1695,8 @@ p:last-child { margin-bottom: 0; }
 .footer-nav a:hover { color: var(--paper); }
 
 .footer-bottom {
+  position: relative;
+  z-index: 1;
   margin-top: clamp(32px, 5vw, 56px);
   padding-top: var(--s5);
   border-top: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);

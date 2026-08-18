@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sản phẩm — NHỤY</title>
+<meta name="description" content="Sáu sản phẩm NHỤY: sữa rửa mặt gạo lứt, nước cân bằng rau má, tinh chất nghệ đen, kem dưỡng bơ hạt mỡ, kem đêm cúc la mã, xịt khoáng trà xanh.">
+<meta property="og:title" content="Sản phẩm — NHỤY">
+<meta property="og:description" content="Sáu sản phẩm NHỤY: sữa rửa mặt gạo lứt, nước cân bằng rau má, tinh chất nghệ đen, kem dưỡng bơ hạt mỡ, kem đêm cúc la mã, xịt khoáng trà xanh.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%23C4626E' stroke-width='1.6'%3E%3Ccircle cx='16' cy='16' r='4.2'/%3E%3Ccircle cx='16' cy='5' r='2.1'/%3E%3Ccircle cx='26.5' cy='12.6' r='2.1'/%3E%3Ccircle cx='22.5' cy='24.9' r='2.1'/%3E%3Ccircle cx='9.5' cy='24.9' r='2.1'/%3E%3Ccircle cx='5.5' cy='12.6' r='2.1'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+/* Cờ js-on bật các hiệu ứng chỉ an toàn khi có JS. Cờ loading dựng cổng mở
+   trang — đặt ngay tại đây (đồng bộ, trước khi vẽ) để nội dung không nháy một
+   nhịp rồi mới bị che. Hẹn giờ cuối là chốt chặn: nếu main.js không chạy được
+   thì trang vẫn tự mở ra thay vì kẹt sau tấm che. */
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js-on');
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /* Cổng mở trang chỉ chạy ở lần vào site đầu tiên. Cắm cờ NGAY tại đây, không
+     đợi đếm xong: khách bấm sang trang khác giữa chừng cũng không phải xem lại.
+     Chế độ riêng tư chặn sessionStorage thì cứ dựng cổng, thà thừa còn hơn kẹt. */
+  try {
+    if (window.sessionStorage.getItem('nhuy-intro')) return;
+    window.sessionStorage.setItem('nhuy-intro', '1');
+  } catch (e) { /* chế độ riêng tư */ }
+
+  d.classList.add('loading');
+  setTimeout(function () {
+    d.classList.remove('loading');
+    if (document.body) document.body.classList.add('ready');
+  }, 4000);
+})();
+</script>
+</head>
+<body>
+<div class="loader" aria-hidden="true">
+  <svg class="loader-mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="4.2"/><circle cx="16" cy="5" r="2.1"/><circle cx="26.5" cy="12.6" r="2.1"/><circle cx="22.5" cy="24.9" r="2.1"/><circle cx="9.5" cy="24.9" r="2.1"/><circle cx="5.5" cy="12.6" r="2.1"/></g></svg>
+  <p class="loader-count" data-loader-count>000</p>
+  <div class="loader-track"><i data-loader-fill></i></div>
+</div>
+<a class="skip-link" href="#main">Tới nội dung chính</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="4.2"/><circle cx="16" cy="5" r="2.1"/><circle cx="26.5" cy="12.6" r="2.1"/><circle cx="22.5" cy="24.9" r="2.1"/><circle cx="9.5" cy="24.9" r="2.1"/><circle cx="5.5" cy="12.6" r="2.1"/></g></svg>
+      <b>NHỤY</b><small>Mỹ phẩm</small>
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Điều hướng chính">
+      <ul>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="san-pham.html" aria-current="page">Sản phẩm</a></li>
+        <li><a href="thanh-phan.html">Thành phần</a></li>
+        <li><a href="routine.html">Routine</a></li>
+        <li><a href="ve-chung-toi.html">Về NHỤY</a></li>
+        <li><a href="lien-he.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <p class="open-chip"><i aria-hidden="true"></i><span data-open-hours>Hôm nay 09:00–19:00</span></p>
+      <a class="btn btn--solid btn--sm header-cta" href="san-pham.html">Mua ngay</a>
+      <a class="cart-btn" href="san-pham.html"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 5h10l-.9 8.5H3.9L3 5Z"/><path d="M6 5V3.6a2 2 0 0 1 4 0V5"/></svg><span>Giỏ</span><b data-cart-count>0</b><span class="sr-only">sản phẩm trong giỏ</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <i aria-hidden="true"></i><span>Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="page-num" aria-hidden="true"><b>02</b><span>/ 06</span></div>
+    <div class="wrap inner">
+      <p class="crumb"><a href="index.html">NHỤY</a> <span aria-hidden="true">/</span> <span>Sản phẩm</span></p>
+      <h1>Sáu sản phẩm, mỗi sản phẩm một việc</h1>
+      <p class="lead">Không có bộ sưu tập theo mùa, không có phiên bản giới hạn. Sáu mã này là toàn bộ những gì NHỤY làm.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="prod-grid">
+    <article class="p-card" id="sua-rua-mat-gao-lut" data-handle="sua-rua-mat-gao-lut" data-price="250000">
+      <figure class="pc-media">
+        <img src="https://images.unsplash.com/photo-1712168044214-f5a272c23a5b?w=600&amp;h=800&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Tuýp sữa rửa mặt vỏ trắng trơn đặt trên khối bục màu hồng đất" width="600" height="800" loading="lazy" decoding="async">
+        <span class="pc-num" aria-hidden="true">01</span>
+      </figure>
+      <button class="pc-qv" type="button" aria-expanded="false" aria-controls="qv-sua-rua-mat-gao-lut">Xem</button>
+      <div class="pc-body">
+        <h3><a class="stretched" href="san-pham.html#sua-rua-mat-gao-lut">Sữa rửa mặt gạo lứt</a></h3>
+        <p class="pc-desc">Bọt mềm, rửa sạch mà không kéo căng da.</p>
+        <p class="pc-price">Từ <b>250.000₫</b></p>
+      </div>
+      <div class="pc-spec" id="qv-sua-rua-mat-gao-lut" hidden>
+        <dl>
+          <dt>Hoạt chất</dt><dd>Oryza Sativa 2%</dd>
+          <dt>Dung tích</dt><dd>120 ml</dd>
+          <dt>Vai trò</dt><dd>Làm sạch dịu</dd>
+        </dl>
+      </div>
+      <button class="btn btn--line btn--sm pc-add" type="button" data-add>Thêm vào giỏ</button>
+      <p class="pc-note sr-only" role="status"></p>
+    </article>
+    <article class="p-card" id="nuoc-can-bang-rau-ma" data-handle="nuoc-can-bang-rau-ma" data-price="290000">
+      <figure class="pc-media">
+        <img src="https://images.unsplash.com/photo-1770717984643-2a1545902579?w=600&amp;h=800&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Chai nước cân bằng thuỷ tinh xanh khói nắp trắng rót rộng trên nền sáng" width="600" height="800" loading="lazy" decoding="async">
+        <span class="pc-num" aria-hidden="true">02</span>
+      </figure>
+      <button class="pc-qv" type="button" aria-expanded="false" aria-controls="qv-nuoc-can-bang-rau-ma">Xem</button>
+      <div class="pc-body">
+        <h3><a class="stretched" href="san-pham.html#nuoc-can-bang-rau-ma">Nước cân bằng rau má</a></h3>
+        <p class="pc-desc">Cân bằng lại da sau bước rửa, thấm nhanh.</p>
+        <p class="pc-price">Từ <b>290.000₫</b></p>
+      </div>
+      <div class="pc-spec" id="qv-nuoc-can-bang-rau-ma" hidden>
+        <dl>
+          <dt>Hoạt chất</dt><dd>Madecassoside 3%</dd>
+          <dt>Dung tích</dt><dd>150 ml</dd>
+          <dt>Vai trò</dt><dd>Làm dịu, cấp ẩm nhẹ</dd>
+        </dl>
+      </div>
+      <button class="btn btn--line btn--sm pc-add" type="button" data-add>Thêm vào giỏ</button>
+      <p class="pc-note sr-only" role="status"></p>
+    </article>
+    <article class="p-card" id="tinh-chat-nghe-den" data-handle="tinh-chat-nghe-den" data-price="480000">
+      <figure class="pc-media">
+        <img src="https://images.unsplash.com/photo-1781344116880-029945a42b75?w=600&amp;h=800&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Chai tinh chất thuỷ tinh hổ phách nhãn trơn đặt trên bệ bê tông" width="600" height="800" loading="lazy" decoding="async">
+        <span class="pc-num" aria-hidden="true">03</span>
+      </figure>
+      <button class="pc-qv" type="button" aria-expanded="false" aria-controls="qv-tinh-chat-nghe-den">Xem</button>
+      <div class="pc-body">
+        <h3><a class="stretched" href="san-pham.html#tinh-chat-nghe-den">Tinh chất nghệ đen</a></h3>
+        <p class="pc-desc">Ba giọt buổi tối cho vùng da mới lành.</p>
+        <p class="pc-price">Từ <b>480.000₫</b></p>
+      </div>
+      <div class="pc-spec" id="qv-tinh-chat-nghe-den" hidden>
+        <dl>
+          <dt>Hoạt chất</dt><dd>Curcumin 3%</dd>
+          <dt>Dung tích</dt><dd>30 ml</dd>
+          <dt>Vai trò</dt><dd>Làm dịu, làm đều màu</dd>
+        </dl>
+      </div>
+      <button class="btn btn--line btn--sm pc-add" type="button" data-add>Thêm vào giỏ</button>
+      <p class="pc-note sr-only" role="status"></p>
+    </article>
+    <article class="p-card" id="kem-duong-bo-hat-mo" data-handle="kem-duong-bo-hat-mo" data-price="390000">
+      <figure class="pc-media">
+        <img src="https://images.unsplash.com/photo-1763503836825-97f5450d155a?w=600&amp;h=800&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Hũ kem dưỡng trắng mở nắp đặt trên phiến đá" width="600" height="800" loading="lazy" decoding="async">
+        <span class="pc-num" aria-hidden="true">04</span>
+      </figure>
+      <button class="pc-qv" type="button" aria-expanded="false" aria-controls="qv-kem-duong-bo-hat-mo">Xem</button>
+      <div class="pc-body">
+        <h3><a class="stretched" href="san-pham.html#kem-duong-bo-hat-mo">Kem dưỡng bơ hạt mỡ</a></h3>
+        <p class="pc-desc">Kết cấu đặc, khoá ẩm cho da khô mùa hanh.</p>
+        <p class="pc-price">Từ <b>390.000₫</b></p>
+      </div>
+      <div class="pc-spec" id="qv-kem-duong-bo-hat-mo" hidden>
+        <dl>
+          <dt>Hoạt chất</dt><dd>Butyrospermum Parkii 5%</dd>
+          <dt>Dung tích</dt><dd>50 ml</dd>
+          <dt>Vai trò</dt><dd>Phục hồi hàng rào da</dd>
+        </dl>
+      </div>
+      <button class="btn btn--line btn--sm pc-add" type="button" data-add>Thêm vào giỏ</button>
+      <p class="pc-note sr-only" role="status"></p>
+    </article>
+    <article class="p-card" id="kem-dem-cuc-la-ma" data-handle="kem-dem-cuc-la-ma" data-price="420000">
+      <figure class="pc-media">
+        <img src="https://images.unsplash.com/photo-1779437141537-62577b216307?w=600&amp;h=800&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Hũ thuỷ tinh mờ và hộp giấy kraft đặt cạnh nhau trên nền sáng" width="600" height="800" loading="lazy" decoding="async">
+        <span class="pc-num" aria-hidden="true">05</span>
+      </figure>
+      <button class="pc-qv" type="button" aria-expanded="false" aria-controls="qv-kem-dem-cuc-la-ma">Xem</button>
+      <div class="pc-body">
+        <h3><a class="stretched" href="san-pham.html#kem-dem-cuc-la-ma">Kem đêm cúc la mã</a></h3>
+        <p class="pc-desc">Lớp cuối buổi tối, giảm cảm giác châm chích.</p>
+        <p class="pc-price">Từ <b>420.000₫</b></p>
+      </div>
+      <div class="pc-spec" id="qv-kem-dem-cuc-la-ma" hidden>
+        <dl>
+          <dt>Hoạt chất</dt><dd>Bisabolol 2%</dd>
+          <dt>Dung tích</dt><dd>50 ml</dd>
+          <dt>Vai trò</dt><dd>Giảm kích ứng ban đêm</dd>
+        </dl>
+      </div>
+      <button class="btn btn--line btn--sm pc-add" type="button" data-add>Thêm vào giỏ</button>
+      <p class="pc-note sr-only" role="status"></p>
+    </article>
+    <article class="p-card" id="xit-khoang-tra-xanh" data-handle="xit-khoang-tra-xanh" data-price="220000">
+      <figure class="pc-media">
+        <img src="https://images.unsplash.com/photo-1601065874121-05ba185080d8?w=600&amp;h=800&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Ba chai xịt khoáng trong suốt có đầu phun sương trên nền đá sáng" width="600" height="800" loading="lazy" decoding="async">
+        <span class="pc-num" aria-hidden="true">06</span>
+      </figure>
+      <button class="pc-qv" type="button" aria-expanded="false" aria-controls="qv-xit-khoang-tra-xanh">Xem</button>
+      <div class="pc-body">
+        <h3><a class="stretched" href="san-pham.html#xit-khoang-tra-xanh">Xịt khoáng trà xanh</a></h3>
+        <p class="pc-desc">Xịt giữa ngày, làm dịu da khi ra nắng về.</p>
+        <p class="pc-price">Từ <b>220.000₫</b></p>
+      </div>
+      <div class="pc-spec" id="qv-xit-khoang-tra-xanh" hidden>
+        <dl>
+          <dt>Hoạt chất</dt><dd>EGCG 4%</dd>
+          <dt>Dung tích</dt><dd>100 ml</dd>
+          <dt>Vai trò</dt><dd>Chống oxy hoá</dd>
+        </dl>
+      </div>
+      <button class="btn btn--line btn--sm pc-add" type="button" data-add>Thêm vào giỏ</button>
+      <p class="pc-note sr-only" role="status"></p>
+    </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="wrap">
+      <div class="section-head section-head--split reveal">
+        <span class="sh-num" aria-hidden="true">01</span>
+        <p class="tag">Cách chọn</p>
+        <h2>Ba câu hỏi trước khi mua</h2>
+        <p class="muted">Trả lời được ba câu này thì bạn tự chọn được, không cần chúng tôi tư vấn.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <b>01</b>
+          <h3>Da bạn đang thiếu gì</h3>
+          <p>Thiếu ẩm thì da căng và bong. Thiếu dầu thì da khô ráp. Hai chuyện khác nhau, hai sản phẩm khác nhau.</p>
+        </div>
+        <div class="step">
+          <b>02</b>
+          <h3>Bạn có đang kích ứng không</h3>
+          <p>Nếu đang đỏ hoặc châm chích, bắt đầu bằng cúc la mã và rau má. Nghệ đen để sau.</p>
+        </div>
+        <div class="step">
+          <b>03</b>
+          <h3>Bạn dùng được mấy phút</h3>
+          <p>Năm phút thì bốn bước. Hai phút thì rửa mặt, kem dưỡng, chống nắng — vẫn tốt hơn làm nửa vời tám bước.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-inner">
+      <div>
+        <p class="tag">Chưa chắc chọn gì</p>
+        <h2>Gọi cho chúng tôi, không mua cũng được.</h2>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn--solid" href="tel:02439568822">024 3956 8822</a>
+        <a class="btn btn--line" href="lien-he.html">Gửi câu hỏi</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="tag">NHỤY <i aria-hidden="true"></i> Mỹ phẩm thực vật</p>
+        <h2>Làm đẹp bắt đầu từ nhụy hoa.</h2>
+        <p>Tinh chất từ thực vật, cho làn da biết thở.</p>
+        <a class="footer-tel" href="tel:02439568822">024 3956 8822</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="tag">Giờ mở cửa</p>
+        <dl class="footer-hours">
+          <div><dt>Thứ 2 – Thứ 6</dt><dd>09:00 – 19:00</dd></div>
+          <div><dt>Thứ 7</dt><dd>09:00 – 17:00</dd></div>
+          <div><dt>Chủ nhật</dt><dd>Nghỉ</dd></div>
+        </dl>
+        <p>34 Nguyễn Khuyến, Đống Đa, Hà Nội</p>
+      </div>
+
+      <div class="footer-col">
+        <p class="tag">Liên kết</p>
+        <ul class="footer-nav">
+          <li><a href="san-pham.html">Sản phẩm</a></li>
+          <li><a href="thanh-phan.html">Thành phần</a></li>
+          <li><a href="routine.html">Routine</a></li>
+          <li><a href="ve-chung-toi.html">Về NHỤY</a></li>
+          <li><a href="lien-he.html">Liên hệ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <dl class="footer-plate">
+      <div><dt>Xuất xứ</dt><dd>Hà Nội, Việt Nam</dd></div>
+      <div><dt>Dòng sản phẩm</dt><dd>06 mã</dd></div>
+      <div><dt>Chiết xuất</dt><dd>12 thực vật</dd></div>
+      <div><dt>Paraben</dt><dd>0%</dd></div>
+    </dl>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 NHỤY</span>
+      <span>Ảnh minh hoạ: Unsplash</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

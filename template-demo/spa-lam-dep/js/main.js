@@ -362,6 +362,94 @@
     sweep();
   }
 
+  /* Word reveal hero H1 (pattern getlayers #3) — wrap từng từ, trượt lên khi load.
+     Reduced motion: không đụng DOM. */
+  function initRevealWords() {
+    var targets = $$('.reveal-words');
+    if (!targets.length || reduced()) return;
+
+    targets.forEach(function (el) {
+      var frag = document.createDocumentFragment();
+      el.childNodes.forEach(function (node) {
+        if (node.nodeType === 3) {
+          node.textContent.split(/(\s+)/).forEach(function (tok) {
+            if (!tok) return;
+            if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span');
+            w.className = 'w';
+            var inner = document.createElement('span');
+            inner.textContent = tok;
+            w.appendChild(inner);
+            frag.appendChild(w);
+          });
+        } else if (node.nodeType === 1) {
+          var w = document.createElement('span');
+          w.className = 'w';
+          var inner = document.createElement('span');
+          inner.appendChild(node.cloneNode(true));
+          w.appendChild(inner);
+          frag.appendChild(w);
+        }
+      });
+      el.replaceChildren(frag);
+    });
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        targets.forEach(function (el) { el.classList.add('is-in'); });
+      });
+    });
+  }
+
+  /* Stats count-up theo scroll (pattern getlayers #13) — ease-out 1.2s, IO once.
+     Reduced motion: hiện số cuối ngay. */
+  function initStats() {
+    var panels = $$('.stats-panel');
+    if (!panels.length) return;
+    var nums = $$('[data-count]', panels[0]);
+    if (!nums.length) return;
+
+    var setFinal = function () {
+      nums.forEach(function (n) { n.textContent = n.getAttribute('data-count'); });
+    };
+    if (reduced()) { setFinal(); return; }
+
+    /* Markup chứa số cuối (no-JS an toàn) → reset về 0 rồi đếm lên */
+    nums.forEach(function (n) { n.textContent = '0'; });
+
+    var done = false;
+    var run = function () {
+      if (done) return;
+      done = true;
+      var t0 = null;
+      var dur = 1200;
+      var step = function (t) {
+        if (!t0) t0 = t;
+        var p = Math.min((t - t0) / dur, 1);
+        var e = 1 - Math.pow(1 - p, 3);
+        nums.forEach(function (n) {
+          var end = parseInt(n.getAttribute('data-count'), 10);
+          n.textContent = Math.round(e * end);
+        });
+        if (p < 1) requestAnimationFrame(step);
+        else setFinal();
+      };
+      requestAnimationFrame(step);
+    };
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          run();
+          observer.disconnect();
+        }
+      }, { threshold: .4 });
+      observer.observe(panels[0]);
+    } else {
+      run();
+    }
+  }
+
   /* Parallax hero — ảnh đã scale(1.15), dịch nhẹ theo scroll, rAF-throttle.
      Reduced motion: không chạy (ảnh giữ scale tĩnh). */
   function initHeroParallax() {
@@ -399,6 +487,8 @@
     initViewTransition();
     initReveal();
     initHeroParallax();
+    initRevealWords();
+    initStats();
   }
 
   if (document.readyState === 'loading') {

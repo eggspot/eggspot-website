@@ -1,0 +1,85 @@
+{
+  "resources": ["sfx.m4a"],
+  "spritemap": {
+    "catch_coin": {
+      "start": 3.078,
+      "end": 3.358,
+      "loop": false
+    },
+    "catch_perfect": {
+      "start": 2.72,
+      "end": 2.958,
+      "loop": false
+    },
+    "catch_star": {
+      "start": 11.89,
+      "end": 12.44,
+      "loop": false
+    },
+    "catch_gem": {
+      "start": 16.366,
+      "end": 16.816,
+      "loop": false
+    },
+    "bomb_hit": {
+      "start": 4.298,
+      "end": 4.848,
+      "loop": false
+    },
+    "brick_hit": {
+      "start": 5.868,
+      "end": 6.268,
+      "loop": false
+    },
+    "gem_whoosh": {
+      "start": 1.33,
+      "end": 1.63,
+      "loop": false
+    },
+    "chain_up": {
+      "start": 24.082,
+      "end": 25.079,
+      "loop": false
+    },
+    "phase_rush": {
+      "start": 8.849,
+      "end": 9.85,
+      "loop": false
+    },
+    "phase_gold": {
+      "start": 9.97,
+      "end": 11.77,
+      "loop": false
+    },
+    "slowmo_in": {
+      "start": 15.746,
+      "end": 16.246,
+      "loop": false
+    },
+    "count_tick": {
+      "start": 4.098,
+      "end": 4.178,
+      "loop": false
+    },
+    "run_end": {
+      "start": 12.56,
+      "end": 13.66,
+      "loop": false
+    },
+    "count_roll": {
+      "start": 3.078,
+      "end": 3.358,
+      "loop": false
+    },
+    "record": {
+      "start": 13.78,
+      "end": 15.626,
+      "loop": false
+    },
+    "ui_tap": {
+      "start": 0.0,
+      "end": 0.3,
+      "loop": false
+    }
+  }
+}

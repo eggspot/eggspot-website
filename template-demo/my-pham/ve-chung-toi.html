@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Về NHỤY — Mỹ phẩm thực vật Hà Nội</title>
+<meta name="description" content="NHỤY thành lập năm 2019 tại Đống Đa, Hà Nội. Nguyên liệu từ Hoà Bình, Mộc Châu và Sa Pa, công thức tối đa 15 thành phần.">
+<meta property="og:title" content="Về NHỤY — Mỹ phẩm thực vật Hà Nội">
+<meta property="og:description" content="NHỤY thành lập năm 2019 tại Đống Đa, Hà Nội. Nguyên liệu từ Hoà Bình, Mộc Châu và Sa Pa, công thức tối đa 15 thành phần.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%23C4626E' stroke-width='1.6'%3E%3Ccircle cx='16' cy='16' r='4.2'/%3E%3Ccircle cx='16' cy='5' r='2.1'/%3E%3Ccircle cx='26.5' cy='12.6' r='2.1'/%3E%3Ccircle cx='22.5' cy='24.9' r='2.1'/%3E%3Ccircle cx='9.5' cy='24.9' r='2.1'/%3E%3Ccircle cx='5.5' cy='12.6' r='2.1'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+/* Cờ js-on bật các hiệu ứng chỉ an toàn khi có JS. Cờ loading dựng cổng mở
+   trang — đặt ngay tại đây (đồng bộ, trước khi vẽ) để nội dung không nháy một
+   nhịp rồi mới bị che. Hẹn giờ cuối là chốt chặn: nếu main.js không chạy được
+   thì trang vẫn tự mở ra thay vì kẹt sau tấm che. */
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js-on');
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /* Cổng mở trang chỉ chạy ở lần vào site đầu tiên. Cắm cờ NGAY tại đây, không
+     đợi đếm xong: khách bấm sang trang khác giữa chừng cũng không phải xem lại.
+     Chế độ riêng tư chặn sessionStorage thì cứ dựng cổng, thà thừa còn hơn kẹt. */
+  try {
+    if (window.sessionStorage.getItem('nhuy-intro')) return;
+    window.sessionStorage.setItem('nhuy-intro', '1');
+  } catch (e) { /* chế độ riêng tư */ }
+
+  d.classList.add('loading');
+  setTimeout(function () {
+    d.classList.remove('loading');
+    if (document.body) document.body.classList.add('ready');
+  }, 4000);
+})();
+</script>
+</head>
+<body>
+<div class="loader" aria-hidden="true">
+  <svg class="loader-mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="4.2"/><circle cx="16" cy="5" r="2.1"/><circle cx="26.5" cy="12.6" r="2.1"/><circle cx="22.5" cy="24.9" r="2.1"/><circle cx="9.5" cy="24.9" r="2.1"/><circle cx="5.5" cy="12.6" r="2.1"/></g></svg>
+  <p class="loader-count" data-loader-count>000</p>
+  <div class="loader-track"><i data-loader-fill></i></div>
+</div>
+<a class="skip-link" href="#main">Tới nội dung chính</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="4.2"/><circle cx="16" cy="5" r="2.1"/><circle cx="26.5" cy="12.6" r="2.1"/><circle cx="22.5" cy="24.9" r="2.1"/><circle cx="9.5" cy="24.9" r="2.1"/><circle cx="5.5" cy="12.6" r="2.1"/></g></svg>
+      <b>NHỤY</b><small>Mỹ phẩm</small>
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Điều hướng chính">
+      <ul>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="san-pham.html">Sản phẩm</a></li>
+        <li><a href="thanh-phan.html">Thành phần</a></li>
+        <li><a href="routine.html">Routine</a></li>
+        <li><a href="ve-chung-toi.html" aria-current="page">Về NHỤY</a></li>
+        <li><a href="lien-he.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <p class="open-chip"><i aria-hidden="true"></i><span data-open-hours>Hôm nay 09:00–19:00</span></p>
+      <a class="btn btn--solid btn--sm header-cta" href="san-pham.html">Mua ngay</a>
+      <a class="cart-btn" href="san-pham.html"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 5h10l-.9 8.5H3.9L3 5Z"/><path d="M6 5V3.6a2 2 0 0 1 4 0V5"/></svg><span>Giỏ</span><b data-cart-count>0</b><span class="sr-only">sản phẩm trong giỏ</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <i aria-hidden="true"></i><span>Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="page-num" aria-hidden="true"><b>05</b><span>/ 06</span></div>
+    <div class="wrap inner">
+      <p class="crumb"><a href="index.html">NHỤY</a> <span aria-hidden="true">/</span> <span>Về NHỤY</span></p>
+      <h1>Bắt đầu từ một bếp đun thảo mộc ở Đống Đa</h1>
+      <p class="lead">NHỤY ra đời năm 2019, từ thói quen đun nước lá của một gia đình làm thuốc nam ba đời tại Hà Nội.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap story">
+      <div class="story-body">
+        <div class="section-head reveal">
+          <p class="tag">Câu chuyện</p>
+          <h2>Chúng tôi bắt đầu vì không đọc nổi nhãn</h2>
+        </div>
+        <p>Năm 2018, chị Mai — người sáng lập NHỤY — bị kích ứng sau khi đổi kem dưỡng. Chị lật vỏ hộp ra đọc và thấy bốn mươi hai dòng thành phần, trong đó có hơn hai mươi dòng chị không hiểu là gì. Câu hỏi rất đơn giản: nếu người bán không giải thích được từng dòng, thì ai chịu trách nhiệm khi da hỏng?</p>
+        <p>Một năm sau, xưởng đầu tiên mở tại Đống Đa với đúng ba sản phẩm. Nguyên tắc đặt ra từ ngày đầu và giữ đến giờ: công thức dưới mười lăm thành phần, phần trăm hoạt chất in thẳng lên nhãn, và mỗi lô nguyên liệu đều truy được về tên hợp tác xã đã bán cho chúng tôi.</p>
+      </div>
+
+      <figure class="story-media">
+        <img src="https://images.unsplash.com/photo-1552256028-2c58c3cbfa7a?w=800&amp;h=1000&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Người pha chế đang trộn dung dịch trong phòng công thức" width="800" height="1000" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="wrap">
+      <div class="section-head section-head--split reveal">
+        <span class="sh-num" aria-hidden="true">01</span>
+        <p class="tag">Nguồn nguyên liệu</p>
+        <h2>Ba vùng trồng, ba mối quen</h2>
+        <p class="muted">Chúng tôi không mua qua đầu mối. Mỗi vùng có một người phụ trách, năm nào cũng lên ít nhất hai lần.</p>
+      </div>
+
+      <div class="origins">
+        <article class="origin">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1768729341078-9da4e0ea959e?w=800&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Củ nghệ tươi, lát nghệ và bột nghệ trên mặt gỗ" width="800" height="600" loading="lazy" decoding="async">
+          </figure>
+          <h3>Hoà Bình — nghệ đen</h3>
+          <p>Thu hoạch tháng Mười một, phơi trong nhà lưới rồi chuyển thẳng về xưởng trong vòng ba ngày.</p>
+        </article>
+
+        <article class="origin">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1593335663758-4da70281a917?w=800&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Đồi chè xanh trồng theo hàng trên sườn dốc" width="800" height="600" loading="lazy" decoding="async">
+          </figure>
+          <h3>Mộc Châu — trà xanh</h3>
+          <p>Chỉ lấy lứa hái tháng Tư, khi lá còn non và hàm lượng EGCG cao nhất trong năm.</p>
+        </article>
+
+        <article class="origin">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1750437527283-2958f14e15ce?w=800&amp;h=600&amp;q=80&amp;auto=format&amp;fit=crop"
+             alt="Vạt rau má lá tròn viền răng cưa mọc dày trong vườn" width="800" height="600" loading="lazy" decoding="async">
+          </figure>
+          <h3>Sa Pa — rau má</h3>
+          <p>Trồng xen dưới tán, không phun thuốc. Rửa và cấp đông ngay tại chỗ trước khi vận chuyển.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="tag">Con số</p>
+        <h2>Ba con số nói thay lời giới thiệu</h2>
+      </div>
+
+      <div class="spec-panel">
+        <div class="spec-cell">
+          <b>2019</b>
+          <span>Năm thành lập</span>
+          <em>xưởng đầu tiên tại Đống Đa</em>
+        </div>
+        <div class="spec-cell">
+          <b>03</b>
+          <span>Vùng trồng hợp tác</span>
+          <em>Hoà Bình &middot; Mộc Châu &middot; Sa Pa</em>
+        </div>
+        <div class="spec-cell">
+          <b>15</b>
+          <span>Thành phần tối đa</span>
+          <em>trần do chúng tôi tự đặt</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="wrap">
+      <div class="section-head section-head--split reveal">
+        <span class="sh-num" aria-hidden="true">02</span>
+        <p class="tag">Nhật ký công thức</p>
+        <h2>Những lần chúng tôi làm hỏng</h2>
+        <p class="muted">Sổ tay phòng công thức, chép lại nguyên văn. Chúng tôi để nguyên cả những lần thất bại.</p>
+      </div>
+
+      <ul class="journal">
+        <li>
+          <p class="jn-date"><b>03.2019</b><span>Lô thử 004</span></p>
+          <div>
+            <h3>Kem dưỡng tách lớp sau mười ngày</h3>
+            <p>Tỷ lệ bơ hạt mỡ đẩy lên 8% cho &ldquo;giàu dưỡng&rdquo;. Kết quả: nhũ tương tách nước, mùi ngả. Hạ về 5% và giữ nguyên đến nay.</p>
+          </div>
+        </li>
+        <li>
+          <p class="jn-date"><b>11.2021</b><span>Lô thử 037</span></p>
+          <div>
+            <h3>Tinh chất nghệ đen làm ố áo gối</h3>
+            <p>Curcumin ở 5% bám màu quá mạnh. Giảm còn 3%, thêm bước lọc lạnh — hiệu quả trên da gần như không đổi, vết ố thì hết.</p>
+          </div>
+        </li>
+        <li>
+          <p class="jn-date"><b>06.2024</b><span>Lô thử 061</span></p>
+          <div>
+            <h3>Bỏ hẳn hương liệu</h3>
+            <p>Ba khách phản hồi ngứa nhẹ quanh cánh mũi. Cắt toàn bộ hương tổng hợp khỏi sáu công thức. Đổi lại, mỗi lô nay có mùi hơi khác nhau.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <blockquote class="quote">
+        <p>Tôi không hứa da bạn sẽ trắng. Tôi chỉ hứa bạn đọc được mọi dòng trên vỏ hộp và hiểu mình đang bôi gì lên mặt.</p>
+        <cite>Chị Mai — người sáng lập NHỤY</cite>
+      </blockquote>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="tag">NHỤY <i aria-hidden="true"></i> Mỹ phẩm thực vật</p>
+        <h2>Làm đẹp bắt đầu từ nhụy hoa.</h2>
+        <p>Tinh chất từ thực vật, cho làn da biết thở.</p>
+        <a class="footer-tel" href="tel:02439568822">024 3956 8822</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="tag">Giờ mở cửa</p>
+        <dl class="footer-hours">
+          <div><dt>Thứ 2 – Thứ 6</dt><dd>09:00 – 19:00</dd></div>
+          <div><dt>Thứ 7</dt><dd>09:00 – 17:00</dd></div>
+          <div><dt>Chủ nhật</dt><dd>Nghỉ</dd></div>
+        </dl>
+        <p>34 Nguyễn Khuyến, Đống Đa, Hà Nội</p>
+      </div>
+
+      <div class="footer-col">
+        <p class="tag">Liên kết</p>
+        <ul class="footer-nav">
+          <li><a href="san-pham.html">Sản phẩm</a></li>
+          <li><a href="thanh-phan.html">Thành phần</a></li>
+          <li><a href="routine.html">Routine</a></li>
+          <li><a href="ve-chung-toi.html">Về NHỤY</a></li>
+          <li><a href="lien-he.html">Liên hệ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <dl class="footer-plate">
+      <div><dt>Xuất xứ</dt><dd>Hà Nội, Việt Nam</dd></div>
+      <div><dt>Dòng sản phẩm</dt><dd>06 mã</dd></div>
+      <div><dt>Chiết xuất</dt><dd>12 thực vật</dd></div>
+      <div><dt>Paraben</dt><dd>0%</dd></div>
+    </dl>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 NHỤY</span>
+      <span>Ảnh minh hoạ: Unsplash</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
