@@ -1,0 +1,62 @@
+/* Máy khoan cầm tay 12V — palette clone TikTok Shop (TUX design system).
+   Nguồn: đo trực tiếp CSSOM www.tiktok.com + pixel-sample ảnh UI TikTok Shop VN thật.
+   KHÔNG dùng bộ token @eggspot/color ở template khác — trang này clone màu TikTok. */
+
+:root {
+  /* --- Cốt lõi (đo trực tiếp CSSOM) --- */
+  --tk-red: #FE2C55;          /* primary thương hiệu — chỉ cho chữ LỚN (≥18.66px đậm) và mảng màu */
+  --tk-red-dark: #E01B42;     /* 4.77:1 trên trắng — nền/chữ đỏ cho mọi text nhỏ, và trạng thái :active */
+  --tk-red-chip: #C9143A;     /* 5.23:1 trên nền hồng #FEF2F2 — chữ đỏ đặt trên nền tô nhạt */
+  --tk-ink: #161823;          /* text primary — mọi tiêu đề, tab/nav active */
+  --tk-gray-75: rgba(22, 24, 35, .75);
+  --tk-gray-60: rgba(22, 24, 35, .6);   /* tab inactive */
+  --tk-gray-50: rgba(22, 24, 35, .5);   /* token gốc TikTok — chỉ cho viền/ký hiệu, không cho chữ */
+  --tk-gray-65: rgba(22, 24, 35, .65);  /* 5.2:1 — text phụ 11–13px */
+  --tk-gray-34: rgba(22, 24, 35, .34);  /* tertiary / placeholder */
+  --tk-border: rgba(22, 24, 35, .12);
+  --tk-surface: rgba(22, 24, 35, .06);  /* nền ô search, chip */
+  --tk-bg-sub: #F8F8F8;
+  --tk-white: #FFFFFF;
+  --tk-black: #000000;        /* ô countdown, badge Mall */
+
+  /* --- Phụ trợ (pixel-sample từ ảnh UI thật) --- */
+  --tk-orange: #FF4A26;       /* điểm cuối gradient thanh giá flash */
+  --tk-orange-warn: #FF4C3A;  /* điểm đầu gradient progress bar */
+  --tk-amber: #FFA800;        /* điểm cuối gradient progress bar */
+  --tk-cyan: #20D5EC;         /* ribbon XTRA */
+  --tk-green: #00A34A;        /* ribbon EXTRA */
+  --tk-yellow: #F5CA19;       /* ribbon Bonus (chữ đen) */
+  --tk-star: #FACC16;         /* sao rating */
+  --tk-voucher-bg: #FEF2F2;   /* nền chip voucher */
+  --tk-cart-bg: #FFEDF1;      /* nền nút tròn thêm giỏ ở bottom bar */
+  --tk-track: #EEEEEE;        /* nền progress bar */
+
+  /* --- Kênh liên hệ --- */
+  --zalo: #0088FF;         /* xanh Zalo gốc — chỉ cho chữ lớn (≥18.66px đậm) */
+  --zalo-dark: #0068CC;    /* 5.45:1 trên trắng — nền nút Zalo có chữ nhỏ */
+
+  /* --- Gradient: CHỈ 3 chỗ (header dọc · thanh giá ngang · progress bar) --- */
+  --tk-grad-head: linear-gradient(180deg, #FB1A4E 0%, #FF6B8A 60%, #FFE8EC 100%);
+  --tk-grad-flash: linear-gradient(90deg, var(--tk-red) 0%, var(--tk-orange) 100%);
+  --tk-grad-progress: linear-gradient(90deg, var(--tk-orange-warn) 0%, var(--tk-amber) 100%);
+
+  /* --- Bo góc phân tầng (nguyên tắc 5) --- */
+  --r-pill: 9999px;   /* pill / search / CTA tròn */
+  --r-card: 8px;      /* card, sheet */
+  --r-sheet: 12px;    /* khung form, modal */
+  --r-chip: 4px;      /* badge, chip, ô countdown */
+  --r-btn: 6px;       /* nút chữ nhật TUX */
+
+  /* --- Chiều cao hàng tab dính; dải mua nhanh neo ngay dưới nó --- */
+  --tab-h: 40px;
+  /* chiều cao dải mua nhanh — neo liên kết trừ hao đúng bằng con số này */
+  --sticky-h: 44px;
+
+  /* --- Tầng z --- */
+  --z-tabs: 320;
+  --z-sticky: 330;
+  --z-bar: 350;
+  --z-modal: 380;
+  --z-popup: 460;
+  --z-gdpr: 400;
+}

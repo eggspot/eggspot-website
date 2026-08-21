@@ -1,0 +1,21 @@
+/* The letterbox. On a viewport the canvas cannot fill, this colour is what shows either side of
+   it, so it is the game's own night green rather than a default — a navy border around a jungle
+   cabinet reads as a broken page. */
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #0b1a0c;
+}
+
+#gameParent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
