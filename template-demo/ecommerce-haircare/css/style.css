@@ -1137,8 +1137,10 @@ table { border-collapse: collapse; width: 100%; }
 
 /* Newsletter */
 .news-box { max-width: 640px; }
-.news-form { display: flex; gap: var(--s3); margin-top: var(--s5); }
+/* wrap: ô đồng ý và dòng trạng thái xuống hàng riêng, ô nhập + nút giữ một hàng */
+.news-form { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
 .news-form .input { flex: 1; }
+.news-form .consent, .news-form .form-status { flex: 0 0 100%; margin: 0; }
 @media (max-width: 560px) {
   .news-form { flex-direction: column; }
 }
@@ -1794,3 +1796,112 @@ fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
+
+/* ============================== 13 BANNER ĐỒNG Ý COOKIE ============================== */
+/* Mặc định ẩn trong markup; JS chỉ bật khi chưa có lựa chọn nào được ghi. Không
+   JS thì banner nằm im — thà không hỏi còn hơn chắn một dải nội dung vĩnh viễn
+   mà không nút nào đóng được. */
+.gdpr-banner {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  /* trên header 310, drawer 350 và modal 360 */
+  z-index: 400;
+  background: var(--ink);
+  color: var(--text-light);
+  border-top: 1px solid var(--ink-line);
+}
+
+/* Một số reset đặt display cho phần tử khối và nuốt mất hidden mặc định */
+.gdpr-banner[hidden] { display: none; }
+
+.gdpr-banner__inner {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding: var(--s4) var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4) var(--s6);
+}
+
+.gdpr-banner p {
+  max-width: 68ch;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--text-muted-light);
+}
+
+.gdpr-banner a { color: var(--text-light); border-bottom: 1px solid currentColor; }
+.gdpr-banner a:hover { color: var(--terra-light); }
+
+.gdpr-banner__actions { display: flex; flex: 0 0 auto; gap: var(--s3); }
+/* Nền tối: viền sáng cho nút phụ, giống nút phụ trên thanh mobile */
+.gdpr-banner .btn-outline { --btn-fg: var(--text-light); --btn-bd: var(--ink-line); }
+.gdpr-banner .btn-outline:hover { --btn-bd: var(--text-light); }
+
+@media (max-width: 767px) {
+  /* Thanh hành động mobile đã chiếm mép dưới — banner đứng ngay trên nó */
+  .gdpr-banner { bottom: calc(70px + env(safe-area-inset-bottom)); }
+  .gdpr-banner__inner { flex-direction: column; align-items: stretch; gap: var(--s3); }
+  .gdpr-banner__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+  .gdpr-banner__actions .btn { width: 100%; }
+}
+
+@media (max-width: 400px) {
+  .gdpr-banner__actions { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ============================== 14 CHÍNH SÁCH BẢO MẬT ============================== */
+.privacy-doc { display: grid; gap: var(--s7); max-width: 78ch; }
+
+.privacy-doc__block {
+  display: grid;
+  gap: var(--s4);
+  padding-top: var(--s7);
+  border-top: 1px solid var(--hairline);
+}
+.privacy-doc__block:first-child { padding-top: 0; border-top: 0; }
+
+.privacy-doc__n {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: .12em;
+  color: var(--accent-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.privacy-doc h2 { max-width: 26ch; }
+.privacy-doc p { color: var(--fg-muted); max-width: 66ch; }
+
+.privacy-doc ul {
+  margin: 0;
+  padding-left: var(--s5);
+  display: grid;
+  gap: var(--s2);
+  color: var(--fg-muted);
+}
+
+.privacy-doc a { color: var(--accent-text); border-bottom: 1px solid currentColor; }
+
+/* Khối cảnh báo bản mẫu — vạch terracotta bên trái để tách khỏi văn bản luật */
+.privacy-doc__flag {
+  padding: var(--s4) var(--s5);
+  background: var(--cream);
+  border: 1px solid var(--hairline);
+  border-left: 2px solid var(--terra);
+}
+.privacy-doc__flag p { color: var(--fg); max-width: none; }
+
+/* Dòng bảo mật đường truyền dưới nút gửi */
+.form-security {
+  margin-top: var(--s3);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+
+/* Ô đồng ý dùng lại .check-row; chỉ cần khoảng thở trước nút gửi */
+.check-row + .check-row { margin-top: var(--s3); }
+.consent { margin-bottom: var(--s5); }

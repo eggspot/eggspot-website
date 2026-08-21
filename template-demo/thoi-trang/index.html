@@ -271,9 +271,14 @@
         <h2>Nhận ưu đãi &amp; lookbook mới nhất</h2>
         <p>Mỗi tháng một lá thư: bộ sưu tập mới, mẹo phối đồ và ưu đãi riêng cho khách đăng ký.</p>
         <form class="newsletter-form" novalidate>
-          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" required>
+          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" autocomplete="email" required>
           <button class="btn btn-accent" type="submit">Đăng ký <span class="arrow">→</span></button>
+          <label class="consent">
+            <input name="consent" type="checkbox" required>
+            <span>Tôi đã đọc và đồng ý với <a href="privacy-policy.html">Chính sách bảo mật</a>.</span>
+          </label>
           <p class="form-note" role="status"></p>
+          <p class="form-secure">Dữ liệu của bạn được mã hoá khi truyền (HTTPS/TLS) và không bán cho bên thứ ba.</p>
         </form>
       </div>
     </div>
@@ -297,6 +302,7 @@
           <li><a href="about.html">Thương hiệu</a></li>
           <li><a href="journal.html">Nhật ký</a></li>
           <li><a href="contact.html">Liên hệ</a></li>
+          <li><a href="privacy-policy.html">Chính sách bảo mật</a></li>
         </ul>
       </div>
 
@@ -330,6 +336,17 @@
 
 <button class="to-top" type="button" aria-label="Lên đầu trang">↑</button>
 <div class="toast" role="status" aria-live="polite"></div>
+
+<div class="gdpr-banner" role="region" aria-label="Lựa chọn cookie" aria-live="polite" hidden>
+  <div class="gdpr-banner__inner">
+    <p>Website dùng cookie cần thiết để hoạt động. Chúng tôi không dùng cookie quảng cáo hay theo dõi.
+       <a href="privacy-policy.html">Chính sách bảo mật</a></p>
+    <div class="gdpr-banner__actions">
+      <button class="btn btn-outline" type="button" data-gdpr="essential">Chỉ cookie cần thiết</button>
+      <button class="btn btn-dark" type="button" data-gdpr="accept">Chấp nhận</button>
+    </div>
+  </div>
+</div>
 
 <script src="js/main.js"></script>
 </body>

@@ -89,6 +89,8 @@
       e.preventDefault();
 
       var empty = $$("[required]", form).filter(function (field) {
+        // Ô đồng ý luôn mang value "on" dù chưa tick — kiểm tra riêng bên dưới
+        if (field.type === "checkbox") return false;
         return !String(field.value).trim();
       })[0];
 
@@ -98,6 +100,18 @@
           note.classList.add("error", "show");
         }
         empty.focus();
+        return;
+      }
+
+      // Thiếu ô đồng ý không phải lỗi nhập liệu — báo đúng việc còn thiếu
+      var consent = $("[name='consent']", form);
+
+      if (consent && !consent.checked) {
+        if (note) {
+          note.textContent = "⚠ Vui lòng đồng ý với Chính sách bảo mật trước khi gửi.";
+          note.classList.add("error", "show");
+        }
+        consent.focus();
         return;
       }
 
@@ -597,6 +611,40 @@
         "✔ Đã nhận yêu cầu đặt bàn! Chúng tôi gọi xác nhận trong 15 phút.",
         "✔ Đã gửi yêu cầu đặt bàn!"
       );
+    });
+  })();
+
+  /* ===== Lựa chọn cookie ===== */
+  /* Bản mẫu không nạp analytics hay mã theo dõi nào. Nếu sau này thêm, đoạn nạp
+     đó phải chờ localStorage "gdpr-consent" bằng "accept" rồi mới chạy. */
+  (function initGdpr() {
+    var banner = $(".gdpr-banner");
+    if (!banner) return;
+
+    var KEY = "gdpr-consent";
+    var choice = null;
+
+    // Chế độ riêng tư hoặc trình duyệt chặn cookie làm localStorage ném lỗi cả
+    // khi đọc lẫn khi ghi — nuốt lỗi để một cái kho hỏng không chặn cả trang.
+    try {
+      choice = window.localStorage.getItem(KEY);
+    } catch (err) {
+      /* không đọc được lựa chọn cũ — coi như chưa chọn */
+    }
+
+    if (choice) return;
+
+    banner.hidden = false;
+
+    $$("[data-gdpr]", banner).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        try {
+          window.localStorage.setItem(KEY, btn.getAttribute("data-gdpr"));
+        } catch (err) {
+          /* không ghi được — vẫn đóng thanh cho phiên hiện tại */
+        }
+        banner.hidden = true;
+      });
     });
   })();
 

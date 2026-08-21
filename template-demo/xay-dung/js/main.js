@@ -75,16 +75,24 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      var empty = $$("[required]", form).filter(function (field) {
-        return !String(field.value).trim();
+      // Hộp kiểm luôn trả value "on" dù chưa tích, phải xét trạng thái checked —
+      // nếu không ô đồng ý bỏ trống vẫn lọt qua và biểu mẫu gửi không có consent
+      var missing = $$("[required]", form).filter(function (field) {
+        return field.type === "checkbox"
+          ? !field.checked
+          : !String(field.value).trim();
       })[0];
 
-      if (empty) {
+      if (missing) {
         if (note) {
-          note.textContent = "⚠ Vui lòng điền đầy đủ thông tin bắt buộc.";
+          // Thiếu đồng ý không phải lỗi nhập liệu — tách lời báo để người đọc
+          // biết đúng việc còn thiếu
+          note.textContent = missing.name === "consent"
+            ? "⚠ Vui lòng đồng ý với Chính sách bảo mật trước khi gửi."
+            : "⚠ Vui lòng điền đầy đủ thông tin bắt buộc.";
           note.classList.add("error", "show");
         }
-        empty.focus();
+        missing.focus();
         return;
       }
 
@@ -470,6 +478,35 @@
         "✔ Đã gửi yêu cầu! Chúng tôi phản hồi trong 24h làm việc."
       );
     }
+  })();
+
+  /* ===== Dải lựa chọn cookie (GDPR) =====
+     Trang không chạy analytics hay cookie theo dõi nào; dải này chỉ ghi lại lựa
+     chọn của người đọc. Nếu sau này gắn GA hay công cụ đo lường thì phải chờ
+     localStorage 'gdpr-consent' bằng 'accept' rồi mới nạp script. */
+  (function initGdpr() {
+    var banner = $(".gdpr-banner");
+    if (!banner) return;
+
+    var KEY = "gdpr-consent";
+    var choice = null;
+    // Chế độ riêng tư hoặc chặn cookie làm localStorage ném lỗi cả khi đọc lẫn
+    // khi ghi — nuốt lỗi để một cái kho không dùng được không chặn cả trang
+    try {
+      choice = window.localStorage.getItem(KEY);
+    } catch (e) {}
+    if (choice) return;
+
+    banner.hidden = false;
+
+    $$("[data-gdpr]", banner).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        try {
+          window.localStorage.setItem(KEY, btn.getAttribute("data-gdpr"));
+        } catch (e) {}
+        banner.hidden = true;
+      });
+    });
   })();
 
   /* ===== Cập nhật năm ở footer ===== */

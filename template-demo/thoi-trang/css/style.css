@@ -1901,7 +1901,8 @@ body.menu-open .site-header .nav-toggle span {
   position: fixed;
   left: 50%;
   bottom: 34px;
-  z-index: 400;
+  /* Trên thanh lựa chọn cookie (400) để lời xác nhận không bị dải đó che */
+  z-index: 410;
   padding: 14px 26px;
   border-radius: var(--radius);
   background: var(--ink);
@@ -1919,6 +1920,219 @@ body.menu-open .site-header .nav-toggle span {
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, 0);
+}
+
+/* ===== Thanh lựa chọn cookie ===== */
+/* Dải giấy mỏng ở mép dưới. Không phủ kín màn hình: khách vẫn cuộn và bấm được
+   mọi thứ trong lúc chưa trả lời. */
+.gdpr-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Trên header dính (310) và menu mobile (300); toast nâng lên 410 để vẫn đọc được */
+  z-index: 400;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -16px 40px rgb(var(--ink-rgb) / 0.1);
+}
+
+/* Vài reset đặt display cho phần tử khối và nuốt mất hidden mặc định */
+.gdpr-banner[hidden] {
+  display: none;
+}
+
+.gdpr-banner__inner {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding: 18px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 40px;
+}
+
+.gdpr-banner p {
+  max-width: 68ch;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.gdpr-banner a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.gdpr-banner a:hover {
+  color: var(--accent-dark);
+}
+
+.gdpr-banner__actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+}
+
+.gdpr-banner__actions .btn {
+  padding: 12px 24px;
+  font-size: 13px;
+}
+
+@media (max-width: 620px) {
+  .gdpr-banner__inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Hai nút chia đôi hàng để ngón tay không phải với sang mép */
+  .gdpr-banner__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .gdpr-banner__actions .btn {
+    width: 100%;
+    padding-inline: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .gdpr-banner__actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Chính sách bảo mật & ô đồng ý ===== */
+.policy {
+  display: grid;
+  gap: 52px;
+  max-width: 72ch;
+  margin: 0 auto;
+}
+
+.policy__block {
+  display: grid;
+  gap: 16px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.policy__block:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.policy__n {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.policy h2 {
+  max-width: 24ch;
+  font-size: clamp(24px, 3.4vw, 36px);
+  line-height: 1.2;
+}
+
+.policy p {
+  max-width: 64ch;
+  margin: 0;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+.policy ul {
+  margin: 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+.policy a {
+  color: var(--accent);
+}
+
+.policy a:hover {
+  color: var(--accent-dark);
+}
+
+/* Khối nhắc bản mẫu — vạch gạch nung bên trái để tách khỏi phần văn bản luật */
+.policy__flag {
+  padding: 22px 26px;
+  border-left: 2px solid var(--accent);
+  background: var(--ivory);
+}
+
+.policy__flag p {
+  color: var(--ink);
+}
+
+/* Ô đồng ý trong biểu mẫu */
+.consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 12px;
+  margin: 18px 0 6px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.consent input {
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.consent a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.consent a:hover {
+  color: var(--accent-dark);
+}
+
+/* Ô đồng ý trên nền mực của dải thư nhà mốt */
+.newsletter .consent {
+  max-width: 46ch;
+  margin-inline: auto;
+  color: rgb(var(--paper-rgb) / 0.7);
+}
+
+.newsletter .consent a {
+  color: var(--accent-soft);
+}
+
+.newsletter .consent a:hover {
+  color: var(--paper);
+}
+
+/* Dòng trấn an dưới nút gửi */
+.form-secure {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.newsletter .form-secure {
+  color: rgb(var(--paper-rgb) / 0.55);
 }
 
 /* ===== Reveal animation ===== */

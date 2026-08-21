@@ -108,17 +108,17 @@
           <div class="field-row">
             <div class="field">
               <label for="cf-name">Họ và tên</label>
-              <input id="cf-name" name="name" type="text" placeholder="Nguyễn Văn Phúc" required>
+              <input id="cf-name" name="name" type="text" placeholder="Nguyễn Văn Phúc" autocomplete="name" required>
             </div>
             <div class="field">
               <label for="cf-phone">Số điện thoại</label>
-              <input id="cf-phone" name="phone" type="tel" placeholder="0936 888 666" required>
+              <input id="cf-phone" name="phone" type="tel" placeholder="0936 888 666" autocomplete="tel" required>
             </div>
           </div>
 
           <div class="field">
             <label for="cf-email">Email</label>
-            <input id="cf-email" name="email" type="email" placeholder="email@cuaban.vn" required>
+            <input id="cf-email" name="email" type="email" placeholder="email@cuaban.vn" autocomplete="email" required>
           </div>
 
           <div class="field-row">
@@ -150,8 +150,14 @@
             <textarea id="cf-message" name="message" placeholder="Ngân sách dự kiến, diện tích mong muốn, thời điểm cần nhận nhà…" required></textarea>
           </div>
 
+          <label class="consent">
+            <input name="consent" type="checkbox" required>
+            <span>Tôi đã đọc và đồng ý với <a href="privacy-policy.html">Chính sách bảo mật</a>.</span>
+          </label>
+
           <button class="btn btn-gold btn-block" type="submit">Gửi yêu cầu tư vấn <span class="arrow" aria-hidden="true">→</span></button>
           <p class="form-note" role="status"></p>
+          <p class="form-secure-note">Dữ liệu của bạn được mã hoá khi truyền (HTTPS/TLS) và không bán cho bên thứ ba. Bản mẫu này không gửi dữ liệu đi đâu — biểu mẫu chỉ hiển thị thông báo xác nhận tại chỗ.</p>
         </form>
 
       </div>
@@ -195,6 +201,7 @@
           <li><a href="du-an.html">Dự án</a></li>
           <li><a href="tin-tuc.html">Tin tức</a></li>
           <li><a href="lien-he.html">Liên hệ</a></li>
+          <li><a href="privacy-policy.html">Chính sách bảo mật</a></li>
         </ul>
       </div>
 
@@ -215,6 +222,18 @@
     </div>
   </div>
 </footer>
+
+<!-- ===== Dải lựa chọn cookie (GDPR) ===== -->
+<div class="gdpr-banner" role="region" aria-label="Lựa chọn cookie" aria-live="polite" hidden>
+  <div class="container gdpr-banner-inner">
+    <p>Website sử dụng cookie cần thiết để hoạt động. Chúng tôi không dùng cookie quảng cáo hay theo dõi.
+      <a href="privacy-policy.html">Chính sách bảo mật</a></p>
+    <div class="gdpr-banner-actions">
+      <button class="btn btn-ghost" type="button" data-gdpr="essential">Chỉ cookie cần thiết</button>
+      <button class="btn btn-gold" type="button" data-gdpr="accept">Chấp nhận</button>
+    </div>
+  </div>
+</div>
 
 <button class="to-top" type="button" aria-label="Lên đầu trang">↑</button>
 <div class="toast" role="status" aria-live="polite"></div>

@@ -3,7 +3,7 @@
    01 Tiện ích · 02 Chuyển động · 03 Điều hướng · 04 Reveal đầu khối
    05 Bộ đếm số lớn · 06 Form liên hệ · 07 Năm ở chân trang
    08 Thanh tiến trình cuộn · 09 Đồng hồ Hà Nội · 10 Tooltip bản đồ
-   11 Bảng chạy
+   11 Bảng chạy · 12 Banner đồng ý cookie
    ========================================================================= */
 (function () {
   'use strict';
@@ -355,13 +355,46 @@
       /* novalidate tắt bong bóng của trình duyệt để tự viết thông báo, nên phải
          tự kiểm tra — nếu không biểu mẫu rỗng vẫn nhận được lời cảm ơn. */
       if (!form.checkValidity()) {
-        if (note) note.textContent = 'Vui lòng nhập họ tên và email hợp lệ trước khi gửi.';
-        var invalid = form.querySelector(':invalid');
-        if (invalid) invalid.focus();
+        /* Ô đồng ý cũng là trường bắt buộc nhưng lỗi của nó không phải lỗi
+           nhập liệu — tách riêng để người đọc biết đúng việc còn thiếu. */
+        var invalid = form.querySelector(':invalid:not([name="consent"])');
+        if (invalid) {
+          if (note) note.textContent = 'Vui lòng nhập họ tên và email hợp lệ trước khi gửi.';
+          invalid.focus();
+          return;
+        }
+        var consent = form.querySelector('[name="consent"]');
+        if (note) note.textContent = 'Vui lòng đồng ý với Chính sách bảo mật trước khi gửi.';
+        if (consent) consent.focus();
         return;
       }
       if (note) note.textContent = 'Cảm ơn, chúng tôi sẽ liên hệ trong 1 ngày làm việc.';
       form.reset();
+    });
+  }
+
+  /* ---- 12 Banner đồng ý cookie ----------------------------------------- */
+  /* Trang không chạy analytics hay cookie theo dõi nào; banner chỉ ghi lại
+     lựa chọn của người đọc. Nếu sau này gắn thêm GA hay công cụ đo lường thì
+     phải chờ localStorage 'gdpr-consent' bằng 'accept' rồi mới nạp script. */
+  function initGdpr() {
+    var banner = $('.gdpr-banner');
+    if (!banner) return;
+
+    var KEY = 'gdpr-consent';
+    var choice = null;
+    /* Chế độ riêng tư hoặc chặn cookie làm localStorage ném lỗi khi đọc lẫn
+       khi ghi — nuốt lỗi để một cái kho không dùng được không chặn cả trang. */
+    try { choice = window.localStorage.getItem(KEY); } catch (e) {}
+    if (choice) return;
+
+    banner.hidden = false;
+
+    $$('[data-gdpr]', banner).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        try { window.localStorage.setItem(KEY, btn.getAttribute('data-gdpr')); } catch (e) {}
+        banner.hidden = true;
+      });
     });
   }
 
@@ -383,6 +416,7 @@
     initMapTip();
     initForm();
     initYear();
+    initGdpr();
   }
 
   if (document.readyState === 'loading') {

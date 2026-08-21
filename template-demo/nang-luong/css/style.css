@@ -8,6 +8,7 @@
    11 Bảng dữ liệu · 12 Danh sách theo nhóm · 13 Thẻ thông số · 14 Vận hành
    15 Công nghệ · 16 Đội ngũ · 17 Dải liên hệ · 18 Footer · 19 Trang phụ
    20 Form · 21 Reveal & giảm chuyển động · 22 Responsive
+   23 Banner đồng ý cookie · 24 Chính sách bảo mật & ô đồng ý
    ========================================================================= */
 
 /* ---- 01 Token ---------------------------------------------------------- */
@@ -1468,3 +1469,134 @@ body.menu-open .nav-toggle .bar::after { transform: translateY(-5px) rotate(-45d
   .stat-band, .stat-band--3 { grid-template-columns: 1fr; }
   .stat-band .stat { border-left: 0; padding-left: 0; border-bottom: var(--rule); }
 }
+
+/* ---- 23 Banner đồng ý cookie ------------------------------------------- */
+/* Dán mép dưới, không phủ kín màn hình: chưa chọn thì trang vẫn đọc và thao
+   tác được bình thường. Ẩn sẵn bằng thuộc tính hidden trong HTML, chỉ JS mới
+   bật — không JS thì không có lựa chọn nào ghi nhận được, để banner đứng im
+   còn hơn chắn một dải nội dung vĩnh viễn. */
+.gdpr-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Trên header 310 và lớp phủ menu 300 */
+  z-index: 400;
+  background: var(--paper);
+  border-top: 1px solid var(--ink);
+  box-shadow: 0 -2px 0 var(--ink-wash);
+}
+
+/* Một số reset đặt display cho phần tử khối và nuốt mất hidden mặc định */
+.gdpr-banner[hidden] { display: none; }
+
+.gdpr-banner__inner {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: var(--s3) var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3) var(--s5);
+}
+
+.gdpr-banner p {
+  max-width: 68ch;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.gdpr-banner a {
+  color: var(--accent-ink);
+  text-underline-offset: 3px;
+}
+.gdpr-banner a:hover { color: var(--ink); }
+
+.gdpr-banner__actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--s3);
+}
+.gdpr-banner__actions .btn { min-height: 40px; font-size: 11px; }
+
+@media (max-width: 620px) {
+  .gdpr-banner__inner { flex-direction: column; align-items: stretch; gap: var(--s3); }
+  /* Hai nút chia đôi hàng, .btn đã rộng 100% ở khổ này nên mỗi nút lấp đầy ô */
+  .gdpr-banner__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+}
+
+@media (max-width: 380px) {
+  .gdpr-banner__actions { grid-template-columns: 1fr; }
+}
+
+/* ---- 24 Chính sách bảo mật & ô đồng ý ---------------------------------- */
+.policy { display: grid; gap: var(--s5); max-width: 78ch; }
+
+.policy__block {
+  display: grid;
+  gap: var(--s3);
+  padding-top: var(--s5);
+  border-top: var(--rule);
+}
+.policy__block:first-child { padding-top: 0; border-top: 0; }
+
+.policy__n {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: var(--w-bold);
+  letter-spacing: .1em;
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.policy h2 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); max-width: 26ch; }
+.policy p { color: var(--muted); font-size: 14px; max-width: 66ch; }
+
+.policy ul {
+  margin: 0;
+  padding-left: var(--s4);
+  display: grid;
+  gap: var(--s2);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.policy a { color: var(--accent-ink); }
+.policy a:hover { color: var(--ink); }
+
+/* Khối cảnh báo bản mẫu — vạch hổ phách bên trái để tách khỏi văn bản luật */
+.policy__flag {
+  padding: var(--s3) var(--s4);
+  background: var(--wash);
+  border: var(--rule);
+  border-left: 2px solid var(--accent);
+}
+.policy__flag p { color: var(--ink); max-width: none; }
+
+/* Ô đồng ý trên biểu mẫu — hộp kiểm giữ nguyên cỡ hệ thống, chỉ căn hàng */
+.consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--s3);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.consent input {
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  accent-color: var(--accent-ink);
+  cursor: pointer;
+}
+
+.consent a { color: var(--accent-ink); text-underline-offset: 3px; }
+.consent a:hover { color: var(--ink); }

@@ -124,9 +124,15 @@
             </div>
           </fieldset>
 
+          <label class="consent">
+            <input id="c-consent" name="consent" type="checkbox" required>
+            <span>Tôi đã đọc và đồng ý với <a href="privacy-policy.html">Chính sách bảo mật</a>.</span>
+          </label>
+
           <div class="form-foot">
             <button class="btn btn--solid" type="submit">Gửi yêu cầu giữ chỗ</button>
             <p class="form-status" role="status" aria-live="polite"></p>
+            <p class="field-note">Dữ liệu của bạn được mã hoá khi truyền (HTTPS/TLS) và không bán cho bên thứ ba.</p>
             <p class="field-note">Thông tin chỉ dùng để xác nhận lịch. Chúng tôi không gửi tin quảng cáo.</p>
           </div>
         </form>
@@ -224,6 +230,7 @@
           <li><a href="khong-gian.html">Không gian</a></li>
           <li><a href="tin-tuc.html">Tin tức</a></li>
           <li><a href="lien-he.html">Liên hệ</a></li>
+          <li><a href="privacy-policy.html">Chính sách bảo mật</a></li>
         </ul>
       </div>
 
@@ -235,6 +242,17 @@
     </div>
   </div>
 </footer>
+
+<div class="gdpr-banner" role="region" aria-label="Lựa chọn cookie" aria-live="polite" hidden>
+  <div class="gdpr-banner__inner">
+    <p>Website dùng cookie cần thiết để hoạt động. Chúng tôi không dùng cookie quảng cáo hay theo dõi.
+       <a href="privacy-policy.html">Chính sách bảo mật</a></p>
+    <div class="gdpr-banner__actions">
+      <button class="btn btn--line btn--sm" type="button" data-gdpr="essential">Chỉ cookie cần thiết</button>
+      <button class="btn btn--solid btn--sm" type="button" data-gdpr="accept">Chấp nhận</button>
+    </div>
+  </div>
+</div>
 
 <script src="js/main.js?v=2"></script>
 </body>

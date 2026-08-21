@@ -3,7 +3,7 @@
    01 Tiện ích · 02 Chuyển động · 03 Điều hướng · 04 Reveal đầu khối
    05 Thanh % thành phần · 06 Xem nhanh sản phẩm · 07 Giỏ hàng demo
    08 Form · 09 Parallax ảnh hero · 10 Cổng mở trang · 11 Giờ mở cửa
-   12 Dải khẩu hiệu
+   12 Dải khẩu hiệu · 13 Lựa chọn cookie
    ========================================================================= */
 (function () {
   'use strict';
@@ -187,19 +187,33 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var firstInvalid = null;
+        var consentMissing = false;
 
         fields.forEach(function (field) {
           if (field.checkValidity()) {
             field.removeAttribute('aria-invalid');
-          } else {
-            field.setAttribute('aria-invalid', 'true');
-            if (!firstInvalid) firstInvalid = field;
+            return;
           }
+          field.setAttribute('aria-invalid', 'true');
+          /* Ô đồng ý cũng bắt buộc, nhưng thiếu nó không phải lỗi nhập liệu —
+             tách riêng để câu báo nói đúng việc còn thiếu. */
+          if (field.name === 'consent') {
+            consentMissing = true;
+            return;
+          }
+          if (!firstInvalid) firstInvalid = field;
         });
 
         if (firstInvalid) {
           if (status) status.textContent = 'Còn thiếu thông tin phía trên, bạn kiểm tra lại giúp chúng tôi.';
           firstInvalid.focus();
+          return;
+        }
+
+        if (consentMissing) {
+          var consent = $('[name="consent"]', form);
+          if (status) status.textContent = 'Bạn cần đồng ý với Chính sách bảo mật trước khi gửi.';
+          if (consent) consent.focus();
           return;
         }
 
@@ -360,6 +374,30 @@
     observer.observe(band);
   }
 
+  /* ---- 13 Lựa chọn cookie ---------------------------------------------- */
+  /* Bản mẫu không nạp analytics hay mã theo dõi nào. Nếu sau này thêm, đoạn nạp
+     đó phải chờ localStorage 'gdpr-consent' bằng 'accept' rồi mới chạy. */
+  function initGdpr() {
+    var banner = $('.gdpr-banner');
+    if (!banner) return;
+
+    var KEY = 'gdpr-consent';
+    var choice = null;
+    /* Chế độ riêng tư hoặc trình duyệt chặn cookie làm localStorage ném lỗi cả
+       khi đọc lẫn khi ghi — nuốt lỗi để một cái kho hỏng không chặn cả trang. */
+    try { choice = window.localStorage.getItem(KEY); } catch (e) {}
+    if (choice) return;
+
+    banner.hidden = false;
+
+    $$('[data-gdpr]', banner).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        try { window.localStorage.setItem(KEY, btn.getAttribute('data-gdpr')); } catch (e) {}
+        banner.hidden = true;
+      });
+    });
+  }
+
   /* ---- Khởi động ------------------------------------------------------- */
   function boot() {
     initLoader();
@@ -372,6 +410,7 @@
     initForm();
     initHeroParallax();
     initPillBand();
+    initGdpr();
   }
 
   if (document.readyState === 'loading') {

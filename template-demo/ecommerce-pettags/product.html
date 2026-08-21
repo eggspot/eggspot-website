@@ -233,10 +233,18 @@
               </div>
             </div>
 
+            <label class="consent">
+              <input type="checkbox" id="engraveConsent" name="consent" required>
+              <span>I agree that the engraving text I entered — including the phone number on line 2 — is processed to make my tag, as described in the <a href="privacy-policy.html">Privacy Policy</a>.</span>
+            </label>
+
             <div class="buy-row">
               <button type="submit" class="btn btn-accent btn-block" id="addToCart" data-variant-id="4100000000001">Add to Cart</button>
               <button type="button" class="btn btn-outline btn-block" id="buyNow" data-variant-id="4100000000001">Buy it now</button>
             </div>
+
+            <p class="form-note" id="engraveNote" role="status"></p>
+            <p class="form-security">Your data is encrypted in transit (HTTPS/TLS) and is never sold to third parties.</p>
 
             <p class="trust-line"><span aria-hidden="true">✓</span> <strong>Free shipping over $35</strong> · Engraved and shipped in 2 business days</p>
           </form>
@@ -390,8 +398,13 @@
           <label class="visually-hidden" for="newsletterEmail">Email address</label>
           <input type="email" id="newsletterEmail" name="email" placeholder="you@example.com" required>
           <button type="submit" class="btn btn-light">Subscribe</button>
+          <label class="consent">
+            <input type="checkbox" name="consent" required>
+            <span>I agree to receive the newsletter and to the <a href="privacy-policy.html">Privacy Policy</a>.</span>
+          </label>
         </form>
         <p class="form-note" role="status"></p>
+        <p class="form-security">Your data is encrypted in transit (HTTPS/TLS) and is never sold to third parties.</p>
       </div>
     </section>
   </main>
@@ -433,6 +446,7 @@
             <li><a href="contact.html">Shipping &amp; returns</a></li>
             <li><a href="cart.html">Your cart</a></li>
             <li><a href="contact.html">FAQ</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
           </ul>
         </div>
       </div>
@@ -445,6 +459,17 @@
 
   <button type="button" class="to-top" aria-label="Back to top"><span aria-hidden="true">↑</span></button>
   <div class="toast" role="status" aria-live="polite"></div>
+
+  <div class="gdpr-banner" role="region" aria-label="Cookie consent" aria-live="polite" hidden>
+    <div class="gdpr-banner__inner">
+      <p>This site uses only the cookies it needs to work. No advertising cookies, no tracking.
+        <a href="privacy-policy.html">Privacy Policy</a></p>
+      <div class="gdpr-banner__actions">
+        <button type="button" class="btn btn-outline" data-gdpr="essential">Essential only</button>
+        <button type="button" class="btn btn-accent" data-gdpr="accept">Accept</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>

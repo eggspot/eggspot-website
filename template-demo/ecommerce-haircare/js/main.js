@@ -539,6 +539,14 @@
           return false;
         }
         if (!agree.checked) { setError(4, 'Vui lòng xác nhận đã đọc chính sách cọc và hủy lịch.'); agree.focus(); return false; }
+        /* Biểu mẫu mang novalidate nên required trên ô đồng ý không tự chặn —
+           họ tên và số điện thoại chỉ được ghi lại sau khi người đặt đồng ý. */
+        var consent = $('#bk-consent');
+        if (consent && !consent.checked) {
+          setError(4, 'Vui lòng đồng ý với Chính sách bảo mật trước khi gửi.');
+          consent.focus();
+          return false;
+        }
       }
       setError(step, '');
       return true;
@@ -908,7 +916,11 @@
             }
             if (status) {
               status.hidden = false;
-              status.textContent = 'Vui lòng điền đầy đủ các trường bắt buộc.';
+              /* Thiếu ô đồng ý không phải lỗi nhập liệu — tách riêng để người
+                 đọc biết đúng việc còn thiếu thay vì dò lại cả biểu mẫu. */
+              status.textContent = firstBad && firstBad.name === 'consent'
+                ? 'Vui lòng đồng ý với Chính sách bảo mật trước khi gửi.'
+                : 'Vui lòng điền đầy đủ các trường bắt buộc.';
             }
             return;
           }
@@ -921,6 +933,31 @@
           status.setAttribute('role', 'status');
         }
         form.reset();
+      });
+    });
+  }
+
+  /* ============================ BANNER ĐỒNG Ý COOKIE ============================ */
+  /* Trang không chạy analytics hay cookie theo dõi nào; banner chỉ ghi lại lựa
+     chọn của người đọc. Nếu sau này gắn thêm công cụ đo lường thì phải chờ
+     localStorage 'gdpr-consent' bằng 'accept' rồi mới nạp script. */
+  function initGdpr() {
+    var banner = $('.gdpr-banner');
+    if (!banner) return;
+
+    var KEY = 'gdpr-consent';
+    var choice = null;
+    /* Chế độ riêng tư hoặc chặn cookie làm localStorage ném lỗi khi đọc lẫn khi
+       ghi — nuốt lỗi để một cái kho không dùng được không chặn cả trang. */
+    try { choice = window.localStorage.getItem(KEY); } catch (e) {}
+    if (choice) return;
+
+    banner.hidden = false;
+
+    $$('[data-gdpr]', banner).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        try { window.localStorage.setItem(KEY, btn.getAttribute('data-gdpr')); } catch (e) {}
+        banner.hidden = true;
       });
     });
   }
@@ -984,6 +1021,7 @@
     initForms();
     initReveal();
     initHeroParallax();
+    initGdpr();
     var y = $('[data-year]');
     if (y) y.textContent = String(new Date().getFullYear());
   }

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cửa hàng — NÔNG SỚM | Rau củ, trái cây, nấm và combo tuần</title>
+<meta name="description" content="Rau củ, trái cây, nấm và combo tuần hái trong buổi sáng. Lọc theo danh mục, mùa vụ và khoảng giá. Đặt trước 22:00, giao trước 7:00 sáng hôm sau.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cửa hàng — NÔNG SỚM | Rau củ, trái cây, nấm và combo tuần">
+<meta property="og:description" content="Rau củ, trái cây, nấm và combo tuần hái trong buổi sáng. Lọc theo danh mục, mùa vụ và khoảng giá. Đặt trước 22:00, giao trước 7:00 sáng hôm sau.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=1200&h=630&q=75&auto=format&fit=crop">
+<meta property="og:locale" content="vi_VN">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23fbf7ef'/><path d='M26 6c0 10.4-6.2 16.6-14.7 16.6-1.8 0-3.4-.3-4.7-.8C8 13.6 14.4 7.9 26 6Z' fill='%234f6b31'/><path d='M5 27c1.1-5.1 3.9-9.4 8.1-12.8' stroke='%23b4552b' stroke-width='2' fill='none' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/colors.css">
+<link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js-on')</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Bỏ qua đến nội dung chính</a>
+<header class="site-header">
+  <div class="hd-inner">
+    <a class="logo" href="index.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true" class="leaf-mark"><path d="M27 5c0 11-6.6 17.6-15.6 17.6-1.9 0-3.6-.3-5-.9C7.7 13.1 14.6 7 27 5Z" fill="var(--accent-9)"/><path d="M5 28c1.2-5.4 4.1-10 8.6-13.6" stroke="var(--terra)" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      <span>NÔNG SỚM<small>Hái lúc sớm · Giao trước 7 giờ</small></span>
+    </a>
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="shop.html" aria-current="page">Cửa hàng</a>
+      <a href="index.html#theo-mua">Theo mùa</a>
+      <a href="ve-farm.html">Về farm</a>
+      <a href="tin-tuc.html">Nhật ký vườn</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+    <div class="hd-actions">
+      <a class="icon-btn" href="cart.html" aria-label="Xem giỏ hàng">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 7h15l-1.3 12.2H5.8L4.5 7Z"/><path d="M8.6 7V5.6a3.4 3.4 0 0 1 6.8 0V7"/></svg>
+        <span class="cart-badge" data-cart-count data-empty="true">0</span>
+      </a>
+      <a class="btn btn-primary btn-sm hd-cta" href="shop.html">Đặt rau</a>
+      <button class="burger" type="button" data-burger aria-expanded="false" aria-controls="mobileNav" aria-label="Mở menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mobileNav" data-mobile-panel>
+    <a href="shop.html">Cửa hàng</a>
+    <a href="index.html#theo-mua">Theo mùa</a>
+    <a href="ve-farm.html">Về farm</a>
+    <a href="tin-tuc.html">Nhật ký vườn</a>
+    <a href="lien-he.html">Liên hệ</a>
+  <a class="btn btn-primary btn-block" href="shop.html">Đặt rau tuần này</a>
+</div>
+
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Trang chủ</a> · Cửa hàng</p>
+      <span class="eyebrow">Hái sáng nay</span>
+      <h1 class="d2 line-reveal line-reveal--words"><span class="lr-w" style="--i:0"><span>Cửa</span></span> <span class="lr-w" style="--i:1"><span>hàng</span></span></h1>
+      <p class="lead">Mười hai mặt hàng đang có trong kho lạnh. Đặt trước 22:00 hôm nay, nhận trước 7:00 sáng mai.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--tight s-cream">
+    <div class="wrap">
+      <div class="shop-layout">
+
+        <div class="filters-wrap">
+          <!-- Dưới 900px bộ lọc gập lại: mở sẵn thì phải cuộn 470px mới thấy
+               sản phẩm đầu tiên. Từ 900px trở lên panel luôn hiện và dính theo
+               trang khi cuộn (position: sticky trong .filters-wrap). -->
+          <button class="btn btn-outline filters-toggle" type="button" data-filters-toggle aria-expanded="false" aria-controls="shopFilters">Bộ lọc</button>
+
+          <aside class="filters" id="shopFilters" data-filters-panel data-open="false" aria-label="Bộ lọc sản phẩm">
+            <div class="filter-group">
+              <h3>Danh mục</h3>
+              <div class="radio-list">
+                <label class="radio-row"><input type="radio" name="cat" value="all" checked><span>Tất cả sản phẩm</span></label>
+                <label class="radio-row"><input type="radio" name="cat" value="rau-cu"><span>Rau củ</span></label>
+                <label class="radio-row"><input type="radio" name="cat" value="trai-cay"><span>Trái cây</span></label>
+                <label class="radio-row"><input type="radio" name="cat" value="nam-thao-moc"><span>Nấm &amp; thảo mộc</span></label>
+                <label class="radio-row"><input type="radio" name="cat" value="combo"><span>Combo tuần</span></label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3>Mùa vụ</h3>
+              <label class="check-row"><input type="checkbox" data-season-only><span>Chỉ hiện thứ đang vào mùa tháng này</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 id="priceRangeLabel">Khoảng giá</h3>
+              <div class="c-select c-select--block" data-select data-price-range>
+                <button class="c-select__btn" type="button" id="priceRangeBtn" data-select-btn role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="priceRangeList" aria-labelledby="priceRangeLabel priceRangeBtn">
+                  <span data-select-value>Tất cả giá</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <ul class="c-select__list" id="priceRangeList" role="listbox" aria-labelledby="priceRangeLabel" data-select-list hidden>
+                  <li class="c-select__opt" role="option" id="priceRange-all" data-value="all" aria-selected="true">Tất cả giá</li>
+                  <li class="c-select__opt" role="option" id="priceRange-1" data-value="-100000" aria-selected="false">Dưới 100.000đ</li>
+                  <li class="c-select__opt" role="option" id="priceRange-2" data-value="100000-200000" aria-selected="false">100.000đ – 200.000đ</li>
+                  <li class="c-select__opt" role="option" id="priceRange-3" data-value="200000-300000" aria-selected="false">200.000đ – 300.000đ</li>
+                  <li class="c-select__opt" role="option" id="priceRange-4" data-value="300000-" aria-selected="false">Trên 300.000đ</li>
+                </ul>
+              </div>
+            </div>
+
+            <button class="btn btn-outline btn-sm" type="button" data-filter-reset>Xoá bộ lọc</button>
+          </aside>
+        </div>
+
+        <div>
+          <div class="shop-toolbar">
+            <p class="shop-count" data-shop-count role="status">12 sản phẩm</p>
+            <span class="select-wrap">
+              <span id="sortLabel">Sắp xếp</span>
+              <span class="c-select c-select--end" data-select data-sort>
+                <button class="c-select__btn" type="button" id="sortBtn" data-select-btn role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="sortList" aria-labelledby="sortLabel sortBtn">
+                  <span data-select-value>Mặc định</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <ul class="c-select__list" id="sortList" role="listbox" aria-labelledby="sortLabel" data-select-list hidden>
+                  <li class="c-select__opt" role="option" id="sort-default" data-value="default" aria-selected="true">Mặc định</li>
+                  <li class="c-select__opt" role="option" id="sort-best" data-value="best" aria-selected="false">Bán chạy</li>
+                  <li class="c-select__opt" role="option" id="sort-asc" data-value="price-asc" aria-selected="false">Giá thấp → cao</li>
+                  <li class="c-select__opt" role="option" id="sort-desc" data-value="price-desc" aria-selected="false">Giá cao → thấp</li>
+                </ul>
+              </span>
+            </span>
+          </div>
+
+          <div class="grid-products grid-products--3" data-shop-grid>
+        <article class="pcard reveal" style="--i:0" data-product data-cat="rau-cu" data-price="65000" data-months="10,11,12,1,2,3,4" data-rank="96" data-order="1">
+          <div class="pcard__media">
+            <a href="product.html?sp=ca-chua-bi" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1524593166156-312f362cada0?w=520&h=650&q=75&auto=format&fit=crop" alt="Cà chua bi hữu cơ Đà Lạt" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+              <span class="badge badge-fresh">Mới hái sáng nay</span>
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=ca-chua-bi">Cà chua bi hữu cơ Đà Lạt</a></h3>
+            <p class="pcard__unit">Hộp 500g · Rau củ</p>
+            <p class="pcard__price">65.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="ca-chua-bi" data-name="Cà chua bi hữu cơ Đà Lạt" data-unit="Hộp 500g" data-price="65000" data-img="https://images.unsplash.com/photo-1524593166156-312f362cada0?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:1" data-product data-cat="rau-cu" data-price="120000" data-months="2,3,4,5,6,7,8,9" data-rank="88" data-order="2">
+          <div class="pcard__media">
+            <a href="product.html?sp=mang-tay-cu-chi" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1595855759920-86582396756a?w=520&h=650&q=75&auto=format&fit=crop" alt="Măng tây xanh Củ Chi" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=mang-tay-cu-chi">Măng tây xanh Củ Chi</a></h3>
+            <p class="pcard__unit">Bó 500g · Rau củ</p>
+            <p class="pcard__price">120.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="mang-tay-cu-chi" data-name="Măng tây xanh Củ Chi" data-unit="Bó 500g" data-price="120000" data-img="https://images.unsplash.com/photo-1595855759920-86582396756a?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:2" data-product data-cat="rau-cu" data-price="32000" data-months="1,2,3,4,5,6,7,8,9,10,11,12" data-rank="92" data-order="3">
+          <div class="pcard__media">
+            <a href="product.html?sp=xa-lach-lo-lo" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=520&h=650&q=75&auto=format&fit=crop" alt="Xà lách lô lô xanh" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+              <span class="badge badge-fresh">Mới hái sáng nay</span>
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=xa-lach-lo-lo">Xà lách lô lô xanh</a></h3>
+            <p class="pcard__unit">Cây 300g · Rau củ</p>
+            <p class="pcard__price">32.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="xa-lach-lo-lo" data-name="Xà lách lô lô xanh" data-unit="Cây 300g" data-price="32000" data-img="https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:3" data-product data-cat="rau-cu" data-price="38000" data-months="9,10,11,12,1,2,3" data-rank="74" data-order="4">
+          <div class="pcard__media">
+            <a href="product.html?sp=cai-bo-xoi" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?w=520&h=650&q=75&auto=format&fit=crop" alt="Cải bó xôi baby" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=cai-bo-xoi">Cải bó xôi baby</a></h3>
+            <p class="pcard__unit">Bó 250g · Rau củ</p>
+            <p class="pcard__price">38.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="cai-bo-xoi" data-name="Cải bó xôi baby" data-unit="Bó 250g" data-price="38000" data-img="https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:0" data-product data-cat="trai-cay" data-price="250000" data-months="12,1,2,3,4" data-rank="99" data-order="5">
+          <div class="pcard__media">
+            <a href="product.html?sp=dau-tay-moc-chau" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=520&h=650&q=75&auto=format&fit=crop" alt="Dâu tây Mộc Châu" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+              <span class="badge badge-sale">Giảm giá</span>
+              <span class="badge badge-fresh">Mới hái sáng nay</span>
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=dau-tay-moc-chau">Dâu tây Mộc Châu</a></h3>
+            <p class="pcard__unit">Hộp 500g · Trái cây</p>
+            <p class="pcard__price">250.000đ <del>290.000đ</del></p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="dau-tay-moc-chau" data-name="Dâu tây Mộc Châu" data-unit="Hộp 500g" data-price="250000" data-img="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:1" data-product data-cat="trai-cay" data-price="78000" data-months="4,5,6,7,8,9" data-rank="90" data-order="6">
+          <div class="pcard__media">
+            <a href="product.html?sp=dua-hau-ruot-do" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=520&h=650&q=75&auto=format&fit=crop" alt="Dưa hấu ruột đỏ miền Tây" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=dua-hau-ruot-do">Dưa hấu ruột đỏ miền Tây</a></h3>
+            <p class="pcard__unit">1 trái · 3–4 kg · Trái cây</p>
+            <p class="pcard__price">78.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="dua-hau-ruot-do" data-name="Dưa hấu ruột đỏ miền Tây" data-unit="1 trái · 3–4 kg" data-price="78000" data-img="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:2" data-product data-cat="trai-cay" data-price="95000" data-months="3,4,5,6,7" data-rank="85" data-order="7">
+          <div class="pcard__media">
+            <a href="product.html?sp=xoai-cat-hoa-loc" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=520&h=650&q=75&auto=format&fit=crop" alt="Xoài cát Hòa Lộc" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=xoai-cat-hoa-loc">Xoài cát Hòa Lộc</a></h3>
+            <p class="pcard__unit">1 kg · Trái cây</p>
+            <p class="pcard__price">95.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="xoai-cat-hoa-loc" data-name="Xoài cát Hòa Lộc" data-unit="1 kg" data-price="95000" data-img="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:3" data-product data-cat="nam-thao-moc" data-price="68000" data-months="1,2,3,4,5,6,7,8,9,10,11,12" data-rank="70" data-order="8">
+          <div class="pcard__media">
+            <a href="product.html?sp=nam-mo-trang" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=520&h=650&q=75&auto=format&fit=crop" alt="Nấm mỡ trắng" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=nam-mo-trang">Nấm mỡ trắng</a></h3>
+            <p class="pcard__unit">Hộp 300g · Nấm & thảo mộc</p>
+            <p class="pcard__price">68.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="nam-mo-trang" data-name="Nấm mỡ trắng" data-unit="Hộp 300g" data-price="68000" data-img="https://images.unsplash.com/photo-1504545102780-26774c1bb073?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:0" data-product data-cat="nam-thao-moc" data-price="35000" data-months="1,2,3,4,5,6,7,8,9,10,11,12" data-rank="78" data-order="9">
+          <div class="pcard__media">
+            <a href="product.html?sp=hanh-la-rau-thom" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1602769515559-e15133a7e992?w=520&h=650&q=75&auto=format&fit=crop" alt="Hành lá & rau thơm" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=hanh-la-rau-thom">Hành lá & rau thơm</a></h3>
+            <p class="pcard__unit">Combo 3 bó · Nấm & thảo mộc</p>
+            <p class="pcard__price">35.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="hanh-la-rau-thom" data-name="Hành lá & rau thơm" data-unit="Combo 3 bó" data-price="35000" data-img="https://images.unsplash.com/photo-1602769515559-e15133a7e992?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:1" data-product data-cat="combo" data-price="389000" data-months="1,2,3,4,5,6,7,8,9,10,11,12" data-rank="95" data-order="10">
+          <div class="pcard__media">
+            <a href="product.html?sp=combo-rau-tuan" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=520&h=650&q=75&auto=format&fit=crop" alt="Combo rau tuần 5 ngày" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=combo-rau-tuan">Combo rau tuần 5 ngày</a></h3>
+            <p class="pcard__unit">8 loại · 2,5 kg · Combo tuần</p>
+            <p class="pcard__price">389.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="combo-rau-tuan" data-name="Combo rau tuần 5 ngày" data-unit="8 loại · 2,5 kg" data-price="389000" data-img="https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:2" data-product data-cat="combo" data-price="329000" data-months="1,2,3,4,5,6,7,8,9,10,11,12" data-rank="87" data-order="11">
+          <div class="pcard__media">
+            <a href="product.html?sp=combo-trai-cay-sang" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=520&h=650&q=75&auto=format&fit=crop" alt="Combo trái cây sáng" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+              <span class="badge badge-sale">Giảm giá</span>
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=combo-trai-cay-sang">Combo trái cây sáng</a></h3>
+            <p class="pcard__unit">5 loại · 3 kg · Combo tuần</p>
+            <p class="pcard__price">329.000đ <del>369.000đ</del></p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="combo-trai-cay-sang" data-name="Combo trái cây sáng" data-unit="5 loại · 3 kg" data-price="329000" data-img="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+        <article class="pcard reveal" style="--i:3" data-product data-cat="combo" data-price="599000" data-months="1,2,3,4,5,6,7,8,9,10,11,12" data-rank="93" data-order="12">
+          <div class="pcard__media">
+            <a href="product.html?sp=combo-gia-dinh" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1557844352-761f2565b576?w=520&h=650&q=75&auto=format&fit=crop" alt="Combo gia đình 4 người" width="520" height="650" loading="lazy" decoding="async"></a>
+            <div class="pcard__flags">
+              <span data-season-slot></span>
+
+            </div>
+          </div>
+          <div class="pcard__body">
+            <h3 class="pcard__name"><a href="product.html?sp=combo-gia-dinh">Combo gia đình 4 người</a></h3>
+            <p class="pcard__unit">12 loại · 5 kg · Combo tuần</p>
+            <p class="pcard__price">599.000đ</p>
+            <button class="btn btn-outline btn-sm pcard__add" type="button" data-add-to-cart data-id="combo-gia-dinh" data-name="Combo gia đình 4 người" data-unit="12 loại · 5 kg" data-price="599000" data-img="https://images.unsplash.com/photo-1557844352-761f2565b576?w=220&h=264&q=75&auto=format&fit=crop">Thêm vào giỏ</button>
+          </div>
+        </article>
+          </div>
+          <p class="empty-note" data-shop-empty hidden>Không có sản phẩm nào khớp bộ lọc. Thử nới khoảng giá hoặc <button class="btn btn-ghost btn-sm" type="button" data-filter-reset>xoá bộ lọc</button>.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tight s-tint">
+    <div class="wrap">
+      <div class="stats-panel">
+        <div class="stat-row">
+          <div class="stat"><b>04:00</b><span>Giờ bắt đầu hái mỗi ngày</span></div>
+          <div class="stat"><b>07:00</b><span>Hạn chót giao tới cửa nhà bạn</span></div>
+          <div class="stat"><b>300.000đ</b><span>Mức đơn được miễn phí giao</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <p class="watermark ft-watermark" aria-hidden="true">NÔNG SỚM</p>
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft-col ft-brand">
+        <a class="logo" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true" class="leaf-mark"><path d="M27 5c0 11-6.6 17.6-15.6 17.6-1.9 0-3.6-.3-5-.9C7.7 13.1 14.6 7 27 5Z" fill="var(--accent-9)"/><path d="M5 28c1.2-5.4 4.1-10 8.6-13.6" stroke="var(--terra)" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg><span>NÔNG SỚM<small>Hái lúc sớm · Giao trước 7 giờ</small></span></a>
+        <p class="small">Rau trái từ vườn Đà Lạt, Mộc Châu và Đồng bằng sông Cửu Long, hái lúc 4 giờ sáng và giao tới bếp của bạn trước 7 giờ.</p>
+      </div>
+      <div class="ft-col">
+        <h3>Mua hàng</h3>
+        <ul>
+          <li><a href="shop.html">Tất cả sản phẩm</a></li>
+          <li><a href="shop.html#rau-cu">Rau củ</a></li>
+          <li><a href="shop.html#trai-cay">Trái cây</a></li>
+          <li><a href="shop.html#combo">Combo tuần</a></li>
+          <li><a href="cart.html">Giỏ hàng</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h3>Về chúng tôi</h3>
+        <ul>
+          <li><a href="ve-farm.html">Câu chuyện farm</a></li>
+          <li><a href="ve-farm.html#vung-trong">Vùng trồng</a></li>
+          <li><a href="tin-tuc.html">Nhật ký vườn</a></li>
+          <li><a href="lien-he.html">Liên hệ</a></li>
+          <li><a href="privacy-policy.html">Chính sách bảo mật</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h3>Liên hệ</h3>
+        <ul>
+          <li>Hotline: <a href="tel:0901234567">0901 234 567</a></li>
+          <li>Zalo: <a href="https://zalo.me/0901234567" rel="noopener">0901 234 567</a></li>
+          <li>Email: <a href="mailto:chao@nongsom.vn">chao@nongsom.vn</a></li>
+          <li>Nhận đơn: 14:00 hôm trước — 22:00</li>
+          <li>Giao: 5:30 — 7:00 sáng hôm sau</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 NÔNG SỚM. Bản mẫu website — số liệu và hình ảnh là nội dung minh hoạ.</span>
+      <span><a href="privacy-policy.html">Chính sách bảo mật</a> · <a href="lien-he.html">Điều khoản giao hàng</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="gdpr-banner" role="region" aria-label="Lựa chọn cookie" aria-live="polite" hidden>
+  <div class="gdpr-banner__inner">
+    <p>Trang này chỉ dùng bộ nhớ trình duyệt để giữ giỏ hàng của bạn. Không cookie quảng cáo, không theo dõi hành vi. <a href="privacy-policy.html" style="white-space:nowrap">Chính sách bảo mật</a></p>
+    <div class="gdpr-banner__actions">
+      <button class="btn btn-outline btn-sm" type="button" data-gdpr="essential">Chỉ phần cần thiết</button>
+      <button class="btn btn-primary btn-sm" type="button" data-gdpr="accept">Đồng ý</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

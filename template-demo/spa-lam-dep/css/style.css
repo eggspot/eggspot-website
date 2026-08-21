@@ -2164,6 +2164,144 @@ p:last-child { margin-bottom: 0; }
   }
 }
 
+/* ---- 18 Thanh lựa chọn cookie ------------------------------------------ */
+/* Dải giấy mỏng ở mép dưới, không phủ kín màn hình: người đọc vẫn cuộn và bấm
+   được mọi thứ trong khi chưa trả lời. */
+.gdpr-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Trên header dính (310) và lớp phủ menu (300) */
+  z-index: 400;
+  background: var(--paper);
+  border-top: 1px solid var(--line-strong);
+  box-shadow: 0 -10px 30px rgba(31, 42, 44, .06);
+}
+
+/* Vài reset đặt display cho phần tử khối và nuốt mất hidden mặc định */
+.gdpr-banner[hidden] { display: none; }
+
+.gdpr-banner__inner {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: var(--s4) var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4) var(--s7);
+}
+
+.gdpr-banner p {
+  max-width: 68ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.gdpr-banner a {
+  color: var(--deep);
+  text-underline-offset: 3px;
+}
+.gdpr-banner a:hover { color: var(--ink); }
+
+.gdpr-banner__actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--s3);
+}
+
+@media (max-width: 620px) {
+  .gdpr-banner__inner { flex-direction: column; align-items: stretch; }
+  /* Hai nút chia đôi hàng để ngón tay không phải với sang mép */
+  .gdpr-banner__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+  .gdpr-banner__actions .btn { width: 100%; padding-inline: var(--s3); }
+}
+
+@media (max-width: 380px) {
+  .gdpr-banner__actions { grid-template-columns: 1fr; }
+}
+
+/* ---- 19 Chính sách bảo mật & ô đồng ý ---------------------------------- */
+.policy {
+  display: grid;
+  gap: var(--s7);
+  max-width: 72ch;
+}
+
+.policy__block {
+  display: grid;
+  gap: var(--s4);
+  padding-top: var(--s6);
+  border-top: 1px solid var(--line);
+}
+.policy__block:first-child { padding-top: 0; border-top: 0; }
+
+.policy__n {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: .16em;
+  color: var(--celadon);
+  font-variant-numeric: tabular-nums;
+}
+
+.policy h2 {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.2;
+  max-width: 24ch;
+}
+
+.policy p {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 64ch;
+}
+
+.policy ul {
+  margin: 0;
+  padding-left: var(--s5);
+  display: grid;
+  gap: var(--s2);
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.policy a { color: var(--deep); }
+.policy a:hover { color: var(--ink); }
+
+/* Khối nhắc bản mẫu — vạch celadon bên trái để tách khỏi phần văn bản luật */
+.policy__flag {
+  padding: var(--s5);
+  background: var(--linen);
+  border-left: 2px solid var(--celadon);
+  border-radius: var(--radius);
+}
+.policy__flag p { color: var(--ink); margin: 0; }
+
+/* Ô đồng ý trong biểu mẫu */
+.consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--s3);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+  cursor: pointer;
+}
+.consent input {
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  accent-color: var(--deep);
+  cursor: pointer;
+}
+.consent a { color: var(--deep); text-underline-offset: 3px; }
+.consent a:hover { color: var(--ink); }
+
 /* ---- 99 Motion --------------------------------------------------------- */
 /* Stagger áp cho từng dòng trong section head, không cho cả khối. */
 .js-on .reveal > * {

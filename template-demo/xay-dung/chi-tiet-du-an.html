@@ -228,8 +228,13 @@
         <h2>Nhận báo giá mẫu &amp; kinh nghiệm xây nhà</h2>
         <p>Mỗi tháng một email: đơn giá thi công cập nhật, mẹo giám sát và bài học từ công trường.</p>
         <form class="newsletter-form" novalidate>
-          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" required>
+          <input type="email" name="email" placeholder="Email của bạn" aria-label="Email của bạn" autocomplete="email" required>
           <button class="btn btn-primary" type="submit">Đăng ký <span class="arrow">→</span></button>
+          <label class="consent">
+            <input name="consent" type="checkbox" required>
+            <span>Tôi đồng ý nhận bản tin qua email và đã đọc <a href="privacy-policy.html">Chính sách bảo mật</a>.</span>
+          </label>
+          <p class="form-secure-note">Email của bạn được mã hoá khi truyền (HTTPS/TLS), không bán cho bên thứ ba và có thể huỷ đăng ký bất cứ lúc nào.</p>
           <p class="form-note" role="status"></p>
         </form>
       </div>
@@ -264,6 +269,7 @@
           <li><a href="du-an.html">Dự án</a></li>
           <li><a href="tin-tuc.html">Tin tức</a></li>
           <li><a href="lien-he.html">Liên hệ</a></li>
+          <li><a href="privacy-policy.html">Chính sách bảo mật</a></li>
         </ul>
       </div>
 
@@ -284,6 +290,18 @@
     </div>
   </div>
 </footer>
+
+<!-- ===== Dải lựa chọn cookie (GDPR) ===== -->
+<div class="gdpr-banner" role="region" aria-label="Lựa chọn cookie" aria-live="polite" hidden>
+  <div class="container gdpr-banner-inner">
+    <p>Website sử dụng cookie cần thiết để hoạt động. Chúng tôi không dùng cookie quảng cáo hay theo dõi.
+      <a href="privacy-policy.html">Chính sách bảo mật</a></p>
+    <div class="gdpr-banner-actions">
+      <button class="btn btn-ghost" type="button" data-gdpr="essential">Chỉ cookie cần thiết</button>
+      <button class="btn btn-primary" type="button" data-gdpr="accept">Chấp nhận</button>
+    </div>
+  </div>
+</div>
 
 <button class="to-top" type="button" aria-label="Lên đầu trang">↑</button>
 <div class="toast" role="status" aria-live="polite"></div>

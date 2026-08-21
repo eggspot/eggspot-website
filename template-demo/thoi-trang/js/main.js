@@ -518,7 +518,17 @@
         e.preventDefault();
         var input = $("input[type='email']", form);
         var note = $(".form-note", form);
+        var consent = $("[name='consent']", form);
         if (!input || !input.value.trim()) return;
+        // novalidate tắt bong bóng của trình duyệt, nên ô đồng ý phải tự kiểm
+        if (consent && !consent.checked) {
+          if (note) {
+            note.textContent = "Vui lòng đồng ý với Chính sách bảo mật trước khi gửi.";
+            note.classList.add("show");
+          }
+          consent.focus();
+          return;
+        }
         if (note) {
           note.textContent = "✔ Cảm ơn bạn! Ưu đãi sẽ được gửi tới hộp thư sớm.";
           note.classList.add("show");
@@ -536,12 +546,58 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var note = $(".form-note", form);
+      var consent = $("[name='consent']", form);
+
+      // novalidate tắt bong bóng của trình duyệt, nên ô đồng ý phải tự kiểm
+      if (consent && !consent.checked) {
+        if (note) {
+          note.textContent = "Vui lòng đồng ý với Chính sách bảo mật trước khi gửi.";
+          note.classList.add("show");
+        }
+        consent.focus();
+        return;
+      }
+
       if (note) {
         note.textContent = "✔ Đã gửi! Chúng tôi sẽ phản hồi trong 24h.";
         note.classList.add("show");
       }
       showToast("✔ Đã gửi! Chúng tôi sẽ phản hồi trong 24h.");
       form.reset();
+    });
+  })();
+
+  /* ===== Lựa chọn cookie ===== */
+  /* Bản mẫu không nạp analytics hay mã theo dõi nào. Nếu sau này thêm, đoạn nạp
+     đó phải chờ localStorage "gdpr-consent" bằng "accept" rồi mới chạy. */
+  (function initGdpr() {
+    var banner = $(".gdpr-banner");
+    if (!banner) return;
+
+    var KEY = "gdpr-consent";
+    var choice = null;
+
+    // Chế độ riêng tư hoặc trình duyệt chặn cookie làm localStorage ném lỗi cả
+    // khi đọc lẫn khi ghi — nuốt lỗi để một cái kho hỏng không chặn cả trang.
+    try {
+      choice = window.localStorage.getItem(KEY);
+    } catch (err) {
+      /* không đọc được lựa chọn cũ — coi như chưa chọn */
+    }
+
+    if (choice) return;
+
+    banner.hidden = false;
+
+    $$("[data-gdpr]", banner).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        try {
+          window.localStorage.setItem(KEY, btn.getAttribute("data-gdpr"));
+        } catch (err) {
+          /* không ghi được — vẫn đóng thanh cho phiên hiện tại */
+        }
+        banner.hidden = true;
+      });
     });
   })();
 

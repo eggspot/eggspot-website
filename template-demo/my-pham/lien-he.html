@@ -136,10 +136,15 @@
           <label for="lh-ghi-chu">Ghi chú</label>
           <textarea id="lh-ghi-chu" name="ghi-chu" rows="4" placeholder="Da bạn đang gặp chuyện gì?"></textarea>
         </div>
+        <label class="consent">
+          <input id="lh-consent" name="consent" type="checkbox" required>
+          <span>Tôi đã đọc và đồng ý với <a href="privacy-policy.html">Chính sách bảo mật</a>.</span>
+        </label>
         <div class="form-foot">
           <button class="btn btn--solid" type="submit">Gửi</button>
           <p class="form-status" role="status"></p>
         </div>
+        <p class="field-note">Dữ liệu của bạn được mã hoá khi truyền (HTTPS/TLS) và không bán cho bên thứ ba.</p>
         <p class="field-note">Biểu mẫu minh hoạ — chưa nối hệ thống gửi thật.</p>
       </form>
     </div>
@@ -195,6 +200,7 @@
           <li><a href="routine.html">Routine</a></li>
           <li><a href="ve-chung-toi.html">Về NHỤY</a></li>
           <li><a href="lien-he.html">Liên hệ</a></li>
+          <li><a href="privacy-policy.html">Chính sách bảo mật</a></li>
         </ul>
       </div>
     </div>
@@ -212,6 +218,17 @@
     </div>
   </div>
 </footer>
+
+<div class="gdpr-banner" role="region" aria-label="Lựa chọn cookie" aria-live="polite" hidden>
+  <div class="gdpr-banner__inner">
+    <p>Website dùng cookie cần thiết để hoạt động. Chúng tôi không dùng cookie quảng cáo hay theo dõi.
+       <a href="privacy-policy.html">Chính sách bảo mật</a></p>
+    <div class="gdpr-banner__actions">
+      <button class="btn btn--line btn--sm" type="button" data-gdpr="essential">Chỉ cookie cần thiết</button>
+      <button class="btn btn--solid btn--sm" type="button" data-gdpr="accept">Chấp nhận</button>
+    </div>
+  </div>
+</div>
 
 <script src="js/main.js"></script>
 </body>

@@ -147,11 +147,24 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var fields = $$('[required]', form);
-      var missing = fields.some(function (field) {
-        return !String(field.value).trim();
+      // An unticked checkbox still reports value "on", so consent needs
+      // .checked rather than the value test the text fields use.
+      var missing = null;
+      fields.some(function (field) {
+        var empty = field.type === 'checkbox'
+          ? !field.checked
+          : !String(field.value).trim();
+        if (empty) missing = field;
+        return empty;
       });
       if (missing) {
-        fail('Please fill in all required fields.');
+        // A missing consent tick is a different problem from a blank field —
+        // saying which one is missing saves the reader hunting for it.
+        if (missing.name === 'consent') {
+          fail('Please agree to the Privacy Policy before sending.', missing);
+        } else {
+          fail('Please fill in all required fields.');
+        }
         return;
       }
       // the forms carry novalidate, so the browser never checks this for us
@@ -810,11 +823,24 @@
     // a tag with no name is not a product — block the add and point at the field
     function submitLine() {
       var line = currentLine();
+      var note = $('#engraveNote', form);
       if (!line.line1) {
+        if (note) note.textContent = 'Add your pet’s name before adding to cart.';
         showToast('Add your pet’s name before adding to cart');
         if (input1) input1.focus();
         return false;
       }
+      /* The engraving carries a pet name and the owner's phone number, so the
+         add is a data-collection step and waits on the consent tick. The form
+         carries novalidate, so nothing enforces this except the check here. */
+      var consent = $('[name="consent"]', form);
+      if (consent && !consent.checked) {
+        if (note) note.textContent = 'Please agree to the Privacy Policy before adding to cart.';
+        showToast('Please agree to the Privacy Policy before adding to cart');
+        consent.focus();
+        return false;
+      }
+      if (note) note.textContent = '';
       return addToCart(line);
     }
 
@@ -1022,6 +1048,33 @@
   /* ---------------------------------------------
      Boot
   --------------------------------------------- */
+  /* ---------------------------------------------
+     Cookie consent
+  --------------------------------------------- */
+  /* Nothing on this site loads analytics or a tracking cookie, so the bar only
+     records what the reader picked. If a measurement script is added later it
+     must wait for localStorage 'gdpr-consent' to read 'accept' before loading. */
+  function initGdpr() {
+    var banner = $('.gdpr-banner');
+    if (!banner) return;
+
+    var KEY = 'gdpr-consent';
+    var choice = null;
+    // Private mode and blocked-cookie settings throw on read as well as write,
+    // so swallow it — an unusable store must not take the page down with it.
+    try { choice = window.localStorage.getItem(KEY); } catch (e) {}
+    if (choice) return;
+
+    banner.hidden = false;
+
+    $$('[data-gdpr]', banner).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        try { window.localStorage.setItem(KEY, btn.getAttribute('data-gdpr')); } catch (e) {}
+        banner.hidden = true;
+      });
+    });
+  }
+
   function init() {
     initHeader();
     initDemoToasts();
@@ -1038,6 +1091,7 @@
 
     bindDemoForm($('#newsletterForm'), 'Thanks — you are on the list ✓');
     bindDemoForm($('#contactForm'), 'Message sent — we reply within 1 business day ✓');
+    initGdpr();
   }
 
   if (document.readyState === 'loading') {

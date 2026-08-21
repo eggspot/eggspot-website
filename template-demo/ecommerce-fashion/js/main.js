@@ -75,12 +75,26 @@
     var note = $('.form-note', form) || (form.parentNode ? $('.form-note', form.parentNode) : null);
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var missing = $$('[required]', form).some(function (field) {
-        return !String(field.value).trim();
+      // novalidate is set on every demo form, so nothing stops an empty submit
+      // unless we check here. An unticked checkbox still reports value "on",
+      // so it needs .checked rather than the value test the text fields use.
+      var missing = null;
+      $$('[required]', form).some(function (field) {
+        var empty = field.type === 'checkbox'
+          ? !field.checked
+          : !String(field.value).trim();
+        if (empty) missing = field;
+        return empty;
       });
       if (missing) {
-        if (note) note.textContent = 'Please fill in all required fields.';
-        showToast('Please fill in all required fields');
+        // A missing consent tick is a different problem from a blank field —
+        // saying which one is missing saves the reader hunting for it.
+        var text = missing.name === 'consent'
+          ? 'Please agree to the Privacy Policy before sending.'
+          : 'Please fill in all required fields.';
+        if (note) note.textContent = text;
+        showToast(text);
+        if (typeof missing.focus === 'function') missing.focus();
         return;
       }
       if (note) note.textContent = message;
@@ -747,6 +761,33 @@
   }
 
   /* ---------------------------------------------
+     Cookie consent
+  --------------------------------------------- */
+  /* Nothing on this site loads analytics or a tracking cookie, so the bar only
+     records what the reader picked. If a measurement script is added later it
+     must wait for localStorage 'gdpr-consent' to read 'accept' before loading. */
+  function initGdpr() {
+    var banner = $('.gdpr-banner');
+    if (!banner) return;
+
+    var KEY = 'gdpr-consent';
+    var choice = null;
+    // Private mode and blocked-cookie settings throw on read as well as write,
+    // so swallow it — an unusable store must not take the page down with it.
+    try { choice = window.localStorage.getItem(KEY); } catch (e) {}
+    if (choice) return;
+
+    banner.hidden = false;
+
+    $$('[data-gdpr]', banner).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        try { window.localStorage.setItem(KEY, btn.getAttribute('data-gdpr')); } catch (e) {}
+        banner.hidden = true;
+      });
+    });
+  }
+
+  /* ---------------------------------------------
      Boot
   --------------------------------------------- */
   function init() {
@@ -767,6 +808,7 @@
 
     bindDemoForm($('#newsletterForm'), 'Thanks — you are on the list ✓');
     bindDemoForm($('#contactForm'), 'Message sent — we reply within 1 business day ✓');
+    initGdpr();
   }
 
   if (document.readyState === 'loading') {
