@@ -1,0 +1,961 @@
+/* Landing máy massage cổ vai gáy — giao diện "spa thư giãn" nền tối.
+   Thiết kế cho khung 390px; từ 768px trở lên trang thu về cột giữa 520px,
+   thanh hành động cố định nhường chỗ cho cụm CTA nằm trong luồng nội dung.
+   Nhận diện riêng của trang: nền xanh than #0F172A cho header/hero/các mục
+   chuyên môn, ánh sáng ấm cho chip nhiệt, và hoạ tiết sóng massage lặp lại
+   xuyên suốt (biến --wave) — thay cho hero trắng kiểu flash-sale thường gặp. */
+
+/* ============ 0. TOKEN CỤC BỘ ============
+   Màu lấy từ css/colors.css (Radix scale, accent #0D9488). Khối này chỉ giữ
+   những giá trị KHÔNG thuộc thang màu: nền tối, bo góc, chiều cao neo, tầng z,
+   gradient dựng từ thang accent, hoạ tiết sóng và vài màu ngữ nghĩa ngoài thang. */
+:root {
+  /* --- Nền tối spa: dùng cho header, hero, mục huyệt, mục chế độ --- */
+  --ink: #0F172A;             /* xanh than nền chính */
+  --ink-2: #16263B;           /* lớp nổi (card) trên nền tối */
+  --ink-line: rgba(255, 255, 255, .16);
+  --on-ink: #F1F5F9;          /* chữ chính trên nền tối — 16.4:1 */
+  --on-ink-dim: #A8C3C0;      /* chữ phụ trên nền tối — 9.3:1, vẫn đạt AA */
+
+  /* --- Ánh sáng ấm: chỉ dành cho chi tiết nhiệt (40-45°C) --- */
+  --warm: #FBBF24;
+  --warm-ink: #3A2606;        /* chữ trên nền ấm — 9.8:1 */
+
+  /* --- Hoạ tiết sóng massage: 3 đường cong chồng, lặp cả hai chiều --- */
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='60' viewBox='0 0 240 60'%3E%3Cg fill='none' stroke='%230D9488' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M0 10q15-9 30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0' opacity='.55'/%3E%3Cpath d='M0 30q15 9 30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0' opacity='.4'/%3E%3Cpath d='M0 50q15-9 30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0' opacity='.28'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* --- Gradient dựng từ thang accent --- */
+  --grad-head: linear-gradient(168deg, var(--ink) 0%, #12283A 58%, #0A3F3B 100%);
+  --grad-flash: linear-gradient(90deg, var(--accent-9) 0%, var(--accent-7) 100%);
+  --grad-progress: linear-gradient(90deg, var(--accent-9) 0%, var(--accent-8) 100%);
+
+  /* --- Màu ngữ nghĩa ngoài thang thương hiệu --- */
+  --star: #FACC16;            /* sao rating */
+  --success-bg: #EFFBF3;      /* nền thông báo gửi form thành công */
+  --success-fg: #0B6B36;      /* 7.3:1 trên --success-bg */
+  --zalo: #0088FF;            /* xanh Zalo gốc — chỉ cho chữ lớn (≥18.66px đậm) */
+  --zalo-dark: #0068CC;       /* 5.45:1 trên trắng — nền nút Zalo có chữ nhỏ */
+
+  /* --- Bo góc phân tầng, gốc là --radius của bộ token --- */
+  --r-pill: 9999px;
+  --r-card: var(--radius);
+  --r-sheet: calc(var(--radius) + 4px);
+  --r-chip: calc(var(--radius) / 2);
+  --r-btn: 6px;
+
+  /* --- Chiều cao hàng tab dính; dải mua nhanh neo ngay dưới nó --- */
+  --tab-h: 40px;
+  --sticky-h: 62px;
+
+  /* --- Tầng z --- */
+  --z-tabs: 320;
+  --z-sticky: 330;
+  --z-bar: 350;
+  --z-modal: 380;
+  --z-popup: 460;
+  --z-gdpr: 400;
+}
+
+/* ============ 1. NỀN CHUNG ============ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--gray-2);
+  color: var(--gray-12);
+  font: 400 14px/1.5 "Be Vietnam Pro", Arial, Tahoma, sans-serif;
+  /* chừa chỗ cho thanh hành động cố định */
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+}
+
+img { max-width: 100%; height: auto; display: block; }
+/* mọi ảnh sản phẩm đều vuông 1:1 */
+.tk-gal__slide img, .tk-card__pic img, .tk-combo__box img, .tk-modal__panel img {
+  width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+}
+svg { width: 100%; height: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+:focus-visible { outline: 2px solid var(--gray-12); outline-offset: 2px; border-radius: 2px; }
+/* trên nền tối viền focus đen sẽ chìm — đảo sang trắng */
+.tk-sec--ink :focus-visible, .tk-head :focus-visible, .tk-hero :focus-visible {
+  outline-color: var(--accent-contrast);
+}
+
+/* ba vùng cuộn ngang đều giấu thanh cuộn */
+.tk-tabs::-webkit-scrollbar,
+ul.tk-vouchers::-webkit-scrollbar,
+.tk-gal__track::-webkit-scrollbar { display: none; }
+
+.skip {
+  position: absolute; left: 8px; top: -60px; z-index: 500;
+  background: var(--gray-12); color: var(--accent-contrast);
+  padding: 10px 14px; border-radius: var(--r-btn); font-weight: 600;
+}
+.skip:focus { top: 8px; }
+
+.tk-frame { max-width: 520px; margin-inline: auto; background: var(--background); }
+/* ba dải cố định bám theo đúng bề ngang khung nội dung */
+.tk-sticky, .tk-bar, .tk-gdpr { max-width: 520px; margin-inline: auto; }
+.tk-pad { padding-inline: 12px; }
+
+/* ============ 1b. NỀN TỐI + HOẠ TIẾT SÓNG ============
+   Hoạ tiết là lớp ::before phủ toàn khối, đục 8% nên không ăn vào độ tương phản
+   chữ. Nội dung trong khối phải nằm trên lớp này (position + z-index). */
+.tk-ink { position: relative; background: var(--ink); color: var(--on-ink); isolation: isolate; }
+.tk-ink::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background-image: var(--wave); background-repeat: repeat; background-size: 240px 60px;
+  opacity: .085;
+}
+
+/* ============ 2. HEADER CAMPAIGN ============ */
+.tk-head {
+  background: var(--grad-head);
+  padding: calc(8px + env(safe-area-inset-top)) 12px 10px;
+  color: var(--on-ink);
+}
+
+.tk-head__row { display: flex; align-items: center; gap: 8px; }
+
+.tk-logo {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 19px; font-weight: 800; letter-spacing: -.2px; flex: 1;
+}
+.tk-logo svg { width: 20px; height: 20px; flex: none; color: var(--accent-8); }
+.tk-logo span { font-weight: 400; opacity: .85; }
+
+.tk-head__acts { display: flex; gap: 2px; }
+
+.tk-ico {
+  position: relative; width: 32px; height: 32px; padding: 4px;
+  display: grid; place-items: center; color: var(--on-ink);
+}
+.tk-ico svg { width: 24px; height: 24px; }
+.tk-ico__badge {
+  position: absolute; top: -3px; right: -3px;
+  min-width: 15px; height: 15px; padding: 0 4px;
+  background: var(--accent-9); color: var(--accent-contrast);
+  border: 1.5px solid var(--ink); border-radius: var(--r-pill);
+  font-size: 9px; font-weight: 700; line-height: 12px; text-align: center;
+}
+
+.tk-search {
+  margin-top: 10px;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--background); border-radius: 92px;
+  padding: 10px 12px 10px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .28);
+}
+.tk-search svg { width: 18px; height: 18px; flex: none; color: var(--gray-11); }
+.tk-search__ph {
+  flex: 1; min-width: 0; color: var(--gray-11); font-size: 13px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.tk-search__go { color: var(--accent-11); font-size: 14px; font-weight: 600; flex: none; }
+
+.tk-quick { display: flex; margin-top: 12px; }
+.tk-quick__i {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 600; line-height: 1.3; text-align: center;
+  color: var(--on-ink);
+}
+.tk-quick__ico {
+  width: 34px; height: 34px; padding: 7px;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, .1); border: 1px solid var(--ink-line);
+  border-radius: var(--r-card); color: var(--accent-8);
+}
+.tk-quick__i svg { width: 20px; height: 20px; }
+
+/* ============ 3. TAB NAV — gạch chân ĐEN ============ */
+.tk-tabs {
+  position: sticky; top: 0; z-index: var(--z-tabs);
+  height: var(--tab-h);
+  display: flex; gap: 4px;
+  background: var(--background);
+  border-bottom: 1px solid var(--gray-6);
+  padding: 0 6px;
+  overflow-x: auto; scrollbar-width: none;
+}
+
+.tk-tab {
+  position: relative; flex: none;
+  background: none; border: 0; cursor: pointer;
+  padding: 12px 8px 11px;
+  font-family: inherit; font-size: 14px; font-weight: 400; line-height: 1.5;
+  color: var(--gray-11);
+  white-space: nowrap;
+}
+.tk-tab.is-on { color: var(--gray-12); font-weight: 700; }
+.tk-tab.is-on::after {
+  content: ""; position: absolute; left: 8px; right: 8px; bottom: 0;
+  height: 3px; border-radius: 2px; background: var(--gray-12);
+}
+
+/* ============ 4. HERO — nền tối spa ============ */
+.tk-hero__media { position: relative; }
+
+/* --- Gallery 6 ảnh: cuộn ngang có scroll-snap nên vuốt được trên mobile
+       mà không cần thư viện; mũi tên và chấm chỉ để điều khiển bằng chuột/bàn phím --- */
+.tk-gal { position: relative; }
+.tk-gal__track {
+  display: flex; margin: 0;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.tk-gal__track:focus-visible { outline: 2px solid var(--accent-contrast); outline-offset: -4px; }
+.tk-gal__slide { flex: 0 0 100%; scroll-snap-align: center; }
+
+.tk-gal__arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 30px; height: 30px; padding: 6px; border: 0; cursor: pointer;
+  background: rgba(15, 23, 42, .62); color: var(--on-ink);
+  border-radius: var(--r-pill);
+}
+.tk-gal__arrow--prev { left: 8px; }
+.tk-gal__arrow--next { right: 8px; }
+.tk-gal__arrow[disabled] { opacity: .35; cursor: default; }
+
+.tk-gal__count {
+  position: absolute; right: 12px; bottom: 40px;
+  background: rgba(15, 23, 42, .62); color: var(--on-ink);
+  font-size: 11px; padding: 2px 8px; border-radius: var(--r-pill);
+  font-variant-numeric: tabular-nums;
+}
+
+.tk-gal__dots {
+  position: absolute; left: 0; right: 0; bottom: 36px;
+  display: flex; justify-content: center; gap: 6px;
+}
+.tk-gal__dot {
+  width: 6px; height: 6px; padding: 0; border: 0; cursor: pointer;
+  background: rgba(255, 255, 255, .55); border-radius: var(--r-pill);
+}
+.tk-gal__dot[aria-current="true"] { width: 16px; background: var(--accent-8); }
+
+/* chip social proof + chip thông số + ribbon phải nằm trên ảnh đang cuộn */
+.tk-hero__chip, .tk-ribbons, .tk-specchips { z-index: 2; }
+
+.tk-hero__chip {
+  position: absolute; left: 12px; top: 12px;
+  max-width: calc(100% - 24px);
+  background: rgba(15, 23, 42, .68); color: var(--on-ink);
+  font-size: 11px; line-height: 1.4; padding: 3px 8px; border-radius: var(--r-chip);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.tk-authority {
+  position: absolute; left: 12px; top: 36px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--accent-2); color: var(--accent-11);
+  font-size: 11px; font-weight: 600; line-height: 1.4;
+  padding: 3px 7px; border-radius: var(--r-chip);
+}
+
+/* Hai chip thông số nổi bên phải ảnh — nhận diện riêng của máy massage:
+   nhiệt hồng ngoại (ánh sáng ấm) và 3 cấp sóng xung kích (accent). */
+.tk-specchips {
+  position: absolute; right: 12px; top: 12px;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+}
+.tk-specchip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 9px; border-radius: var(--r-pill);
+  font-size: 11px; font-weight: 700; line-height: 1.3; white-space: nowrap;
+  background: rgba(15, 23, 42, .78); color: var(--on-ink);
+  border: 1px solid var(--ink-line);
+}
+.tk-specchip svg { width: 13px; height: 13px; flex: none; }
+.tk-specchip--warm { background: var(--warm); color: var(--warm-ink); border-color: transparent; }
+.tk-specchip--wave { color: var(--accent-8); }
+
+/* Ribbon 3 mảnh bình hành dính liền, cắt xéo ~10° (5px trên 28px cao) */
+.tk-ribbons { position: absolute; left: 0; bottom: 0; display: flex; }
+.tk-ribbon {
+  height: 28px; padding: 0 9px 0 11px;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 700; line-height: 1; white-space: nowrap;
+  clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+  margin-left: -5px;
+}
+.tk-ribbon:first-child { clip-path: polygon(0 0, 100% 0, calc(100% - 5px) 100%, 0 100%); margin-left: 0; }
+.tk-ribbon:last-child { clip-path: polygon(5px 0, 100% 0, 100% 100%, 0 100%); }
+.tk-ribbon b { font-size: 8px; font-weight: 800; text-transform: uppercase; opacity: .82; letter-spacing: .3px; }
+/* 3 mảnh ribbon lấy 3 bậc accent tăng dần */
+.tk-ribbon--1 { background: var(--accent-4); color: var(--gray-12); }
+.tk-ribbon--2 { background: var(--accent-6); color: var(--gray-12); }
+.tk-ribbon--3 { background: var(--accent-8); color: var(--gray-12); }
+
+/* Thanh giá flash — gradient ngang, chip % đảo màu */
+.tk-flash {
+  background: var(--grad-flash); color: var(--accent-contrast);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+  padding: 10px 12px 14px;
+}
+.tk-flash__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }
+.tk-flash__off {
+  background: var(--accent-contrast); color: var(--accent-11);
+  font-size: 13px; font-weight: 700; line-height: 1;
+  padding: 4px 5px; border-radius: var(--r-chip);
+}
+.tk-flash__now { font-size: 29px; font-weight: 800; line-height: 1.05; }
+.tk-flash__old {
+  flex-basis: 100%; margin-top: 2px;
+  font-size: 12px; font-weight: 400; line-height: 1.35;
+  color: var(--accent-12);
+}
+.tk-flash__meta { text-align: right; padding-top: 2px; flex: none; color: var(--accent-12); }
+.tk-flash__tag {
+  display: flex; align-items: center; justify-content: flex-end; gap: 2px;
+  font-size: 15px; font-weight: 700;
+}
+.tk-flash__tag svg { width: 15px; height: 15px; color: var(--accent-contrast); }
+.tk-flash__end { display: block; margin-top: 3px; font-size: 12px; color: var(--accent-12); }
+/* Cú huých mất mát: nói rõ mất gì khi đồng hồ về 0 chứ không chỉ đếm ngược suông. */
+.tk-revert { display: block; margin-top: 3px; font-size: 11px; line-height: 1.35; color: inherit; }
+.tk-revert--ink { margin-top: 6px; text-align: right; color: var(--accent-11); }
+
+/* Khối chữ của hero nằm trên nền tối */
+.tk-hero__body { padding-bottom: 4px; }
+.tk-hero__title {
+  padding-top: 12px;
+  font-size: 17px; font-weight: 700; line-height: 1.35; color: var(--on-ink);
+}
+.tk-hero__lede { margin-top: 6px; font-size: 13px; line-height: 1.5; color: var(--on-ink-dim); }
+
+.tk-rating {
+  display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+  margin-top: 8px; font-size: 12px; color: var(--on-ink-dim);
+}
+.tk-rating b { font-size: 13px; color: var(--on-ink); }
+.tk-rating i { font-style: normal; }
+.tk-star { width: 14px; height: 14px; color: var(--star); flex: none; }
+.tk-star--sm { width: 12px; height: 12px; }
+.tk-star--xs { width: 11px; height: 11px; vertical-align: -1px; }
+
+ul.tk-vouchers {
+  display: flex; gap: 6px; margin-top: 10px;
+  overflow-x: auto; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, #000 88%, transparent);
+  scroll-margin-top: calc(var(--tab-h) + 12px);
+}
+.tk-vouchers li {
+  flex: none; display: flex; align-items: center; gap: 4px;
+  background: rgba(13, 148, 136, .18); color: var(--accent-8);
+  border: 1px solid rgba(13, 148, 136, .45);
+  font-size: 12px; padding: 4px 8px; border-radius: var(--r-chip); white-space: nowrap;
+}
+.tk-ticket { width: 14px; height: 14px; flex: none; }
+
+.tk-progress { display: flex; align-items: center; gap: 8px; margin: 12px 0 14px; }
+.tk-progress__hot {
+  background: var(--accent-9); color: var(--accent-contrast);
+  font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: var(--r-chip); flex: none;
+}
+.tk-progress__track {
+  flex: 1; height: 6px; background: rgba(255, 255, 255, .18);
+  border-radius: var(--r-pill); overflow: hidden;
+}
+.tk-progress__fill { display: block; width: 84%; height: 100%; background: var(--grad-progress); }
+.tk-progress__label { font-size: 11px; color: var(--on-ink-dim); flex: none; }
+.tk-progress__label b { color: var(--on-ink); }
+
+/* ============ 4b. DẢI MUA NHANH DÍNH ĐỈNH ============ */
+.tk-sticky {
+  position: fixed; left: 0; right: 0; top: var(--tab-h); z-index: var(--z-sticky);
+  display: flex; align-items: center; gap: 8px;
+  min-height: var(--sticky-h); padding: 7px 12px;
+  background: var(--grad-flash); color: var(--accent-contrast);
+}
+.tk-sticky[hidden] { display: none; }
+.tk-sticky__col { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.tk-sticky__row { display: flex; align-items: center; gap: 8px; }
+.tk-sticky__price { font-size: 19px; font-weight: 800; flex: none; }
+.tk-sticky__buy {
+  margin-left: auto; flex: none;
+  height: 30px; padding: 0 16px; display: flex; align-items: center;
+  background: var(--ink); color: var(--on-ink);
+  border-radius: var(--r-pill); font-size: 13px; font-weight: 700;
+}
+.tk-sticky__buy:active { background: #000; }
+
+/* ============ 5. CTA TRONG LUỒNG (chỉ desktop) ============ */
+.tk-inline-cta { display: none; }
+
+/* ============ 6. SECTION CHUNG ============ */
+/* mọi mục tiêu liên kết neo đều dừng dưới hàng tab dính */
+[id] { scroll-margin-top: calc(var(--tab-h) + var(--sticky-h) + 12px); }
+
+.tk-sec { padding: 12px 0; }
+.tk-sec + .tk-sec, .tk-inline-cta + .tk-sec { border-top: 8px solid var(--gray-2); }
+.tk-sec--ink + .tk-sec, .tk-sec + .tk-sec--ink { border-top-color: var(--ink); }
+.tk-sec__h { font-size: 16px; font-weight: 700; color: var(--gray-12); margin-bottom: 10px; }
+.tk-sec__sub { margin: -4px 0 12px; font-size: 13px; line-height: 1.5; color: var(--gray-11); }
+.tk-sec--ink { padding: 18px 0 20px; }
+.tk-sec--ink .tk-sec__h { color: var(--on-ink); }
+.tk-sec--ink .tk-sec__sub { color: var(--on-ink-dim); }
+
+/* ============ 7. NỖI ĐAU ============
+   Người mua nhận ra hoàn cảnh của chính mình trước khi nghe thông số máy. */
+.tk-cases { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tk-case {
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-radius: var(--r-card); overflow: hidden;
+}
+.tk-case img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.tk-case span {
+  display: block; padding: 6px 8px 8px;
+  font-size: 12px; line-height: 1.4; color: var(--gray-12);
+}
+/* Khung neo giá — đóng khung mất mát bằng con số khách tự kiểm chứng được */
+.tk-cost {
+  display: flex; align-items: flex-start; gap: 7px;
+  margin-top: 10px; padding: 9px 10px;
+  background: var(--accent-2); border-radius: var(--r-card);
+  color: var(--accent-11); font-size: 13px; font-weight: 600; line-height: 1.45;
+}
+.tk-cost svg { width: 16px; height: 16px; flex: none; margin-top: 1px; }
+
+/* ============ 7b. BẢN ĐỒ HUYỆT CỔ – VAI – GÁY ============
+   Ba điểm bấm chính, mỗi điểm một ảnh vuông và mô tả ngắn. Số thứ tự nằm đè
+   góc ảnh để đọc như bản đồ chứ không phải danh sách thường. */
+.tk-points { display: grid; gap: 10px; }
+.tk-point {
+  display: grid; grid-template-columns: 92px 1fr; gap: 10px; align-items: center;
+  background: var(--ink-2); border: 1px solid var(--ink-line);
+  border-radius: var(--r-card); overflow: hidden;
+}
+.tk-point__pic { position: relative; }
+.tk-point__pic img { width: 92px; height: 92px; object-fit: cover; display: block; }
+.tk-point__n {
+  position: absolute; left: 0; top: 0;
+  min-width: 22px; height: 22px; padding: 0 6px;
+  display: grid; place-items: center;
+  background: var(--accent-9); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 800; border-bottom-right-radius: var(--r-chip);
+}
+.tk-point__txt { padding: 8px 12px 8px 0; }
+.tk-point__txt b {
+  display: flex; align-items: flex-start; gap: 5px;
+  font-size: 14px; font-weight: 700; line-height: 1.35; color: var(--on-ink);
+}
+.tk-point__txt b svg { width: 14px; height: 14px; flex: none; margin-top: 2px; color: var(--accent-8); }
+.tk-point__txt span {
+  display: block; margin-top: 3px;
+  font-size: 12px; line-height: 1.5; color: var(--on-ink-dim);
+}
+
+/* ============ 7c. CHẾ ĐỘ MASSAGE 3 CẤP ============ */
+.tk-modes { display: grid; gap: 8px; }
+.tk-mode {
+  display: grid; grid-template-columns: 38px 1fr auto; gap: 4px 10px; align-items: center;
+  padding: 10px 12px;
+  background: var(--ink-2); border: 1px solid var(--ink-line); border-radius: var(--r-card);
+}
+/* Ba ô con đều là <span>, nên vị trí phải khai báo rõ từng ô — để tự động xếp
+   thì quy tắc chung của nhóm sẽ kéo cả icon lẫn thanh cường độ về cột giữa. */
+.tk-mode__ico {
+  grid-column: 1; grid-row: 1 / span 2;
+  width: 38px; height: 38px; padding: 8px;
+  display: grid; place-items: center;
+  background: rgba(13, 148, 136, .16); border-radius: var(--r-pill); color: var(--accent-8);
+}
+.tk-mode b { grid-column: 2; grid-row: 1; font-size: 14px; font-weight: 700; color: var(--on-ink); }
+.tk-mode__d { grid-column: 2; grid-row: 2; font-size: 12px; line-height: 1.45; color: var(--on-ink-dim); }
+/* Thanh 3 vạch cường độ — vạch sáng dần theo cấp, đọc được không cần màu */
+.tk-mode__lv { grid-column: 3; grid-row: 1 / span 2; display: flex; align-items: flex-end; gap: 3px; height: 24px; }
+.tk-mode__lv i { width: 5px; border-radius: 2px; background: rgba(255, 255, 255, .2); }
+.tk-mode__lv i:nth-child(1) { height: 10px; }
+.tk-mode__lv i:nth-child(2) { height: 17px; }
+.tk-mode__lv i:nth-child(3) { height: 24px; }
+.tk-mode--1 .tk-mode__lv i:nth-child(-n+1),
+.tk-mode--2 .tk-mode__lv i:nth-child(-n+2),
+.tk-mode--3 .tk-mode__lv i:nth-child(-n+3) { background: var(--accent-8); }
+
+/* Dải nhiệt hồng ngoại — dùng ánh sáng ấm để tách khỏi phần sóng xung kích */
+.tk-heat {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-top: 10px; padding: 10px 12px;
+  background: rgba(251, 191, 36, .12); border: 1px solid rgba(251, 191, 36, .4);
+  border-radius: var(--r-card);
+}
+.tk-heat svg { width: 18px; height: 18px; flex: none; color: var(--warm); margin-top: 1px; }
+.tk-heat b { display: block; font-size: 13px; font-weight: 700; color: var(--warm); }
+.tk-heat__d { display: block; margin-top: 2px; font-size: 12px; line-height: 1.5; color: var(--on-ink-dim); }
+
+/* ============ 8. GRID 2 CỘT ============ */
+#gian-hang { background: var(--gray-2); }
+.tk-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  padding-inline: 12px;
+}
+.tk-card {
+  appearance: none; border: 0; padding: 0; cursor: pointer; text-align: left;
+  background: var(--background); border-radius: var(--r-card); overflow: hidden;
+  font: inherit; color: inherit;
+  display: flex; flex-direction: column;
+}
+.tk-card__pic { position: relative; display: block; }
+.tk-card__off {
+  position: absolute; top: 0; right: 0;
+  background: var(--accent-11); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 700; line-height: 1;
+  padding: 4px 6px; border-bottom-left-radius: var(--r-chip);
+}
+.tk-card__title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  margin: 8px 8px 0; font-size: 13px; line-height: 1.4; color: var(--gray-12);
+}
+.tk-card__price {
+  margin: 6px 8px 0; font-size: 17px; font-weight: 700; color: var(--accent-11); line-height: 1.2;
+}
+.tk-card__price s { font-size: 12px; font-weight: 400; color: var(--gray-11); }
+.tk-card__meta { margin: 4px 8px 10px; font-size: 11px; color: var(--gray-11); }
+.tk-card[hidden] { display: none; }
+
+.tk-grid__empty { padding: 20px 12px; text-align: center; color: var(--gray-11); }
+
+/* ============ 9. COMBO 3 CỘT ============ */
+.tk-combo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+/* radio ẩn, ô bao quanh đóng vai nút chọn — dùng chung cho combo và gói mua.
+   Chỉ ẩn chính cái <input>: kéo cả .tk-combo__i vào đây sẽ ẩn luôn nhãn bọc ngoài. */
+.tk-combo__i { position: relative; cursor: pointer; }
+.tk-combo__i input, .tk-pack input { position: absolute; opacity: 0; pointer-events: none; }
+.tk-combo__i input:focus-visible + .tk-combo__box,
+.tk-pack input:focus-visible + .tk-pack__box { outline: 2px solid var(--gray-12); outline-offset: 2px; }
+.tk-combo__box {
+  position: relative; display: block;
+  border: 1.5px solid var(--gray-6); border-radius: var(--r-card); overflow: hidden;
+  background: var(--background);
+}
+.tk-combo__off {
+  position: absolute; top: 4px; left: 4px;
+  background: var(--accent-11); color: var(--accent-contrast);
+  font-size: 11px; font-weight: 700; line-height: 1;
+  padding: 3px 6px; border-radius: var(--r-pill);
+}
+.tk-combo__name {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  min-height: 39px; padding: 6px 5px 0; text-align: center;
+  font-size: 12px; font-weight: 500; line-height: 1.35; color: var(--gray-12);
+}
+.tk-combo__price {
+  display: block; padding: 3px 4px 7px; text-align: center;
+  font-size: 13px; font-weight: 700; color: var(--accent-11);
+}
+.tk-combo__i input:checked + .tk-combo__box { border-color: var(--accent-9); }
+
+/* ============ 10. SO SÁNH CHI PHÍ SPA ============
+   Bảng 3 cột: hạng mục · đi spa · dùng máy. Cột máy được tô nền accent nhạt
+   để mắt bám vào phương án rẻ hơn ngay từ lần lướt đầu. */
+.tk-vs { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tk-vs caption { caption-side: top; text-align: left; font-size: 12px; color: var(--gray-11); padding-bottom: 8px; }
+.tk-vs th, .tk-vs td { padding: 9px 8px; border-bottom: 1px solid var(--gray-5); vertical-align: top; text-align: left; }
+.tk-vs thead th { font-size: 12px; font-weight: 700; color: var(--gray-12); border-bottom-width: 2px; }
+.tk-vs tbody th { font-weight: 400; color: var(--gray-11); }
+.tk-vs td { color: var(--gray-12); }
+.tk-vs .is-me { background: var(--accent-2); color: var(--accent-11); font-weight: 600; }
+.tk-vs tfoot th { font-size: 13px; font-weight: 700; color: var(--gray-12); }
+.tk-vs tfoot td { font-size: 15px; font-weight: 800; }
+.tk-vs tfoot .is-me { color: var(--accent-11); }
+.tk-vs__save {
+  display: flex; align-items: flex-start; gap: 7px;
+  margin-top: 10px; padding: 10px 12px;
+  background: var(--accent-9); color: var(--accent-contrast);
+  border-radius: var(--r-card); font-size: 13px; font-weight: 600; line-height: 1.45;
+}
+.tk-vs__save svg { width: 16px; height: 16px; flex: none; margin-top: 1px; }
+.tk-vs__wrap { overflow-x: auto; }
+
+/* ============ 11. DÙNG CHO AI ============ */
+.tk-who { display: grid; gap: 8px; }
+.tk-whoi {
+  display: grid; grid-template-columns: 84px 1fr; gap: 10px; align-items: center;
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-radius: var(--r-card); overflow: hidden;
+}
+.tk-whoi img { width: 84px; height: 84px; object-fit: cover; display: block; }
+.tk-whoi__txt { padding: 8px 12px 8px 0; }
+.tk-whoi__txt b {
+  display: flex; align-items: flex-start; gap: 5px;
+  font-size: 14px; font-weight: 700; line-height: 1.35; color: var(--gray-12);
+}
+.tk-whoi__txt b svg { width: 15px; height: 15px; flex: none; margin-top: 2px; color: var(--accent-11); }
+.tk-whoi__txt span { display: block; margin-top: 3px; font-size: 12px; line-height: 1.5; color: var(--gray-11); }
+
+/* ============ 12. ĐÁNH GIÁ ============ */
+.tk-reviews { display: grid; gap: 8px; }
+.tk-reviews li {
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-radius: var(--r-card); padding: 10px 12px;
+}
+.tk-reviews p + p { margin-top: 4px; }
+.tk-reviews__stars { color: var(--star); font-size: 13px; letter-spacing: 1px; }
+.tk-reviews__who { font-size: 12px; color: var(--gray-11); }
+
+/* ============ 12b. 3 CAM KẾT (đảo rủi ro) ============ */
+.tk-pledges { display: grid; gap: 8px; padding: 2px 12px 4px; }
+.tk-pledge {
+  display: grid; gap: 3px; padding: 10px;
+  background: var(--background); border: 1px solid var(--gray-6); border-radius: var(--r-card);
+}
+.tk-pledge__ico { width: 22px; height: 22px; color: var(--accent-11); margin-bottom: 2px; }
+.tk-pledge__ico--brand { color: var(--accent-9); }
+.tk-pledge b { font-size: 14px; font-weight: 700; line-height: 1.35; color: var(--gray-12); }
+.tk-pledge span { font-size: 12px; line-height: 1.45; color: var(--gray-11); }
+
+/* ============ 13. 3 BƯỚC ============ */
+.tk-steps { display: grid; gap: 10px; }
+.tk-steps li {
+  display: grid; grid-template-columns: 32px 1fr; column-gap: 10px; align-items: start;
+  font-size: 13px; line-height: 1.5; color: var(--gray-11);
+}
+.tk-steps__n {
+  grid-row: span 2; font-size: 18px; font-weight: 800; color: var(--gray-12); line-height: 1.2;
+}
+.tk-steps b { font-size: 14px; color: var(--gray-12); }
+
+/* ============ 14. THÔNG SỐ ============ */
+.tk-spec { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tk-spec th, .tk-spec td {
+  text-align: left; padding: 9px 0; border-bottom: 1px solid var(--gray-6); vertical-align: top;
+}
+.tk-spec th { width: 42%; font-weight: 400; color: var(--gray-11); padding-right: 10px; }
+.tk-spec td { color: var(--gray-12); }
+
+/* ============ 15. FORM ĐẶT HÀNG ============ */
+.tk-order {
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-radius: var(--r-sheet); padding: 12px;
+}
+.tk-order__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tk-order__deal {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 13px; font-weight: 600; color: var(--gray-12);
+}
+.tk-order__deal .tk-ticket { color: var(--accent-11); }
+
+/* Countdown 3 ô vuông ĐEN */
+.tk-countdown { display: flex; align-items: center; gap: 3px; }
+.tk-countdown b {
+  width: 22px; height: 22px; display: grid; place-items: center;
+  background: var(--gray-12); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 700; border-radius: var(--r-chip);
+  font-variant-numeric: tabular-nums;
+}
+.tk-countdown i { font-style: normal; font-size: 12px; font-weight: 700; color: var(--gray-12); }
+.tk-countdown--mini b { width: 18px; height: 18px; font-size: 10px; }
+/* trong thanh giá flash thì đồng hồ là chữ chạy chứ không phải ô vuông */
+.tk-countdown--plain { display: inline-flex; gap: 0; font-variant-numeric: tabular-nums; }
+.tk-countdown--plain b { width: auto; height: auto; display: inline; background: none; color: inherit; font-size: inherit; font-weight: 600; }
+.tk-countdown--plain i { color: inherit; font-size: inherit; font-weight: 600; }
+.tk-countdown--mini i { font-size: 10px; color: var(--accent-contrast); }
+
+.tk-order__h { margin: 10px 0 12px; font-size: 16px; font-weight: 700; }
+
+.tk-field { display: block; margin-bottom: 10px; }
+.tk-field label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.tk-field input {
+  width: 100%; height: 42px; padding: 0 12px;
+  background: var(--gray-3); border: 1px solid transparent; border-radius: var(--r-btn);
+  font-family: inherit; font-size: 16px; font-weight: 400; line-height: 1.4;
+  color: var(--gray-12);
+}
+/* placeholder và giá ship gạch bỏ vẫn là chữ đọc được -> giữ bậc 11 */
+.tk-field input::placeholder { color: var(--gray-11); }
+.tk-field input:focus { background: var(--background); border-color: var(--gray-12); }
+.tk-field input[aria-invalid="true"] { border-color: var(--accent-9); background: var(--accent-2); }
+
+/* Người thật đứng sau đơn hàng — hạ ngờ vực ngay trước khi khách điền form */
+.tk-owner {
+  display: flex; align-items: center; gap: 9px;
+  margin-bottom: 12px; padding: 9px 10px;
+  background: var(--gray-2); border-radius: var(--r-card);
+}
+.tk-owner__ava { width: 48px; height: 48px; flex: none; border-radius: var(--r-pill); object-fit: cover; }
+.tk-owner__txt { min-width: 0; font-size: 13px; line-height: 1.4; color: var(--gray-11); }
+.tk-owner__txt b { display: block; font-weight: 700; color: var(--gray-12); }
+.tk-owner__zalo {
+  flex: none; height: 30px; padding: 0 11px;
+  display: flex; align-items: center; gap: 4px;
+  background: var(--zalo-dark); color: var(--accent-contrast);
+  border-radius: var(--r-pill); font-size: 13px; font-weight: 600;
+}
+.tk-owner__zalo svg { width: 14px; height: 14px; }
+
+/* Dải trấn an ngay trên nút gửi — chốt 4 rủi ro lớn nhất tại đúng lúc do dự */
+.tk-trust {
+  display: flex; flex-wrap: wrap; gap: 4px 12px;
+  margin: 12px 0 10px; font-size: 11px; color: var(--gray-11);
+}
+.tk-trust li { display: flex; align-items: center; gap: 4px; }
+.tk-trust svg { width: 13px; height: 13px; flex: none; }
+
+.tk-field__hint { display: block; margin-top: 4px; font-size: 11px; color: var(--gray-11); }
+
+.tk-packs { border: 0; padding: 0; margin: 14px 0 10px; display: grid; gap: 8px; }
+.tk-packs legend { padding: 0; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.tk-pack { cursor: pointer; }
+.tk-pack__box {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 8px;
+  border: 1.5px solid var(--gray-6); border-radius: var(--r-card); padding: 9px 12px;
+}
+.tk-pack__box b { font-size: 14px; }
+.tk-pack__note { grid-column: 1; font-size: 12px; color: var(--gray-11); }
+.tk-pack__price { grid-column: 2; grid-row: 1 / span 2; font-size: 17px; font-weight: 700; color: var(--accent-11); }
+.tk-pack input:checked + .tk-pack__box { border-color: var(--accent-9); background: var(--accent-2); }
+
+.tk-ship { font-size: 13px; color: var(--gray-11); margin-bottom: 12px; }
+.tk-ship s { color: var(--gray-11); }
+.tk-ship b { color: var(--accent-11); font-weight: 700; }
+
+.tk-consent { display: grid; grid-template-columns: 18px 1fr; gap: 8px; margin-bottom: 12px; }
+.tk-consent input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--accent-9); }
+.tk-consent label { font-size: 12px; line-height: 1.5; color: var(--gray-11); }
+.tk-consent a { color: var(--accent-11); text-decoration: underline; }
+
+.tk-submit {
+  width: 100%; height: 44px; border: 0; cursor: pointer;
+  background: var(--accent-9); color: var(--accent-contrast);
+  border-radius: var(--r-btn);
+  font-family: inherit; font-size: 16px; font-weight: 700; line-height: 1;
+}
+.tk-submit:active { background: var(--accent-11); }
+
+.tk-tls {
+  display: flex; align-items: flex-start; gap: 6px; margin-top: 10px;
+  font-size: 11px; line-height: 1.5; color: var(--gray-11);
+}
+.tk-tls svg { width: 14px; height: 14px; flex: none; margin-top: 1px; }
+
+.tk-note:empty { display: none; }
+.tk-note {
+  margin-top: 12px; padding: 10px 12px;
+  border-radius: var(--r-card); font-size: 13px; line-height: 1.5;
+}
+.tk-note.is-error { background: var(--accent-2); color: var(--accent-11); }
+.tk-note.is-ok { background: var(--success-bg); color: var(--success-fg); }
+/* 19px/700 đưa chữ vào ngưỡng "chữ lớn" nên trắng trên xanh Zalo đạt AA */
+.tk-note .tk-note__zalo {
+  display: inline-flex; align-items: center; height: 46px; margin-top: 10px; padding: 0 20px;
+  background: var(--zalo); color: var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 19px; font-weight: 700;
+}
+
+.tk-callus { margin-top: 12px; font-size: 12px; color: var(--gray-11); }
+.tk-callus a { color: var(--accent-11); font-weight: 600; }
+
+/* ============ 16. FAQ ============ */
+.tk-faq details { border-bottom: 1px solid var(--gray-6); }
+.tk-faq summary {
+  list-style: none; cursor: pointer; padding: 12px 24px 12px 0; position: relative;
+  font-size: 14px; font-weight: 500;
+}
+.tk-faq summary::-webkit-details-marker { display: none; }
+.tk-faq summary::after {
+  content: ""; position: absolute; right: 4px; top: 17px;
+  width: 8px; height: 8px; border-right: 1.6px solid var(--gray-11); border-bottom: 1.6px solid var(--gray-11);
+  transform: rotate(45deg); transition: transform .18s ease;
+}
+.tk-faq details[open] summary::after { transform: rotate(-135deg); top: 20px; }
+.tk-faq p { padding: 0 0 12px; font-size: 13px; line-height: 1.6; color: var(--gray-11); }
+
+/* ============ 17. FOOTER ============ */
+.tk-foot { padding: 18px 12px 22px; text-align: center; color: var(--on-ink); }
+.tk-foot__logo {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  font-size: 15px; font-weight: 800;
+}
+.tk-wave-ico { width: 18px; height: 18px; flex: none; color: var(--accent-8); }
+.tk-foot__links { margin-top: 8px; font-size: 13px; color: var(--on-ink-dim); }
+.tk-foot__links a { color: var(--on-ink); }
+.tk-foot__c { margin-top: 8px; font-size: 11px; color: var(--on-ink-dim); }
+
+/* ============ 18. BOTTOM ACTION BAR ============ */
+.tk-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-bar);
+  display: flex; align-items: center; gap: 8px;
+  background: var(--background); border-top: 1px solid var(--gray-6);
+  padding: 7px 10px calc(7px + env(safe-area-inset-bottom));
+}
+.tk-bar__i {
+  flex: none; width: 60px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 10px; line-height: 1.2; white-space: nowrap; color: var(--gray-12);
+}
+.tk-bar__i svg { width: 22px; height: 22px; }
+.tk-bar__cart {
+  flex: none; width: 40px; height: 40px; padding: 9px;
+  display: grid; place-items: center;
+  background: var(--accent-3); color: var(--accent-11); border-radius: var(--r-pill);
+}
+/* nút mua chính — dùng chung cho thanh cố định và cụm CTA trong luồng */
+.tk-buy {
+  flex: 1 1 0; height: 44px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--accent-9); color: var(--accent-contrast); border-radius: var(--r-pill);
+  border: 0; cursor: pointer; font-family: inherit;
+  font-size: 15px; font-weight: 700; line-height: 1.15;
+}
+.tk-buy small { font-size: 11px; font-weight: 400; }
+/* Bản trong hero: chiếm trọn bề ngang, một dòng chữ 16px — nút mua có mặt ngay
+   màn hình đầu, không phải đợi cuộn qua hero mới thấy dải mua nhanh.
+   Giữ nguyên nền và màu chữ của .tk-buy để tương phản đã cân ở đó không đổi. */
+.tk-buy--hero {
+  width: 100%; flex: none; height: 44px;
+  flex-direction: row; gap: 6px;
+  font-size: 16px; line-height: 1;
+}
+.tk-hero__cta { margin-top: 12px; }
+.tk-buy:active { background: var(--accent-11); }
+
+.tk-bar__zalo {
+  flex: none; height: 44px; padding: 0 14px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--zalo-dark); color: var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 14px; font-weight: 700; line-height: 1.15;
+}
+.tk-bar__zalo small { font-size: 10px; font-weight: 400; }
+
+/* ============ 19. XEM NHANH ============ */
+.tk-modal {
+  position: fixed; inset: 0; z-index: var(--z-modal);
+  display: grid; place-items: center; padding: 16px;
+  background: rgba(15, 23, 42, .62);
+}
+.tk-modal[hidden] { display: none; }
+.tk-modal__panel {
+  position: relative; width: 100%; max-width: 340px;
+  background: var(--background); border-radius: var(--r-sheet); overflow: hidden;
+}
+.tk-modal__x {
+  position: absolute; top: 8px; right: 8px; z-index: 1;
+  width: 30px; height: 30px; padding: 6px; border: 0; cursor: pointer;
+  background: rgba(15, 23, 42, .6); color: var(--accent-contrast); border-radius: var(--r-pill);
+}
+.tk-modal__body { padding: 12px; }
+.tk-modal__body h3 { font-size: 15px; font-weight: 600; line-height: 1.4; }
+.tk-modal__price { margin-top: 8px; font-size: 22px; font-weight: 800; color: var(--accent-11); }
+.tk-modal__price s { font-size: 13px; font-weight: 400; color: var(--gray-11); }
+.tk-modal__desc { margin-top: 8px; font-size: 13px; line-height: 1.55; color: var(--gray-11); }
+.tk-modal__buy {
+  display: block; margin-top: 12px; height: 44px; line-height: 44px; text-align: center;
+  background: var(--accent-9); color: var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 15px; font-weight: 700;
+}
+
+/* ============ 19b. POPUP ĐẶT HÀNG ============ */
+.tk-popup {
+  position: fixed; inset: 0; z-index: var(--z-popup);
+  display: grid; place-items: end center;
+  background: rgba(15, 23, 42, .58);
+}
+.tk-popup[hidden] { display: none; }
+.tk-popup__panel {
+  position: relative; width: 100%; max-width: 520px;
+  max-height: 92vh; overflow-y: auto;
+  background: var(--background);
+  border-radius: var(--r-sheet) var(--r-sheet) 0 0;
+  padding: 16px 12px calc(16px + env(safe-area-inset-bottom));
+}
+.tk-popup__x {
+  position: absolute; top: 10px; right: 10px;
+  width: 32px; height: 32px; padding: 7px; border: 0; cursor: pointer;
+  background: var(--gray-3); color: var(--gray-12); border-radius: var(--r-pill);
+}
+.tk-popup__h { font-size: 17px; font-weight: 700; padding-right: 40px; }
+.tk-popup__lede { margin: 4px 0 12px; font-size: 13px; color: var(--gray-11); }
+
+/* ============ 20. GDPR ============ */
+.tk-gdpr {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-gdpr);
+  background: var(--ink); color: var(--on-ink);
+  padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+  font-size: 12px; line-height: 1.55;
+}
+.tk-gdpr[hidden] { display: none; }
+/* dải GDPR phủ đúng chỗ thanh hành động — ẩn thanh đi cho khỏi chồng nhau */
+body:has(.tk-gdpr:not([hidden])) .tk-bar { display: none; }
+.tk-gdpr a { color: var(--accent-8); text-decoration: underline; }
+.tk-gdpr__btns { display: flex; gap: 8px; margin-top: 10px; }
+.tk-gdpr__b {
+  flex: 1; height: 36px; cursor: pointer;
+  background: none; color: var(--on-ink);
+  border: 1px solid var(--ink-line); border-radius: var(--r-btn);
+  font-family: inherit; font-size: 13px; font-weight: 600; line-height: 1;
+}
+.tk-gdpr__b--ok { background: var(--accent-9); border-color: var(--accent-9); color: var(--accent-contrast); }
+
+/* ============ 21. TRANG CHÍNH SÁCH ============ */
+.tk-legal { padding: 16px 12px 24px; }
+.tk-legal h1 { font-size: 20px; font-weight: 800; line-height: 1.35; }
+.tk-legal__intro { margin-top: 8px; font-size: 13px; color: var(--gray-11); }
+.tk-legal section { margin-top: 20px; }
+.tk-legal h2 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.tk-legal p, .tk-legal li { font-size: 13px; line-height: 1.65; color: var(--gray-11); }
+.tk-legal p + p, .tk-legal ul + p { margin-top: 8px; }
+.tk-legal ul { margin-top: 6px; display: grid; gap: 4px; }
+.tk-legal li { padding-left: 16px; position: relative; }
+.tk-legal li::before {
+  content: ""; position: absolute; left: 4px; top: 9px;
+  width: 4px; height: 4px; border-radius: var(--r-pill); background: var(--gray-9);
+}
+.tk-legal a { color: var(--accent-11); text-decoration: underline; }
+.tk-legal code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+  background: var(--gray-3); padding: 1px 5px; border-radius: var(--r-chip);
+}
+.tk-legal .tk-legal__note {
+  margin-top: 20px; padding: 10px 12px;
+  background: var(--gray-2); border-radius: var(--r-card);
+  font-size: 12px; color: var(--gray-11);
+}
+body.is-legal { padding-bottom: 0; }
+
+/* ============ 22. DESKTOP ≥768px ============ */
+@media (min-width: 768px) {
+  body { padding-bottom: 0; }
+
+  .tk-frame {
+    box-shadow: 0 0 0 1px var(--gray-6), 0 18px 48px rgba(15, 23, 42, .16);
+    min-height: 100vh;
+  }
+
+  /* Thanh cố định nhường chỗ cho cụm CTA nằm trong luồng */
+  .tk-bar { display: none; }
+
+  .tk-inline-cta {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px; border-top: 8px solid var(--gray-2);
+  }
+  .tk-pledges { grid-template-columns: repeat(3, 1fr); }
+  /* Ba cấp nằm cạnh nhau: cột hẹp lại nên xếp dọc icon → tên → mô tả → cường độ */
+  .tk-modes { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+  .tk-mode { grid-template-columns: 1fr; align-content: start; gap: 6px; }
+  .tk-mode__ico { grid-column: 1; grid-row: 1; }
+  .tk-mode b { grid-column: 1; grid-row: 2; }
+  .tk-mode__d { grid-column: 1; grid-row: 3; }
+  .tk-mode__lv { grid-column: 1; grid-row: 4; align-self: end; height: 18px; margin-top: 2px; }
+  .tk-mode__lv i:nth-child(1) { height: 8px; }
+  .tk-mode__lv i:nth-child(2) { height: 13px; }
+  .tk-mode__lv i:nth-child(3) { height: 18px; }
+
+  .tk-inline-cta__ghost {
+    flex: none; height: 44px; padding: 0 14px;
+    display: flex; align-items: center;
+    border: 1px solid var(--gray-6); border-radius: var(--r-pill);
+    font-size: 13px; font-weight: 500;
+  }
+}
+
+/* ============ 23. GIẢM CHUYỂN ĐỘNG ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

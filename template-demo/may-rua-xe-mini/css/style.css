@@ -1,0 +1,940 @@
+/* Landing máy rửa xe mini áp lực cao — giao diện "mát – sạch – hiện đại".
+   Thiết kế cho khung 390px; từ 768px trở lên trang mở rộng thành cột giữa 720px
+   và hero tách hẳn thành 2 cột (ảnh phun nước | chữ + giá + CTA).
+   Mô-típ nhận diện lặp lại toàn trang: badge PSI tròn, giọt nước và tia nước SVG. */
+
+/* ============ 0. TOKEN CỤC BỘ ============
+   Màu lấy từ css/colors.css (thang Radix, accent #0891B2). Khối này chỉ giữ
+   những giá trị KHÔNG thuộc thang màu: bo góc, chiều cao neo, tầng z, gradient
+   nước dựng từ thang accent, và ba màu ngữ nghĩa nằm ngoài thang. */
+:root {
+  /* --- Gradient nước, cả ba đều dựng từ thang accent --- */
+  --grad-head: linear-gradient(180deg, var(--accent-9) 0%, var(--accent-6) 62%, var(--accent-2) 100%);
+  --grad-flash: linear-gradient(90deg, var(--accent-9) 0%, var(--accent-7) 100%);
+  --grad-progress: linear-gradient(90deg, var(--accent-9) 0%, var(--accent-8) 100%);
+
+  /* --- Màu ngữ nghĩa ngoài thang thương hiệu --- */
+  --star: #FACC16;            /* sao rating */
+  --success-bg: #EFFBF3;      /* nền thông báo gửi form thành công */
+  --success-fg: #0B6B36;      /* 7.3:1 trên --success-bg */
+  --warn-fg: #9A3412;         /* 6.1:1 trên trắng — cột chi phí "ra tiệm" */
+  --warn-bg: #FFF4ED;
+  --zalo: #0088FF;            /* xanh Zalo gốc — chỉ cho chữ lớn (≥18.66px đậm) */
+  --zalo-dark: #0068CC;       /* 5.45:1 trên trắng — nền nút Zalo chữ nhỏ */
+
+  /* --- Bo góc phân tầng, gốc là --radius của bộ token --- */
+  --r-pill: 9999px;
+  --r-card: var(--radius);
+  --r-sheet: calc(var(--radius) + 6px);
+  --r-chip: calc(var(--radius) / 2);
+  --r-btn: 6px;
+
+  --tab-h: 40px;      /* chiều cao hàng tab dính */
+  --sticky-h: 62px;   /* chiều cao dải mua nhanh — neo liên kết trừ hao đúng bằng đây */
+
+  /* --- Tầng z --- */
+  --z-tabs: 320;
+  --z-sticky: 330;
+  --z-bar: 350;
+  --z-modal: 380;
+  --z-gdpr: 400;
+  --z-popup: 460;
+}
+
+/* ============ 1. NỀN CHUNG ============ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--gray-2);
+  color: var(--gray-12);
+  font: 400 14px/1.5 "Be Vietnam Pro", Arial, Tahoma, sans-serif;
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));   /* chừa chỗ thanh hành động */
+}
+
+img { max-width: 100%; height: auto; display: block; }
+/* ảnh sản phẩm giữ khuôn vuông 1:1 cho mọi ô lưới */
+.aq-gal__slide img, .aq-card__pic img, .aq-combo__box img, .aq-modal__panel img {
+  width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+}
+svg { width: 100%; height: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+:focus-visible { outline: 2px solid var(--gray-12); outline-offset: 2px; border-radius: 2px; }
+
+.aq-tabs::-webkit-scrollbar,
+ul.aq-vouchers::-webkit-scrollbar,
+.aq-gal__track::-webkit-scrollbar { display: none; }
+
+.skip {
+  position: absolute; left: 8px; top: -60px; z-index: 500;
+  background: var(--gray-12); color: var(--accent-contrast);
+  padding: 10px 14px; border-radius: var(--r-btn); font-weight: 600;
+}
+.skip:focus { top: 8px; }
+
+.aq-frame { max-width: 520px; margin-inline: auto; background: var(--background); }
+.aq-sticky, .aq-bar, .aq-gdpr { max-width: 520px; margin-inline: auto; }
+.aq-pad { padding-inline: 12px; }
+
+/* ============ 2. MÔ-TÍP NHẬN DIỆN: BADGE PSI + GIỌT NƯỚC + TIA NƯỚC ============ */
+/* Badge PSI tròn viền accent — xuất hiện ở hero, thanh đo áp lực và khối giá. */
+.aq-psi {
+  display: inline-grid; place-content: center; text-align: center;
+  width: 66px; height: 66px; flex: none;
+  background: var(--background); color: var(--accent-11);
+  border: 2px solid var(--accent-9); border-radius: var(--r-pill);
+  box-shadow: 0 4px 14px rgba(8, 145, 178, .22);
+  line-height: 1;
+}
+.aq-psi b { font-size: 20px; font-weight: 800; letter-spacing: -.5px; }
+.aq-psi small { display: block; margin-top: 2px; font-size: 9px; font-weight: 700; letter-spacing: .6px; }
+.aq-psi--hero { position: absolute; right: 12px; top: 12px; z-index: 3; width: 74px; height: 74px; }
+.aq-psi--hero b { font-size: 23px; }
+.aq-psi--sm { width: 56px; height: 56px; }
+.aq-psi--sm b { font-size: 17px; }
+.aq-psi--sm small { font-size: 8px; letter-spacing: .2px; }
+
+/* Giọt nước đứng trước mỗi tiêu đề mục — nhắc lại mô-típ mà không tốn chỗ. */
+.aq-drops { display: inline-block; width: 15px; height: 15px; margin-right: 6px; color: var(--accent-9); vertical-align: -2px; }
+.aq-drops svg { width: 100%; height: 100%; }
+
+/* Tia nước SVG phủ chéo ảnh hero: hai đường cong + ba giọt bay. */
+.aq-jet {
+  position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%;
+  pointer-events: none;
+}
+.aq-jet__line { fill: none; stroke: rgba(255, 255, 255, .8); stroke-width: 2.2; stroke-linecap: round; }
+.aq-jet__line--soft { stroke: rgba(255, 255, 255, .4); stroke-width: 1.4; }
+.aq-jet__drop { fill: rgba(255, 255, 255, .85); animation: aq-fly 2.6s ease-in-out infinite; }
+.aq-jet__drop--b { animation-delay: .5s; }
+.aq-jet__drop--c { animation-delay: 1.1s; }
+@keyframes aq-fly {
+  0%   { opacity: 0; transform: translate(-14px, 10px); }
+  35%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(22px, -16px); }
+}
+
+/* ============ 3. HEADER ============ */
+.aq-head {
+  background: var(--grad-head);
+  padding: calc(8px + env(safe-area-inset-top)) 12px 10px;
+  color: var(--accent-contrast);
+}
+.aq-head__row { display: flex; align-items: center; gap: 8px; }
+
+.aq-logo {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 19px; font-weight: 800; letter-spacing: -.2px; flex: 1;
+}
+.aq-logo svg { width: 19px; height: 19px; flex: none; }
+.aq-logo span { font-weight: 400; opacity: .85; }
+
+.aq-head__acts { display: flex; gap: 2px; }
+.aq-ico {
+  position: relative; width: 32px; height: 32px; padding: 4px;
+  display: grid; place-items: center; color: var(--accent-contrast);
+}
+.aq-ico svg { width: 24px; height: 24px; }
+.aq-ico__badge {
+  position: absolute; top: -3px; right: -3px;
+  min-width: 15px; height: 15px; padding: 0 4px;
+  background: var(--accent-11); color: var(--accent-contrast);
+  border: 1.5px solid var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 9px; font-weight: 700; line-height: 12px; text-align: center;
+}
+
+.aq-search {
+  margin-top: 10px;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--background); border-radius: 92px;
+  padding: 10px 12px 10px 14px;
+  box-shadow: 0 1px 3px rgba(0, 48, 64, .12);
+}
+.aq-search svg { width: 18px; height: 18px; flex: none; color: var(--gray-11); }
+.aq-search__ph {
+  flex: 1; min-width: 0; color: var(--gray-11); font-size: 13px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.aq-search__go { color: var(--accent-11); font-size: 14px; font-weight: 600; flex: none; }
+
+.aq-quick { display: flex; margin-top: 12px; }
+.aq-quick__i {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 600; line-height: 1.3; text-align: center;
+  color: var(--gray-12);
+}
+.aq-quick__ico {
+  width: 34px; height: 34px; padding: 7px;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, .86); border-radius: var(--r-card);
+  color: var(--accent-9);
+}
+.aq-quick__i svg { width: 20px; height: 20px; }
+
+/* ============ 4. TAB NAV — gạch chân ĐEN ============ */
+.aq-tabs {
+  position: sticky; top: 0; z-index: var(--z-tabs);
+  height: var(--tab-h);
+  display: flex; gap: 4px;
+  background: var(--background);
+  border-bottom: 1px solid var(--gray-6);
+  padding: 0 6px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.aq-tab {
+  position: relative; flex: none;
+  background: none; border: 0; cursor: pointer;
+  padding: 12px 8px 11px;
+  font-family: inherit; font-size: 14px; font-weight: 400; line-height: 1.5;
+  color: var(--gray-11); white-space: nowrap;
+}
+.aq-tab.is-on { color: var(--gray-12); font-weight: 700; }
+.aq-tab.is-on::after {
+  content: ""; position: absolute; left: 8px; right: 8px; bottom: 0;
+  height: 3px; border-radius: 2px; background: var(--gray-12);
+}
+
+/* ============ 5. HERO SPLIT ============
+   390px: ảnh trước, khối chữ đè lên mép dưới ảnh 14px cho có chiều sâu.
+   ≥768px: hai cột thật, ảnh trái – chữ phải. */
+.aq-hero { display: grid; }
+/* con của grid mặc định min-width:auto — băng ảnh cuộn ngang sẽ đẩy rộng cả trang
+   nếu không cho phép co lại */
+.aq-hero > * { min-width: 0; }
+
+.aq-hero__media { position: relative; min-width: 0; }
+.aq-gal { min-width: 0; }
+
+.aq-gal { position: relative; }
+.aq-gal__track {
+  display: flex; margin: 0;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.aq-gal__track:focus-visible { outline: 2px solid var(--gray-12); outline-offset: -4px; }
+.aq-gal__slide { flex: 0 0 100%; scroll-snap-align: center; }
+
+.aq-gal__arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  width: 30px; height: 30px; padding: 6px; border: 0; cursor: pointer;
+  background: rgba(255, 255, 255, .86); color: var(--accent-12);
+  border-radius: var(--r-pill);
+}
+.aq-gal__arrow--prev { left: 8px; }
+.aq-gal__arrow--next { right: 8px; }
+.aq-gal__arrow[disabled] { opacity: .35; cursor: default; }
+
+.aq-gal__count {
+  position: absolute; right: 12px; bottom: 52px; z-index: 3;
+  background: rgba(0, 48, 64, .55); color: var(--accent-contrast);
+  font-size: 11px; padding: 2px 8px; border-radius: var(--r-pill);
+  font-variant-numeric: tabular-nums;
+}
+.aq-gal__dots {
+  /* nằm trên dải ribbon (cao 28px, cách đáy 16px) để chấm luôn bấm được */
+  position: absolute; left: 0; right: 0; bottom: 52px; z-index: 3;
+  display: flex; justify-content: center; gap: 6px;
+}
+.aq-gal__dot {
+  width: 6px; height: 6px; padding: 0; border: 0; cursor: pointer;
+  background: rgba(255, 255, 255, .6); border-radius: var(--r-pill);
+}
+.aq-gal__dot[aria-current="true"] { width: 16px; background: var(--accent-contrast); }
+
+.aq-hero__chip, .aq-ribbons, .aq-authority, .aq-hero__x8 { z-index: 3; }
+
+.aq-hero__chip {
+  position: absolute; left: 12px; top: 12px;
+  max-width: calc(100% - 110px);
+  background: rgba(0, 48, 64, .55); color: var(--accent-contrast);
+  font-size: 11px; line-height: 1.4; padding: 3px 8px; border-radius: var(--r-chip);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.aq-authority {
+  position: absolute; left: 12px; top: 36px;
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--accent-2); color: var(--accent-11);
+  font-size: 11px; font-weight: 600; line-height: 1.4;
+  padding: 3px 7px; border-radius: var(--r-chip);
+}
+/* Chip "gấp 8 lần" nằm ngay dưới badge PSI, cùng kể một câu chuyện áp lực */
+.aq-hero__x8 {
+  position: absolute; right: 12px; top: 92px;
+  display: inline-flex; align-items: center; gap: 5px; max-width: 168px;
+  background: var(--accent-12); color: var(--accent-contrast);
+  font-size: 11px; font-weight: 600; line-height: 1.3;
+  padding: 5px 9px; border-radius: var(--r-pill);
+}
+.aq-hero__x8 svg { width: 13px; height: 13px; flex: none; }
+
+/* Ribbon 3 mảnh cắt xéo ~10°, dùng 3 bậc accent tăng dần */
+ /* nhấc lên 16px để khối chữ bo góc đè lên mép ảnh không cắt mất chữ ribbon */
+.aq-ribbons { position: absolute; left: 0; bottom: 16px; display: flex; pointer-events: none; }
+.aq-ribbon {
+  height: 28px; padding: 0 9px 0 11px;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 700; line-height: 1; white-space: nowrap;
+  clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+  margin-left: -5px; color: var(--gray-12);
+}
+.aq-ribbon:first-child { clip-path: polygon(0 0, 100% 0, calc(100% - 5px) 100%, 0 100%); margin-left: 0; }
+.aq-ribbon:last-child { clip-path: polygon(5px 0, 100% 0, 100% 100%, 0 100%); }
+.aq-ribbon b { font-size: 8px; font-weight: 800; text-transform: uppercase; opacity: .82; letter-spacing: .3px; }
+.aq-ribbon--1 { background: var(--accent-4); }
+.aq-ribbon--2 { background: var(--accent-6); }
+.aq-ribbon--3 { background: var(--accent-8); }
+
+/* --- Cột chữ --- */
+.aq-hero__body {
+  position: relative; z-index: 4;
+  margin-top: -14px; padding: 14px 12px 4px;
+  background: var(--background);
+  border-radius: var(--r-sheet) var(--r-sheet) 0 0;
+}
+.aq-hero__title { font-size: 20px; font-weight: 800; line-height: 1.28; letter-spacing: -.3px; }
+.aq-hero__lede { margin-top: 8px; font-size: 13px; line-height: 1.55; color: var(--gray-11); }
+
+.aq-specchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.aq-specchips li {
+  display: flex; align-items: center; gap: 5px;
+  background: var(--accent-3); color: var(--accent-11);
+  font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: var(--r-pill);
+}
+.aq-specchips svg { width: 14px; height: 14px; flex: none; }
+
+/* Thanh giá flash — gradient nước ngang, chip % đảo màu */
+.aq-flash {
+  margin-top: 12px; border-radius: var(--r-card);
+  background: var(--grad-flash); color: var(--accent-contrast);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+  padding: 10px 12px 12px;
+}
+.aq-flash__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }
+.aq-flash__off {
+  background: var(--accent-contrast); color: var(--accent-11);
+  font-size: 13px; font-weight: 700; line-height: 1;
+  padding: 4px 5px; border-radius: var(--r-chip);
+}
+.aq-flash__now { font-size: 29px; font-weight: 800; line-height: 1.05; }
+.aq-flash__old {
+  flex-basis: 100%; margin-top: 2px;
+  font-size: 12px; font-weight: 400; line-height: 1.35; color: var(--accent-12);
+}
+.aq-flash__meta { text-align: right; padding-top: 2px; flex: none; color: var(--accent-12); }
+.aq-flash__tag {
+  display: flex; align-items: center; justify-content: flex-end; gap: 2px;
+  font-size: 15px; font-weight: 700;
+}
+.aq-flash__tag svg { width: 15px; height: 15px; color: var(--accent-contrast); }
+.aq-flash__end { display: block; margin-top: 3px; font-size: 12px; }
+/* Cú huých mất mát: nói rõ mất gì khi đồng hồ về 0, không chỉ đếm ngược suông */
+.aq-revert { display: block; margin-top: 3px; font-size: 11px; line-height: 1.35; color: inherit; }
+.aq-revert--ink { margin-top: 6px; text-align: right; color: var(--accent-11); }
+
+.aq-rating {
+  display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+  margin-top: 10px; font-size: 12px; color: var(--gray-11);
+}
+.aq-rating b { font-size: 13px; color: var(--gray-12); }
+.aq-rating i { font-style: normal; }
+.aq-star { width: 14px; height: 14px; color: var(--star); flex: none; }
+.aq-star--sm { width: 12px; height: 12px; }
+.aq-star--xs { width: 11px; height: 11px; vertical-align: -1px; }
+
+ul.aq-vouchers {
+  display: flex; gap: 6px; margin-top: 10px;
+  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, #000 88%, transparent);
+  scroll-margin-top: calc(var(--tab-h) + 12px);
+}
+.aq-vouchers li {
+  flex: none; display: flex; align-items: center; gap: 4px;
+  background: var(--accent-2); color: var(--accent-11);
+  font-size: 12px; padding: 4px 8px; border-radius: var(--r-chip); white-space: nowrap;
+}
+.aq-ticket { width: 14px; height: 14px; flex: none; }
+
+.aq-progress { display: flex; align-items: center; gap: 8px; margin: 12px 0 14px; }
+.aq-progress__hot {
+  background: var(--accent-11); color: var(--accent-contrast);
+  font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: var(--r-chip); flex: none;
+}
+.aq-progress__track { flex: 1; height: 6px; background: var(--gray-3); border-radius: var(--r-pill); overflow: hidden; }
+.aq-progress__fill { display: block; width: 82%; height: 100%; background: var(--grad-progress); }
+.aq-progress__label { font-size: 11px; color: var(--gray-11); flex: none; }
+.aq-progress__label b { color: var(--gray-12); }
+
+.aq-hero__cta { display: grid; gap: 8px; padding-bottom: 12px; }
+.aq-buy--hero { width: 100%; }
+.aq-hero__zalo {
+  height: 42px; display: flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid var(--accent-8); border-radius: var(--r-pill);
+  color: var(--accent-11); font-size: 14px; font-weight: 600;
+}
+.aq-hero__zalo svg { width: 16px; height: 16px; }
+
+/* ============ 6. DẢI MUA NHANH DÍNH ĐỈNH ============ */
+.aq-sticky {
+  position: fixed; left: 0; right: 0; top: var(--tab-h); z-index: var(--z-sticky);
+  display: flex; align-items: center; gap: 8px;
+  min-height: var(--sticky-h); padding: 7px 12px;
+  background: var(--grad-flash); color: var(--accent-contrast);
+}
+.aq-sticky[hidden] { display: none; }
+.aq-sticky__col { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.aq-sticky__row { display: flex; align-items: center; gap: 8px; }
+.aq-sticky__price { font-size: 19px; font-weight: 800; flex: none; }
+.aq-sticky__buy {
+  margin-left: auto; flex: none;
+  height: 30px; padding: 0 16px; display: flex; align-items: center;
+  background: var(--accent-12); color: var(--accent-contrast);
+  border-radius: var(--r-pill); font-size: 13px; font-weight: 700;
+}
+.aq-sticky__buy:active { background: var(--accent-11); }
+
+/* ============ 7. SECTION CHUNG ============ */
+[id] { scroll-margin-top: calc(var(--tab-h) + var(--sticky-h) + 12px); }
+
+.aq-sec { padding: 14px 0; }
+.aq-sec + .aq-sec, .aq-inline-cta + .aq-sec { border-top: 8px solid var(--gray-2); }
+.aq-sec--tint { background: var(--accent-1); }
+.aq-sec__h { font-size: 17px; font-weight: 700; line-height: 1.35; color: var(--gray-12); margin-bottom: 12px; }
+
+.aq-inline-cta { display: none; }
+
+/* ============ 8. NỖI ĐAU ============ */
+.aq-pains { display: grid; gap: 8px; }
+.aq-pain {
+  display: grid; gap: 3px; padding: 11px 12px;
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-left: 3px solid var(--accent-8); border-radius: var(--r-card);
+}
+.aq-pain__ico { width: 20px; height: 20px; color: var(--accent-11); margin-bottom: 2px; }
+.aq-pain b { font-size: 14px; font-weight: 700; line-height: 1.4; color: var(--gray-12); }
+.aq-pain span { font-size: 12.5px; line-height: 1.5; color: var(--gray-11); }
+
+/* ============ 9. THANH ĐO PSI ============ */
+.aq-gauge { display: grid; gap: 10px; }
+.aq-gauge__row {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3px 8px;
+}
+.aq-gauge__name { grid-row: 1; grid-column: 1; font-size: 12.5px; line-height: 1.35; color: var(--gray-11); }
+.aq-gauge__name b { color: var(--accent-11); font-weight: 700; }
+.aq-gauge__val { grid-row: 1; grid-column: 2; font-size: 15px; font-weight: 800; color: var(--gray-12); text-align: right; white-space: nowrap; }
+.aq-gauge__val small { font-size: 10px; font-weight: 600; color: var(--gray-11); }
+.aq-gauge__bar {
+  grid-row: 2; grid-column: 1 / -1;
+  height: 12px; background: var(--gray-3); border-radius: var(--r-pill); overflow: hidden;
+}
+.aq-gauge__fill { display: block; height: 100%; background: var(--gray-8); border-radius: var(--r-pill); }
+/* thanh của máy đang bán: gradient nước — chỉ nó được dùng accent-9 */
+.aq-gauge__fill--on { background: var(--grad-flash); }
+.aq-gauge__fill--pro { background: var(--accent-7); }
+.aq-gauge__row.is-hero .aq-gauge__name { color: var(--gray-12); font-weight: 600; }
+.aq-gauge__row.is-hero .aq-gauge__val { color: var(--accent-11); }
+
+.aq-gauge__note {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 14px; padding: 12px;
+  background: var(--background); border: 1px solid var(--accent-6); border-radius: var(--r-card);
+  font-size: 12.5px; line-height: 1.55; color: var(--gray-11);
+}
+
+/* ============ 10. TRƯỚC / SAU ============
+   Ảnh "sau" nằm chồng đúng vị trí ảnh "trước" và bị cắt bằng clip-path theo
+   --pos, nên hai ảnh luôn khớp khung khi kéo. Thanh kéo là <input type="range">
+   trong suốt phủ hết khung — chuột, cảm ứng và bàn phím dùng chung một điều khiển. */
+.aq-ba {
+  --pos: 52%;
+  position: relative; overflow: hidden;
+  border-radius: var(--r-card); background: var(--gray-3);
+  aspect-ratio: 4 / 3;
+}
+.aq-ba__img { width: 100%; height: 100%; object-fit: cover; }
+.aq-ba__after {
+  position: absolute; inset: 0;
+  clip-path: inset(0 0 0 var(--pos));
+}
+.aq-ba__tag {
+  position: absolute; top: 10px; z-index: 2;
+  background: rgba(0, 48, 64, .6); color: var(--accent-contrast);
+  font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: var(--r-pill);
+}
+.aq-ba__tag--l { left: 10px; }
+.aq-ba__tag--r { right: 10px; background: var(--accent-9); }
+.aq-ba__handle {
+  position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 3;
+  width: 3px; margin-left: -1.5px; background: var(--accent-contrast);
+  box-shadow: 0 0 0 1px rgba(0, 48, 64, .25);
+}
+.aq-ba__handle::after {
+  content: ""; position: absolute; top: 50%; left: 50%;
+  width: 34px; height: 34px; margin: -17px 0 0 -17px;
+  background: var(--accent-contrast); border: 2px solid var(--accent-9);
+  border-radius: var(--r-pill);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='12' viewBox='0 0 22 12' fill='none' stroke='%230891B2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 2 1 6l4 4M17 2l4 4-4 4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center;
+}
+.aq-ba__range {
+  position: absolute; inset: 0; z-index: 4;
+  width: 100%; height: 100%; margin: 0; padding: 0;
+  appearance: none; background: none; cursor: ew-resize;
+}
+.aq-ba__range::-webkit-slider-thumb { appearance: none; width: 40px; height: 100%; background: transparent; }
+.aq-ba__range::-moz-range-thumb { width: 40px; height: 100%; border: 0; background: transparent; }
+.aq-ba__range:focus-visible { outline: 2px solid var(--gray-12); outline-offset: -4px; }
+.aq-ba__cap { margin-top: 10px; font-size: 12.5px; line-height: 1.55; color: var(--gray-11); }
+
+/* ============ 11. 5 BƯỚC ============ */
+.aq-steps { display: grid; gap: 10px; counter-reset: step; }
+.aq-steps li {
+  display: grid; grid-template-columns: 34px 1fr; column-gap: 10px; align-items: start;
+  font-size: 13px; line-height: 1.5; color: var(--gray-11);
+}
+.aq-steps__n {
+  grid-row: span 2;
+  font-size: 17px; font-weight: 800; color: var(--accent-9); line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+.aq-steps b { font-size: 14px; color: var(--gray-12); }
+.aq-steps__tip {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-top: 12px; padding: 10px 12px;
+  background: var(--accent-3); border-radius: var(--r-card);
+  font-size: 12.5px; line-height: 1.5; color: var(--accent-11);
+}
+.aq-steps__tip svg { width: 16px; height: 16px; flex: none; margin-top: 2px; }
+.aq-steps__tip b { font-weight: 700; }
+
+/* ============ 12. SO SÁNH CHI PHÍ ============ */
+.aq-cost { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.aq-cost__col {
+  padding: 12px 10px; border-radius: var(--r-card);
+  background: var(--warn-bg); border: 1px solid var(--gray-6);
+}
+.aq-cost__col--on { background: var(--accent-2); border-color: var(--accent-8); }
+.aq-cost__lab { font-size: 12px; font-weight: 600; color: var(--gray-11); }
+.aq-cost__big { margin-top: 4px; font-size: 21px; font-weight: 800; line-height: 1.15; color: var(--warn-fg); }
+.aq-cost__col--on .aq-cost__big { color: var(--accent-11); }
+.aq-cost__big small { display: block; margin-top: 2px; font-size: 11px; font-weight: 500; color: var(--gray-11); }
+.aq-cost__list { margin-top: 8px; display: grid; gap: 4px; }
+.aq-cost__list li { position: relative; padding-left: 13px; font-size: 12px; line-height: 1.45; color: var(--gray-11); }
+.aq-cost__list li::before {
+  content: ""; position: absolute; left: 2px; top: 7px;
+  width: 5px; height: 5px; border-radius: var(--r-pill); background: var(--gray-8);
+}
+.aq-cost__col--on .aq-cost__list li::before { background: var(--accent-9); }
+.aq-cost__note {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-top: 10px; padding: 10px 12px;
+  background: var(--background); border: 1px solid var(--accent-6); border-radius: var(--r-card);
+  font-size: 13px; line-height: 1.5; color: var(--gray-11);
+}
+.aq-cost__note svg { width: 16px; height: 16px; flex: none; margin-top: 2px; color: var(--accent-9); }
+.aq-cost__note b { color: var(--accent-11); font-weight: 700; }
+
+/* ============ 13. KỊCH BẢN SỬ DỤNG ============ */
+.aq-cases { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.aq-case {
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-radius: var(--r-card); overflow: hidden;
+}
+.aq-case img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.aq-case span { display: block; padding: 6px 8px 8px; font-size: 12px; line-height: 1.4; color: var(--gray-12); }
+
+/* ============ 14. GRID 2 CỘT ============ */
+#gian-hang { background: var(--gray-2); }
+.aq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-inline: 12px; }
+.aq-card {
+  appearance: none; border: 0; padding: 0; cursor: pointer; text-align: left;
+  background: var(--background); border-radius: var(--r-card); overflow: hidden;
+  font: inherit; color: inherit; display: flex; flex-direction: column;
+}
+.aq-card[hidden] { display: none; }
+.aq-card__pic { position: relative; display: block; }
+.aq-card__off {
+  position: absolute; top: 0; right: 0;
+  background: var(--accent-11); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 700; line-height: 1;
+  padding: 4px 6px; border-bottom-left-radius: var(--r-chip);
+}
+.aq-card__title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  margin: 8px 8px 0; font-size: 13px; line-height: 1.4; color: var(--gray-12);
+}
+.aq-card__price { margin: 6px 8px 0; font-size: 17px; font-weight: 700; color: var(--accent-11); line-height: 1.2; }
+.aq-card__price s { font-size: 12px; font-weight: 400; color: var(--gray-11); }
+.aq-card__meta { margin: 4px 8px 10px; font-size: 11px; color: var(--gray-11); }
+.aq-grid__empty { padding: 20px 12px; text-align: center; color: var(--gray-11); }
+
+/* ============ 15. COMBO 3 CỘT ============ */
+.aq-combo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.aq-combo__i { position: relative; cursor: pointer; }
+/* chỉ ẩn chính cái <input>, không ẩn nhãn bọc ngoài */
+.aq-combo__i input, .aq-pack input { position: absolute; opacity: 0; pointer-events: none; }
+.aq-combo__i input:focus-visible + .aq-combo__box,
+.aq-pack input:focus-visible + .aq-pack__box { outline: 2px solid var(--gray-12); outline-offset: 2px; }
+.aq-combo__box {
+  position: relative; display: block;
+  border: 1.5px solid var(--gray-6); border-radius: var(--r-card); overflow: hidden;
+  background: var(--background);
+}
+.aq-combo__off {
+  position: absolute; top: 4px; left: 4px;
+  background: var(--accent-11); color: var(--accent-contrast);
+  font-size: 11px; font-weight: 700; line-height: 1;
+  padding: 3px 6px; border-radius: var(--r-pill);
+}
+.aq-combo__name {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  min-height: 39px; padding: 6px 5px 0; text-align: center;
+  font-size: 12px; font-weight: 500; line-height: 1.35; color: var(--gray-12);
+}
+.aq-combo__price { display: block; padding: 3px 4px 7px; text-align: center; font-size: 13px; font-weight: 700; color: var(--accent-11); }
+.aq-combo__i input:checked + .aq-combo__box { border-color: var(--accent-9); }
+
+/* ============ 16. ĐÁNH GIÁ ============ */
+.aq-reviews { display: grid; gap: 8px; }
+.aq-reviews li {
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-radius: var(--r-card); padding: 10px 12px;
+}
+.aq-reviews p + p { margin-top: 4px; }
+.aq-reviews__stars { display: flex; gap: 2px; }
+.aq-reviews__who { font-size: 12px; color: var(--gray-11); }
+
+/* ============ 17. 3 CAM KẾT ============ */
+.aq-pledges { display: grid; gap: 8px; padding: 2px 12px 4px; }
+.aq-pledge {
+  display: grid; gap: 3px; padding: 10px;
+  background: var(--background); border: 1px solid var(--gray-6); border-radius: var(--r-card);
+}
+.aq-pledge__ico { width: 22px; height: 22px; color: var(--accent-11); margin-bottom: 2px; }
+.aq-pledge__ico--on { color: var(--accent-9); }
+.aq-pledge b { font-size: 14px; font-weight: 700; line-height: 1.35; color: var(--gray-12); }
+.aq-pledge span { font-size: 12px; line-height: 1.45; color: var(--gray-11); }
+
+/* ============ 18. THÔNG SỐ ============ */
+.aq-spec { width: 100%; border-collapse: collapse; font-size: 13px; }
+.aq-spec th, .aq-spec td {
+  text-align: left; padding: 9px 0; border-bottom: 1px solid var(--gray-6); vertical-align: top;
+}
+.aq-spec th { width: 40%; font-weight: 400; color: var(--gray-11); padding-right: 10px; }
+.aq-spec td { color: var(--gray-12); }
+
+/* ============ 19. FORM ĐẶT HÀNG ============ */
+.aq-order {
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-radius: var(--r-sheet); padding: 12px;
+}
+.aq-order__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.aq-order__deal { display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; color: var(--gray-12); }
+.aq-order__deal .aq-ticket { color: var(--accent-11); }
+
+/* Countdown 3 ô vuông ĐEN */
+.aq-countdown { display: flex; align-items: center; gap: 3px; }
+.aq-countdown b {
+  width: 22px; height: 22px; display: grid; place-items: center;
+  background: var(--gray-12); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 700; border-radius: var(--r-chip);
+  font-variant-numeric: tabular-nums;
+}
+.aq-countdown i { font-style: normal; font-size: 12px; font-weight: 700; color: var(--gray-12); }
+.aq-countdown--mini b { width: 18px; height: 18px; font-size: 10px; }
+.aq-countdown--mini i { font-size: 10px; color: var(--accent-contrast); }
+/* trong thanh giá flash thì đồng hồ là chữ chạy chứ không phải ô vuông */
+.aq-countdown--plain { display: inline-flex; gap: 0; font-variant-numeric: tabular-nums; }
+.aq-countdown--plain b { width: auto; height: auto; display: inline; background: none; color: inherit; font-size: inherit; font-weight: 600; }
+.aq-countdown--plain i { color: inherit; font-size: inherit; font-weight: 600; }
+
+.aq-order__h { margin: 10px 0 12px; font-size: 16px; font-weight: 700; }
+
+/* Người thật đứng sau đơn hàng — hạ ngờ vực ngay trước khi khách điền form */
+.aq-owner {
+  display: flex; align-items: center; gap: 9px;
+  margin-bottom: 12px; padding: 9px 10px;
+  background: var(--accent-2); border-radius: var(--r-card);
+}
+.aq-owner__ava { width: 48px; height: 48px; flex: none; border-radius: var(--r-pill); object-fit: cover; }
+.aq-owner__txt { min-width: 0; font-size: 13px; line-height: 1.4; color: var(--gray-11); }
+.aq-owner__txt b { display: block; font-weight: 700; color: var(--gray-12); }
+.aq-owner__zalo {
+  flex: none; height: 30px; padding: 0 11px;
+  display: flex; align-items: center; gap: 4px;
+  background: var(--zalo-dark); color: var(--accent-contrast);
+  border-radius: var(--r-pill); font-size: 13px; font-weight: 600;
+}
+.aq-owner__zalo svg { width: 14px; height: 14px; }
+
+.aq-field { display: block; margin-bottom: 10px; }
+.aq-field label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.aq-field input {
+  width: 100%; height: 42px; padding: 0 12px;
+  background: var(--gray-3); border: 1px solid transparent; border-radius: var(--r-btn);
+  font-family: inherit; font-size: 16px; font-weight: 400; line-height: 1.4;   /* 16px: iOS không tự phóng to */
+  color: var(--gray-12);
+}
+.aq-field input::placeholder { color: var(--gray-11); }
+.aq-field input:focus { background: var(--background); border-color: var(--gray-12); }
+.aq-field input[aria-invalid="true"] { border-color: var(--accent-9); background: var(--accent-2); }
+.aq-field__hint { display: block; margin-top: 4px; font-size: 11px; color: var(--gray-11); }
+
+.aq-packs { border: 0; padding: 0; margin: 14px 0 10px; display: grid; gap: 8px; }
+.aq-packs legend { padding: 0; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.aq-pack { cursor: pointer; }
+.aq-pack__box {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 8px;
+  border: 1.5px solid var(--gray-6); border-radius: var(--r-card); padding: 9px 12px;
+}
+.aq-pack__box b { font-size: 14px; }
+.aq-pack__note { grid-column: 1; font-size: 12px; color: var(--gray-11); }
+.aq-pack__price { grid-column: 2; grid-row: 1 / span 2; font-size: 17px; font-weight: 700; color: var(--accent-11); }
+.aq-pack input:checked + .aq-pack__box { border-color: var(--accent-9); background: var(--accent-2); }
+
+.aq-ship { font-size: 13px; color: var(--gray-11); margin-bottom: 12px; }
+.aq-ship s { color: var(--gray-11); }
+.aq-ship b { color: var(--accent-11); font-weight: 700; }
+
+.aq-consent { display: grid; grid-template-columns: 18px 1fr; gap: 8px; margin-bottom: 12px; }
+.aq-consent input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--accent-9); }
+.aq-consent label { font-size: 12px; line-height: 1.5; color: var(--gray-11); }
+.aq-consent a { color: var(--accent-11); text-decoration: underline; }
+
+/* Dải trấn an ngay trên nút gửi — chốt 4 rủi ro lớn nhất tại đúng lúc do dự */
+.aq-trust { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 12px 0 10px; font-size: 11px; color: var(--gray-11); }
+.aq-trust li { display: flex; align-items: center; gap: 4px; }
+.aq-trust svg { width: 13px; height: 13px; flex: none; }
+
+.aq-submit {
+  width: 100%; height: 44px; border: 0; cursor: pointer;
+  background: var(--accent-11); color: var(--accent-contrast); border-radius: var(--r-btn);
+  font-family: inherit; font-size: 16px; font-weight: 700; line-height: 1;
+}
+.aq-submit:active { background: var(--accent-12); }
+
+.aq-tls { display: flex; align-items: flex-start; gap: 6px; margin-top: 10px; font-size: 11px; line-height: 1.5; color: var(--gray-11); }
+.aq-tls svg { width: 14px; height: 14px; flex: none; margin-top: 1px; }
+
+.aq-note:empty { display: none; }
+.aq-note { margin-top: 12px; padding: 10px 12px; border-radius: var(--r-card); font-size: 13px; line-height: 1.5; }
+.aq-note.is-error { background: var(--accent-2); color: var(--accent-11); }
+.aq-note.is-ok { background: var(--success-bg); color: var(--success-fg); }
+/* 19px/700 đưa chữ vào ngưỡng "chữ lớn" nên trắng trên xanh Zalo đạt AA */
+.aq-note .aq-note__zalo {
+  display: inline-flex; align-items: center; height: 46px; margin-top: 10px; padding: 0 20px;
+  background: var(--zalo); color: var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 19px; font-weight: 700;
+}
+
+.aq-callus { margin-top: 12px; font-size: 12px; color: var(--gray-11); }
+.aq-callus a { color: var(--accent-11); font-weight: 600; }
+
+/* ============ 20. FAQ ============ */
+.aq-faq details { border-bottom: 1px solid var(--gray-6); }
+.aq-faq summary {
+  list-style: none; cursor: pointer; padding: 12px 24px 12px 0; position: relative;
+  font-size: 14px; font-weight: 500;
+}
+.aq-faq summary::-webkit-details-marker { display: none; }
+.aq-faq summary::after {
+  content: ""; position: absolute; right: 4px; top: 17px;
+  width: 8px; height: 8px; border-right: 1.6px solid var(--gray-11); border-bottom: 1.6px solid var(--gray-11);
+  transform: rotate(45deg); transition: transform .18s ease;
+}
+.aq-faq details[open] summary::after { transform: rotate(-135deg); top: 20px; }
+.aq-faq p { padding: 0 0 12px; font-size: 13px; line-height: 1.6; color: var(--gray-11); }
+
+/* ============ 21. FOOTER ============ */
+.aq-foot { background: var(--gray-2); padding: 18px 12px 22px; text-align: center; }
+.aq-foot__logo { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 15px; font-weight: 800; }
+.aq-drop { width: 16px; height: 16px; flex: none; color: var(--accent-9); }
+.aq-foot__links { margin-top: 8px; font-size: 13px; color: var(--gray-11); }
+.aq-foot__links a { color: var(--gray-12); }
+.aq-foot__c { margin-top: 8px; font-size: 11px; color: var(--gray-11); }
+
+/* ============ 22. BOTTOM ACTION BAR ============ */
+.aq-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-bar);
+  display: flex; align-items: center; gap: 8px;
+  background: var(--background); border-top: 1px solid var(--gray-6);
+  padding: 7px 10px calc(7px + env(safe-area-inset-bottom));
+}
+.aq-bar__i {
+  flex: none; width: 60px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 10px; line-height: 1.2; white-space: nowrap; color: var(--gray-12);
+}
+.aq-bar__i svg { width: 22px; height: 22px; }
+.aq-bar__cart {
+  flex: none; width: 40px; height: 40px; padding: 9px;
+  display: grid; place-items: center;
+  background: var(--accent-3); color: var(--accent-9); border-radius: var(--r-pill);
+}
+/* nút mua chính — dùng chung cho thanh cố định, hero và cụm CTA desktop */
+.aq-buy {
+  flex: 1 1 0; height: 44px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--accent-11); color: var(--accent-contrast); border-radius: var(--r-pill);
+  border: 0; cursor: pointer; font-family: inherit;
+  font-size: 15px; font-weight: 700; line-height: 1.15;
+}
+.aq-buy small { font-size: 11px; font-weight: 400; }
+.aq-buy:active { background: var(--accent-12); }
+
+.aq-bar__zalo {
+  flex: none; height: 44px; padding: 0 14px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--zalo-dark); color: var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 14px; font-weight: 700; line-height: 1.15;
+}
+.aq-bar__zalo small { font-size: 10px; font-weight: 400; }
+
+/* ============ 23. XEM NHANH ============ */
+.aq-modal {
+  position: fixed; inset: 0; z-index: var(--z-modal);
+  display: grid; place-items: center; padding: 16px;
+  background: rgba(0, 48, 64, .55);
+}
+.aq-modal[hidden] { display: none; }
+.aq-modal__panel {
+  position: relative; width: 100%; max-width: 340px;
+  background: var(--background); border-radius: var(--r-sheet); overflow: hidden;
+}
+.aq-modal__x {
+  position: absolute; top: 8px; right: 8px; z-index: 1;
+  width: 30px; height: 30px; padding: 6px; border: 0; cursor: pointer;
+  background: rgba(0, 48, 64, .55); color: var(--accent-contrast); border-radius: var(--r-pill);
+}
+.aq-modal__body { padding: 12px; }
+.aq-modal__body h3 { font-size: 15px; font-weight: 600; line-height: 1.4; }
+.aq-modal__price { margin-top: 8px; font-size: 22px; font-weight: 800; color: var(--accent-11); }
+.aq-modal__price s { font-size: 13px; font-weight: 400; color: var(--gray-11); }
+.aq-modal__desc { margin-top: 8px; font-size: 13px; line-height: 1.55; color: var(--gray-11); }
+.aq-modal__buy {
+  display: block; margin-top: 12px; height: 44px; line-height: 44px; text-align: center;
+  background: var(--accent-11); color: var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 15px; font-weight: 700;
+}
+
+/* ============ 24. POPUP ĐẶT HÀNG ============ */
+.aq-popup {
+  position: fixed; inset: 0; z-index: var(--z-popup);
+  display: grid; place-items: end center;
+  background: rgba(0, 48, 64, .5);
+}
+.aq-popup[hidden] { display: none; }
+.aq-popup__panel {
+  position: relative; width: 100%; max-width: 520px;
+  max-height: 92vh; overflow-y: auto;
+  background: var(--background);
+  border-radius: var(--r-sheet) var(--r-sheet) 0 0;
+  padding: 16px 12px calc(16px + env(safe-area-inset-bottom));
+}
+.aq-popup__x {
+  position: absolute; top: 10px; right: 10px;
+  width: 32px; height: 32px; padding: 7px; border: 0; cursor: pointer;
+  background: var(--gray-3); color: var(--gray-12); border-radius: var(--r-pill);
+}
+.aq-popup__h { font-size: 17px; font-weight: 700; padding-right: 40px; }
+.aq-popup__lede { margin: 4px 0 12px; font-size: 13px; color: var(--gray-11); }
+
+/* ============ 25. GDPR ============ */
+.aq-gdpr {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-gdpr);
+  background: var(--gray-12); color: var(--accent-contrast);
+  padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+  font-size: 12px; line-height: 1.55;
+}
+.aq-gdpr[hidden] { display: none; }
+/* dải GDPR phủ đúng chỗ thanh hành động — ẩn thanh đi cho khỏi chồng nhau */
+body:has(.aq-gdpr:not([hidden])) .aq-bar { display: none; }
+.aq-gdpr a { color: var(--accent-contrast); text-decoration: underline; }
+.aq-gdpr__btns { display: flex; gap: 8px; margin-top: 10px; }
+.aq-gdpr__b {
+  flex: 1; height: 36px; cursor: pointer;
+  background: none; color: var(--accent-contrast);
+  border: 1px solid rgba(255, 255, 255, .45); border-radius: var(--r-btn);
+  font-family: inherit; font-size: 13px; font-weight: 600; line-height: 1;
+}
+.aq-gdpr__b--ok { background: var(--accent-9); border-color: var(--accent-9); }
+
+/* ============ 26. TRANG CHÍNH SÁCH ============ */
+.aq-legal { padding: 16px 12px 24px; }
+.aq-legal h1 { font-size: 20px; font-weight: 800; line-height: 1.35; }
+.aq-legal__intro { margin-top: 8px; font-size: 13px; color: var(--gray-11); }
+.aq-legal section { margin-top: 20px; }
+.aq-legal h2 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.aq-legal p, .aq-legal li { font-size: 13px; line-height: 1.65; color: var(--gray-11); }
+.aq-legal p + p, .aq-legal ul + p { margin-top: 8px; }
+.aq-legal ul { margin-top: 6px; display: grid; gap: 4px; }
+.aq-legal li { padding-left: 16px; position: relative; }
+.aq-legal li::before {
+  content: ""; position: absolute; left: 4px; top: 9px;
+  width: 4px; height: 4px; border-radius: var(--r-pill); background: var(--gray-9);
+}
+.aq-legal a { color: var(--accent-11); text-decoration: underline; }
+.aq-legal code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+  background: var(--gray-3); padding: 1px 5px; border-radius: var(--r-chip);
+}
+.aq-legal .aq-legal__note {
+  margin-top: 20px; padding: 10px 12px;
+  background: var(--gray-2); border-radius: var(--r-card);
+  font-size: 12px; color: var(--gray-11);
+}
+body.is-legal { padding-bottom: 0; }
+
+/* ============ 27. DESKTOP ≥768px ============
+   Khung rộng ra 720px để hero tách thật thành hai cột: ảnh trái, chữ phải. */
+@media (min-width: 768px) {
+  body { padding-bottom: 0; }
+
+  .aq-frame {
+    max-width: 720px;
+    box-shadow: 0 0 0 1px var(--gray-6), 0 18px 48px rgba(0, 48, 64, .12);
+    min-height: 100vh;
+  }
+  .aq-sticky, .aq-bar, .aq-gdpr { max-width: 720px; }
+
+  .aq-bar { display: none; }
+
+  .aq-hero {
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+    align-items: start; gap: 4px; padding: 12px 12px 0;
+  }
+  .aq-hero__media { border-radius: var(--r-sheet); overflow: hidden; }
+  .aq-hero__body { margin-top: 0; padding: 0 0 0 6px; border-radius: 0; }
+  .aq-hero__title { font-size: 22px; }
+
+  .aq-inline-cta {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px; border-top: 8px solid var(--gray-2);
+  }
+  .aq-inline-cta__ghost {
+    flex: none; height: 44px; padding: 0 14px;
+    display: flex; align-items: center;
+    border: 1px solid var(--gray-6); border-radius: var(--r-pill);
+    font-size: 13px; font-weight: 500;
+  }
+
+  /* cột ảnh hẹp hơn mobile nên 3 mảnh ribbon phải bóp lại mới đủ chỗ */
+  .aq-ribbon { font-size: 9px; padding: 0 7px 0 9px; }
+  .aq-ribbon b { font-size: 7px; }
+
+  .aq-pains, .aq-pledges { grid-template-columns: repeat(2, 1fr); }
+  .aq-cases { grid-template-columns: repeat(4, 1fr); }
+  .aq-reviews { grid-template-columns: repeat(3, 1fr); }
+  .aq-steps { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============ 28. GIẢM CHUYỂN ĐỘNG ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  .aq-jet__drop { animation: none; opacity: .85; }
+}

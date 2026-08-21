@@ -1,0 +1,1014 @@
+/* Landing quạt phun sương mini cầm tay — giao diện "mát lạnh mùa hè".
+   Thiết kế cho khung 390px; từ 768px trở lên trang thu về cột giữa 520px,
+   thanh hành động cố định nhường chỗ cho cụm CTA nằm trong luồng nội dung.
+   Ba motif lặp xuyên trang: giọt nước SVG (header/footer), chip nhiệt độ
+   (hero · nhiệt kế · thông số) và dải sóng nước ngăn giữa các mục. */
+
+/* ============ 0. TOKEN CỤC BỘ ============
+   Màu lấy từ css/colors.css (Radix scale, accent #0284C7). Khối này chỉ giữ
+   những giá trị KHÔNG thuộc thang màu: bo góc, chiều cao neo, tầng z,
+   gradient dựng từ thang accent, và các màu ngữ nghĩa nằm ngoài thang. */
+:root {
+  /* --- Gradient dựng từ thang accent --- */
+  --grad-head: linear-gradient(180deg, var(--accent-9) 0%, var(--accent-6) 58%, var(--accent-2) 100%);
+  --grad-flash: linear-gradient(90deg, var(--accent-9) 0%, var(--accent-7) 100%);
+  --grad-progress: linear-gradient(90deg, var(--accent-9) 0%, var(--accent-8) 100%);
+  /* nền hero: trời sáng dần từ sky nhạt xuống trắng, để blob sương nổi lên trên */
+  --grad-mist: linear-gradient(170deg, var(--accent-5) 0%, var(--accent-3) 38%, var(--accent-2) 72%, var(--background) 100%);
+  /* thanh nhiệt kế: nóng -> mát, đọc từ phải sang trái theo hướng giảm nhiệt */
+  --grad-heat: linear-gradient(90deg, var(--accent-9) 0%, #38BDF8 42%, #FBBF24 74%, var(--hot) 100%);
+
+  /* --- Màu ngữ nghĩa ngoài thang thương hiệu --- */
+  --star: #FACC16;            /* sao rating */
+  --hot: #DC2626;             /* phía "nóng" của nhiệt kế và cột quạt thường */
+  --hot-bg: #FEF2F2;          /* nền nhạt cho ô 38°C */
+  --hot-fg: #B91C1C;          /* 6.2:1 trên --hot-bg */
+  --success-bg: #EFFBF3;      /* nền thông báo gửi form thành công */
+  --success-fg: #0B6B36;      /* 7.3:1 trên --success-bg */
+  --zalo: #0088FF;            /* xanh Zalo gốc — chỉ cho chữ lớn (>=18.66px đậm) */
+  --zalo-dark: #0068CC;       /* 5.45:1 trên trắng — nền nút Zalo có chữ nhỏ */
+
+  /* --- Hoạ tiết giọt nước lặp lại ở header và footer --- */
+  --drops: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='%23ffffff' fill-opacity='.16'%3E%3Cpath d='M14 12c3 3.6 4.6 6 4.6 7.8a4.6 4.6 0 0 1-9.2 0C9.4 18 11 15.6 14 12z'/%3E%3Cpath d='M50 34c2.4 2.9 3.7 4.8 3.7 6.3a3.7 3.7 0 0 1-7.4 0c0-1.5 1.3-3.4 3.7-6.3z'/%3E%3Cpath d='M30 54c1.8 2.2 2.8 3.6 2.8 4.7a2.8 2.8 0 0 1-5.6 0c0-1.1 1-2.5 2.8-4.7z'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* --- Bo góc phân tầng (mềm hơn máy khoan: card 14px, sheet 18px) --- */
+  --radius-soft: 14px;
+  --r-pill: 9999px;
+  --r-card: var(--radius-soft);
+  --r-sheet: 18px;
+  --r-chip: 8px;
+  --r-btn: 10px;
+
+  /* --- Chiều cao hàng tab dính; dải mua nhanh neo ngay dưới nó --- */
+  --tab-h: 40px;
+  --sticky-h: 62px;
+
+  /* --- Tầng z --- */
+  --z-tabs: 320;
+  --z-sticky: 330;
+  --z-bar: 350;
+  --z-modal: 380;
+  --z-popup: 460;
+  --z-gdpr: 400;
+}
+
+/* ============ 1. NỀN CHUNG ============ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--gray-2);
+  color: var(--gray-12);
+  font: 400 14px/1.5 "Be Vietnam Pro", Arial, Tahoma, sans-serif;
+  /* chừa chỗ cho thanh hành động cố định */
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+}
+
+img { max-width: 100%; height: auto; display: block; }
+/* mọi ảnh sản phẩm đều vuông 1:1 theo nguyên tắc 8 của TikTok Shop */
+.qs-gal__slide img, .qs-card__pic img, .qs-combo__box img, .qs-modal__panel img {
+  width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+}
+svg { width: 100%; height: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+:focus-visible { outline: 2px solid var(--gray-12); outline-offset: 2px; border-radius: 2px; }
+
+/* ba vùng cuộn ngang đều giấu thanh cuộn */
+.qs-tabs::-webkit-scrollbar,
+ul.qs-vouchers::-webkit-scrollbar,
+.qs-gal__track::-webkit-scrollbar { display: none; }
+
+.skip {
+  position: absolute; left: 8px; top: -60px; z-index: 500;
+  background: var(--gray-12); color: var(--accent-contrast);
+  padding: 10px 14px; border-radius: var(--r-btn); font-weight: 600;
+}
+.skip:focus { top: 8px; }
+
+.qs-frame { max-width: 520px; margin-inline: auto; background: var(--background); }
+/* ba dải cố định bám theo đúng bề ngang khung nội dung */
+.qs-sticky, .qs-bar, .qs-gdpr { max-width: 520px; margin-inline: auto; }
+.qs-pad { padding-inline: 12px; }
+
+/* ============ 2. HEADER CAMPAIGN ============ */
+.qs-head {
+  position: relative;
+  background: var(--grad-head);
+  padding: calc(8px + env(safe-area-inset-top)) 12px 10px;
+  color: var(--accent-contrast);
+}
+/* Giọt nước rải thưa trên nền gradient — motif nhận diện, đặt dưới nội dung */
+.qs-head::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: var(--drops); background-size: 72px 72px;
+  pointer-events: none;
+}
+.qs-head > * { position: relative; }
+
+.qs-head__row { display: flex; align-items: center; gap: 8px; }
+
+.qs-logo {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 19px; font-weight: 800; letter-spacing: -.2px; flex: 1;
+}
+.qs-logo svg { width: 18px; height: 18px; flex: none; }
+.qs-logo span { font-weight: 400; opacity: .85; }
+
+.qs-head__acts { display: flex; gap: 2px; }
+
+.qs-ico {
+  position: relative; width: 32px; height: 32px; padding: 4px;
+  display: grid; place-items: center; color: var(--accent-contrast);
+}
+.qs-ico svg { width: 24px; height: 24px; }
+.qs-ico__badge {
+  /* lệch ra ngoài khung icon để không phủ quai giỏ */
+  position: absolute; top: -3px; right: -3px;
+  min-width: 15px; height: 15px; padding: 0 4px;
+  background: var(--accent-11); color: var(--accent-contrast);
+  border: 1.5px solid var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 9px; font-weight: 700; line-height: 12px; text-align: center;
+}
+
+/* Ô search: pill trắng đặc, radius 92px + padding 12/16 — số đo đo trực tiếp */
+.qs-search {
+  margin-top: 10px;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--background); border-radius: 92px;
+  padding: 10px 12px 10px 14px;
+  box-shadow: 0 1px 3px rgba(22, 24, 35, .1);
+}
+.qs-search svg { width: 18px; height: 18px; flex: none; color: var(--gray-11); }
+.qs-search__ph {
+  flex: 1; min-width: 0; color: var(--gray-11); font-size: 13px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.qs-search__go { color: var(--accent-11); font-size: 14px; font-weight: 600; flex: none; }
+
+.qs-quick { display: flex; margin-top: 12px; }
+.qs-quick__i {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 600; line-height: 1.3; text-align: center;
+  color: var(--gray-12);
+}
+.qs-quick__ico {
+  width: 34px; height: 34px; padding: 7px;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, .82); border-radius: var(--r-card);
+  color: var(--accent-9);
+}
+.qs-quick__i svg { width: 20px; height: 20px; }
+
+/* ============ 3. TAB NAV — gạch chân ĐEN ============ */
+.qs-tabs {
+  position: sticky; top: 0; z-index: var(--z-tabs);
+  height: var(--tab-h);
+  display: flex; gap: 4px;
+  background: var(--background);
+  border-bottom: 1px solid var(--gray-6);
+  padding: 0 6px;
+  overflow-x: auto; scrollbar-width: none;
+}
+
+.qs-tab {
+  position: relative; flex: none;
+  background: none; border: 0; cursor: pointer;
+  padding: 12px 8px 11px;
+  font-family: inherit; font-size: 14px; font-weight: 400; line-height: 1.5;
+  color: var(--gray-11);
+  white-space: nowrap;
+}
+.qs-tab.is-on { color: var(--gray-12); font-weight: 700; }
+.qs-tab.is-on::after {
+  content: ""; position: absolute; left: 8px; right: 8px; bottom: 0;
+  height: 3px; border-radius: 2px; background: var(--gray-12);
+}
+
+/* ============ 4. HERO — PDP FLASH SALE ============ */
+.qs-hero__media { position: relative; }
+
+/* --- Gallery 6 ảnh: cuộn ngang có scroll-snap nên vuốt được trên mobile
+       mà không cần thư viện; mũi tên và chấm chỉ để điều khiển bằng chuột/bàn phím --- */
+.qs-gal { position: relative; }
+.qs-gal__track {
+  display: flex; margin: 0;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.qs-gal__track:focus-visible { outline: 2px solid var(--gray-12); outline-offset: -4px; }
+.qs-gal__slide { flex: 0 0 100%; scroll-snap-align: center; }
+
+.qs-gal__arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 30px; height: 30px; padding: 6px; border: 0; cursor: pointer;
+  background: rgba(255, 255, 255, .82); color: var(--gray-12);
+  border-radius: var(--r-pill);
+}
+.qs-gal__arrow--prev { left: 8px; }
+.qs-gal__arrow--next { right: 8px; }
+.qs-gal__arrow[disabled] { opacity: .35; cursor: default; }
+
+.qs-gal__count {
+  position: absolute; right: 12px; bottom: 40px;
+  background: rgba(0, 0, 0, .5); color: var(--accent-contrast);
+  font-size: 11px; padding: 2px 8px; border-radius: var(--r-pill);
+  font-variant-numeric: tabular-nums;
+}
+
+.qs-gal__dots {
+  position: absolute; left: 0; right: 0; bottom: 36px;
+  display: flex; justify-content: center; gap: 6px;
+}
+.qs-gal__dot {
+  width: 6px; height: 6px; padding: 0; border: 0; cursor: pointer;
+  background: rgba(255, 255, 255, .55); border-radius: var(--r-pill);
+}
+.qs-gal__dot[aria-current="true"] { width: 16px; background: var(--accent-contrast); }
+
+/* chip social proof + ribbon phải nằm trên ảnh đang cuộn */
+.qs-hero__chip, .qs-ribbons { z-index: 2; }
+
+.qs-hero__chip {
+  position: absolute; left: 12px; top: 12px;
+  max-width: calc(100% - 24px);
+  background: rgba(0, 0, 0, .5); color: var(--accent-contrast);
+  font-size: 11px; line-height: 1.4; padding: 3px 8px; border-radius: var(--r-chip);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* Badge uy tín — vai trò như chip "Mall" của TikTok Shop, đặt ngay dưới tên shop */
+.qs-authority {
+  position: absolute; left: 12px; top: 36px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--accent-2); color: var(--accent-11);
+  font-size: 11px; font-weight: 600; line-height: 1.4;
+  padding: 3px 7px; border-radius: var(--r-chip);
+}
+
+/* Ribbon 3 mảnh bình hành dính liền, cắt xéo ~10° (5px trên 28px cao) */
+.qs-ribbons { position: absolute; left: 0; bottom: 0; display: flex; }
+.qs-ribbon {
+  height: 28px; padding: 0 9px 0 11px;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 700; line-height: 1; white-space: nowrap;
+  clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+  margin-left: -5px;
+}
+.qs-ribbon:first-child { clip-path: polygon(0 0, 100% 0, calc(100% - 5px) 100%, 0 100%); margin-left: 0; }
+.qs-ribbon:last-child { clip-path: polygon(5px 0, 100% 0, 100% 100%, 0 100%); }
+.qs-ribbon b { font-size: 8px; font-weight: 800; text-transform: uppercase; opacity: .82; letter-spacing: .3px; }
+/* 3 mảnh ribbon lấy 3 bậc accent tăng dần; tên class giữ nguyên theo markup */
+.qs-ribbon--1 { background: var(--accent-4); color: var(--accent-12); }
+.qs-ribbon--2 { background: var(--accent-6); color: var(--accent-12); }
+.qs-ribbon--3 { background: var(--accent-8); color: var(--accent-12); }
+
+/* Thanh giá flash — gradient ngang, chip % đảo màu */
+.qs-flash {
+  background: var(--grad-flash); color: var(--accent-contrast);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+  padding: 10px 12px 14px;
+}
+.qs-flash__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }
+.qs-flash__off {
+  background: var(--accent-contrast); color: var(--accent-11);
+  font-size: 13px; font-weight: 700; line-height: 1;
+  padding: 4px 5px; border-radius: var(--r-chip);
+}
+.qs-flash__now { font-size: 29px; font-weight: 800; line-height: 1.05; }
+.qs-flash__old {
+  flex-basis: 100%; margin-top: 2px;
+  font-size: 12px; font-weight: 400; line-height: 1.35;
+  color: var(--gray-12);
+}
+.qs-flash__meta { text-align: right; padding-top: 2px; flex: none; color: var(--gray-12); }
+.qs-flash__tag {
+  display: flex; align-items: center; justify-content: flex-end; gap: 2px;
+  font-size: 15px; font-weight: 700;
+}
+.qs-flash__tag svg { width: 15px; height: 15px; color: var(--accent-contrast); }
+.qs-flash__end { display: block; margin-top: 3px; font-size: 12px; color: var(--gray-12); }
+/* Cú huých mất mát: nói rõ mất gì khi đồng hồ về 0 chứ không chỉ đếm ngược suông.
+   Nằm trên gradient đỏ nên dùng trắng mờ; bản trong khung form trắng đảo sang đỏ đậm. */
+.qs-revert { display: block; margin-top: 3px; font-size: 11px; line-height: 1.35; color: inherit; }
+.qs-revert--ink { margin-top: 6px; text-align: right; color: var(--accent-11); }
+
+.qs-hero__title {
+  margin-top: 12px;
+  font-size: 23px; font-weight: 800; line-height: 1.25; letter-spacing: -.3px;
+  color: var(--accent-12);
+}
+.qs-lede { margin-top: 8px; font-size: 14px; line-height: 1.55; color: var(--gray-11); }
+
+.qs-rating {
+  display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+  margin-top: 8px; font-size: 12px; color: var(--gray-11);
+}
+.qs-rating b { font-size: 13px; color: var(--gray-12); }
+.qs-rating i { font-style: normal; }
+.qs-star { width: 14px; height: 14px; color: var(--star); flex: none; }
+.qs-star--sm { width: 12px; height: 12px; }
+.qs-star--xs { width: 11px; height: 11px; vertical-align: -1px; }
+
+ul.qs-vouchers {
+  display: flex; gap: 6px; margin-top: 10px;
+  overflow-x: auto; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  /* thanh cuộn bị ẩn nên mờ dần mép phải để thấy còn chip nữa ở bên trong */
+  -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, #000 88%, transparent);
+  /* hàng này nằm trong hero: lúc nhảy tới thì dải mua nhanh còn ẩn, chỉ cần né hàng tab */
+  scroll-margin-top: calc(var(--tab-h) + 12px);
+}
+.qs-vouchers li {
+  flex: none; display: flex; align-items: center; gap: 4px;
+  background: var(--accent-2); color: var(--accent-11);
+  font-size: 12px; padding: 4px 8px; border-radius: var(--r-chip); white-space: nowrap;
+}
+.qs-ticket { width: 14px; height: 14px; flex: none; }
+
+.qs-progress { display: flex; align-items: center; gap: 8px; margin: 12px 0 14px; }
+.qs-progress__hot {
+  background: var(--accent-11); color: var(--accent-contrast);
+  font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: var(--r-chip); flex: none;
+}
+.qs-progress__track {
+  flex: 1; height: 6px; background: var(--gray-3);
+  border-radius: var(--r-pill); overflow: hidden;
+}
+.qs-progress__fill { display: block; width: 87%; height: 100%; background: var(--grad-progress); }
+.qs-progress__label { font-size: 11px; color: var(--gray-11); flex: none; }
+.qs-progress__label b { color: var(--gray-12); }
+
+/* ============ 4b. DẢI MUA NHANH DÍNH ĐỈNH ============
+   Hiện khi hero đã cuộn khỏi khung nhìn, neo ngay dưới hàng tab dính. */
+.qs-sticky {
+  position: fixed; left: 0; right: 0; top: var(--tab-h); z-index: var(--z-sticky);
+  display: flex; align-items: center; gap: 8px;
+  min-height: var(--sticky-h); padding: 7px 12px;
+  background: var(--grad-flash); color: var(--accent-contrast);
+}
+.qs-sticky[hidden] { display: none; }
+.qs-sticky__col { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.qs-sticky__row { display: flex; align-items: center; gap: 8px; }
+.qs-sticky__price { font-size: 19px; font-weight: 800; flex: none; }
+.qs-sticky__buy {
+  margin-left: auto; flex: none;
+  height: 30px; padding: 0 16px; display: flex; align-items: center;
+  /* đuôi gradient của dải dính là hồng nhạt nên viên pill trắng sẽ chìm:
+     đảo sang nền đỏ đậm, chữ trắng vẫn đạt 5.1:1 */
+  background: var(--accent-11); color: var(--accent-contrast);
+  border-radius: var(--r-pill); font-size: 13px; font-weight: 700;
+}
+.qs-sticky__buy:active { background: var(--accent-12); }
+
+/* ============ 5. CTA TRONG LUỒNG (chỉ desktop) ============ */
+.qs-inline-cta { display: none; }
+
+/* ============ 6. SECTION CHUNG ============ */
+/* mọi mục tiêu liên kết neo đều dừng dưới hàng tab dính */
+[id] { scroll-margin-top: calc(var(--tab-h) + var(--sticky-h) + 12px); }
+
+.qs-sec { padding: 12px 0; }
+.qs-sec + .qs-sec, .qs-inline-cta + .qs-sec { border-top: 8px solid var(--gray-2); }
+.qs-sec__h { font-size: 16px; font-weight: 700; color: var(--gray-12); margin-bottom: 10px; }
+
+/* ============ 7. GRID 2 CỘT ============ */
+#gian-hang { background: var(--gray-2); }
+.qs-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  padding-inline: 12px;
+}
+.qs-card {
+  appearance: none; border: 0; padding: 0; cursor: pointer; text-align: left;
+  background: var(--background); border-radius: var(--r-card); overflow: hidden;
+  font: inherit; color: inherit;
+  display: flex; flex-direction: column;
+}
+.qs-card__pic { position: relative; display: block; }
+.qs-card__off {
+  position: absolute; top: 0; right: 0;
+  background: var(--accent-11); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 700; line-height: 1;
+  padding: 4px 6px; border-bottom-left-radius: var(--r-chip);
+}
+.qs-card__title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  margin: 8px 8px 0; font-size: 13px; line-height: 1.4; color: var(--gray-12);
+}
+.qs-card__price {
+  margin: 6px 8px 0; font-size: 17px; font-weight: 700; color: var(--accent-11); line-height: 1.2;
+}
+.qs-card__price s { font-size: 12px; font-weight: 400; color: var(--gray-11); }
+.qs-card__meta { margin: 4px 8px 10px; font-size: 11px; color: var(--gray-11); }
+
+/* ============ 7b. KHỐI RIÊNG CỦA QUẠT PHUN SƯƠNG ============ */
+
+/* --- Nền hero: gradient sky + blob sương SVG nằm sau ảnh sản phẩm --- */
+.qs-hero { background: var(--grad-mist); overflow: hidden; }
+.qs-hero__media { padding-top: 14px; }
+.qs-blob {
+  position: absolute; inset: -6% -8% auto -8%; height: 118%;
+  width: 116%; pointer-events: none; z-index: 0;
+}
+/* Ảnh và mọi chip đè lên ảnh phải nằm trên lớp blob — các chip vốn đã
+   position:absolute nên chỉ cần nâng tầng, không đặt lại thuộc tính position. */
+.qs-gal { position: relative; z-index: 2; }
+.qs-hero__chip, .qs-authority, .qs-ribbons, .qs-temp--hero, .qs-float { z-index: 2; }
+/* Ảnh thụt vào hai bên để blob sương lộ ra quanh sản phẩm; track vẫn rộng đúng
+   một ô nên phép tính scrollLeft/clientWidth của phần chuyển ảnh không đổi. */
+.qs-gal { padding-inline: 18px; }
+.qs-gal__slide img { border-radius: var(--r-sheet); }
+.qs-gal__arrow--prev { left: 24px; }
+.qs-gal__arrow--next { right: 24px; }
+.qs-gal__count { right: 30px; bottom: 46px; }
+.qs-gal__dots { bottom: 42px; }
+/* chip, ribbon và các chip nổi bám theo mép ảnh đã thụt vào 18px */
+.qs-hero__chip { left: 26px; top: 20px; max-width: calc(100% - 52px); }
+.qs-authority { left: 26px; top: 46px; }
+.qs-temp--hero { left: 26px; bottom: 44px; }
+.qs-float--cool { right: 26px; top: 74px; }
+.qs-float--batt { right: 26px; top: 112px; }
+.qs-ribbons { left: 18px; right: 18px; bottom: 6px; }
+.qs-ribbon { height: 26px; padding: 0 8px 0 10px; font-size: 9.5px; gap: 4px; min-width: 0; }
+.qs-ribbon b { font-size: 7.5px; }
+
+/* --- Chip nhiệt độ 38°C -> 30°C: motif lặp ở hero, mục nhiệt kế, mục so sánh --- */
+.qs-temp {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: var(--r-pill);
+  background: var(--accent-9); color: var(--accent-contrast);
+  font-size: 14px; font-weight: 800; line-height: 1;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, .3);
+}
+.qs-temp__ar { width: 14px; height: 14px; opacity: .85; }
+.qs-temp__from { opacity: .78; text-decoration: line-through; }
+.qs-temp--hero { position: absolute; }
+
+/* --- Hai chip nổi cạnh ảnh: rút gọn lợi ích thành con số --- */
+.qs-float {
+  position: absolute; z-index: 2;
+  background: var(--background); color: var(--accent-11);
+  border: 1px solid var(--accent-6); border-radius: var(--r-pill);
+  padding: 5px 11px; font-size: 13px; font-weight: 800; line-height: 1;
+  box-shadow: 0 3px 12px rgba(2, 132, 199, .16);
+}
+.qs-float--cool { right: 12px; top: 64px; }
+.qs-float--batt { right: 12px; top: 100px; }
+
+/* --- Dải sóng ngăn giữa các mục — thay cho đường kẻ 8px của bản máy khoan --- */
+.qs-wave { display: block; line-height: 0; background: var(--background); }
+.qs-wave svg { display: block; width: 100%; height: 26px; }
+.qs-wave path { fill: var(--accent-3); }
+.qs-wave--flip { background: var(--accent-3); }
+.qs-wave--flip svg { transform: rotate(180deg); }
+.qs-wave--flip path { fill: var(--background); }
+/* mục nằm giữa hai dải sóng dùng nền sky nhạt cho liền mạch */
+.qs-sec--tint { background: var(--accent-3); }
+.qs-wave + .qs-sec, .qs-sec + .qs-wave { border-top: 0; }
+
+/* --- Nỗi đau: 4 khoảnh khắc nóng, gạch màu bên trái --- */
+.qs-pains { display: grid; gap: 8px; }
+.qs-pains li {
+  background: var(--background); border-radius: var(--r-card);
+  border-left: 4px solid var(--accent-8);
+  padding: 10px 12px; font-size: 12.5px; line-height: 1.5; color: var(--gray-11);
+}
+.qs-pains b { display: block; font-size: 14px; color: var(--gray-12); margin-bottom: 2px; }
+
+/* --- Nhiệt kế trước/sau: hai cột số lớn, mũi tên giảm ở giữa --- */
+.qs-thermo {
+  display: grid; grid-template-columns: 1fr 62px 1fr; align-items: stretch; gap: 6px;
+}
+.qs-thermo__side {
+  display: grid; align-content: start; gap: 3px;
+  padding: 12px 10px; border-radius: var(--r-card); text-align: center;
+}
+.qs-thermo__side--hot { background: var(--hot-bg); color: var(--hot-fg); }
+.qs-thermo__side--cool { background: var(--accent-3); color: var(--accent-12); }
+.qs-thermo__tag { font-size: 11px; font-weight: 600; opacity: .85; }
+.qs-thermo__num {
+  font-size: 40px; font-weight: 800; line-height: 1.05; letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+}
+.qs-thermo__num i { font-style: normal; font-size: 18px; font-weight: 700; vertical-align: super; }
+.qs-thermo__note { font-size: 11px; line-height: 1.4; color: var(--gray-11); }
+.qs-thermo__arrow {
+  display: grid; place-items: center; align-content: center; gap: 2px;
+  color: var(--accent-9);
+}
+.qs-thermo__arrow svg { width: 22px; height: 22px; }
+.qs-thermo__arrow b {
+  font-size: 13px; font-weight: 800; color: var(--accent-contrast);
+  background: var(--accent-9); border-radius: var(--r-pill); padding: 2px 7px;
+}
+
+/* --- Thanh nhiệt: gradient nóng -> mát, hai mốc số ở hai đầu --- */
+.qs-scale { position: relative; margin-top: 12px; padding-bottom: 18px; }
+.qs-scale__bar {
+  display: block; height: 8px; border-radius: var(--r-pill); background: var(--grad-heat);
+}
+.qs-scale__lo, .qs-scale__hi {
+  position: absolute; top: 12px; font-size: 11px; font-weight: 700; color: var(--gray-11);
+}
+.qs-scale__lo { left: 0; color: var(--accent-11); }
+.qs-scale__hi { right: 0; color: var(--hot-fg); }
+
+/* --- Ảnh minh hoạ có chú thích, dùng ở mục nhiệt kế và mục so sánh --- */
+.qs-figure { margin: 14px 0 0; }
+.qs-figure img {
+  width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--r-card);
+}
+.qs-figure figcaption { margin-top: 7px; font-size: 12px; line-height: 1.5; color: var(--gray-11); }
+.qs-figure--sm img { aspect-ratio: 16 / 9; }
+.qs-fineprint { margin-top: 10px; font-size: 11px; line-height: 1.5; color: var(--gray-11); }
+
+/* --- 3 chế độ gió: mỗi thẻ một cấp, thanh dưới thể hiện thời lượng pin còn lại --- */
+.qs-modes { display: grid; gap: 8px; }
+.qs-mode {
+  display: grid; grid-template-columns: 38px 1fr auto; align-items: center;
+  column-gap: 10px; row-gap: 2px;
+  background: var(--background); border: 1px solid var(--accent-5);
+  border-radius: var(--r-card); padding: 10px 12px;
+}
+.qs-mode__ico {
+  grid-row: 1 / span 2; width: 38px; height: 38px; padding: 8px;
+  display: grid; place-items: center;
+  background: var(--accent-3); color: var(--accent-11); border-radius: var(--r-pill);
+}
+.qs-mode b { font-size: 15px; font-weight: 700; color: var(--gray-12); }
+.qs-mode__hours {
+  grid-column: 3; grid-row: 1;
+  font-size: 17px; font-weight: 800; color: var(--accent-11); font-variant-numeric: tabular-nums;
+}
+.qs-mode__note { grid-column: 2 / span 2; font-size: 12px; line-height: 1.45; color: var(--gray-11); }
+.qs-mode__bar {
+  grid-column: 2 / span 2; margin-top: 6px;
+  display: block; height: 6px; border-radius: var(--r-pill); background: var(--gray-3); overflow: hidden;
+}
+.qs-mode__bar i { display: block; height: 100%; background: var(--grad-progress); }
+
+/* --- Hai dòng nhấn: phun sương và sạc Type-C --- */
+.qs-mist, .qs-charge {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-top: 10px; padding: 10px 12px; border-radius: var(--r-card);
+  font-size: 12.5px; line-height: 1.5;
+}
+.qs-mist svg, .qs-charge svg { width: 18px; height: 18px; flex: none; margin-top: 1px; }
+.qs-mist { background: var(--accent-3); color: var(--accent-12); }
+.qs-mist svg { color: var(--accent-9); }
+.qs-charge { background: var(--gray-2); color: var(--gray-11); }
+.qs-charge svg { color: var(--accent-9); }
+.qs-mist b, .qs-charge b { color: var(--gray-12); }
+
+/* --- Dùng ở đâu: 4 nơi, ảnh vuông + hai dòng chữ --- */
+.qs-places { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.qs-place {
+  background: var(--background); border: 1px solid var(--accent-5);
+  border-radius: var(--r-card); overflow: hidden;
+}
+.qs-place img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.qs-place span {
+  display: block; padding: 8px 9px 10px;
+  font-size: 11.5px; line-height: 1.45; color: var(--gray-11);
+}
+.qs-place b { display: block; font-size: 13px; color: var(--gray-12); margin-bottom: 2px; }
+
+/* --- Bảng so sánh với quạt mini thường --- */
+.qs-vs { width: 100%; border-collapse: collapse; font-size: 12px; table-layout: fixed; }
+.qs-vs__cap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.qs-vs th, .qs-vs td { padding: 9px 7px; vertical-align: top; text-align: left; }
+.qs-vs thead th { padding-bottom: 7px; }
+.qs-vs__me, .qs-vs__them {
+  display: block; padding: 5px 6px; border-radius: var(--r-chip);
+  font-size: 12px; font-weight: 700; text-align: center;
+}
+.qs-vs__me { background: var(--accent-9); color: var(--accent-contrast); }
+.qs-vs__them { background: var(--gray-3); color: var(--gray-11); }
+.qs-vs tbody th {
+  width: 27%; font-size: 11.5px; font-weight: 500; color: var(--gray-11);
+  border-bottom: 1px solid var(--gray-5);
+}
+.qs-vs tbody td { border-bottom: 1px solid var(--gray-5); line-height: 1.45; }
+.qs-vs tbody td svg { width: 14px; height: 14px; vertical-align: -2px; margin-right: 3px; }
+.qs-vs .is-good { color: var(--accent-12); background: var(--accent-2); }
+.qs-vs .is-good svg { color: var(--accent-9); }
+.qs-vs .is-bad { color: var(--gray-11); }
+.qs-vs .is-bad svg { color: var(--hot); }
+
+/* Khung so sánh chi phí — đóng khung mất mát bằng con số khách tự kiểm chứng được */
+.qs-cost {
+  display: flex; align-items: flex-start; gap: 7px;
+  margin-top: 10px; padding: 9px 10px;
+  background: var(--background); border: 1px dashed var(--accent-8); border-radius: var(--r-card);
+  color: var(--accent-12); font-size: 13px; font-weight: 600; line-height: 1.45;
+}
+.qs-cost svg { width: 16px; height: 16px; flex: none; margin-top: 1px; color: var(--accent-9); }
+.qs-card[hidden] { display: none; }
+
+.qs-grid__empty { padding: 20px 12px; text-align: center; color: var(--gray-11); }
+
+/* ============ 8. COMBO 3 CỘT ============ */
+.qs-combo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+/* radio ẩn, ô bao quanh đóng vai nút chọn — dùng chung cho combo và gói mua.
+   Chỉ ẩn chính cái <input>: kéo cả .qs-combo__i vào đây sẽ ẩn luôn nhãn bọc ngoài. */
+.qs-combo__i { position: relative; cursor: pointer; }
+.qs-combo__i input, .qs-pack input { position: absolute; opacity: 0; pointer-events: none; }
+.qs-combo__i input:focus-visible + .qs-combo__box,
+.qs-pack input:focus-visible + .qs-pack__box { outline: 2px solid var(--gray-12); outline-offset: 2px; }
+.qs-combo__box {
+  position: relative; display: block;
+  border: 1.5px solid var(--gray-6); border-radius: var(--r-card); overflow: hidden;
+  background: var(--background);
+}
+.qs-combo__off {
+  position: absolute; top: 4px; left: 4px;
+  background: var(--accent-11); color: var(--accent-contrast);
+  font-size: 11px; font-weight: 700; line-height: 1;
+  padding: 3px 6px; border-radius: var(--r-pill);
+}
+.qs-combo__name {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  /* chừa đủ 2 dòng để 3 ô cao bằng nhau dù tên dài ngắn khác nhau */
+  min-height: 39px; padding: 6px 5px 0; text-align: center;
+  font-size: 12px; font-weight: 500; line-height: 1.35; color: var(--gray-12);
+}
+.qs-combo__price {
+  display: block; padding: 3px 4px 7px; text-align: center;
+  font-size: 13px; font-weight: 700; color: var(--accent-11);
+}
+.qs-combo__i input:checked + .qs-combo__box { border-color: var(--accent-9); }
+
+/* ============ 9. ĐÁNH GIÁ ============ */
+.qs-reviews { display: grid; gap: 8px; }
+.qs-reviews li {
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-radius: var(--r-card); padding: 10px 12px;
+}
+.qs-reviews p + p { margin-top: 4px; }
+.qs-reviews__stars { color: var(--star); font-size: 13px; letter-spacing: 1px; }
+.qs-reviews__who { font-size: 12px; color: var(--gray-11); }
+
+/* ============ 9b. 3 CAM KẾT (đảo rủi ro) ============
+   Xếp dọc trên mobile: cả 3 cam kết phải đọc được, không để card thứ 3 nằm ngoài khung. */
+.qs-pledges { display: grid; gap: 8px; padding: 2px 12px 4px; }
+.qs-pledge {
+  display: grid; gap: 3px; padding: 10px;
+  background: var(--background); border: 1px solid var(--gray-6); border-radius: var(--r-card);
+}
+.qs-pledge__ico { width: 22px; height: 22px; color: var(--accent-11); margin-bottom: 2px; }
+.qs-pledge__ico--accent { color: var(--accent-9); }
+.qs-pledge b { font-size: 14px; font-weight: 700; line-height: 1.35; color: var(--gray-12); }
+.qs-pledge span { font-size: 12px; line-height: 1.45; color: var(--gray-11); }
+
+/* ============ 10. 3 BƯỚC ============ */
+.qs-steps { display: grid; gap: 10px; }
+.qs-steps li {
+  display: grid; grid-template-columns: 32px 1fr; column-gap: 10px; align-items: start;
+  font-size: 13px; line-height: 1.5; color: var(--gray-11);
+}
+.qs-steps__n {
+  grid-row: span 2; font-size: 18px; font-weight: 800; color: var(--gray-12); line-height: 1.2;
+}
+.qs-steps b { font-size: 14px; color: var(--gray-12); }
+
+/* ============ 11. THÔNG SỐ ============ */
+.qs-spec { width: 100%; border-collapse: collapse; font-size: 13px; }
+.qs-spec th, .qs-spec td {
+  text-align: left; padding: 9px 0; border-bottom: 1px solid var(--gray-6); vertical-align: top;
+}
+.qs-spec th { width: 42%; font-weight: 400; color: var(--gray-11); padding-right: 10px; }
+.qs-spec td { color: var(--gray-12); }
+
+/* ============ 12. FORM ĐẶT HÀNG ============ */
+.qs-order {
+  background: var(--background); border: 1px solid var(--gray-6);
+  border-radius: var(--r-sheet); padding: 12px;
+}
+.qs-order__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.qs-order__deal {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 13px; font-weight: 600; color: var(--gray-12);
+}
+.qs-order__deal .qs-ticket { color: var(--accent-11); }
+
+/* Countdown 3 ô vuông ĐEN — pattern nhận diện của TikTok Shop */
+.qs-countdown { display: flex; align-items: center; gap: 3px; }
+.qs-countdown b {
+  width: 22px; height: 22px; display: grid; place-items: center;
+  background: var(--gray-12); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 700; border-radius: var(--r-chip);
+  font-variant-numeric: tabular-nums;
+}
+.qs-countdown i { font-style: normal; font-size: 12px; font-weight: 700; color: var(--gray-12); }
+.qs-countdown--mini b { width: 18px; height: 18px; font-size: 10px; }
+/* trong thanh giá flash thì đồng hồ là chữ chạy chứ không phải ô vuông */
+.qs-countdown--plain { display: inline-flex; gap: 0; font-variant-numeric: tabular-nums; }
+.qs-countdown--plain b { width: auto; height: auto; display: inline; background: none; color: inherit; font-size: inherit; font-weight: 600; }
+.qs-countdown--plain i { color: inherit; font-size: inherit; font-weight: 600; }
+.qs-countdown--mini i { font-size: 10px; color: var(--accent-contrast); }
+
+.qs-order__h { margin: 10px 0 12px; font-size: 16px; font-weight: 700; }
+
+.qs-field { display: block; margin-bottom: 10px; }
+.qs-field label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.qs-field input {
+  width: 100%; height: 42px; padding: 0 12px;
+  background: var(--gray-3); border: 1px solid transparent; border-radius: var(--r-btn);
+  font-family: inherit; font-size: 16px; font-weight: 400; line-height: 1.4;
+  color: var(--gray-12);
+}
+/* placeholder và giá ship gạch bỏ vẫn là chữ đọc được -> giữ bậc 11 (5.9:1) */
+.qs-field input::placeholder { color: var(--gray-11); }
+.qs-field input:focus { background: var(--background); border-color: var(--gray-12); }
+.qs-field input[aria-invalid="true"] { border-color: var(--accent-9); background: var(--accent-2); }
+/* Người thật đứng sau đơn hàng — hạ ngờ vực ngay trước khi khách điền form */
+.qs-owner {
+  display: flex; align-items: center; gap: 9px;
+  margin-bottom: 12px; padding: 9px 10px;
+  background: var(--gray-2); border-radius: var(--r-card);
+}
+.qs-owner__ava { width: 48px; height: 48px; flex: none; border-radius: var(--r-pill); object-fit: cover; }
+.qs-owner__txt { min-width: 0; font-size: 13px; line-height: 1.4; color: var(--gray-11); }
+.qs-owner__txt b { display: block; font-weight: 700; color: var(--gray-12); }
+.qs-owner__zalo {
+  flex: none; height: 30px; padding: 0 11px;
+  display: flex; align-items: center; gap: 4px;
+  background: var(--zalo-dark); color: var(--accent-contrast);
+  border-radius: var(--r-pill); font-size: 13px; font-weight: 600;
+}
+.qs-owner__zalo svg { width: 14px; height: 14px; }
+
+/* Dải trấn an ngay trên nút gửi — chốt 4 rủi ro lớn nhất tại đúng lúc do dự */
+.qs-trust {
+  display: flex; flex-wrap: wrap; gap: 4px 12px;
+  margin: 12px 0 10px; font-size: 11px; color: var(--gray-11);
+}
+.qs-trust li { display: flex; align-items: center; gap: 4px; }
+.qs-trust svg { width: 13px; height: 13px; flex: none; }
+
+.qs-field__hint { display: block; margin-top: 4px; font-size: 11px; color: var(--gray-11); }
+
+.qs-packs { border: 0; padding: 0; margin: 14px 0 10px; display: grid; gap: 8px; }
+.qs-packs legend { padding: 0; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.qs-pack { cursor: pointer; }
+.qs-pack__box {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 8px;
+  border: 1.5px solid var(--gray-6); border-radius: var(--r-card); padding: 9px 12px;
+}
+.qs-pack__box b { font-size: 14px; }
+.qs-pack__note { grid-column: 1; font-size: 12px; color: var(--gray-11); }
+.qs-pack__price { grid-column: 2; grid-row: 1 / span 2; font-size: 17px; font-weight: 700; color: var(--accent-11); }
+.qs-pack input:checked + .qs-pack__box { border-color: var(--accent-9); background: var(--accent-2); }
+
+.qs-ship { font-size: 13px; color: var(--gray-11); margin-bottom: 12px; }
+.qs-ship s { color: var(--gray-11); }
+.qs-ship b { color: var(--accent-11); font-weight: 700; }
+
+.qs-consent { display: grid; grid-template-columns: 18px 1fr; gap: 8px; margin-bottom: 12px; }
+.qs-consent input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--accent-9); }
+.qs-consent label { font-size: 12px; line-height: 1.5; color: var(--gray-11); }
+.qs-consent a { color: var(--accent-11); text-decoration: underline; }
+
+.qs-submit {
+  width: 100%; height: 44px; border: 0; cursor: pointer;
+  background: var(--accent-11); color: var(--accent-contrast);
+  border-radius: var(--r-btn);
+  font-family: inherit; font-size: 16px; font-weight: 700; line-height: 1;
+}
+.qs-submit:active { background: var(--accent-12); }
+
+.qs-tls {
+  display: flex; align-items: flex-start; gap: 6px; margin-top: 10px;
+  font-size: 11px; line-height: 1.5; color: var(--gray-11);
+}
+.qs-tls svg { width: 14px; height: 14px; flex: none; margin-top: 1px; }
+
+.qs-note:empty { display: none; }
+.qs-note {
+  margin-top: 12px; padding: 10px 12px;
+  border-radius: var(--r-card); font-size: 13px; line-height: 1.5;
+}
+.qs-note.is-error { background: var(--accent-2); color: var(--accent-11); }
+.qs-note.is-ok { background: var(--success-bg); color: var(--success-fg); }
+/* 19px/700 đưa chữ vào ngưỡng "chữ lớn" nên trắng trên xanh Zalo đạt AA */
+.qs-note .qs-note__zalo {
+  display: inline-flex; align-items: center; height: 46px; margin-top: 10px; padding: 0 20px;
+  background: var(--zalo); color: var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 19px; font-weight: 700;
+}
+
+.qs-callus { margin-top: 12px; font-size: 12px; color: var(--gray-11); }
+.qs-callus a { color: var(--accent-11); font-weight: 600; }
+
+/* ============ 13. FAQ ============ */
+.qs-faq details { border-bottom: 1px solid var(--gray-6); }
+.qs-faq summary {
+  list-style: none; cursor: pointer; padding: 12px 24px 12px 0; position: relative;
+  font-size: 14px; font-weight: 500;
+}
+.qs-faq summary::-webkit-details-marker { display: none; }
+.qs-faq summary::after {
+  content: ""; position: absolute; right: 4px; top: 17px;
+  width: 8px; height: 8px; border-right: 1.6px solid var(--gray-11); border-bottom: 1.6px solid var(--gray-11);
+  transform: rotate(45deg); transition: transform .18s ease;
+}
+.qs-faq details[open] summary::after { transform: rotate(-135deg); top: 20px; }
+.qs-faq p { padding: 0 0 12px; font-size: 13px; line-height: 1.6; color: var(--gray-11); }
+
+/* ============ 14. FOOTER ============ */
+.qs-foot {
+  position: relative; overflow: hidden;
+  background: var(--accent-2); padding: 18px 12px 22px; text-align: center;
+}
+.qs-foot::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: var(--drops); background-size: 72px 72px;
+  filter: invert(1); opacity: .5; pointer-events: none;
+}
+.qs-foot > * { position: relative; }
+.qs-foot__logo {
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  font-size: 15px; font-weight: 800;
+}
+.qs-drop { width: 16px; height: 16px; flex: none; color: var(--accent-9); }
+.qs-foot__links { margin-top: 8px; font-size: 13px; color: var(--gray-11); }
+.qs-foot__links a { color: var(--gray-12); }
+.qs-foot__c { margin-top: 8px; font-size: 11px; color: var(--gray-11); }
+
+/* ============ 15. BOTTOM ACTION BAR ============ */
+.qs-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-bar);
+  display: flex; align-items: center; gap: 8px;
+  background: var(--background); border-top: 1px solid var(--gray-6);
+  padding: 7px 10px calc(7px + env(safe-area-inset-bottom));
+}
+.qs-bar__i {
+  flex: none; width: 60px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 10px; line-height: 1.2; white-space: nowrap; color: var(--gray-12);
+}
+.qs-bar__i svg { width: 22px; height: 22px; }
+.qs-bar__cart {
+  flex: none; width: 40px; height: 40px; padding: 9px;
+  display: grid; place-items: center;
+  background: var(--accent-3); color: var(--accent-9); border-radius: var(--r-pill);
+}
+/* nút mua chính — dùng chung cho thanh cố định và cụm CTA trong luồng */
+.qs-buy {
+  flex: 1 1 0; height: 44px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--accent-11); color: var(--accent-contrast); border-radius: var(--r-pill);
+  border: 0; cursor: pointer; font-family: inherit;
+  font-size: 15px; font-weight: 700; line-height: 1.15;
+}
+.qs-buy small { font-size: 11px; font-weight: 400; }
+/* Bản trong hero: chiếm trọn bề ngang, một dòng chữ 16px — nút mua có mặt ngay
+   màn hình đầu, không phải đợi cuộn qua hero mới thấy dải mua nhanh.
+   Giữ nguyên nền và màu chữ của .qs-buy để tương phản đã cân ở đó không đổi. */
+.qs-buy--hero {
+  width: 100%; flex: none; height: 44px;
+  flex-direction: row; gap: 6px;
+  font-size: 16px; line-height: 1;
+}
+.qs-hero__cta { margin-top: 12px; }
+.qs-buy:active { background: var(--accent-12); }
+
+.qs-bar__zalo {
+  flex: none; height: 44px; padding: 0 14px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--zalo-dark); color: var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 14px; font-weight: 700; line-height: 1.15;
+}
+.qs-bar__zalo small { font-size: 10px; font-weight: 400; }
+
+/* ============ 16. XEM NHANH ============ */
+.qs-modal {
+  position: fixed; inset: 0; z-index: var(--z-modal);
+  display: grid; place-items: center; padding: 16px;
+  background: rgba(0, 0, 0, .55);
+}
+.qs-modal[hidden] { display: none; }
+.qs-modal__panel {
+  position: relative; width: 100%; max-width: 340px;
+  background: var(--background); border-radius: var(--r-sheet); overflow: hidden;
+}
+.qs-modal__x {
+  position: absolute; top: 8px; right: 8px; z-index: 1;
+  width: 30px; height: 30px; padding: 6px; border: 0; cursor: pointer;
+  background: rgba(0, 0, 0, .5); color: var(--accent-contrast); border-radius: var(--r-pill);
+}
+.qs-modal__body { padding: 12px; }
+.qs-modal__body h3 { font-size: 15px; font-weight: 600; line-height: 1.4; }
+.qs-modal__price { margin-top: 8px; font-size: 22px; font-weight: 800; color: var(--accent-11); }
+.qs-modal__price s { font-size: 13px; font-weight: 400; color: var(--gray-11); }
+.qs-modal__desc { margin-top: 8px; font-size: 13px; line-height: 1.55; color: var(--gray-11); }
+.qs-modal__buy {
+  display: block; margin-top: 12px; height: 44px; line-height: 44px; text-align: center;
+  background: var(--accent-11); color: var(--accent-contrast); border-radius: var(--r-pill);
+  font-size: 15px; font-weight: 700;
+}
+
+/* ============ 16b. POPUP ĐẶT HÀNG ============ */
+.qs-popup {
+  position: fixed; inset: 0; z-index: var(--z-popup);
+  display: grid; place-items: end center;
+  background: rgba(0, 0, 0, .5);
+}
+.qs-popup[hidden] { display: none; }
+.qs-popup__panel {
+  position: relative; width: 100%; max-width: 520px;
+  max-height: 92vh; overflow-y: auto;
+  background: var(--background);
+  border-radius: var(--r-sheet) var(--r-sheet) 0 0;
+  padding: 16px 12px calc(16px + env(safe-area-inset-bottom));
+}
+.qs-popup__x {
+  position: absolute; top: 10px; right: 10px;
+  width: 32px; height: 32px; padding: 7px; border: 0; cursor: pointer;
+  background: var(--gray-3); color: var(--gray-12); border-radius: var(--r-pill);
+}
+.qs-popup__h { font-size: 17px; font-weight: 700; padding-right: 40px; }
+.qs-popup__lede { margin: 4px 0 12px; font-size: 13px; color: var(--gray-11); }
+
+/* ============ 17. GDPR ============ */
+.qs-gdpr {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-gdpr);
+  background: var(--gray-12); color: var(--accent-contrast);
+  padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+  font-size: 12px; line-height: 1.55;
+}
+.qs-gdpr[hidden] { display: none; }
+/* dải GDPR phủ đúng chỗ thanh hành động — ẩn thanh đi cho khỏi chồng nhau */
+body:has(.qs-gdpr:not([hidden])) .qs-bar { display: none; }
+.qs-gdpr a { color: var(--accent-contrast); text-decoration: underline; }
+.qs-gdpr__btns { display: flex; gap: 8px; margin-top: 10px; }
+.qs-gdpr__b {
+  flex: 1; height: 36px; cursor: pointer;
+  background: none; color: var(--accent-contrast);
+  border: 1px solid rgba(255, 255, 255, .45); border-radius: var(--r-btn);
+  font-family: inherit; font-size: 13px; font-weight: 600; line-height: 1;
+}
+.qs-gdpr__b--ok { background: var(--accent-11); border-color: var(--accent-11); }
+
+/* ============ 18. TRANG CHÍNH SÁCH ============ */
+.qs-legal { padding: 16px 12px 24px; }
+.qs-legal h1 { font-size: 20px; font-weight: 800; line-height: 1.35; }
+.qs-legal__intro { margin-top: 8px; font-size: 13px; color: var(--gray-11); }
+.qs-legal section { margin-top: 20px; }
+.qs-legal h2 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.qs-legal p, .qs-legal li { font-size: 13px; line-height: 1.65; color: var(--gray-11); }
+.qs-legal p + p, .qs-legal ul + p { margin-top: 8px; }
+.qs-legal ul { margin-top: 6px; display: grid; gap: 4px; }
+.qs-legal li { padding-left: 16px; position: relative; }
+.qs-legal li::before {
+  content: ""; position: absolute; left: 4px; top: 9px;
+  width: 4px; height: 4px; border-radius: var(--r-pill); background: var(--gray-9);
+}
+.qs-legal a { color: var(--accent-11); text-decoration: underline; }
+.qs-legal code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+  background: var(--gray-3); padding: 1px 5px; border-radius: var(--r-chip);
+}
+.qs-legal .qs-legal__note {
+  margin-top: 20px; padding: 10px 12px;
+  background: var(--gray-2); border-radius: var(--r-card);
+  font-size: 12px; color: var(--gray-11);
+}
+body.is-legal { padding-bottom: 0; }
+
+/* ============ 19. DESKTOP ≥768px ============ */
+@media (min-width: 768px) {
+  body { padding-bottom: 0; }
+
+  .qs-frame {
+    box-shadow: 0 0 0 1px var(--gray-6), 0 18px 48px rgba(22, 24, 35, .1);
+    min-height: 100vh;
+  }
+
+  /* Thanh cố định nhường chỗ cho cụm CTA nằm trong luồng */
+  .qs-bar { display: none; }
+
+  .qs-inline-cta {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px; border-top: 8px solid var(--gray-2);
+  }
+  .qs-pledges { grid-template-columns: repeat(3, 1fr); }
+
+  .qs-inline-cta__ghost {
+    flex: none; height: 44px; padding: 0 14px;
+    display: flex; align-items: center;
+    border: 1px solid var(--gray-6); border-radius: var(--r-pill);
+    font-size: 13px; font-weight: 500;
+  }
+
+}
+
+/* ============ 20. GIẢM CHUYỂN ĐỘNG ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
