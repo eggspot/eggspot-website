@@ -258,7 +258,7 @@ ul, ol { margin: 0 0 var(--sp-4); padding-left: 1.15rem; }
   border-radius: var(--r-md);
   background: #fff;
   font-family: var(--font-body);
-  font-size: .9rem;
+  font-size: 16px;
   color: var(--ink);
 }
 .header-search input::placeholder { color: var(--gray-9); }
@@ -826,6 +826,7 @@ body.menu-open .mobile-menu { opacity: 1; visibility: visible; transform: none; 
   line-height: 1.1;
   color: #fff;
 }
+.stats strong .star-icon { width: .62em; height: .62em; color: var(--star); vertical-align: baseline; }
 .stats span { font-size: .88rem; color: var(--gray-6); }
 
 /* --------------------------------------------------------------------------
@@ -878,7 +879,8 @@ body.menu-open .mobile-menu { opacity: 1; visibility: visible; transform: none; 
   border-radius: var(--r-md);
   background: var(--paper);
   font-family: var(--font-body);
-  font-size: .95rem;
+  /* 16px cứng: iOS Safari tự phóng to trang khi focus ô nhập nhỏ hơn 16px */
+  font-size: 16px;
   color: var(--ink);
 }
 .field textarea { min-height: 120px; resize: vertical; }
