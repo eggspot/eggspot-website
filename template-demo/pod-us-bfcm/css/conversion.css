@@ -1,0 +1,484 @@
+/* CASELAB® — conversion layer: proof, scarcity, sticky buy bar, offers, wishlist, cross-sell */
+
+/* ---- hero proof row (rating + entry price, above the CTA) ---- */
+.hero__proof {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  margin: 0 0 26px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--gray-8);
+}
+.hero__proof .stars { color: var(--amber); letter-spacing: .06em; font-size: 14px; }
+.hero__proof strong { color: #fff; font-size: 15px; font-weight: 700; }
+.hero__proof em { font-style: normal; color: var(--accent-bright); }
+
+/* ---- drop urgency ---- */
+.drops-claimed {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em;
+  color: var(--gray-11); max-width: 34ch;
+}
+.drops-claimed strong { color: var(--ink); }
+/* on the black page hero the ink-coloured strong disappears into the ground */
+.page-hero .drops-claimed strong { color: #fff; }
+.drops-claimed[hidden], .drops-note[hidden] { display: none; }
+.drops-note {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--gray-10); margin-top: 8px;
+}
+.countdown[hidden] { display: none; }
+.countdown__box { min-width: 68px; }
+
+/* ---- product card additions ---- */
+.p-card__fits {
+  color: var(--gray-10); margin: 3px 0 0;
+  text-transform: none; letter-spacing: .04em;
+}
+.p-card__stock {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  color: var(--red); margin: 0 0 6px;
+}
+.p-card__stock--out { color: var(--gray-10); }
+.p-card--out .p-card__media { opacity: .62; }
+
+.p-card__save {
+  position: absolute; top: 8px; right: 8px; z-index: 3;
+  width: 38px; height: 38px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, .9); color: var(--ink);
+  opacity: 0; transform: scale(.9);
+  transition: opacity .2s, transform .25s var(--ease-spring), color .2s;
+}
+.p-card:hover .p-card__save, .p-card__save:focus-visible, .p-card__save.is-saved { opacity: 1; transform: scale(1); }
+.p-card__save svg { width: 18px; height: 18px; }
+.p-card__save.is-saved { color: var(--red); }
+.p-card__save.is-saved svg { fill: currentColor; }
+@media (hover: none) { .p-card__save { opacity: 1; transform: scale(1); } }
+
+.p-card__add {
+  display: inline-flex; align-items: center; gap: 5px;
+  min-height: 38px; padding: 8px 14px; border-radius: 999px;
+  background: var(--paper-2); color: var(--ink);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+  transition: background-color .2s, transform .25s var(--ease-spring);
+}
+.p-card__add:hover:not(:disabled) { background: var(--accent-9); transform: translateY(-2px); }
+.p-card__add svg { width: 15px; height: 15px; }
+.p-card__add:disabled { color: var(--gray-10); cursor: not-allowed; }
+
+/* ---- PDP: scarcity, delivery promise, bundle, trust ---- */
+.pdp__stock {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .03em;
+  color: var(--gray-11); margin: 0 0 16px;
+}
+.pdp__stock .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-9); flex: 0 0 auto; margin-top: 6px; }
+.pdp__stock > span:last-child { flex: 1 1 auto; }
+.pdp__stock--low { color: var(--red); }
+.pdp__stock--low .dot { background: var(--red); animation: stock-pulse 2s ease infinite; }
+.pdp__stock--low strong { font-weight: 700; }
+.pdp__stock--out { color: var(--gray-10); }
+.pdp__stock[hidden] { display: none; }
+@keyframes stock-pulse { 50% { opacity: .35; } }
+
+.pdp__delivery {
+  display: flex; align-items: center; gap: 9px;
+  padding: 12px 14px; margin: 14px 0 10px;
+  background: var(--accent-2); border: 1px solid var(--accent-4); border-radius: 10px;
+  font-size: 13px; color: var(--accent-12);
+}
+.pdp__delivery svg { width: 17px; height: 17px; flex: 0 0 auto; color: var(--accent-11); }
+.pdp__delivery strong { font-weight: 700; }
+
+.pdp__bundle {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 14px; margin-bottom: 16px;
+  border: 1px dashed var(--gray-7); border-radius: 12px;
+}
+.pdp__bundle svg { width: 18px; height: 18px; flex: 0 0 auto; color: var(--accent-11); }
+.pdp__bundle p { flex: 1 1 160px; font-size: 13px; }
+.pdp__bundle strong { font-weight: 700; }
+.pdp__bundle small { display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: .04em; color: var(--gray-10); margin-top: 3px; }
+.pdp__bundle .btn { min-height: 42px; padding: 10px 18px; font-size: 13px; }
+
+.pdp__trust {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px;
+  margin: 16px 0 24px; padding-top: 16px; border-top: 1px solid var(--gray-4);
+}
+.pdp__trust li {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--gray-11);
+}
+.pdp__trust svg { width: 14px; height: 14px; flex: 0 0 auto; color: var(--accent-11); }
+
+.pdp__notify[hidden] { display: none; }
+
+/* ---- #1: sticky add-to-cart bar ---- */
+.pdp-sticky-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, .96);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--gray-4);
+  box-shadow: 0 -8px 28px rgba(17, 17, 19, .10);
+  animation: sticky-bar-in .25s var(--ease-drawer);
+}
+.pdp-sticky-bar[hidden] { display: none; }
+.pdp-sticky-bar__info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pdp-sticky-bar__info .price { font-size: 16px; }
+.pdp-sticky-bar__meta {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .05em;
+  color: var(--gray-10); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pdp-sticky-bar .btn { margin-left: auto; flex: 1 1 auto; max-width: 60%; min-height: 46px; }
+@keyframes sticky-bar-in { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@media (min-width: 900px) { .pdp-sticky-bar { display: none; } }
+
+/* ---- R12: rating breakdown + review filters ---- */
+.rating-summary { display: grid; grid-template-columns: 1fr; gap: 22px; margin-bottom: 30px; }
+.rating-summary__score { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.rating-summary__score strong { font-family: var(--font-mono); font-size: 30px; font-weight: 700; line-height: 1; }
+.rating-summary__score span { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; color: var(--gray-10); text-transform: uppercase; }
+.rating-summary__score .stars svg { width: 18px; height: 18px; }
+.rating-bars { display: grid; gap: 6px; max-width: 340px; }
+.rating-bar { display: grid; grid-template-columns: 34px 1fr 38px; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--gray-11); }
+.rating-bar__track { display: block; height: 6px; border-radius: 999px; background: var(--gray-4); overflow: hidden; }
+.rating-bar__fill { display: block; height: 100%; background: var(--amber); border-radius: 999px; }
+.review-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.review-filters button {
+  min-height: 40px; padding: 8px 16px; border-radius: 999px;
+  border: 1px solid var(--gray-6); background: #fff;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.review-filters button[aria-pressed="true"] { background: var(--ink); color: var(--accent-bright); border-color: var(--ink); }
+@media (min-width: 720px) { .rating-summary { grid-template-columns: auto 1fr; gap: 48px; align-items: center; } }
+
+/* ---- R6: cart cross-sell ---- */
+.cart-xsell { padding: 12px 20px; border-bottom: 1px solid var(--gray-4); background: #fff; }
+.cart-xsell[hidden] { display: none; }
+.cart-xsell__head { color: var(--gray-10); margin-bottom: 10px; }
+.cart-xsell__row { display: grid; grid-template-columns: 44px 1fr auto auto; align-items: center; gap: 10px; padding: 6px 0; }
+.cart-xsell__row img { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; background: var(--paper-2); }
+.cart-xsell__name { font-size: 13px; font-weight: 500; line-height: 1.3; }
+.cart-xsell__add { min-height: 36px; padding: 6px 14px; font-size: 12px; border-width: 1px; }
+
+/* ---- #8: quick-add model sheet ---- */
+/* The card scrolls by default; the sheet's content is fixed and short, so let it show the
+   select panel instead of clipping it at the card edge. */
+.model-sheet__card { width: min(440px, 100%); overflow: visible; }
+.model-sheet__field .cs__panel { max-height: min(260px, 38vh); }
+.model-sheet__name { font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--gray-10); margin: 6px 0 18px; }
+.model-sheet__field { margin-bottom: 16px; }
+.model-sheet__remember {
+  display: flex; align-items: center; gap: 9px; margin-bottom: 16px; cursor: pointer;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--gray-11);
+}
+.model-sheet__remember input { width: 17px; height: 17px; accent-color: var(--accent-9); }
+
+/* ---- #6: slim cookie line ---- */
+.cookie-notice {
+  position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 80;
+  max-width: none; border-radius: 0;
+  padding: 6px 12px calc(6px + env(safe-area-inset-bottom));
+  gap: 10px; min-height: 44px;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, .22);
+}
+.cookie-notice p { flex: 1 1 auto; font-size: 12px; line-height: 1.3; }
+.cookie-notice .btn { min-height: 32px; padding: 5px 14px; font-size: 12px; border-radius: 999px; }
+.cookie-notice__close { width: 32px; height: 32px; flex: 0 0 auto; color: var(--gray-8); }
+.cookie-notice__close svg { width: 16px; height: 16px; }
+.cookie-notice__close:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+.cookie-notice.is-leaving { transform: translateY(110%); opacity: 0; }
+
+/* ---- #7: exit-intent offer ---- */
+.exit-offer {
+  position: fixed; inset: 0; z-index: 110;
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  background: rgba(17, 17, 19, .55);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  opacity: 0; transition: opacity .2s ease;
+}
+.exit-offer[hidden] { display: none; }
+.exit-offer.open { opacity: 1; }
+.exit-offer__card {
+  position: relative; width: min(430px, 100%);
+  background: var(--ink); color: #fff; border-radius: 18px; padding: 34px 26px 26px;
+  transform: scale(.96); transition: transform .2s ease;
+}
+.exit-offer.open .exit-offer__card { transform: scale(1); }
+.exit-offer__close { position: absolute; top: 10px; right: 10px; color: var(--gray-9); }
+.exit-offer__close:hover { background: rgba(255, 255, 255, .08); color: #fff; }
+.exit-offer__eyebrow { color: var(--accent-bright); display: block; margin-bottom: 12px; }
+.exit-offer__card h2 { font-size: 30px; color: #fff; }
+.exit-offer__card h2 em { font-style: normal; color: var(--accent-bright); }
+.exit-offer__card > p { color: var(--gray-8); font-size: 14px; margin: 12px 0 20px; }
+.exit-offer__form { display: grid; gap: 10px; }
+.exit-offer__form input {
+  min-height: 50px; padding: 12px 18px; border-radius: 999px;
+  border: 1px solid #3a3a3f; background: #1c1c1f; color: #fff;
+}
+.exit-offer__form input::placeholder { color: var(--gray-9); }
+.exit-offer__form input:focus { border-color: var(--accent-9); outline: none; }
+.exit-offer__decline {
+  display: block; width: 100%; margin-top: 14px; padding: 6px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .05em;
+  color: var(--gray-9); text-decoration: underline;
+}
+.exit-offer__decline:hover { color: #fff; }
+.exit-offer__note { color: var(--gray-9); text-align: center; margin-top: 14px; }
+
+/* ---- R15: save toast ---- */
+.save-toast {
+  position: fixed; left: 16px; right: 16px; bottom: 68px; z-index: 85;
+  max-width: 380px; margin: 0 auto;
+  background: var(--ink); color: #fff; border-radius: 12px; padding: 14px 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .3);
+  opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: opacity .25s, transform .25s var(--ease-spring);
+}
+.save-toast.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.save-toast p { font-size: 13px; }
+.save-toast strong { color: var(--accent-bright); }
+.save-toast__form { display: flex; gap: 8px; margin-top: 10px; }
+.save-toast__form input {
+  flex: 1; min-height: 42px; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid #3a3a3f; background: #1c1c1f; color: #fff; font-size: 14px;
+}
+.save-toast__form input:focus { border-color: var(--accent-9); outline: none; }
+.save-toast__form .btn { min-height: 42px; padding: 8px 18px; font-size: 13px; }
+
+/* ---- #12: condensed sticky filter bar ---- */
+.filter-bar {
+  position: sticky; top: var(--header-h); z-index: 40;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 0; margin-bottom: 18px;
+  background: rgba(255, 255, 255, .94);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-4);
+}
+.filter-bar[hidden] { display: none; }
+.filter-bar__toggle {
+  display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto;
+  min-height: 40px; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--gray-6); background: #fff; white-space: nowrap;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em;
+}
+.filter-bar__toggle svg { width: 15px; height: 15px; flex: 0 0 auto; }
+.filter-bar__toggle.is-active { background: var(--ink); color: var(--accent-bright); border-color: var(--ink); }
+.filter-bar__count { margin-left: auto; flex: 0 0 auto; white-space: nowrap; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-10); }
+@media (max-width: 480px) {
+  .filter-bar { gap: 6px; }
+  .filter-bar__toggle { padding: 8px 11px; font-size: 11px; gap: 5px; }
+  .filter-bar__count { font-size: 10px; }
+}
+.toolbar--flash { box-shadow: 0 0 0 3px var(--accent-4); border-radius: 10px; transition: box-shadow .3s; }
+
+/* ---- #15: condensed reviews strip on the homepage ---- */
+.reviews-strip { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.reviews-strip::-webkit-scrollbar { display: none; }
+/* The next card peeks by design — that edge is what tells a thumb the row scrolls. */
+.reviews-strip .review-card { flex: 0 0 min(76vw, 330px); scroll-snap-align: start; padding: 22px; }
+.reviews-strip .review-card blockquote { font-size: 14px; margin-bottom: 14px; }
+.section__cta { display: flex; justify-content: center; margin-top: 32px; }
+
+/* ---- #2: compress the PDP gallery so name, rating and price clear the fold ---- */
+@media (max-width: 899px) {
+  .product-layout { gap: 16px; padding: 14px 20px 96px; }
+  .gallery__main { height: 38vh; max-height: 400px; width: auto; max-width: 100%; margin: 0 auto; }
+  .gallery__thumbs {
+    display: flex; grid-template-columns: none; gap: 8px;
+    overflow-x: auto; margin-top: 8px; justify-content: center; scrollbar-width: none;
+  }
+  .gallery__thumbs::-webkit-scrollbar { display: none; }
+  .gallery__thumb { flex: 0 0 56px; width: 56px; height: 56px; }
+  .pdp h1 { margin: 4px 0 8px; }
+  .pdp__rating { margin-bottom: 10px; }
+  .pdp__price-row { margin-bottom: 10px; }
+  .pdp__stock { margin-bottom: 10px; }
+  .pdp .field { margin-bottom: 10px; }
+  .pdp .field label { margin-bottom: 4px; }
+  .pdp .field .cs__btn { min-height: 44px; }
+  .pdp__chips { margin: 20px 0 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pdp-sticky-bar, .exit-offer__card, .save-toast { animation: none !important; transform: none !important; }
+  .pdp__stock--low .dot { animation: none !important; }
+}
+
+/* ---- review photos + unverified marker ---- */
+.review-card__photo { width: 84px; height: 84px; border-radius: 10px; object-fit: cover; margin-bottom: 16px; background: var(--paper-2); }
+.review-card[hidden] { display: none; }
+.verified--none { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-10); }
+
+/* ---- #15: tighter vertical rhythm on mobile, where every section costs a scroll ---- */
+@media (max-width: 719px) {
+  .section { padding: 56px 0; }
+  .section__head { margin-bottom: 30px; }
+  .newsletter__inner { padding: 56px 0; }
+}
+
+/* ================= BFCM layer ================= */
+
+/* ---- card badge stack: deal badge on top, low-stock underneath ---- */
+/* Two absolutely-positioned badges fought for the same corner; stack them in one flow instead. */
+.p-card__badges {
+  position: absolute; top: 12px; left: 12px; z-index: 3;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+}
+.p-card__badges .badge { position: static; }
+.badge--stock { display: inline-flex; align-items: center; gap: 5px; }
+.badge--stock .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-9); animation: stock-pulse 2s ease infinite; }
+
+/* ---- sale banner strip (black section, red rule, gold savings) ---- */
+.sale-strip { background: var(--ink); color: #fff; padding: 26px 0; border-block: 1px solid #2a1a1c; }
+.sale-strip__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 26px; text-align: center; }
+.sale-strip__item {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--gray-8);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.sale-strip__item strong { color: #fff; }
+.sale-strip__item em { font-style: normal; color: var(--accent-bright); }
+.sale-strip__item svg { width: 15px; height: 15px; color: var(--accent-bright); }
+
+/* ---- deal hero band: the sale terms, above the fold of the grid ---- */
+.deal-band { background: var(--ink); color: #fff; padding: 52px 0; }
+.deal-band__inner { display: grid; gap: 26px; align-items: center; }
+.deal-band__eyebrow { color: var(--accent-bright); display: block; margin-bottom: 12px; }
+.deal-band h2 { font-size: clamp(26px, 3.8vw, 40px); color: #fff; }
+.deal-band h2 em { font-style: normal; color: var(--accent-bright); }
+.deal-band p { color: var(--gray-8); font-size: 15px; margin-top: 12px; max-width: 46ch; }
+.deal-band__code {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 20px;
+  padding: 12px 18px; border: 1px dashed var(--accent-8); border-radius: 10px;
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: .1em; color: #fff;
+}
+.deal-band__code strong { color: var(--accent-bright); font-size: 16px; letter-spacing: .18em; }
+.deal-band__media { border-radius: 16px; overflow: hidden; aspect-ratio: 16 / 10; }
+.deal-band__media img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 900px) { .deal-band__inner { grid-template-columns: 1.05fr 1fr; gap: 56px; } }
+
+/* ---- site-wide sticky deal bar ---- */
+/* Not on the PDP: that page already owns the bottom edge with its add-to-cart bar. */
+.deal-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 75;
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 14px calc(9px + env(safe-area-inset-bottom));
+  background: var(--ink); color: #fff;
+  border-top: 2px solid var(--accent-9);
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, .34);
+  transform: translateY(110%); transition: transform .3s var(--ease-drawer);
+}
+.deal-bar[hidden] { display: none; }
+.deal-bar.is-in { transform: translateY(0); }
+.deal-bar__text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.deal-bar__lead {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.deal-bar__lead em { font-style: normal; color: var(--accent-bright); }
+.deal-bar__note { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; color: var(--gray-9); text-transform: uppercase; }
+.deal-bar .btn { margin-left: auto; flex: 0 0 auto; min-height: 42px; padding: 9px 18px; font-size: 13px; }
+.deal-bar__close { width: 34px; height: 34px; flex: 0 0 auto; color: var(--gray-9); }
+.deal-bar__close svg { width: 16px; height: 16px; }
+.deal-bar__close:hover { background: rgba(255,255,255,.1); color: #fff; }
+/* Keep the other bottom-anchored layers clear of it. */
+body.has-deal-bar .cookie-notice { bottom: 56px; }
+body.has-deal-bar .save-toast { bottom: 124px; }
+@media (max-width: 420px) {
+  .deal-bar { gap: 8px; padding-inline: 10px; }
+  .deal-bar .btn { padding: 9px 13px; font-size: 12px; }
+  .deal-bar__lead { font-size: 11px; }
+}
+
+/* ---- gift bundle card grid on the homepage ---- */
+.gift-row { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.gift-card {
+  display: flex; gap: 16px; align-items: center;
+  padding: 18px; border-radius: 16px; border: 1px solid var(--gray-4); background: #fff;
+  transition: transform .25s var(--ease-spring), box-shadow .25s;
+}
+.gift-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
+.gift-card img { width: 84px; height: 84px; border-radius: 12px; object-fit: cover; flex: 0 0 auto; background: var(--paper-2); }
+.gift-card h3 { font-size: 17px; margin-bottom: 6px; }
+.gift-card p { font-size: 13px; color: var(--gray-11); margin-bottom: 8px; }
+.gift-card .price { font-size: 15px; }
+@media (min-width: 720px) { .gift-row { grid-template-columns: repeat(3, 1fr); gap: 18px; } .gift-card { flex-direction: column; align-items: flex-start; } .gift-card img { width: 100%; height: 150px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .deal-bar { transition: none !important; }
+  .badge--stock .dot { animation: none !important; }
+}
+
+/* ================= BFCM signature layer ================= */
+/* HOLIDAY THEME SETTINGS — Shopify port: the deal-night section and the doorbuster card plate.
+   Both read off --accent-9, so a season swap in colors.css carries them along. */
+
+/* ---- doorbuster card: red-outlined black plate, on any background ---- */
+.p-card--doorbuster {
+  background: #000; border: 2px solid var(--accent-9); border-radius: 16px;
+  padding: 10px 10px 14px;
+}
+.p-card--doorbuster .p-card__media { border-radius: 10px; background: #16161a; }
+.p-card--doorbuster .p-card__info { padding: 12px 4px 0; }
+.p-card--doorbuster .p-card__name,
+.p-card--doorbuster .price { color: #fff; }
+.p-card--doorbuster .p-card__fits,
+.p-card--doorbuster .p-card__stars { color: var(--gray-9); }
+.p-card--doorbuster .price s { color: var(--gray-9); }
+.p-card--doorbuster .p-card__stock { color: var(--accent-bright); }
+.p-card--doorbuster .p-card__add { background: var(--accent-9); color: #fff; }
+.p-card--doorbuster .p-card__add:hover:not(:disabled) { background: var(--accent-10); }
+.p-card--doorbuster .p-card__add:disabled { background: #1e1e22; color: var(--gray-9); }
+.p-card--doorbuster:hover .p-card__media { box-shadow: none; }
+.p-card--doorbuster:hover { box-shadow: 0 14px 34px rgba(229, 72, 77, .28); }
+.p-card--doorbuster .p-card__badges .badge--stock { background: #000; color: var(--accent-bright); box-shadow: inset 0 0 0 1px var(--accent-8); }
+.p-card--doorbuster .p-card__save { background: rgba(0, 0, 0, .72); color: #fff; }
+
+/* ---- deal-night section: black ground, white cards (contrast inverted) ---- */
+.section--night { background: #000; color: #fff; border-block: 2px solid var(--accent-9); }
+.section--night .section__title,
+.section--night h2, .section--night h3 { color: #fff; }
+.section--night .section__eyebrow,
+.section--night .drops-timer-label { color: var(--accent-bright); }
+.section--night .drops-note { color: var(--gray-9); }
+.section--night .drops-claimed { color: var(--gray-8); }
+.section--night .drops-claimed strong { color: #fff; }
+.section--night .grid-empty { color: var(--gray-8); }
+
+/* every card that is not a doorbuster flips to a white plate */
+.section--night .p-card:not(.p-card--doorbuster) {
+  background: #fff; border-radius: 16px; padding: 10px 10px 14px;
+  /* the section paints its type white — a white card has to take the ink back */
+  color: var(--ink);
+}
+/* the heading rule above paints every h3 in the section white — the card name is an h3 */
+.section--night .p-card:not(.p-card--doorbuster) .p-card__name { color: var(--ink); }
+.section--night .p-card:not(.p-card--doorbuster) .p-card__fits,
+.section--night .p-card:not(.p-card--doorbuster) .p-card__stars { color: var(--gray-10); }
+.section--night .p-card:not(.p-card--doorbuster) .price s { color: var(--gray-10); }
+.section--night .p-card:not(.p-card--doorbuster) .p-card__media { border-radius: 10px; }
+.section--night .p-card:not(.p-card--doorbuster) .p-card__info { padding: 12px 4px 0; }
+.section--night .p-card:not(.p-card--doorbuster):hover { box-shadow: 0 14px 34px rgba(0, 0, 0, .5); }
+.section--night .p-card:not(.p-card--doorbuster):hover .p-card__media { box-shadow: none; }
+
+/* Both plates in the deal-night grid spend border + padding on each side, which on a 390px
+   two-column grid left the info column ~20px narrower than a plain card: too narrow for the
+   sale price and the price it is cut from to share a line, and enough to push long names
+   onto a third. The plate is a desktop flourish — on a phone claim that air back. */
+@media (max-width: 559px) {
+  .p-card--doorbuster,
+  .section--night .p-card:not(.p-card--doorbuster) { padding: 6px 6px 12px; }
+  .p-card--doorbuster .p-card__info,
+  .section--night .p-card:not(.p-card--doorbuster) .p-card__info { padding: 12px 0 0; }
+  .p-card--doorbuster .p-card__name,
+  .section--night .p-card:not(.p-card--doorbuster) .p-card__name { font-size: 14px; }
+  .p-card--doorbuster .p-card__row .price s,
+  .section--night .p-card:not(.p-card--doorbuster) .p-card__row .price s { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deal-pulse { animation: none !important; transform: none !important; }
+}

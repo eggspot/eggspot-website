@@ -1,0 +1,269 @@
+/* CASELAB® Holiday — Mono-Tech Streetwear in Christmas dress · base: reset, tokens, type, header, footer */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ================================================================
+   HOLIDAY THEME SETTINGS — Shopify port
+   ----------------------------------------------------------------
+   Everything that makes this build read as "Christmas" instead of
+   "generic case shop" is dialled from the four groups below. Swapping
+   a season means changing these values and nothing else; each one maps
+   to a settings_schema.json field when this lands in a Shopify theme.
+
+     settings.holiday_display_font  -> --font-display
+     settings.holiday_accent        -> --holiday-accent / --holiday-accent-soft
+     settings.holiday_deep          -> --holiday-deep  (dark section ground)
+     settings.holiday_pattern       -> --pattern-* (hero snowfall + ornaments)
+
+   The Radix accent scale in colors.css still owns every interactive
+   surface — these tokens are the seasonal dress on top of it.
+   ================================================================ */
+:root {
+  --ink: #111113;            /* near-black (gray-12 tier) */
+  --paper: #ffffff;
+  --paper-2: #f5f5f7;        /* Apple-ish off-white */
+  --amber: #f5a623;          /* review stars */
+  --red: #cc2936;            /* holiday red — sale / countdown */
+  --shoppay: #5a31f4;
+
+  /* --- holiday: typography --- */
+  /* Fraunces 600/700 — a warm high-contrast serif. Swap this one line and
+     every heading, button and logo changes season. */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-display-opsz: 40;   /* Fraunces optical size for display-scale type */
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+
+  /* --- holiday: seasonal palette (decorative only, never a lone text pairing) --- */
+  --holiday-accent: #e7b008;        /* gold — ornaments, hairlines, card frames */
+  --holiday-accent-soft: #f7d774;   /* gold that clears 4.5:1 on near-black */
+  --holiday-accent-deep: #8a6708;   /* gold that clears 4.5:1 on white */
+  --holiday-deep: #1a0507;          /* deep-red-black ground for alternating bands */
+  --holiday-deep-2: #2b0a0e;        /* one step up, for gradients inside that band */
+
+  /* --- holiday: pattern (hero snowfall + corner ornaments) --- */
+  --pattern-flake: #ffffff;
+  --pattern-opacity: .5;            /* 0 disables the snow without touching markup */
+  --pattern-duration: 10s;          /* per-flake fall time; each flake offsets from this */
+  --pattern-glow: rgba(231, 176, 8, .55);
+
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-drawer: cubic-bezier(.32, .72, 0, 1);
+  --header-h: 64px;
+  --shadow-card: 0 12px 32px rgba(17, 17, 19, .10);
+  --shadow-gold: 0 14px 36px rgba(231, 176, 8, .18);
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input, select, textarea { font-family: var(--font-body); font-size: 16px; color: var(--ink); }
+ul { list-style: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  /* Fraunces is a variable serif: opsz drives how sharp the serifs cut, SOFT rounds
+     the terminals a little so the headings read warm rather than editorial-cold. */
+  font-variation-settings: "opsz" var(--font-display-opsz), "SOFT" 20, "WONK" 1;
+  letter-spacing: -0.012em;
+  line-height: 1.1;
+}
+/* Small display-font runs (buttons, nav, card titles) want the text optical size —
+   the display cut gets spindly below ~20px. */
+.btn, .logo, .accordion__btn, .p-card__name, .mobile-nav a { font-variation-settings: "opsz" 14, "SOFT" 20; }
+
+.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+/* mono label — signature */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.section { padding: 72px 0; }
+.section--alt { background: var(--paper-2); }
+.section__head { max-width: 640px; margin-bottom: 40px; }
+.section__eyebrow { color: var(--accent-11); display: block; margin-bottom: 12px; }
+.section__title { font-size: clamp(30px, 4.6vw, 48px); }
+.section__sub { margin-top: 12px; color: var(--gray-11); font-size: 15px; }
+
+/* ---- buttons ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 12px 28px;
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  border-radius: 999px; border: 2px solid transparent;
+  transition: transform .25s var(--ease-spring), background-color .2s, color .2s, border-color .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.btn--lime { background: var(--accent-9); color: var(--ink); }
+.btn--lime:hover { background: var(--accent-10); }
+.btn--dark { background: var(--ink); color: #fff; }
+.btn--dark:hover { background: #2a2a2e; }
+.btn--ghost { border-color: currentColor; background: transparent; }
+.btn--shoppay { background: var(--shoppay); color: #fff; font-family: var(--font-body); font-weight: 600; }
+.btn--shoppay:hover { background: #4526d9; }
+.btn--block { width: 100%; }
+.btn svg { width: 18px; height: 18px; }
+
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 50%;
+  transition: background-color .2s, transform .25s var(--ease-spring);
+}
+.icon-btn:hover { background: rgba(17, 17, 19, .06); }
+.icon-btn svg { width: 22px; height: 22px; }
+
+/* ---- badges ---- */
+.badge {
+  display: inline-block; padding: 5px 10px; border-radius: 4px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.badge--drop { background: var(--accent-9); color: var(--ink); }
+.badge--sale { background: var(--red); color: #fff; }
+.badge--sale, .badge--drop { border-radius: 999px; }
+.badge--dark { background: var(--ink); color: #fff; }
+.badge--line { border: 1px solid var(--gray-7); color: var(--gray-11); background: #fff; }
+/* Gold reads as "gift", green as "in stock" — the two never carry the same meaning on a card. */
+.badge--gift { background: var(--ink); color: var(--gold-soft); border: 1px solid var(--gold); }
+.badge--bundle { background: var(--gold); color: #2b1f00; }
+
+/* ---- Christmas shipping cutoff bar ----
+   The one date that decides whether a gift arrives in time, so it sits above the header on every
+   page rather than inside the rotating announcements where it would scroll out of view. */
+.cutoff-bar {
+  background: var(--holiday-deep); color: var(--holiday-accent-soft);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 16px;
+  padding: 9px 20px; text-align: center;
+  border-bottom: 1px solid rgba(231, 176, 8, .5);
+  position: relative; z-index: 61;
+}
+.cutoff-bar__label {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.cutoff-bar__label svg { width: 15px; height: 15px; flex: 0 0 auto; }
+.cutoff-bar__note { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: #d8b9bc; }
+@media (max-width: 519px) { .cutoff-bar__note { display: none; } }
+
+/* ---- a11y ---- */
+.skip-link {
+  position: absolute; left: 16px; top: -60px; z-index: 200;
+  background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 6px;
+  transition: top .2s;
+}
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 2px solid var(--accent-9); outline-offset: 2px; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px;
+  clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+}
+
+/* ---- announcement bar (mono marquee) ---- */
+/* Red ground, gold type — the loudest line on the page, and the one that says
+   "holiday" before a single word is read. */
+.announcement {
+  background: linear-gradient(90deg, #6d1219 0%, var(--xmas-red) 50%, #6d1219 100%);
+  color: var(--holiday-accent-soft);
+  overflow: hidden; white-space: nowrap; padding: 9px 0;
+  position: relative; z-index: 60;
+  border-bottom: 1px solid rgba(231, 176, 8, .45);
+}
+.announcement__track { display: inline-flex; gap: 0; animation: marquee 28s linear infinite; will-change: transform; }
+.announcement:hover .announcement__track { animation-play-state: paused; }
+.announcement__item {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase; padding: 0 28px;
+}
+.announcement__item em { font-style: normal; color: #fff; font-weight: 700; }
+.announcement__item--lead { font-weight: 700; color: #fff; }
+.announcement__item--lead em { color: var(--holiday-accent-soft); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---- header ---- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255, 255, 255, .92);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-4);
+}
+.header__inner { display: flex; align-items: center; gap: 8px; height: var(--header-h); }
+.logo {
+  font-family: var(--font-display); font-weight: 700; font-size: 21px; letter-spacing: -0.02em;
+  margin-right: auto; display: inline-flex; align-items: center; gap: 2px;
+}
+.logo sup { font-size: 10px; color: var(--accent-11); }
+.header__nav { display: none; gap: 28px; margin-right: auto; }
+.header__nav a {
+  font-size: 14px; font-weight: 500; color: var(--gray-12);
+  padding: 8px 0; border-bottom: 2px solid transparent; transition: border-color .2s;
+}
+.header__nav a:hover, .header__nav a[aria-current="page"] { border-color: var(--accent-9); }
+.header__actions { display: flex; align-items: center; gap: 2px; }
+.header__search-form { display: none; }
+.header__search-form.open { display: block; }
+.header__search-form input {
+  width: 180px; min-height: 44px; padding: 8px 14px;
+  border: 1px solid var(--gray-6); border-radius: 999px; background: var(--paper-2);
+}
+.cart-btn { position: relative; }
+.cart-count {
+  position: absolute; top: 3px; right: 1px; min-width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-9); color: var(--ink); border-radius: 999px;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 0 4px;
+  transition: transform .25s var(--ease-spring);
+}
+.cart-count.bump { transform: scale(1.45); }
+.cart-count[hidden] { display: none; }
+.mobile-nav { border-top: 1px solid var(--gray-4); background: #fff; padding: 8px 20px 16px; }
+.mobile-nav a { display: block; padding: 13px 0; font-family: var(--font-display); font-weight: 600; font-size: 17px; border-bottom: 1px solid var(--gray-3); }
+.mobile-nav[hidden] { display: none; }
+
+/* ---- footer ---- */
+.site-footer { background: var(--ink); color: var(--gray-8); padding: 64px 0 32px; }
+.footer__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 24px; margin-bottom: 48px; }
+.footer__brand p { font-size: 14px; margin-top: 12px; max-width: 280px; }
+.footer__col h4 { color: var(--accent-9); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 16px; }
+.footer__col a { display: block; padding: 6px 0; font-size: 14px; color: #d6d6d9; transition: color .2s; }
+.footer__col a:hover { color: var(--accent-9); }
+.footer__social { display: flex; gap: 8px; }
+.footer__social a { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #333338; border-radius: 50%; color: #d6d6d9; transition: border-color .2s, color .2s; }
+.footer__social a:hover { border-color: var(--accent-9); color: var(--accent-9); }
+.footer__social svg { width: 18px; height: 18px; }
+.footer__bottom { border-top: 1px solid #29292e; padding-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+.footer__pay { display: flex; flex-wrap: wrap; gap: 8px; }
+.pay-chip {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: .06em;
+  border: 1px solid #333338; color: #d6d6d9; border-radius: 4px; padding: 5px 9px; text-transform: uppercase;
+}
+.pay-chip--shoppay { background: var(--shoppay); border-color: var(--shoppay); color: #fff; }
+.footer__legal { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-9); }
+
+@media (min-width: 768px) {
+  .footer__grid { grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; }
+  .footer__bottom { flex-direction: row; align-items: center; justify-content: space-between; }
+}
+@media (min-width: 980px) {
+  .header__nav { display: flex; }
+  .header__menu { display: none; }
+  .logo { margin-right: 40px; }
+}

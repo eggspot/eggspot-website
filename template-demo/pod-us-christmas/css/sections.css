@@ -1,0 +1,382 @@
+/* CASELAB® Holiday — page sections: hero, marquee, bento, reviews, newsletter, collection, product, misc pages */
+
+/* ---- hero (full-bleed near-black, product offset right, parallax) ---- */
+.hero { position: relative; background: var(--ink); color: #fff; overflow: hidden; }
+/* Two soft lamps — green low-left, red high-right — sit under the photo wash so the near-black
+   hero reads as a lit room rather than a dark rectangle. Painted on ::before so the photo layer
+   (::after gradient) still controls legibility. */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    radial-gradient(560px 420px at 8% 88%, rgba(48, 164, 108, .30), transparent 68%),
+    radial-gradient(520px 400px at 78% 6%, rgba(204, 41, 54, .26), transparent 66%);
+}
+/* HOLIDAY THEME SETTINGS — Shopify port · hero pattern.
+   Twelve discrete flakes, each with its own column, size, fall time and delay, so the field
+   never reads as a repeating tile. They sit at z-2 — above the photo, below the copy — so no
+   flake ever crosses a letter. --pattern-opacity 0 turns the whole thing off without touching
+   markup; prefers-reduced-motion stops it dead at the bottom of this file. */
+.hero__snow { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+/* Each flake is a full-height column carrying one dot on its ::before. The column, not the
+   dot, is what animates — a percentage translate resolves against the animated element's own
+   box, so a 4px dot told to fall 112% would travel four pixels. */
+.hero__snow .flake {
+  position: absolute; top: 0; width: var(--sz, 5px); height: 100%;
+  opacity: 0;
+  animation: flake-fall var(--dur, var(--pattern-duration)) linear var(--delay, 0s) infinite;
+  will-change: transform, opacity;
+}
+.hero__snow .flake::before {
+  content: ""; position: absolute; top: -10px; left: 0;
+  width: var(--sz, 5px); height: var(--sz, 5px); border-radius: 50%;
+  background: var(--pattern-flake);
+  /* A soft halo is what keeps a 3px dot readable over the tree photo as well as over the
+     near-black left half — without it the flakes vanish into the busy right side. */
+  box-shadow: 0 0 7px 1px rgba(255, 255, 255, .5);
+  filter: blur(.3px);
+}
+@keyframes flake-fall {
+  0%   { transform: translate3d(0, 0, 0);                    opacity: 0; }
+  12%  {                                                     opacity: var(--op, var(--pattern-opacity)); }
+  88%  {                                                     opacity: var(--op, var(--pattern-opacity)); }
+  100% { transform: translate3d(var(--drift, 14px), 106%, 0); opacity: 0; }
+}
+/* Twelve columns, twelve rhythms — declared once here rather than inline on every page. */
+.hero__snow .flake:nth-child(1)  { left: 5%;  --sz: 5px;   --dur: 11s;   --delay: 0s;    --drift: 18px;  --op: .5; }
+.hero__snow .flake:nth-child(2)  { left: 14%; --sz: 3px;   --dur: 8.5s;  --delay: 2.4s;  --drift: -12px; --op: .35; }
+.hero__snow .flake:nth-child(3)  { left: 23%; --sz: 6px;   --dur: 12s;   --delay: 1.1s;  --drift: 22px;  --op: .55; }
+.hero__snow .flake:nth-child(4)  { left: 31%; --sz: 3.5px; --dur: 9.5s;  --delay: 4.2s;  --drift: -18px; --op: .4; }
+.hero__snow .flake:nth-child(5)  { left: 42%; --sz: 5px;   --dur: 10.5s; --delay: .6s;   --drift: 10px;  --op: .45; }
+.hero__snow .flake:nth-child(6)  { left: 50%; --sz: 2.5px; --dur: 8s;    --delay: 3.3s;  --drift: -22px; --op: .3; }
+.hero__snow .flake:nth-child(7)  { left: 58%; --sz: 6px;   --dur: 11.5s; --delay: 5.1s;  --drift: 16px;  --op: .6; }
+.hero__snow .flake:nth-child(8)  { left: 67%; --sz: 4px;   --dur: 9s;    --delay: 1.9s;  --drift: -14px; --op: .4; }
+.hero__snow .flake:nth-child(9)  { left: 75%; --sz: 5.5px; --dur: 12s;   --delay: 3.8s;  --drift: 20px;  --op: .5; }
+.hero__snow .flake:nth-child(10) { left: 83%; --sz: 3px;   --dur: 8.5s;  --delay: 6.2s;  --drift: -10px; --op: .35; }
+.hero__snow .flake:nth-child(11) { left: 90%; --sz: 5px;   --dur: 10s;   --delay: 2.7s;  --drift: 24px;  --op: .55; }
+.hero__snow .flake:nth-child(12) { left: 96%; --sz: 4px;   --dur: 11s;   --delay: 4.9s;  --drift: -16px; --op: .45; }
+
+/* Corner ornaments: a holly sprig low-left, a six-point star high-right. Decorative SVG,
+   inline so there is no extra request and both inherit the gold token. */
+.hero__ornament { position: absolute; z-index: 4; pointer-events: none; color: var(--holiday-accent); }
+.hero__ornament svg { width: 100%; height: 100%; display: block; }
+.hero__ornament--holly { left: 16px; bottom: 12px; width: 86px; height: 86px; opacity: .62; }
+.hero__ornament--star  { right: 5%;  top: 10%;      width: 74px;  height: 74px;  opacity: .75;
+  filter: drop-shadow(0 0 14px var(--pattern-glow)); animation: twinkle 4.6s ease-in-out infinite; }
+@media (max-width: 719px) {
+  .hero__ornament--holly { width: 60px; height: 60px; left: 10px; bottom: 8px; opacity: .5; }
+  .hero__ornament--star { width: 52px; right: 7%; top: 6%; height: 52px; }
+}
+
+.hero__glow-dot {
+  position: absolute; z-index: 4; width: 9px; height: 9px; border-radius: 50%;
+  pointer-events: none;
+  background: var(--holiday-accent); box-shadow: 0 0 18px 4px var(--pattern-glow);
+  animation: twinkle 3.4s ease-in-out infinite;
+}
+@keyframes twinkle { 50% { opacity: .25; transform: scale(.7); } }
+.hero__inner { position: relative; z-index: 5; padding: 88px 0 96px; max-width: 620px; }
+.hero__eyebrow { color: var(--accent-9); display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.hero__eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-9); animation: pulse 2s ease infinite; }
+@keyframes pulse { 50% { opacity: .35; } }
+.hero__title { font-size: clamp(40px, 7vw, 84px); color: #fff; }
+.hero__title em { font-style: normal; color: var(--gold-soft); }
+.hero__sub { margin: 20px 0 32px; color: var(--gray-8); font-size: 16px; max-width: 46ch; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero__ctas .btn--ghost { color: #fff; border-color: #3a3a3f; }
+.hero__ctas .btn--ghost:hover { border-color: var(--accent-9); color: var(--accent-9); }
+.hero__meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 36px; }
+.hero__meta span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-9); display: inline-flex; align-items: center; gap: 7px; }
+.hero__meta svg { width: 14px; height: 14px; color: var(--accent-9); }
+.hero__media { position: absolute; inset: 0; z-index: 1; }
+.hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--ink) 0%, rgba(17,17,19,.86) 44%, rgba(17,17,19,.25) 100%); }
+.hero__media img { position: absolute; top: -40px; right: 0; bottom: -40px; left: 30%; width: 70%; height: calc(100% + 80px); object-fit: cover; will-change: transform; }
+@media (max-width: 719px) {
+  .hero__media img { left: 0; width: 100%; }
+  /* Half strength: the vertical mobile wash is thinner mid-frame, so the lamps double up there. */
+  .hero::before {
+    background:
+      radial-gradient(70vw 40vh at 6% 92%, rgba(48, 164, 108, .18), transparent 70%),
+      radial-gradient(70vw 36vh at 84% 4%, rgba(204, 41, 54, .13), transparent 68%);
+  }
+  /* Let the case read through: dark enough for white type, light enough to see the product. */
+  .hero__media::after { background: linear-gradient(180deg, rgba(17,17,19,.93) 0%, rgba(17,17,19,.7) 52%, rgba(17,17,19,.9) 100%); }
+}
+
+/* ---- press marquee (outline text) ---- */
+.press-marquee { background: var(--paper); border-bottom: 1px solid var(--gray-4); padding: 26px 0; overflow: hidden; white-space: nowrap; }
+.press-marquee__track { display: inline-flex; align-items: baseline; animation: marquee 36s linear infinite; will-change: transform; }
+.press-marquee:hover .press-marquee__track { animation-play-state: paused; }
+.press-marquee__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; color: var(--gray-10); padding: 0 24px; text-transform: uppercase; }
+.press-marquee__name {
+  font-family: var(--font-display); font-weight: 700; font-size: 34px; letter-spacing: -0.02em;
+  padding: 0 24px; color: transparent;
+  -webkit-text-stroke: 1.5px var(--gray-8);
+}
+.press-marquee__sep { color: var(--accent-11); font-size: 22px; }
+
+/* ---- drops header row ---- */
+.drops-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 36px; }
+.drops-head .countdown { flex: 0 0 auto; }
+.drops-timer-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; font-weight: 700; }
+.section__link { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; border-bottom: 2px solid var(--accent-9); padding-bottom: 4px; }
+.section__link svg { width: 15px; height: 15px; }
+
+/* ---- material science bento 2x2 ---- */
+.bento { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.bento__card { position: relative; border-radius: 16px; padding: 28px; background: #fff; border: 1px solid var(--gray-4); overflow: hidden; transition: transform .25s var(--ease-spring), box-shadow .25s; }
+.bento__card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
+.bento__card--dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+.bento__card--lime { background: var(--accent-9); color: var(--ink); border-color: var(--accent-9); }
+.bento__icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(17,17,19,.06); margin-bottom: 18px; }
+.bento__card--dark .bento__icon { background: rgba(48, 164, 108, .16); color: var(--accent-9); }
+.bento__card--lime .bento__icon { background: rgba(17,17,19,.1); }
+.bento__icon svg { width: 22px; height: 22px; }
+.bento__stat { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-11); margin-bottom: 8px; display: block; }
+.bento__card--dark .bento__stat { color: var(--accent-9); }
+.bento__card--lime .bento__stat { color: var(--ink); }
+.bento__card h3 { font-size: 21px; margin-bottom: 10px; }
+.bento__card p { font-size: 14px; color: var(--gray-11); max-width: 40ch; }
+.bento__card--dark p { color: var(--gray-8); }
+.bento__card--lime p { color: #1d250f; }
+@media (min-width: 720px) { .bento { grid-template-columns: 1fr 1fr; gap: 18px; } .bento__card { padding: 34px; } }
+
+/* ---- reviews wall ---- */
+.reviews-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 36px; }
+.reviews-summary .stars svg { width: 20px; height: 20px; }
+.reviews-summary strong { font-family: var(--font-mono); font-size: 20px; font-weight: 700; }
+.reviews-summary > span:not(.stars) { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; color: var(--gray-10); text-transform: uppercase; }
+.review-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.review-card { background: #fff; border: 1px solid var(--gray-4); border-radius: 16px; padding: 26px; transition: transform .25s var(--ease-spring), box-shadow .25s; }
+.review-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
+.review-card .stars { margin-bottom: 14px; }
+.review-card blockquote { font-size: 15px; line-height: 1.65; margin-bottom: 18px; }
+.review-card figcaption { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.review-card cite { font-style: normal; font-weight: 600; font-size: 14px; }
+.review-card .verified { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-11); display: inline-flex; align-items: center; gap: 5px; }
+.review-card .verified svg { width: 13px; height: 13px; }
+@media (min-width: 900px) { .review-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ---- image-with-text ---- */
+.iwt { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+.iwt__media { border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; }
+.iwt__media img { width: 100%; height: 100%; object-fit: cover; }
+.iwt__body h2 { font-size: clamp(28px, 3.6vw, 40px); margin: 12px 0 16px; }
+.iwt__body p { color: var(--gray-11); font-size: 15px; margin-bottom: 14px; max-width: 55ch; }
+@media (min-width: 900px) { .iwt { grid-template-columns: 1fr 1fr; gap: 64px; } }
+
+/* ---- newsletter ---- */
+.newsletter { background: var(--ink); color: #fff; }
+.newsletter__inner { padding: 72px 0; max-width: 560px; }
+.newsletter h2 { font-size: clamp(30px, 4.6vw, 46px); color: #fff; }
+.newsletter h2 em { font-style: normal; color: var(--accent-9); }
+.newsletter p { color: var(--gray-8); margin: 14px 0 26px; font-size: 15px; }
+.newsletter__form { display: flex; flex-direction: column; gap: 10px; }
+.newsletter__form input { flex: 1; min-height: 52px; padding: 12px 18px; border-radius: 999px; border: 1px solid #3a3a3f; background: #1c1c1f; color: #fff; }
+.newsletter__form input::placeholder { color: var(--gray-9); }
+.newsletter__form input:focus { border-color: var(--accent-9); outline: none; }
+.newsletter__note { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-9); margin-top: 14px; }
+@media (min-width: 560px) { .newsletter__form { flex-direction: row; } }
+
+/* ---- page hero (collection/about/etc.) ---- */
+.page-hero { background: var(--ink); color: #fff; padding: 52px 0; }
+.page-hero .breadcrumb { color: var(--gray-9); margin-bottom: 14px; }
+.page-hero .breadcrumb a:hover { color: var(--accent-9); }
+.page-hero h1 { font-size: clamp(32px, 5vw, 56px); color: #fff; }
+.page-hero p { color: var(--gray-8); margin-top: 12px; max-width: 52ch; }
+
+/* ---- collection toolbar ---- */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--gray-4); margin-bottom: 32px; }
+/* Dropdowns are custom selects now — see .cselect in components.css. */
+.toolbar__check { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; min-height: 44px; padding: 0 8px; cursor: pointer; }
+.toolbar__check input { width: 18px; height: 18px; accent-color: var(--accent-9); }
+.toolbar__count { margin-left: auto; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-10); }
+.grid-empty { text-align: center; padding: 64px 0; color: var(--gray-10); font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; }
+
+/* ---- product page ---- */
+.product-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding: 40px 20px 72px; }
+.gallery__main { position: relative; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: var(--paper-2); perspective: 1200px; }
+.gallery__flipper { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .6s var(--ease-drawer); }
+.gallery__flipper.flipped { transform: rotateY(180deg); }
+.gallery__face { position: absolute; inset: 0; backface-visibility: hidden; }
+.gallery__face img { width: 100%; height: 100%; object-fit: cover; }
+.gallery__face--back { transform: rotateY(180deg); }
+.gallery__flip-btn {
+  position: absolute; right: 14px; bottom: 14px; z-index: 4;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px;
+  background: rgba(17,17,19,.85); color: #fff; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+}
+.gallery__flip-btn svg { width: 15px; height: 15px; }
+.gallery__badge { position: absolute; top: 14px; left: 14px; z-index: 4; }
+.gallery__thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+.gallery__thumb { aspect-ratio: 1; border-radius: 10px; overflow: hidden; border: 2px solid transparent; padding: 0; background: var(--paper-2); }
+.gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.gallery__thumb[aria-current="true"] { border-color: var(--ink); }
+.pdp__eyebrow { color: var(--accent-11); }
+.pdp h1 { font-size: clamp(30px, 4vw, 44px); margin: 10px 0 12px; }
+.pdp__rating { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--gray-11); }
+.pdp__price-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+.pdp__price-row .price { font-size: 26px; }
+.pdp__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.chip { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--gray-5); background: var(--paper-2); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+.chip svg { width: 14px; height: 14px; color: var(--accent-11); }
+.pdp__buy-row { display: flex; gap: 10px; margin-bottom: 10px; }
+.qty { display: inline-flex; align-items: center; border: 1px solid var(--gray-6); border-radius: 999px; flex: 0 0 auto; }
+.qty button { width: 44px; height: 48px; display: flex; align-items: center; justify-content: center; }
+.qty button svg { width: 15px; height: 15px; }
+.qty span { font-family: var(--font-mono); font-weight: 700; min-width: 26px; text-align: center; }
+.pdp__returns { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-11); margin: 14px 0 26px; }
+.pdp__returns svg { width: 15px; height: 15px; color: var(--accent-11); }
+.pdp__desc { color: var(--gray-11); font-size: 15px; max-width: 58ch; margin-bottom: 26px; }
+.spec-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 12px; letter-spacing: .03em; }
+.spec-table th, .spec-table td { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--gray-4); }
+.spec-table th { color: var(--gray-10); font-weight: 500; text-transform: uppercase; font-size: 10px; letter-spacing: .08em; width: 42%; }
+.spec-table td { font-weight: 700; }
+@media (min-width: 900px) {
+  .product-layout { grid-template-columns: 1.1fr 1fr; gap: 64px; }
+  .pdp { position: sticky; top: calc(var(--header-h) + 24px); align-self: start; }
+}
+
+/* ---- about / contact / privacy ---- */
+.prose { max-width: 68ch; }
+.prose h2 { font-size: 26px; margin: 36px 0 12px; }
+.prose h3 { font-size: 19px; margin: 26px 0 10px; }
+.prose p, .prose li { color: var(--gray-11); font-size: 15px; margin-bottom: 12px; }
+.prose ul { list-style: disc; padding-left: 22px; }
+.prose a { color: var(--accent-11); text-decoration: underline; }
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 36px 0; }
+.stat-card { background: var(--paper-2); border-radius: 14px; padding: 22px 18px; text-align: center; }
+.stat-card strong { display: block; font-family: var(--font-mono); font-size: 24px; font-weight: 700; }
+.stat-card span { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-10); }
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+@media (min-width: 900px) { .contact-grid { grid-template-columns: 1.2fr 1fr; } }
+.contact-aside h3 { font-size: 20px; margin-bottom: 10px; }
+.contact-aside p { color: var(--gray-11); font-size: 14px; margin-bottom: 20px; }
+.contact-aside .footer__social a { border-color: var(--gray-5); color: var(--ink); }
+
+
+/* ---- gift bundle rail (home) ----
+   The season's whole offer is "buy the set, not the case", so the bundles get a framed lane of
+   their own instead of blending into the product grid. */
+.giftbar {
+  display: grid; grid-template-columns: 1fr; gap: 14px;
+}
+.gift-card {
+  position: relative; display: flex; flex-direction: column; gap: 10px;
+  background: var(--ink); color: #fff; border: 1px solid var(--gold);
+  border-radius: 18px; padding: 26px 24px 24px; overflow: hidden;
+  transition: transform .25s var(--ease-spring), box-shadow .25s;
+}
+.gift-card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(17, 17, 19, .28); }
+.gift-card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(320px 200px at 100% 0%, rgba(231, 176, 8, .16), transparent 70%);
+}
+.gift-card > * { position: relative; z-index: 1; }
+.gift-card__tag {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--gold-soft);
+  display: inline-flex; align-items: center; gap: 7px; align-self: flex-start;
+}
+.gift-card__tag svg { width: 14px; height: 14px; }
+.gift-card h3 { font-size: 22px; }
+.gift-card p { font-size: 14px; color: var(--gray-8); }
+.gift-card__price { display: flex; align-items: baseline; gap: 10px; margin-top: 2px; }
+.gift-card__price .price { font-size: 20px; color: var(--gold-soft); }
+.gift-card__price s { font-family: var(--font-mono); font-size: 13px; color: var(--gray-9); }
+.gift-card__save {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; background: var(--xmas-red); color: #fff; border-radius: 4px; padding: 4px 8px;
+}
+.gift-card .btn { margin-top: 6px; align-self: flex-start; }
+.gift-card__media { border-radius: 12px; overflow: hidden; margin: 2px 0 4px; }
+.gift-card__media img { width: 100%; height: 168px; object-fit: cover; }
+@media (min-width: 760px) { .giftbar { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+
+/* ---- cutoff callout (PDP + FAQ) ---- */
+.cutoff-note {
+  display: flex; align-items: flex-start; gap: 12px;
+  border: 1px solid var(--xmas-red); border-left-width: 4px; border-radius: 12px;
+  background: #fff5f5; padding: 14px 16px; margin: 18px 0;
+}
+.cutoff-note svg { width: 20px; height: 20px; flex: 0 0 auto; color: var(--xmas-red); margin-top: 1px; }
+.cutoff-note p { font-size: 13px; line-height: 1.5; }
+.cutoff-note strong { display: block; font-family: var(--font-display); font-size: 14px; margin-bottom: 2px; }
+.cutoff-note small { display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; color: var(--gray-11); margin-top: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Snow stops and settles at a fixed opacity rather than vanishing — the pattern stays,
+     the motion goes. */
+  .hero__snow .flake { animation: none; opacity: var(--op, var(--pattern-opacity)); }
+  .hero__snow .flake:nth-child(odd)::before  { top: 24%; }
+  .hero__snow .flake:nth-child(even)::before { top: 66%; }
+  .hero__glow-dot, .hero__ornament--star { animation: none; }
+}
+
+/* ================================================================
+   HOLIDAY SIGNATURE — alternating bands, gold card frames, ribbons
+   ---------------------------------------------------------------- */
+
+/* Warm band: deep-red-black ground with a gold hairline top and bottom. Alternates with
+   plain white so scrolling the page feels like walking past lit and unlit windows.
+   Swap --holiday-deep in base.css and every band re-dresses at once. */
+.section--holiday {
+  background:
+    radial-gradient(760px 420px at 12% 0%, rgba(204, 41, 54, .22), transparent 70%),
+    linear-gradient(180deg, var(--holiday-deep) 0%, var(--holiday-deep-2) 55%, var(--holiday-deep) 100%);
+  color: #fff;
+  border-top: 1px solid rgba(231, 176, 8, .32);
+  border-bottom: 1px solid rgba(231, 176, 8, .32);
+  position: relative;
+}
+.section--holiday .section__title, .section--holiday h2, .section--holiday h3 { color: #fff; }
+.section--holiday .section__eyebrow { color: var(--holiday-accent-soft); }
+.section--holiday .section__sub, .section--holiday .reviews-summary > span:not(.stars) { color: #cfc4c5; }
+.section--holiday .reviews-summary strong { color: #fff; }
+.section--holiday .section__link { color: var(--holiday-accent-soft); border-bottom-color: var(--holiday-accent); }
+.section--holiday .btn--ghost { color: #fff; border-color: rgba(231, 176, 8, .55); }
+.section--holiday .btn--ghost:hover { border-color: var(--holiday-accent); color: var(--holiday-accent-soft); }
+/* Cards keep their white ground on the dark band — that contrast is the point — but the
+   frame turns gold so they read as ornaments hung on the band rather than pasted onto it. */
+.section--holiday .review-card,
+.section--holiday .bento__card { border-color: rgba(231, 176, 8, .38); }
+.section--holiday .review-card:hover,
+.section--holiday .bento__card:hover { border-color: var(--holiday-accent); box-shadow: var(--shadow-gold); }
+.section--holiday .bento__card--dark { background: #000; border-color: rgba(231, 176, 8, .45); }
+
+/* Gold-frame hover, shared by every card surface — the one gesture that tells you this
+   season's cards are wrapped, not shelved. */
+.p-card:hover .p-card__media,
+.review-card:hover,
+.bento__card:hover,
+.gift-card:hover { border-color: var(--holiday-accent); }
+.p-card__media { border: 1px solid transparent; transition: border-color .2s, box-shadow .25s; }
+.p-card:hover .p-card__media { box-shadow: var(--shadow-gold); }
+.review-card, .bento__card { border-radius: 18px; transition: transform .25s var(--ease-spring), box-shadow .25s, border-color .2s; }
+
+/* GIFT ribbon — a red banner folded over the top-right corner of every bundle card. */
+.gift-card { padding-top: 30px; }
+.gift-card__ribbon {
+  position: absolute; z-index: 2; top: 16px; right: -34px;
+  width: 132px; padding: 5px 0; text-align: center;
+  transform: rotate(38deg);
+  background: linear-gradient(180deg, var(--xmas-red) 0%, #a11c26 100%);
+  color: #fff; box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  border-top: 1px solid rgba(255, 255, 255, .35);
+  border-bottom: 1px solid rgba(231, 176, 8, .8);
+  pointer-events: none;
+}
+
+/* PDP cutoff callout: gold frame + tree mark, so the deadline reads as a gift note rather
+   than an error state. */
+.cutoff-note {
+  border: 1px solid var(--holiday-accent);
+  border-left-width: 4px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fffaf0 0%, #fff5f5 100%);
+  box-shadow: inset 0 0 0 1px rgba(231, 176, 8, .18);
+}
+.cutoff-note svg { color: var(--holiday-accent-deep); }
+.cutoff-note strong { color: var(--ink); }
