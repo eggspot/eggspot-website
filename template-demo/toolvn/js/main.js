@@ -71,33 +71,89 @@
   /* ----------------------------------------------------------------------
      Header: menu, mega menu, ô tìm kiếm
      ---------------------------------------------------------------------- */
+  var FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
   function initHeader() {
     var toggle = $('.nav-toggle');
     var mobileMenu = $('.mobile-menu');
 
     if (toggle && mobileMenu) {
-      var closeMenu = function () {
-        document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Mở menu');
-      };
+      // Lớp phủ tạo bằng JS: 8 trang dùng chung một markup header, không cần
+      // thêm thẻ thủ công vào từng file.
+      var backdrop = document.createElement('div');
+      backdrop.className = 'menu-backdrop';
+      document.body.appendChild(backdrop);
 
-      toggle.addEventListener('click', function () {
-        var open = document.body.classList.toggle('menu-open');
+      var setMenu = function (open) {
+        document.body.classList.toggle('menu-open', open);
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+        mobileMenu.setAttribute('aria-hidden', String(!open));
+      };
+
+      var closeMenu = function (refocus) {
+        if (!document.body.classList.contains('menu-open')) { return; }
+        setMenu(false);
+        if (refocus) { toggle.focus(); }
+      };
+
+      setMenu(false);
+
+      toggle.addEventListener('click', function () {
+        var open = !document.body.classList.contains('menu-open');
+        setMenu(open);
+        if (open) {
+          // visibility nằm trong transition nên còn giữ giá trị hidden suốt một
+          // khung hình sau khi đổi class; phần tử ẩn thì focus() không ăn.
+          // Đợi hai khung hình để chắc chắn drawer đã hiện rồi mới đưa tiêu điểm.
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () {
+              var first = mobileMenu.querySelector(FOCUSABLE);
+              if (first) { first.focus(); }
+            });
+          });
+        }
       });
 
+      backdrop.addEventListener('click', function () { closeMenu(true); });
+
       mobileMenu.addEventListener('click', function (event) {
-        if (event.target.closest('a')) { closeMenu(); }
+        if (event.target.closest('a')) { closeMenu(false); }
       });
 
       document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && document.body.classList.contains('menu-open')) {
-          closeMenu();
-          toggle.focus();
+        if (!document.body.classList.contains('menu-open')) { return; }
+
+        if (event.key === 'Escape') {
+          closeMenu(true);
+          return;
+        }
+
+        // Bẫy tiêu điểm: vòng Tab chỉ chạy trong drawer và nút hamburger.
+        if (event.key !== 'Tab') { return; }
+        var stops = [toggle].concat($$(FOCUSABLE, mobileMenu).filter(function (el) {
+          return el.offsetParent !== null;
+        }));
+        if (!stops.length) { return; }
+        var first = stops[0];
+        var last = stops[stops.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
         }
       });
+
+      // Quay lại khổ desktop khi drawer đang mở: đóng để bỏ khoá cuộn.
+      var desktopQuery = window.matchMedia('(min-width: 981px)');
+      var onDesktop = function (event) { if (event.matches) { closeMenu(false); } };
+      if (desktopQuery.addEventListener) {
+        desktopQuery.addEventListener('change', onDesktop);
+      } else if (desktopQuery.addListener) {
+        desktopQuery.addListener(onDesktop);
+      }
     }
 
     // Accordion danh mục trong menu mobile
@@ -148,10 +204,29 @@
     var search = $('.header-search');
 
     if (searchToggle && search) {
-      searchToggle.addEventListener('click', function () {
-        var open = search.classList.toggle('is-open');
+      var setSearch = function (open) {
+        search.classList.toggle('is-open', open);
         searchToggle.setAttribute('aria-expanded', String(open));
+        searchToggle.setAttribute('aria-label', open ? 'Đóng ô tìm kiếm' : 'Mở ô tìm kiếm');
+      };
+
+      searchToggle.addEventListener('click', function () {
+        var open = !search.classList.contains('is-open');
+        setSearch(open);
         if (open) { $('input', search).focus(); }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && search.classList.contains('is-open')) {
+          setSearch(false);
+          searchToggle.focus();
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!search.classList.contains('is-open')) { return; }
+        if (search.contains(event.target) || searchToggle.contains(event.target)) { return; }
+        setSearch(false);
       });
     }
   }

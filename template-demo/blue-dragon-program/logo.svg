@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Blue Dragon Program" fill="none">
+  <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="2" opacity=".28"/>
+  <path d="M6 19c4.5 0 4.5 4 9 4s4.5-4 9-4 4.5 4 9 4 4.5-4 9-4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M6 27c4.5 0 4.5 4 9 4s4.5-4 9-4 4.5 4 9 4 4.5-4 9-4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+  <path d="M24 5.5c2.6 2.6 3.9 5.2 3.9 7.8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".8"/>
+</svg>

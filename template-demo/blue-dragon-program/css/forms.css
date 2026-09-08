@@ -1,0 +1,67 @@
+/* forms.css — form liên hệ, form bản tin, cookie banner. */
+.form{display:flex;flex-direction:column;gap:var(--gap-m)}
+.form__row{display:grid;gap:var(--gap-m)}
+@media (min-width:600px){.form__row{grid-template-columns:1fr 1fr}}
+.form__field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.form__label{font-size:14px;font-weight:600;letter-spacing:.02em;
+  text-transform:uppercase;color:var(--muted)}
+.form__label span{color:var(--gold-700)}
+.form__input,.form__select,.form__textarea{
+  width:100%;min-height:48px;padding:12px 14px;
+  border:1px solid var(--line);border-radius:var(--radius-media);
+  background:var(--paper);color:var(--ink);font-size:16px;
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.form__textarea{min-height:132px;resize:vertical}
+.form__select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--navy-600) 50%),
+  linear-gradient(135deg,var(--navy-600) 50%,transparent 50%);
+  background-position:calc(100% - 20px) 21px,calc(100% - 14px) 21px;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:44px}
+.form__input:hover,.form__select:hover,.form__textarea:hover{border-color:var(--navy-300)}
+.form__input:focus,.form__select:focus,.form__textarea:focus{border-color:var(--navy-600)}
+.form__input[aria-invalid="true"],.form__textarea[aria-invalid="true"]{border-color:var(--gold-700)}
+.form__error{font-size:var(--fs-meta);color:var(--gold-700);font-weight:500}
+.form__error[hidden]{display:none}
+.form__hint{font-size:var(--fs-meta);color:var(--muted)}
+.form__consent{display:flex;align-items:flex-start;gap:12px;font-size:var(--fs-meta);
+  color:var(--muted);line-height:1.6;cursor:pointer}
+.form__consent{padding-block:6px;min-height:44px}
+.form__consent input{width:24px;height:24px;margin-top:2px;flex-shrink:0;accent-color:var(--navy-600)}
+.form__consent--sm{font-size:14px}
+.form__status{font-size:var(--fs-meta);font-weight:500;padding:12px 16px;
+  border-radius:var(--radius-media);background:var(--navy-50);color:var(--navy-800)}
+.form__status[hidden]{display:none}
+.form__status--ok{background:var(--green-100);color:var(--green-800)}
+.form__status--err{background:#FBF3E2;color:var(--gold-700)}
+.form button[type="submit"]{align-self:flex-start}
+
+/* Bản tin */
+.newsletter-form{display:flex;flex-direction:column;gap:12px;max-width:520px}
+.newsletter-form__row{display:flex;flex-wrap:wrap;gap:var(--gap-xs)}
+.newsletter-form__row .form__input{flex:1 1 200px;min-width:0}
+.newsletter-form__row .btn{flex-shrink:0}
+.newsletter-form--on-dark .form__label{color:var(--navy-300)}
+.newsletter-form--on-dark .form__consent{color:var(--navy-300)}
+.newsletter-form--on-dark .form__consent a{color:#fff}
+.newsletter-form--on-dark .form__input{background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.28);color:#fff}
+.newsletter-form--on-dark .form__input::placeholder{color:rgba(255,255,255,.5)}
+.newsletter-form--on-dark .form__status{background:rgba(255,255,255,.12);color:#fff}
+.newsletter-form--on-dark .form__error{color:var(--gold-500)}
+
+/* Cookie banner — không overlay, không che hero */
+.cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:var(--paper);border-top:1px solid var(--line);
+  box-shadow:0 -8px 24px rgba(16,34,79,.08);max-height:40vh;overflow-y:auto}
+.cookie-banner[hidden]{display:none}
+.cookie-banner__inner{display:flex;flex-wrap:wrap;gap:var(--gap-m);
+  align-items:center;justify-content:space-between;padding-block:16px}
+.cookie-banner__title{font-weight:600;font-size:var(--fs-h4)}
+.cookie-banner__text{font-size:var(--fs-meta);color:var(--muted);max-width:70ch;margin-top:4px}
+.cookie-banner__actions{display:flex;flex-wrap:wrap;gap:var(--gap-xs)}
+@media (max-width:599px){
+  .cookie-banner__inner{gap:10px;padding-block:10px}
+  .cookie-banner__title{font-size:14px}
+  .cookie-banner__text{font-size:13px;line-height:1.5;margin-top:2px}
+  .cookie-banner__actions{flex-wrap:nowrap;width:100%}
+  .cookie-banner__actions .btn{flex:1 1 0;padding-inline:10px;white-space:nowrap}
+}

@@ -1,0 +1,48 @@
+/* utilities.css — reveal, a11y, prose, print. */
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+
+.reveal{opacity:0;transform:translateY(16px);
+  transition:opacity 520ms var(--ease),transform 520ms var(--ease)}
+.reveal--in{opacity:1;transform:none}
+
+/* Nội dung dài: privacy policy */
+.prose{max-width:var(--measure)}
+.prose h2{font-size:var(--fs-h3);margin-top:var(--gap-xl);scroll-margin-top:calc(var(--header-h) + 24px)}
+.prose h3{font-size:var(--fs-h4);margin-top:var(--gap-m)}
+.prose p,.prose ul,.prose ol,.prose table{margin-top:var(--gap-s)}
+.prose ul,.prose ol{padding-left:22px;color:var(--muted)}
+.prose ul{list-style:disc}
+.prose ol{list-style:decimal}
+.prose li + li{margin-top:6px}
+.prose p{color:var(--muted)}
+.prose__updated{font-size:var(--fs-meta);color:var(--muted);font-style:italic}
+.table-scroll{overflow-x:auto;margin-top:var(--gap-s);-webkit-overflow-scrolling:touch}
+.table-scroll:focus-visible{outline-offset:0}
+.prose .table-scroll table{margin-top:0}
+.prose table{width:100%;min-width:420px;border-collapse:collapse;font-size:var(--fs-meta)}
+.prose th,.prose td{border:1px solid var(--line);padding:10px 12px;text-align:left;
+  vertical-align:top;color:var(--muted)}
+.prose th{background:var(--navy-50);color:var(--navy-800);font-weight:600}
+
+.toc{background:var(--navy-50);border-radius:var(--radius-card);padding:24px;
+  font-size:var(--fs-meta)}
+.toc__title{font-size:14px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);font-weight:600;margin-bottom:var(--gap-s)}
+.toc__list li + li{margin-top:2px}
+.toc__list a{display:flex;align-items:center;min-height:44px;text-decoration:none;color:var(--navy-700)}
+.toc__list a:hover{text-decoration:underline;color:var(--navy-800)}
+@media (min-width:900px){
+  .privacy-layout{display:grid;grid-template-columns:260px 1fr;gap:var(--gap-xl);align-items:start}
+  .toc{position:sticky;top:calc(var(--header-h) + 20px)}
+}
+
+.text-muted{color:var(--muted)}
+.mt-l{margin-top:var(--gap-l)}
+.mt-m{margin-top:var(--gap-m)}
+
+@media print{
+  .topbar,.site-header,.mobile-nav,.cookie-banner,.back-to-top,.cta-band,.site-footer{display:none!important}
+  body{color:#000}
+  .reveal{opacity:1;transform:none}
+}

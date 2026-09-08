@@ -1,0 +1,119 @@
+/* sections-detail.css — timeline, pool-card, person-card, case study, tài liệu, tin, CTA. */
+
+/* Timeline */
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;
+  background:var(--line)}
+.timeline__item{position:relative;padding-bottom:var(--gap-xl)}
+.timeline__item:last-child{padding-bottom:0}
+.timeline__marker{position:absolute;left:-28px;top:7px;width:12px;height:12px;
+  border-radius:50%;background:var(--navy-600);box-shadow:0 0 0 4px var(--paper)}
+.section--sand .timeline__marker{box-shadow:0 0 0 4px var(--sand)}
+.timeline__item--latest .timeline__marker{background:var(--green-800)}
+.timeline__year{font-size:var(--fs-meta);font-weight:600;color:var(--navy-600);
+  font-variant-numeric:tabular-nums}
+.timeline__title{font-size:var(--fs-h4);margin-top:4px}
+.timeline__meta{font-size:14px;color:var(--green-800);font-weight:500;margin-top:4px}
+.timeline__body{font-size:var(--fs-meta);color:var(--muted);margin-top:8px;max-width:62ch}
+.timeline__tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+@media (min-width:900px){
+  .timeline{padding-left:0}
+  .timeline::before{left:161px}
+  .timeline__item{padding-left:200px}
+  .timeline__marker{left:156px}
+  .timeline__year{position:absolute;left:0;top:2px;width:140px;text-align:right;font-size:16px}
+}
+
+/* Thẻ Nhóm Chuyên gia */
+.pool-card{display:flex;flex-direction:column;gap:10px;padding:28px 24px;
+  background:var(--paper);border-radius:var(--radius-card);box-shadow:var(--shadow-card)}
+.pool-card__no{font-family:var(--font-accent);font-style:italic;font-size:20px;
+  color:var(--gold-700)}
+.pool-card__topic{font-size:var(--fs-h3)}
+.pool-card__meta{font-size:var(--fs-meta);color:var(--green-800);font-weight:500}
+.pool-card__trainers{font-size:var(--fs-meta);color:var(--muted)}
+.pool-card__trainers li{padding-left:14px;position:relative}
+.pool-card__trainers li::before{content:"";position:absolute;left:0;top:12px;width:6px;height:1px;
+  background:var(--navy-300)}
+.pool-card__result{font-size:var(--fs-meta);color:var(--ink);background:var(--navy-50);
+  border-radius:var(--radius-media);padding:14px 16px}
+
+/* Giảng viên — monogram, không ảnh chân dung stock */
+.person-grid{gap:var(--gap-m)}
+.person-card{display:flex;flex-direction:column;gap:6px;padding:24px;
+  border-radius:var(--radius-card);box-shadow:var(--shadow-card);background:var(--paper)}
+.person-card[hidden]{display:none}
+.person-card__monogram{display:flex;align-items:center;justify-content:center;
+  width:56px;height:56px;border-radius:var(--radius-pill);background:var(--navy-100);
+  color:var(--navy-700);font-weight:600;font-size:18px;margin-bottom:6px}
+.person-card__name{font-size:var(--fs-h4)}
+.person-card__role{font-size:var(--fs-meta);color:var(--green-800);font-weight:500}
+.person-card__org{font-size:var(--fs-meta);color:var(--muted)}
+.person-card__flag{align-self:flex-start;margin-top:6px}
+
+/* Case study */
+.case-study__media img{width:100%;aspect-ratio:4/3;object-fit:cover;
+  border-radius:var(--radius-media)}
+.case-study__body > p{color:var(--muted);margin-top:var(--gap-s);max-width:var(--measure)}
+.case-study__facts{margin-top:var(--gap-l);display:grid;gap:var(--gap-s)}
+.fact{border-top:1px solid var(--line);padding-top:12px}
+.fact__k{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
+  font-weight:600}
+.fact__v{font-size:var(--fs-meta);color:var(--ink);margin-top:4px}
+@media (min-width:900px){
+  .case-study__facts{grid-template-columns:1fr 1fr;gap:var(--gap-m)}
+  .case-study--reverse .case-study__media{order:2}
+}
+
+/* Danh sách đánh số lớn — tiêu chí Thử thách */
+.numbered{counter-reset:num;display:grid;gap:var(--gap-m)}
+.numbered__item{counter-increment:num;display:grid;grid-template-columns:auto 1fr;
+  gap:16px;align-items:start;padding-top:16px;border-top:1px solid var(--line)}
+.numbered__item::before{content:counter(num,decimal-leading-zero);
+  font-family:var(--font-accent);font-style:italic;font-size:24px;color:var(--gold-700);
+  line-height:1.2}
+.numbered__text{color:var(--muted);font-size:var(--fs-meta)}
+
+/* Tài liệu */
+.resource-grid{gap:var(--gap-m)}
+.resource-card{display:flex;flex-direction:column;gap:8px;padding:24px;
+  background:var(--paper);border-radius:var(--radius-card);box-shadow:var(--shadow-card)}
+.resource-card__title{font-size:var(--fs-h4);flex:1}
+.resource-card__meta{font-size:var(--fs-meta);color:var(--muted)}
+.resource-card__type{align-self:flex-start}
+.resource-card--pending{background:var(--navy-50);box-shadow:none}
+
+/* Tin tức */
+.news-grid{gap:var(--gap-l)}
+.news-card{display:grid;grid-template-rows:auto auto auto 1fr auto;gap:10px}
+.news-card[hidden]{display:none}
+.news-card__media{display:block;border-radius:var(--radius-media);overflow:hidden}
+.news-card__media img{width:100%;aspect-ratio:16/10;object-fit:cover;
+  transition:transform var(--dur) var(--ease)}
+.news-card__media:hover img{transform:scale(1.03)}
+.news-card__cat{justify-self:start}
+.news-card__title{font-size:var(--fs-h4);text-transform:none;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.news-card__title a{color:var(--ink);text-decoration:none}
+.news-card__title a:hover{color:var(--navy-600);text-decoration:underline}
+.news-card__excerpt{font-size:var(--fs-meta);color:var(--muted);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news-card__date{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* Liên hệ */
+.contact-grid{display:grid;gap:var(--gap-xl);align-items:start}
+@media (min-width:900px){.contact-grid{grid-template-columns:.85fr 1.15fr}}
+.contact-card{background:var(--navy-50);border-radius:var(--radius-card);padding:28px 24px;
+  display:flex;flex-direction:column;gap:var(--gap-m)}
+.contact-card__block p{font-size:var(--fs-meta);color:var(--muted);margin-top:4px}
+.map-static{background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--radius-media);padding:20px;display:flex;flex-direction:column;gap:6px}
+
+/* Dải CTA cuối trang */
+.cta-band{background:var(--navy-900);color:#fff;padding:var(--sec-y-lg) 0}
+.cta-band__title{font-size:var(--fs-h2);color:#fff}
+.cta-band__text{margin-top:var(--gap-s);color:var(--navy-300);max-width:var(--measure)}
+.cta-band__grid{display:grid;gap:var(--gap-xl);margin-top:var(--gap-xl)}
+@media (min-width:900px){.cta-band__grid{grid-template-columns:1.1fr .9fr}}
+.cta-band__routes{display:flex;flex-direction:column;gap:var(--gap-s);align-items:flex-start}
+.cta-band__note{font-size:14px;color:var(--navy-300)}

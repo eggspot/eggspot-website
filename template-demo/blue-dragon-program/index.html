@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trang chủ | Chương trình Blue Dragon</title>
+<meta name="description" content="Chương trình hợp tác Hà Lan – Việt Nam về quản lý tài nguyên nước tại ĐBSCL: Nhóm Chuyên gia, Học viện, dự án thí điểm kè sinh thái.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Trang chủ | Chương trình Blue Dragon">
+<meta property="og:description" content="Chương trình hợp tác Hà Lan – Việt Nam về quản lý tài nguyên nước tại ĐBSCL: Nhóm Chuyên gia, Học viện, dự án thí điểm kè sinh thái.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1580630873708-e0475b1856c4?auto=format&amp;fit=crop&amp;q=62&amp;w=1200">
+<meta property="og:locale" content="vi_VN">
+<link rel="canonical" href="index.html">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@1,500;1,600&amp;display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/header-footer.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/sections-detail.css">
+<link rel="stylesheet" href="css/forms.css">
+<link rel="stylesheet" href="css/utilities.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Chương trình Blue Dragon","alternateName":"Blue Dragon Program","url":"https://bluedragonprogram.com/","email":"info@bluedragonprogram.com","address":{"@type":"PostalAddress","streetAddress":"Phòng 214, Khoa Môi trường và Tài nguyên thiên nhiên, Đại học Cần Thơ, Khu II, Đường 3/2","addressLocality":"Phường Xuân Khánh, Quận Ninh Kiều","addressRegion":"TP. Cần Thơ","addressCountry":"VN"},"parentOrganization":{"@type":"Organization","name":"Dutch Water Authorities — Blue Deal"}}</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Bỏ qua tới nội dung chính</a>
+
+<div class="topbar">
+  <div class="topbar__inner container">
+    <a class="topbar__link topbar__link--secondary" href="chuong-trinh.html#cong-dong">Cộng đồng Blue Dragon</a>
+    <a class="topbar__link" href="mailto:info@bluedragonprogram.com">info@bluedragonprogram.com</a>
+    <div class="lang-switch">
+      <span class="lang-switch__item lang-switch__item--active" aria-current="true">VI</span>
+      <a class="lang-switch__item" href="#" aria-disabled="true" title="Bản tiếng Anh đang được chuẩn bị">EN</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner container">
+    <a class="brand" href="index.html">
+      <img class="brand__logo" src="logo.svg" alt="" width="36" height="36">
+      <span class="brand__text">Chương trình <strong>Blue Dragon</strong></span>
+    </a>
+    <nav class="nav" aria-label="Điều hướng chính">
+      <ul class="nav__list">
+        <li class="nav__item"><a class="nav__link nav__link--active" href="index.html" aria-current="page">Trang chủ</a></li>
+        <li class="nav__item nav__item--has-panel">
+          <button class="nav__link nav__toggle" type="button" aria-expanded="false" aria-controls="navPanelProgram">Chương trình</button>
+          <div class="nav__panel" id="navPanelProgram" hidden>
+            <a class="nav__panel-link" href="chuong-trinh.html">Tổng quan chương trình</a>
+            <a class="nav__panel-link" href="chuyen-gia.html">Nhóm Chuyên gia</a>
+            <a class="nav__panel-link" href="du-an-thi-diem.html">Dự án thí điểm</a>
+            <a class="nav__panel-link" href="hoc-vien.html">Học viện &amp; tài liệu</a>
+          </div>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="tin-tuc.html">Tin tức</a></li>
+        <li class="nav__item"><a class="nav__link" href="lien-he.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--primary btn--sm site-header__cta" href="lien-he.html">Liên hệ văn phòng</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Mở menu">
+      <span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav" hidden>
+  <div class="mobile-nav__panel">
+    <button class="mobile-nav__close" type="button" aria-label="Đóng menu">&times;</button>
+    <nav class="mobile-nav__list" aria-label="Điều hướng di động">
+      <a class="mobile-nav__link" href="index.html" aria-current="page">Trang chủ</a>
+        <a class="mobile-nav__link mobile-nav__link--sub" href="chuong-trinh.html">Tổng quan chương trình</a>
+        <a class="mobile-nav__link mobile-nav__link--sub" href="chuyen-gia.html">Nhóm Chuyên gia</a>
+        <a class="mobile-nav__link mobile-nav__link--sub" href="du-an-thi-diem.html">Dự án thí điểm</a>
+        <a class="mobile-nav__link mobile-nav__link--sub" href="hoc-vien.html">Học viện &amp; tài liệu</a>
+      <a class="mobile-nav__link" href="tin-tuc.html">Tin tức</a>
+      <a class="mobile-nav__link" href="lien-he.html">Liên hệ</a>
+    </nav>
+    <a class="btn btn--primary mobile-nav__cta" href="lien-he.html">Liên hệ văn phòng</a>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="hero">
+  <div class="container hero__inner">
+    <p class="hero__eyebrow eyebrow">Hợp tác Hà Lan &ndash; Việt Nam &middot; Blue Deal</p>
+    <h1 class="hero__title">Quản lý tài nguyên nước cho <span class="accent">21 triệu người</span> Đồng bằng sông Cửu Long</h1>
+    <p class="hero__lead">Chương trình hợp tác của Hiệp hội Nước Hà Lan tại Đồng bằng sông Cửu Long nhằm hướng đến trao đổi kiến thức và kinh nghiệm trong lĩnh vực quản lý tài nguyên nước.</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="chuong-trinh.html">Tìm hiểu chương trình <span class="btn__icon" aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn--ghost" href="tin-tuc.html">Hoạt động mới nhất</a>
+    </div>
+    <ul class="hero__meta">
+      <li>Hiệp hội Nước Hà Lan</li>
+      <li>Đại học Cần Thơ</li>
+      <li>Các tỉnh ĐBSCL</li>
+    </ul>
+  </div>
+  <figure class="hero__figure">
+    <img class="hero__media" src="https://images.unsplash.com/photo-1580630873708-e0475b1856c4?auto=format&amp;fit=crop&amp;q=62&amp;w=1600" srcset="https://images.unsplash.com/photo-1580630873708-e0475b1856c4?auto=format&amp;fit=crop&amp;q=62&amp;w=400 400w, https://images.unsplash.com/photo-1580630873708-e0475b1856c4?auto=format&amp;fit=crop&amp;q=62&amp;w=560 560w, https://images.unsplash.com/photo-1580630873708-e0475b1856c4?auto=format&amp;fit=crop&amp;q=62&amp;w=800 800w, https://images.unsplash.com/photo-1580630873708-e0475b1856c4?auto=format&amp;fit=crop&amp;q=62&amp;w=1000 1000w, https://images.unsplash.com/photo-1580630873708-e0475b1856c4?auto=format&amp;fit=crop&amp;q=62&amp;w=1200 1200w, https://images.unsplash.com/photo-1580630873708-e0475b1856c4?auto=format&amp;fit=crop&amp;q=62&amp;w=1600 1600w" sizes="100vw" alt="Kênh nước chảy giữa hai hàng cây xanh ở vùng đồng bằng" width="1600" height="600" fetchpriority="high" decoding="async">
+    <figcaption class="figure__credit container">Ảnh: Unsplash</figcaption>
+  </figure>
+</section>
+
+<section class="section section--dark stat-band">
+  <div class="container">
+    <ul class="stat-band__grid grid grid--4">
+      <li class="stat">
+        <span class="stat__value" data-count-to="21" data-suffix=" triệu">21 triệu</span>
+        <span class="stat__label">người dân ĐBSCL chịu tác động</span>
+      </li>
+      <li class="stat">
+        <span class="stat__value" data-count-to="5">5</span>
+        <span class="stat__label">Nhóm Chuyên gia đã triển khai</span>
+      </li>
+      <li class="stat">
+        <span class="stat__value" data-count-to="13" data-suffix=" tỉnh">13 tỉnh</span>
+        <span class="stat__label">tham gia tập huấn GIS, 60 học viên</span>
+      </li>
+      <li class="stat">
+        <span class="stat__value" data-count-to="2030">2030</span>
+        <span class="stat__label">mốc mục tiêu của Blue Deal</span>
+      </li>
+    </ul>
+    <p class="stat-band__stamp">Số liệu chương trình &middot; cập nhật 09/2026</p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="partner-strip">
+      <p class="partner-strip__label">Đối tác thực hiện</p>
+      <ul class="partner-strip__list">
+        <li class="partner-tile">Hiệp hội Nước Hà Lan</li>
+        <li class="partner-tile">Blue Deal</li>
+        <li class="partner-tile">Đại học Cần Thơ</li>
+        <li class="partner-tile">Sở NN&amp;PTNT Cần Thơ &middot; Hậu Giang &middot; Kiên Giang</li>
+        <li class="partner-tile">Rijkswaterstaat</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt section--deferred">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">Cách chương trình vận hành</p>
+      <h2 class="section__title">Bốn gói công việc, <span class="accent">một mục tiêu chung</span></h2>
+      <p class="section__lead">Mỗi gói công việc phụ trách một phần của chuỗi năng lực: đào tạo tại chỗ, đào tạo giảng viên, kết nối chuyên môn và thử nghiệm giải pháp mới.</p>
+    </header>
+    <div class="grid grid--4 pillar-grid">
+      <article class="pillar-card reveal">
+        <span class="pillar-card__index" aria-hidden="true">01</span>
+        <h3 class="pillar-card__title">Nhóm Chuyên gia Blue Dragon</h3>
+        <p class="pillar-card__text">Các đợt tập huấn tổ chức lần lượt tại các tỉnh đối tác, mỗi nhóm tập trung một chủ đề chuyên môn.</p>
+        <a class="link-arrow" href="chuyen-gia.html">Xem chi tiết</a>
+      </article>
+      <article class="pillar-card reveal">
+        <span class="pillar-card__index" aria-hidden="true">02</span>
+        <h3 class="pillar-card__title">Học viện Blue Dragon</h3>
+        <p class="pillar-card__text">Mô hình đào tạo đa cấp độ: học viên Việt Nam tiềm năng được chọn học nâng cao tại Việt Nam và Hà Lan, sau đó trở thành giảng viên cho các địa phương khác.</p>
+        <a class="link-arrow" href="hoc-vien.html">Xem chi tiết</a>
+      </article>
+      <article class="pillar-card reveal">
+        <span class="pillar-card__index" aria-hidden="true">03</span>
+        <h3 class="pillar-card__title">Cộng đồng Blue Dragon</h3>
+        <p class="pillar-card__text">Nền tảng trực tuyến và trực tiếp kết nối cán bộ tỉnh, giảng viên ĐHCT và chuyên gia Hà Lan theo mô hình helix bốn chiều.</p>
+        <a class="link-arrow" href="chuong-trinh.html#cong-dong">Xem chi tiết</a>
+      </article>
+      <article class="pillar-card pillar-card--eco reveal">
+        <span class="pillar-card__index" aria-hidden="true">04</span>
+        <h3 class="pillar-card__title">Tăng tốc mở rộng Blue Dragon</h3>
+        <p class="pillar-card__text">Thử nghiệm và nhân rộng giải pháp mới thông qua cuộc thi Thử thách Blue Dragon tổ chức 2 năm một lần.</p>
+        <a class="link-arrow" href="du-an-thi-diem.html">Xem chi tiết</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--deferred">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">Bối cảnh</p>
+      <h2 class="section__title">Ba sức ép <span class="accent">cùng lúc lên đồng bằng</span></h2>
+      <p class="section__lead">Đồng bằng sông Cửu Long đặc biệt chịu nhiều rủi ro trầm trọng do có nguy cơ sụt lún đất nhanh chóng và mực nước biển dâng trong tương lai.</p>
+    </header>
+    <div class="grid grid--3">
+      <article class="challenge-item reveal">
+        <figure class="challenge-item__figure">
+          <img src="https://images.unsplash.com/photo-1764703038041-15c26862a283?auto=format&amp;fit=crop&amp;q=62&amp;w=1000" srcset="https://images.unsplash.com/photo-1764703038041-15c26862a283?auto=format&amp;fit=crop&amp;q=62&amp;w=400 400w, https://images.unsplash.com/photo-1764703038041-15c26862a283?auto=format&amp;fit=crop&amp;q=62&amp;w=560 560w, https://images.unsplash.com/photo-1764703038041-15c26862a283?auto=format&amp;fit=crop&amp;q=62&amp;w=800 800w, https://images.unsplash.com/photo-1764703038041-15c26862a283?auto=format&amp;fit=crop&amp;q=62&amp;w=1000 1000w" sizes="(min-width:1200px) 360px, (min-width:900px) 31vw, (min-width:600px) 46vw, 92vw" alt="Không ảnh vùng châu thổ với dòng nước mang nặng phù sa" width="1000" height="750" loading="lazy" decoding="async">
+        </figure>
+        <p class="challenge-item__data">~600 km</p>
+        <h3 class="challenge-item__title">Sạt lở bờ sông</h3>
+        <p class="challenge-item__text">ĐBSCL có gần 600 km bờ sông bị sạt lở, trong đó 140 km cực kỳ nguy hiểm.</p>
+      </article>
+      <article class="challenge-item reveal">
+        <figure class="challenge-item__figure">
+          <img src="https://images.unsplash.com/photo-1777880394630-1a368376e8cf?auto=format&amp;fit=crop&amp;q=62&amp;w=1000" srcset="https://images.unsplash.com/photo-1777880394630-1a368376e8cf?auto=format&amp;fit=crop&amp;q=62&amp;w=400 400w, https://images.unsplash.com/photo-1777880394630-1a368376e8cf?auto=format&amp;fit=crop&amp;q=62&amp;w=560 560w, https://images.unsplash.com/photo-1777880394630-1a368376e8cf?auto=format&amp;fit=crop&amp;q=62&amp;w=800 800w, https://images.unsplash.com/photo-1777880394630-1a368376e8cf?auto=format&amp;fit=crop&amp;q=62&amp;w=1000 1000w" sizes="(min-width:1200px) 360px, (min-width:900px) 31vw, (min-width:600px) 46vw, 92vw" alt="Không ảnh vùng châu thổ với mặt đất khô nứt nẻ" width="1000" height="750" loading="lazy" decoding="async">
+        </figure>
+        <p class="challenge-item__data">21 triệu</p>
+        <h3 class="challenge-item__title">Xâm nhập mặn và nước biển dâng</h3>
+        <p class="challenge-item__text">Sinh kế của hơn 21 triệu người sống ở ĐBSCL và nền kinh tế khu vực đang bị đe dọa.</p>
+      </article>
+      <article class="challenge-item reveal">
+        <figure class="challenge-item__figure">
+          <img src="https://images.unsplash.com/photo-1775762951322-d382fcb43fef?auto=format&amp;fit=crop&amp;q=62&amp;w=1000" srcset="https://images.unsplash.com/photo-1775762951322-d382fcb43fef?auto=format&amp;fit=crop&amp;q=62&amp;w=400 400w, https://images.unsplash.com/photo-1775762951322-d382fcb43fef?auto=format&amp;fit=crop&amp;q=62&amp;w=560 560w, https://images.unsplash.com/photo-1775762951322-d382fcb43fef?auto=format&amp;fit=crop&amp;q=62&amp;w=800 800w, https://images.unsplash.com/photo-1775762951322-d382fcb43fef?auto=format&amp;fit=crop&amp;q=62&amp;w=1000 1000w" sizes="(min-width:1200px) 360px, (min-width:900px) 31vw, (min-width:600px) 46vw, 92vw" alt="Kênh dẫn nước thẳng chạy giữa đồng ruộng" width="1000" height="750" loading="lazy" decoding="async">
+        </figure>
+        <p class="challenge-item__data">0</p>
+        <h3 class="challenge-item__title">Thiếu cơ quan quản lý tổng hợp</h3>
+        <p class="challenge-item__text">Khu vực chưa có một cơ quan chuyên biệt về quản lý tổng hợp tài nguyên nước.</p>
+      </article>
+    </div>
+
+    <div class="province-band">
+      <div class="province-band__viz" aria-hidden="true"></div>
+      <ul class="province-list">
+        <li class="province-chip province-chip--core">Cần Thơ<span class="province-chip__note">Nhóm 1, 2, 3, 4</span></li>
+        <li class="province-chip province-chip--core">Hậu Giang<span class="province-chip__note">Nhóm 1, 2, 3, 4</span></li>
+        <li class="province-chip province-chip--eco">Kiên Giang<span class="province-chip__note">Nhóm 1, 2, 3, 4 &middot; Dự án thí điểm</span></li>
+        <li class="province-chip">+10 tỉnh ĐBSCL<span class="province-chip__note">Nhóm 5 GIS &middot; 60 học viên</span></li>
+      </ul>
+      <p class="province-band__stamp">Phạm vi tính đến 09/2026</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sand section--deferred">
+  <div class="container">
+    <header class="section__head section__head--split">
+      <div>
+        <p class="eyebrow">Nhóm Chuyên gia</p>
+        <h2 class="section__title">Năm đợt tập huấn, <span class="accent">năm chủ đề chuyên môn</span></h2>
+        <p class="section__lead">Mỗi Nhóm Chuyên gia kéo dài nhiều tuần, luân phiên tại các tỉnh đối tác, kết thúc bằng một sản phẩm áp dụng được vào công việc quản lý hằng ngày.</p>
+      </div>
+      <div class="section__actions">
+        <a class="btn btn--ghost" href="chuyen-gia.html">Xem toàn bộ 7 chủ đề đào tạo</a>
+      </div>
+    </header>
+    <ol class="timeline">
+      <li class="timeline__item reveal">
+        <div class="timeline__marker" aria-hidden="true"></div>
+        <p class="timeline__year">06/2022</p>
+        <h3 class="timeline__title">Nhóm 1 &mdash; Quản lý tài sản</h3>
+        <p class="timeline__meta">Cần Thơ &middot; Hậu Giang &middot; Kiên Giang</p>
+        <p class="timeline__body">Tuần tập huấn đầu tiên tại Sở NN&amp;PTNT Cần Thơ. Kết thúc đầu 2024 với kế hoạch O&amp;M cống Bà Đầm C (Hậu Giang) và phương pháp PDCA nạo vét hạ lưu Cống Kênh Cụt (Kiên Giang).</p>
+        <ul class="timeline__tags"><li class="badge">O&amp;M</li><li class="badge">PDCA</li></ul>
+      </li>
+      <li class="timeline__item reveal">
+        <div class="timeline__marker" aria-hidden="true"></div>
+        <p class="timeline__year">10/2022</p>
+        <h3 class="timeline__title">Nhóm 2 &mdash; Truyền thông, nâng cao nhận thức và thu hồi phí tổn</h3>
+        <p class="timeline__meta">Hậu Giang</p>
+        <p class="timeline__body">Thống nhất chủ đề truyền thông: sử dụng nước tiết kiệm, an toàn và bảo vệ nguồn nước.</p>
+        <ul class="timeline__tags"><li class="badge">Truyền thông</li><li class="badge">Thu hồi phí tổn</li></ul>
+      </li>
+      <li class="timeline__item reveal">
+        <div class="timeline__marker" aria-hidden="true"></div>
+        <p class="timeline__year">04/2023</p>
+        <h3 class="timeline__title">Nhóm 3 &mdash; Quản lý rủi ro ngập lụt</h3>
+        <p class="timeline__meta">Cần Thơ</p>
+        <p class="timeline__body">Giới thiệu hệ thống kiểm soát ngập lụt Hà Lan, quy hoạch không gian và quản lý thông tin ngập lụt.</p>
+        <ul class="timeline__tags"><li class="badge">Ngập lụt</li><li class="badge">Quy hoạch không gian</li></ul>
+      </li>
+      <li class="timeline__item reveal">
+        <div class="timeline__marker" aria-hidden="true"></div>
+        <p class="timeline__year">11/2023</p>
+        <h3 class="timeline__title">Nhóm 4 &mdash; Thích ứng biến đổi khí hậu</h3>
+        <p class="timeline__meta">Cần Thơ &middot; Hậu Giang &middot; Kiên Giang</p>
+        <p class="timeline__body">Mỗi đối tác đưa ra một thách thức thực tế: ngập lụt Bình Thủy, sạt lở sông Cái Côn, sạt lở do hạn hán U Minh Thượng.</p>
+        <ul class="timeline__tags"><li class="badge">Thích ứng</li><li class="badge">Dự án tình huống</li></ul>
+      </li>
+      <li class="timeline__item timeline__item--latest reveal">
+        <div class="timeline__marker" aria-hidden="true"></div>
+        <p class="timeline__year">2024</p>
+        <h3 class="timeline__title">Nhóm 5 &mdash; GIS và viễn thám</h3>
+        <p class="timeline__meta">13 tỉnh ĐBSCL</p>
+        <p class="timeline__body">3 tuần tập huấn, 60 học viên; kỹ năng GIS cơ bản, lập bản đồ, thu thập dữ liệu hiện trường bằng QField.</p>
+        <ul class="timeline__tags"><li class="badge">GIS</li><li class="badge">QField</li><li class="badge">Viễn thám</li></ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section case-study section--deferred">
+  <div class="container split split--wide-left">
+    <figure class="case-study__media figure">
+      <img src="https://images.unsplash.com/photo-1589556183130-530470785fab?auto=format&amp;fit=crop&amp;q=62&amp;w=1000" srcset="https://images.unsplash.com/photo-1589556183130-530470785fab?auto=format&amp;fit=crop&amp;q=62&amp;w=400 400w, https://images.unsplash.com/photo-1589556183130-530470785fab?auto=format&amp;fit=crop&amp;q=62&amp;w=560 560w, https://images.unsplash.com/photo-1589556183130-530470785fab?auto=format&amp;fit=crop&amp;q=62&amp;w=800 800w, https://images.unsplash.com/photo-1589556183130-530470785fab?auto=format&amp;fit=crop&amp;q=62&amp;w=1000 1000w" sizes="(min-width:900px) 45vw, 92vw" alt="Rễ cây đước đan xen trong mặt nước lặng ven bờ" width="1000" height="750" loading="lazy" decoding="async">
+      <figcaption class="figure__credit">Ảnh: Unsplash</figcaption>
+    </figure>
+    <div class="case-study__body">
+      <p class="eyebrow">Dự án thí điểm</p>
+      <h2 class="section__title">Kè sinh thái <span class="accent">tại Kiên Giang</span></h2>
+      <p>Cùng với xâm nhập mặn và lũ lụt, sạt lở bờ sông là một trong ba vấn đề chính cần được giải quyết ở Đồng bằng sông Cửu Long.</p>
+      <dl class="case-study__facts">
+        <div class="fact"><dt class="fact__k">Địa điểm</dt><dd class="fact__v">Kênh Xẻo Rô, xã Tây Yên A, huyện An Biên, Kiên Giang</dd></div>
+        <div class="fact"><dt class="fact__k">Giai đoạn</dt><dd class="fact__v">Chương trình tăng tốc đổi mới, giai đoạn 2 (2024&ndash;2026)</dd></div>
+        <div class="fact"><dt class="fact__k">Cách tiếp cận</dt><dd class="fact__v">So sánh giải pháp thuận thiên (NBS) với phương án bê tông</dd></div>
+        <div class="fact"><dt class="fact__k">Nguồn dữ liệu xói mòn</dt><dd class="fact__v">Deltares</dd></div>
+      </dl>
+      <p class="mt-l"><a class="link-arrow" href="du-an-thi-diem.html">Đọc hồ sơ dự án</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt section--deferred">
+  <div class="container">
+    <header class="section__head section__head--split">
+      <div>
+        <p class="eyebrow">Học viện và tài liệu</p>
+        <h2 class="section__title">Tài nguyên <span class="accent">dùng được ngay</span></h2>
+        <p class="section__lead">Tài liệu chương trình được tổ chức theo chủ đề đào tạo và theo dự án. Các mục chưa công bố được đánh dấu rõ để tránh nhầm lẫn.</p>
+      </div>
+      <div class="section__actions"><a class="btn btn--ghost" href="hoc-vien.html">Vào Học viện Blue Dragon</a></div>
+    </header>
+    <div class="grid grid--4 resource-grid">
+      <article class="resource-card">
+        <p class="badge resource-card__type">Trang nội dung</p>
+        <h3 class="resource-card__title">Tổng quan Chương trình Blue Dragon</h3>
+        <p class="resource-card__meta">Bối cảnh, Blue Deal, mục tiêu, các giai đoạn</p>
+        <a class="link-arrow resource-card__action" href="chuong-trinh.html">Xem trang</a>
+      </article>
+      <article class="resource-card">
+        <p class="badge resource-card__type">Tài liệu tập huấn</p>
+        <h3 class="resource-card__title">7 chủ đề đào tạo</h3>
+        <p class="resource-card__meta">Khung nội dung của các Nhóm Chuyên gia</p>
+        <a class="link-arrow resource-card__action" href="chuyen-gia.html">Xem trang</a>
+      </article>
+      <article class="resource-card">
+        <p class="badge badge--phase resource-card__type">Hồ sơ dự án</p>
+        <h3 class="resource-card__title">Hồ sơ kè sinh thái Kiên Giang</h3>
+        <p class="resource-card__meta">Giai đoạn 2 (2024&ndash;2026) &middot; huyện An Biên</p>
+        <a class="link-arrow resource-card__action" href="du-an-thi-diem.html">Xem trang</a>
+      </article>
+      <article class="resource-card resource-card--pending">
+        <p class="badge resource-card__type">Bản tin</p>
+        <h3 class="resource-card__title">Bản tin chương trình</h3>
+        <p class="resource-card__meta">Đăng ký nhận qua email ở cuối trang</p>
+        <a class="link-arrow resource-card__action" href="#ket-noi">Tới mục đăng ký</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--deferred">
+  <div class="container">
+    <header class="section__head section__head--split">
+      <div>
+        <p class="eyebrow">Tin tức</p>
+        <h2 class="section__title">Hoạt động <span class="accent">mới nhất</span></h2>
+        <p class="section__lead">Ghi nhận từ các đợt tập huấn, chuyến công tác và sự kiện chuyên môn của chương trình.</p>
+      </div>
+      <div class="section__actions"><a class="btn btn--ghost" href="tin-tuc.html">Tất cả tin tức</a></div>
+    </header>
+    <div class="grid grid--3 news-grid">
+      <article class="news-card reveal">
+        <a class="news-card__media" href="#" aria-disabled="true" tabindex="-1" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1755548679962-32afb0bbace4?auto=format&amp;fit=crop&amp;q=62&amp;w=800" srcset="https://images.unsplash.com/photo-1755548679962-32afb0bbace4?auto=format&amp;fit=crop&amp;q=62&amp;w=400 400w, https://images.unsplash.com/photo-1755548679962-32afb0bbace4?auto=format&amp;fit=crop&amp;q=62&amp;w=560 560w, https://images.unsplash.com/photo-1755548679962-32afb0bbace4?auto=format&amp;fit=crop&amp;q=62&amp;w=800 800w" sizes="(min-width:1200px) 360px, (min-width:900px) 31vw, (min-width:600px) 46vw, 92vw" alt="Người trình bày trước lớp học chuyên môn" width="800" height="500" loading="lazy" decoding="async">
+        </a>
+        <p class="news-card__cat badge">Hợp tác</p>
+        <h3 class="news-card__title"><a href="#" aria-disabled="true">Hoạt động quản lý thường kỳ Chương trình Blue Dragon, tháng 3 năm 2026</a></h3>
+        <p class="news-card__excerpt">Ghi nhận công việc điều phối định kỳ giữa văn phòng chương trình và các tỉnh đối tác.</p>
+        <p class="news-card__date"><time datetime="2026-05-21">21/05/2026</time></p>
+      </article>
+      <article class="news-card reveal">
+        <a class="news-card__media" href="#" aria-disabled="true" tabindex="-1" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1776039325240-02916820bfeb?auto=format&amp;fit=crop&amp;q=62&amp;w=800" srcset="https://images.unsplash.com/photo-1776039325240-02916820bfeb?auto=format&amp;fit=crop&amp;q=62&amp;w=400 400w, https://images.unsplash.com/photo-1776039325240-02916820bfeb?auto=format&amp;fit=crop&amp;q=62&amp;w=560 560w, https://images.unsplash.com/photo-1776039325240-02916820bfeb?auto=format&amp;fit=crop&amp;q=62&amp;w=800 800w" sizes="(min-width:1200px) 360px, (min-width:900px) 31vw, (min-width:600px) 46vw, 92vw" alt="Khán phòng hội nghị đang theo dõi phần thuyết trình" width="800" height="500" loading="lazy" decoding="async">
+        </a>
+        <p class="news-card__cat badge">Tập huấn</p>
+        <h3 class="news-card__title"><a href="#" aria-disabled="true">Chủ đề 4 tuần 5: Thích ứng với biến đổi khí hậu</a></h3>
+        <p class="news-card__excerpt">Tuần tập huấn tiếp theo của Nhóm Chuyên gia 4 về thích ứng với biến đổi khí hậu.</p>
+        <p class="news-card__date"><time datetime="2026-05-06">06/05/2026</time></p>
+      </article>
+      <article class="news-card reveal">
+        <a class="news-card__media" href="#" aria-disabled="true" tabindex="-1" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1783873352853-a7439f52e728?auto=format&amp;fit=crop&amp;q=62&amp;w=800" srcset="https://images.unsplash.com/photo-1783873352853-a7439f52e728?auto=format&amp;fit=crop&amp;q=62&amp;w=400 400w, https://images.unsplash.com/photo-1783873352853-a7439f52e728?auto=format&amp;fit=crop&amp;q=62&amp;w=560 560w, https://images.unsplash.com/photo-1783873352853-a7439f52e728?auto=format&amp;fit=crop&amp;q=62&amp;w=800 800w" sizes="(min-width:1200px) 360px, (min-width:900px) 31vw, (min-width:600px) 46vw, 92vw" alt="Kênh nhỏ giữa đồng ruộng dưới bầu trời nhiều mây" width="800" height="500" loading="lazy" decoding="async">
+        </a>
+        <p class="news-card__cat badge">Tập huấn</p>
+        <h3 class="news-card__title"><a href="#" aria-disabled="true">Chủ đề 5 tuần 7: GIS &ndash; viễn thám</a></h3>
+        <p class="news-card__excerpt">Nội dung tuần 7 của Nhóm Chuyên gia 5 tập trung vào GIS và viễn thám.</p>
+        <p class="news-card__date"><time datetime="2026-04-01">01/04/2026</time></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="ket-noi">
+  <div class="container">
+    <p class="eyebrow">Kết nối</p>
+    <h2 class="cta-band__title">Kết nối với <span class="accent">chương trình</span></h2>
+    <p class="cta-band__text">Ba lối vào dành cho cán bộ sở ngành, giảng viên, nghiên cứu viên và đối tác ngành nước quan tâm tới hoạt động của chương trình tại Đồng bằng sông Cửu Long.</p>
+    <div class="cta-band__grid">
+      <form class="newsletter-form newsletter-form--on-dark" id="newsletterFormCta" novalidate>
+        <label class="form__label" for="nl-email-cta">Email nhận bản tin</label>
+        <div class="newsletter-form__row">
+          <input class="form__input" id="nl-email-cta" type="email" name="email" required placeholder="ten@donvi.gov.vn" autocomplete="email" aria-describedby="nl-cta-err">
+          <button class="btn btn--primary" type="submit">Đăng ký</button>
+        </div>
+        <p class="form__error" id="nl-cta-err" role="alert" hidden></p>
+        <label class="form__consent form__consent--sm" for="nl-consent-cta">
+          <input type="checkbox" id="nl-consent-cta" name="consent" required>
+          <span>Tôi đồng ý nhận bản tin và có thể huỷ đăng ký bất cứ lúc nào.</span>
+        </label>
+        <input class="visually-hidden" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="form__status" role="status" aria-live="polite" hidden></p>
+      </form>
+      <div class="cta-band__routes">
+        <a class="btn btn--on-dark" href="lien-he.html">Liên hệ văn phòng ĐHCT <span class="btn__icon" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn--on-dark" href="chuong-trinh.html#cong-dong" aria-describedby="ctaCommunityNote">Cộng đồng Blue Dragon</a>
+        <p class="cta-band__note" id="ctaCommunityNote">Cộng đồng có khu vực đăng nhập dành cho thành viên chương trình.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__col site-footer__col--brand">
+      <a class="site-footer__brand" href="index.html">
+        <img class="brand__logo" src="logo.svg" alt="" width="36" height="36">
+        <span class="brand__text">Chương trình <strong>Blue Dragon</strong></span>
+      </a>
+      <p class="site-footer__tagline">Chương trình hợp tác của Hiệp hội Nước Hà Lan tại Đồng bằng sông Cửu Long về trao đổi kiến thức và kinh nghiệm trong lĩnh vực quản lý tài nguyên nước.</p>
+      <form class="newsletter-form newsletter-form--on-dark mt-l" id="newsletterFormFooter" novalidate>
+        <label class="form__label" for="nl-email-footer">Email nhận bản tin</label>
+        <div class="newsletter-form__row">
+          <input class="form__input" id="nl-email-footer" type="email" name="email" required placeholder="ten@donvi.gov.vn" autocomplete="email" aria-describedby="nl-footer-err">
+          <button class="btn btn--primary" type="submit">Đăng ký</button>
+        </div>
+        <p class="form__error" id="nl-footer-err" role="alert" hidden></p>
+        <label class="form__consent form__consent--sm" for="nl-consent-footer">
+          <input type="checkbox" id="nl-consent-footer" name="consent" required>
+          <span>Tôi đồng ý nhận bản tin và có thể huỷ đăng ký bất cứ lúc nào.</span>
+        </label>
+        <input class="visually-hidden" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="form__status" role="status" aria-live="polite" hidden></p>
+      </form>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Chương trình</h2>
+      <ul class="site-footer__list">
+        <li><a href="chuong-trinh.html">Tổng quan chương trình</a></li>
+        <li><a href="chuyen-gia.html">Nhóm Chuyên gia</a></li>
+        <li><a href="du-an-thi-diem.html">Dự án thí điểm</a></li>
+        <li><a href="chuong-trinh.html#cong-dong">Cộng đồng Blue Dragon</a></li>
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <h2 class="site-footer__heading">Tài nguyên</h2>
+      <ul class="site-footer__list">
+        <li><a href="hoc-vien.html">Học viện &amp; tài liệu</a></li>
+        <li><a href="tin-tuc.html">Tin tức và sự kiện</a></li>
+        <li><a href="lien-he.html">Liên hệ văn phòng</a></li>
+        <li><a href="privacy-policy.html">Chính sách quyền riêng tư</a></li>
+      </ul>
+    </div>
+    <address class="site-footer__col site-footer__col--contact">
+      <h2 class="site-footer__heading">Văn phòng chương trình</h2>
+      <p>Phòng 214, Khoa Môi trường và Tài nguyên thiên nhiên, Đại học Cần Thơ, Khu II, Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TP. Cần Thơ.</p>
+      <p class="mt-m"><a href="mailto:info@bluedragonprogram.com">info@bluedragonprogram.com</a></p>
+    </address>
+  </div>
+  <div class="site-footer__bottom container">
+    <p>&copy; 2020&ndash;<span data-current-year>2026</span> Chương trình Blue Dragon. Hợp tác Hiệp hội Nước Hà Lan &middot; Blue Deal &middot; các tỉnh ĐBSCL.</p>
+    <a href="privacy-policy.html">Chính sách quyền riêng tư</a>
+  </div>
+</footer>
+
+<button class="back-to-top" type="button" hidden aria-label="Lên đầu trang">&uarr;</button>
+
+
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieDesc" hidden>
+  <div class="cookie-banner__inner container">
+    <div>
+      <p class="cookie-banner__title" id="cookieTitle">Cookie trên website này</p>
+      <p class="cookie-banner__text" id="cookieDesc">Chúng tôi chỉ dùng cookie kỹ thuật cần thiết để ghi nhớ lựa chọn của bạn. Không có cookie quảng cáo hay theo dõi bên thứ ba. Xem <a href="privacy-policy.html">Chính sách quyền riêng tư</a>.</p>
+    </div>
+    <div class="cookie-banner__actions">
+      <button class="btn btn--primary btn--sm" type="button" data-consent="accept">Đồng ý</button>
+      <button class="btn btn--ghost btn--sm" type="button" data-consent="reject">Chỉ cookie cần thiết</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js" defer></script>
+<script src="js/consent.js" defer></script>
+<script src="js/forms.js" defer></script>
+<script src="js/counters.js" defer></script>
+</body>
+</html>

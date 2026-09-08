@@ -1,0 +1,100 @@
+/* sections.css — hero, page-hero, dải số liệu, gói công việc, thách thức, dải tỉnh. */
+
+/* Hero editorial: chữ trên nền trắng, ảnh full-bleed phía dưới. Không overlay. */
+.hero{background:var(--paper)}
+.hero__inner{padding-top:24px;padding-bottom:32px}
+.hero__title{margin-top:var(--gap-s);font-size:var(--fs-h1)}
+.hero__lead{margin-top:var(--gap-s);font-size:var(--fs-lead);color:var(--muted);
+  max-width:var(--measure)}
+.hero__actions{display:flex;flex-wrap:wrap;gap:var(--gap-s);margin-top:var(--gap-m)}
+.hero__meta{display:flex;flex-wrap:wrap;gap:var(--gap-s) var(--gap-m);
+  margin-top:var(--gap-l);padding-top:var(--gap-m);border-top:1px solid var(--line);
+  font-size:var(--fs-meta);color:var(--muted)}
+.hero__meta li{display:flex;align-items:center;gap:8px}
+.hero__meta li::before{content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--green-700);flex-shrink:0}
+.hero__figure{margin:0}
+.hero__media{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:0}
+.hero__figure .figure__credit{margin-top:6px;padding-inline:var(--container-pad)}
+@media (min-width:900px){
+  .hero__inner{padding-top:56px;padding-bottom:48px}
+  .hero__lead{margin-top:var(--gap-m)}
+  .hero__actions{margin-top:var(--gap-l)}
+  .hero__title{max-width:18ch}
+  .hero__media{aspect-ratio:8/3}
+}
+
+/* Page hero cho trang con — không ảnh */
+.page-hero{background:var(--navy-50);padding:40px 0 40px}
+.page-hero__title{margin-top:var(--gap-xs)}
+.page-hero__lead{margin-top:var(--gap-s);font-size:var(--fs-lead);color:var(--muted);
+  max-width:var(--measure)}
+.page-hero__meta{display:flex;flex-wrap:wrap;gap:var(--gap-xs);margin-top:var(--gap-m)}
+@media (min-width:900px){.page-hero{padding:64px 0 48px}}
+
+/* Dải số liệu */
+.stat-band__grid{gap:var(--gap-l)}
+.stat{display:flex;flex-direction:column;gap:6px}
+.stat__value{font-size:var(--fs-stat);font-weight:600;color:#fff;line-height:1.05;
+  font-variant-numeric:tabular-nums}
+.stat__label{font-size:15px;color:var(--navy-300);text-transform:uppercase;
+  letter-spacing:.06em;line-height:1.45}
+.stat-band__stamp{margin-top:var(--gap-l);font-size:var(--fs-meta);color:var(--navy-300)}
+@media (min-width:900px){
+  .stat-band__grid .stat + .stat{border-left:1px solid rgba(255,255,255,.16);padding-left:var(--gap-l)}
+}
+
+/* Đối tác — ô chữ, không logo giả */
+.partner-strip__label{font-size:14px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);font-weight:600;margin-bottom:var(--gap-m)}
+.partner-strip__list{display:grid;gap:var(--gap-s);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
+.partner-tile{display:flex;align-items:center;justify-content:center;text-align:center;
+  min-height:72px;padding:14px 16px;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--radius-media);color:var(--navy-700);font-size:15px;font-weight:600;
+  line-height:1.4}
+
+/* Gói công việc */
+.pillar-grid{gap:var(--gap-m)}
+.pillar-card{display:flex;flex-direction:column;gap:10px;padding:32px 24px;
+  border-radius:var(--radius-card);background:var(--navy-800);color:#fff}
+.pillar-card__index{font-family:var(--font-accent);font-style:italic;font-size:28px;
+  color:var(--gold-500);line-height:1}
+.pillar-card__title{font-size:var(--fs-h4);color:#fff}
+.pillar-card__text{font-size:var(--fs-meta);color:rgba(255,255,255,.82);flex:1}
+.pillar-card .link-arrow{color:#fff;margin-top:var(--gap-xs)}
+.pillar-card .link-arrow:hover{color:var(--gold-500)}
+.pillar-card--eco{background:var(--green-800)}
+.pillar-card--light{background:var(--navy-50);color:var(--ink)}
+.pillar-card--light .pillar-card__index{color:var(--gold-700)}
+.pillar-card--light .pillar-card__title{color:var(--ink)}
+.pillar-card--light .pillar-card__text{color:var(--muted)}
+.pillar-card--light .link-arrow{color:var(--navy-600)}
+
+/* Thách thức — mỗi ảnh gắn 1 số liệu */
+.challenge-item{display:flex;flex-direction:column;gap:10px}
+.challenge-item__figure{margin:0}
+.challenge-item__figure img{width:100%;aspect-ratio:4/3;object-fit:cover;
+  border-radius:var(--radius-media)}
+.challenge-item__data{font-size:var(--fs-h3);color:var(--green-800);font-weight:600;
+  font-variant-numeric:tabular-nums;margin-top:6px}
+.challenge-item__title{font-size:var(--fs-h4)}
+.challenge-item__text{font-size:var(--fs-meta);color:var(--muted)}
+
+/* Dải tỉnh — chip là nguồn thông tin thật, viz chỉ trang trí */
+.province-band{position:relative;margin-top:var(--gap-xl);padding:28px 24px;
+  border-radius:var(--radius-card);background:var(--navy-50);overflow:hidden}
+.province-band__viz{position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 8% 120%,rgba(37,64,143,.14),transparent 60%),
+    radial-gradient(100% 70% at 92% -20%,rgba(11,94,66,.14),transparent 60%),
+    linear-gradient(115deg,transparent 45%,rgba(37,64,143,.10) 46%,transparent 48%)}
+.province-list{position:relative;display:flex;flex-wrap:wrap;gap:var(--gap-s)}
+.province-chip{flex:1 1 200px;min-width:0;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--radius-media);padding:14px 16px;font-weight:600;color:var(--navy-800)}
+.province-chip--core{border-left:3px solid var(--navy-600)}
+.province-chip--eco{border-left:3px solid var(--green-800)}
+.province-chip__note{display:block;font-weight:400;font-size:14px;color:var(--muted);
+  margin-top:4px}
+.province-band__stamp{position:relative;margin-top:var(--gap-m);font-size:var(--fs-meta);
+  color:var(--muted)}

@@ -1,0 +1,81 @@
+/* tokens.css — biến thiết kế gốc. Sửa màu/nhịp ở đây, không sửa rải rác. */
+:root{
+  /* Navy — DNA thương hiệu */
+  --navy-900:#10224F;
+  --navy-800:#16295C;
+  --navy-700:#1D3474;
+  --navy-600:#25408F;   /* PRIMARY */
+  --navy-300:#7AB1E0;
+  --navy-100:#E4EAF5;
+  --navy-50:#F4F7FC;
+
+  /* Green — sinh thái ĐBSCL / giải pháp dựa trên thiên nhiên */
+  --green-800:#0B5E42;
+  --green-700:#0E7A55;
+  --green-100:#E2F2EA;
+
+  /* Gold — eyebrow, accent trên nền tối */
+  --gold-700:#8A6206;
+  --gold-500:#C99A2E;
+
+  /* Teal — dữ liệu / GIS */
+  --teal-700:#0E6E86;
+
+  /* Neutral */
+  --ink:#101418;
+  --muted:#4E596B;
+  --line:#DDE3EC;
+  --paper:#FFFFFF;
+  --paper-2:#F6F8FB;
+  --sand:#F5F1E8;
+
+  /* Font */
+  --font-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-accent:"Playfair Display",Georgia,"Times New Roman",serif;
+
+  /* Type scale */
+  --fs-body:1.0625rem;
+  --lh-body:1.7;
+  --fs-lead:clamp(1.0625rem,1rem + 0.35vw,1.25rem);
+  --fs-h1:clamp(2.125rem,1.25rem + 3.2vw,3.5rem);
+  --fs-h2:clamp(1.625rem,1.1rem + 2.1vw,2.75rem);
+  --fs-h3:clamp(1.25rem,1.1rem + 0.7vw,1.5rem);
+  --fs-h4:1.125rem;
+  --fs-eyebrow:0.875rem;
+  --fs-meta:0.9375rem;
+  --fs-stat:clamp(2.5rem,1.5rem + 4vw,4rem);
+  --lh-head:1.22;
+  --measure:65ch;
+
+  /* Spacing & layout */
+  --container:1200px;
+  --container-pad:16px;
+  --sec-y:48px;
+  --sec-y-lg:72px;
+  --gap-xl:40px;
+  --gap-l:32px;
+  --gap-m:24px;
+  --gap-s:16px;
+  --gap-xs:8px;
+
+  /* Hình khối — đúng 3 radius, đúng 2 shadow */
+  --radius-pill:999px;
+  --radius-card:16px;
+  --radius-media:8px;
+  --shadow-card:0 0 0 1px var(--line);
+  --shadow-raise:0 8px 24px rgba(16,34,79,.08);
+
+  /* Chuyển động */
+  --ease:cubic-bezier(.2,.6,.2,1);
+  --dur:220ms;
+  --header-h:60px;
+}
+
+@media (min-width:900px){
+  :root{
+    --container-pad:40px;
+    --sec-y:80px;
+    --sec-y-lg:120px;
+    --header-h:72px;
+  }
+}

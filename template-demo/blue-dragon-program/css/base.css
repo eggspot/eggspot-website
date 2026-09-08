@@ -1,0 +1,64 @@
+/* base.css — reset nhẹ, typography gốc, tiện ích a11y nền tảng. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body,h1,h2,h3,h4,p,figure,blockquote,dl,dd,ol,ul{margin:0}
+ol[class],ul[class]{list-style:none;padding:0}
+
+body{
+  font-family:var(--font-body);
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body.no-scroll{overflow:hidden}
+
+h1,h2,h3,h4{line-height:var(--lh-head);font-weight:600;text-wrap:balance}
+h1{font-size:var(--fs-h1)}
+h2{font-size:var(--fs-h2)}
+h3{font-size:var(--fs-h3)}
+h4{font-size:var(--fs-h4)}
+p{text-wrap:pretty}
+
+a{color:var(--navy-600);text-decoration:underline;text-underline-offset:3px;
+  transition:color var(--dur) var(--ease)}
+a:hover{color:var(--navy-800)}
+
+img,svg,video{max-width:100%;display:block;height:auto}
+img{background:var(--navy-50)}
+
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+
+strong{font-weight:600}
+time,.tabular{font-variant-numeric:tabular-nums}
+address{font-style:normal}
+hr{border:0;border-top:1px solid var(--line);margin:0}
+
+/* Focus — luôn nhìn thấy, không bao giờ outline:none */
+:focus-visible{outline:3px solid var(--navy-600);outline-offset:2px;border-radius:2px}
+.section--dark :focus-visible,.cta-band :focus-visible,
+.site-footer :focus-visible{outline-color:var(--gold-500)}
+
+/* Skip link — phần tử focus đầu tiên, không đè nội dung khi ẩn */
+.skip-link{
+  position:absolute;top:0;left:16px;z-index:100;
+  transform:translateY(-120%);
+  background:var(--navy-900);color:#fff;text-decoration:none;
+  padding:12px 20px;border-radius:0 0 var(--radius-media) var(--radius-media);
+  font-size:var(--fs-meta);font-weight:600;
+  transition:transform var(--dur) var(--ease);
+}
+.skip-link:focus-visible{transform:translateY(0);color:#fff}
+
+::selection{background:var(--navy-100);color:var(--navy-900)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important;
+  }
+  .reveal{opacity:1;transform:none}
+}
