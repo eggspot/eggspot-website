@@ -1,9 +1,10 @@
 # eggspot.app
 
 The Eggspot website, served by GitHub Pages at https://eggspot.app (`CNAME`). `www.eggspot.app` and
-`http://` redirect to `https://eggspot.app`. Every push to `main` is live a minute later.
+`http://` redirect to `https://eggspot.app`. Every push to `main` goes live within a few minutes.
 
-The pages are static HTML. App pages reuse the shell of an existing page (`/assets/contact.8Q8zlUds.css`,
+Pages builds the site with Jekyll; `_config.yml` keeps this README off the site. The pages are static
+HTML. App pages reuse the shell of an existing page (`/assets/contact.8Q8zlUds.css`,
 the header and the footer); only the `<title>`, the meta description and the `<article>` change.
 
 ## One folder per app
@@ -37,8 +38,8 @@ Rules:
   instructions (for example AppLovin, Unity Ads, Meta Audience Network). Never remove lines another app
   may still use.
 - Keep `/robots.txt` in place. Without it GitHub Pages sometimes answers a 5xx for the missing file, and
-  Google's crawlers treat a 5xx `robots.txt` as "do not crawl this site", which also stops them reading
-  `app-ads.txt`.
+  Google's crawlers treat a 5xx `robots.txt` as "do not crawl this site" for a while, which also stops
+  them reading `app-ads.txt`.
 - After a change, check `https://eggspot.app/app-ads.txt` answers 200 `text/plain`, then AdMob > Apps >
   app-ads.txt. Google can take up to 7 days to crawl the file again.
 
