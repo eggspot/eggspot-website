@@ -18,7 +18,8 @@ Every store app gets the same set of pages, so each store listing has stable URL
 | `/<app>/support/` | The App Store **Support URL** and the Play support contact |
 | `/<app>/terms/` | Terms of use, when the app has accounts or subscriptions |
 
-Today: `/klondike/` (Big Card Solitaire) and `/pagoda/` (Lên Chùa / Pagoda Prayer).
+Today: `/klondike/` (Big Card Solitaire), `/pagoda/` (Lên Chùa / Pagoda Prayer), `/hatchling/` (Hatchling Clash) and
+`/pack-rules/` (Pack Rules).
 
 ## app-ads.txt
 
