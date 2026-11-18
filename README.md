@@ -20,7 +20,8 @@ Every store app gets the same set of pages, so each store listing has stable URL
 
 Today: `/klondike/` (Big Card Solitaire), `/spider/`, `/freecell/`, `/tripeaks/` and `/pyramid/` (Spider, FreeCell,
 TriPeaks and Pyramid Solitaire: Big Cards), `/mahjong/`, `/sudoku/`, `/blockpuzzle/` and `/harvestfair/` (Mahjong
-Solitaire: Big Tiles, Sudoku: Big Numbers, Block Puzzle: Big Blocks and Harvest Fair: Big Merge), `/pagoda/` (Lên Chùa / Pagoda Prayer), `/hatchling/` (Hatchling Clash) and `/pack-rules/` (Pack Rules).
+Solitaire: Big Tiles, Sudoku: Big Numbers, Block Puzzle: Big Blocks and Harvest Fair: Big Merge), `/pagoda/` (Lên Chùa / Pagoda Prayer), `/hatchling/` (Hatchling Clash), `/pack-rules/` (Pack Rules) and
+`/thousand-skies/` (Thousand Skies: 99 Heroes).
 
 ## app-ads.txt
 
