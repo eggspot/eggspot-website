@@ -1,2 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /hatch-rush/review/
+Disallow: /tippy-raft/review/
+Disallow: /push-line/review/
