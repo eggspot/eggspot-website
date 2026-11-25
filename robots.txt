@@ -3,3 +3,8 @@ Allow: /
 Disallow: /hatch-rush/review/
 Disallow: /tippy-raft/review/
 Disallow: /push-line/review/
+Disallow: /egg-belt/review/
+Disallow: /hen-pens/review/
+Disallow: /nest-guard/review/
+Disallow: /offline-games-99/review/
+Disallow: /math-zoo/review/
