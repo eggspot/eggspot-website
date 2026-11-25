@@ -23,7 +23,7 @@ TriPeaks and Pyramid Solitaire: Big Cards), `/mahjong/`, `/sudoku/`, `/blockpuzz
 Solitaire: Big Tiles, Sudoku: Big Numbers, Block Puzzle: Big Blocks and Harvest Fair: Big Merge), `/pagoda/` (Lên Chùa / Pagoda Prayer), `/hatchling/` (Hatchling Clash), `/pack-rules/` (Pack Rules) and
 `/thousand-skies/` (Thousand Skies: 99 Heroes), `/hatch-rush/` (Hatch Rush), `/tippy-raft/` (Tippy Raft),
 `/push-line/` (Push Line), `/fishy-rules/` (Fishy Rules), `/egg-belt/` (Egg Belt), `/hen-pens/` (Hen Pens),
-`/nest-guard/` (Nest Guard), `/offline-games-99/` (99 Offline Games) and `/math-zoo/` (Math Zoo).
+`/nest-guard/` (Nest Guard), `/offline-games-99/` (99 Offline Games), `/math-zoo/` (Math Zoo) and `/nestfield-farm/` (Nestfield Farm).
 
 ## app-ads.txt
 
