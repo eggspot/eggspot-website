@@ -11,3 +11,4 @@ Disallow: /math-zoo/review/
 Disallow: /fishy-rules/review/
 Disallow: /pack-rules/review/
 Disallow: /hatchling/review/
+Disallow: /rollday/review/
