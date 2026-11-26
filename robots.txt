@@ -9,3 +9,4 @@ Disallow: /nest-guard/review/
 Disallow: /offline-games-99/review/
 Disallow: /math-zoo/review/
 Disallow: /fishy-rules/review/
+Disallow: /pack-rules/review/
